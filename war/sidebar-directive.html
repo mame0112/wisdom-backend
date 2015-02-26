@@ -1,0 +1,5 @@
+<div id="sidebar" ng-controller="SidebarController" ng-init="initialize()">
+	<ul class="nav nav-pills nav-stacked" ng-repeat="data in Category">
+		<li><a ng-href="#/category/{{data.id}}"><font color={{data.color}}>{{data.name}}</a></li>
+	</ul>
+</div>

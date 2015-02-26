@@ -1,0 +1,13 @@
+<div ng-controller="infobarController">
+	<ul class="media-list">
+		<li class="media" ng-repeat="data in lists">
+		    <a class="pull-left" ng-href="#/view/1">
+		        <img src="image/64-64.png" alt="" class="media-object" />
+		    </a>
+		    <div class="media-body">
+		        <h4 class="media-heading">{{data.title}}</h4>
+		        {{data.description}}
+		    </div>
+		</li>
+	</ul>
+</div>

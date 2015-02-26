@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>AngularJS samples</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="lib/angular.min.js"></script>
+<!--    <script src="lib/angular-route.min.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.13/angular-route.min.js"></script>
+    <script src="js/wisdom.js"></script>
+    <script src="js/directives.js"></script>
+	<script src="js/constants.js"></script>
+	<script src="js/sidebarcontroller.js"></script>
+	<script src="js/pickupController.js"></script>
+	<script src="js/infobarController.js"></script>
+	<script src="js/userDataController.js"></script>
+	<script src="js/util/logUtil.js"></script>
+  <script src="js/userAccountController.js"></script>
+  <script src="js/signinController.js"></script>
+  <script src="js/signupController.js"></script>
+  <script src="js/util/modeService.js"></script>
+  <script src="js/util/pagenationFactory.js"></script>
+  <script src="js/breadcrumbController.js"></script>
+  <script src="js/headerController.js"></script>
+  <script src="js/categoryController.js"></script>
+  <script src="js/util/apiServices.js"></script>
+  </head>
+  <body ng-app="WidsomApp">
+  <div class="container">
+  	<div class="row">
+		<div header-directive></div>
+    <div breadcrumb-directive></div>
+		<div ng-view></div>
+	</div>
+	<div footer-directive></div>
+  </div>
+  </body>
+</html>

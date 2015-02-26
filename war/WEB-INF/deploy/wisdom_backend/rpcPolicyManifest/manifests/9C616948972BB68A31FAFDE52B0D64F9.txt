@@ -1,0 +1,2 @@
+serviceClass: com.mame.wisdom.client.GreetingService
+path: 1685F423001FB5CF1361CB936F0430B7.gwt.rpc
