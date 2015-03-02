@@ -12,10 +12,15 @@ public class DBConstant {
 	public final static String KIND_UPDATE_INFO = "kind_update_info";
 
 	public final static String ENTITY_TOTAL_USER_NUM = "entity_total_user_nu,";
-	
+
+	public final static String ENTITY_USER_ID = "user_id";
+
+	public final static String ENTITY_USER_TWITTER_NAME = "user_twitter_name";
+
+	// Test fields
 	public final static String ENTITY_ID = "id";
-	
+
 	public final static String ENTITY_TITLE = "title";
-	
+
 	public final static String ENTITY_DESCRIPTION = "description";
 }
