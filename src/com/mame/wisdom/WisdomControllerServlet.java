@@ -6,8 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mame.wisdom.action.Action;
 import com.mame.wisdom.action.ActionFactory;
-
-import util.DbgUtil;
+import com.mame.wisdom.util.DbgUtil;
 
 public class WisdomControllerServlet extends HttpServlet {
 

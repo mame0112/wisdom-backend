@@ -4,8 +4,7 @@ import com.google.appengine.labs.repackaged.org.json.JSONArray;
 import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import com.mame.wisdom.datastore.DBConstant;
-
-import util.DbgUtil;
+import com.mame.wisdom.util.DbgUtil;
 
 public class MockJSONGenerator {
 

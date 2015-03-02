@@ -4,8 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.mame.wisdom.mock.MockJSONGenerator;
-
-import util.DbgUtil;
+import com.mame.wisdom.util.DbgUtil;
 
 public class SigninAction implements Action {
 

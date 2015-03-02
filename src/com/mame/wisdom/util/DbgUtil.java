@@ -1,4 +1,4 @@
-package util;
+package com.mame.wisdom.util;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
