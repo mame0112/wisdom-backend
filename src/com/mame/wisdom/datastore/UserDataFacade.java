@@ -9,8 +9,6 @@ public class UserDataFacade {
 
 	private final static String TAG = UserDataFacade.class.getSimpleName();
 
-	private final static int DAO_MODE = DAOFactory.DEFAULT;
-
 	public UserDataFacade() {
 		DbgUtil.showLog(TAG, "UserDataFacade");
 	}
@@ -19,7 +17,7 @@ public class UserDataFacade {
 			throws WisdomDatastoreException {
 		DbgUtil.showLog(TAG, "createNewUserData");
 
-		DAOFactory factory = DAOFactory.getDAOFactory(DAO_MODE);
+		DAOFactory factory = DAOFactory.getDAOFactory();
 		UserDAO userDAO = factory.getUserDAO();
 
 		// TODO
@@ -37,7 +35,7 @@ public class UserDataFacade {
 					"Illegal argument. twitterName is null");
 		}
 
-		DAOFactory factory = DAOFactory.getDAOFactory(DAO_MODE);
+		DAOFactory factory = DAOFactory.getDAOFactory();
 		UserDAO userDAO = factory.getUserDAO();
 		WDUserData data = userDAO.findUserDataByTwitterAccount(twitterName);
 

@@ -11,7 +11,7 @@ public class CipherDAOFactory extends DAOFactory {
 	}
 
 	@Override
-	public UserDAO getWisdomDAO() throws WisdomDatastoreException {
+	public WisdomDAO getWisdomDAO() throws WisdomDatastoreException {
 		// TODO Auto-generated method stub
 		return null;
 	}

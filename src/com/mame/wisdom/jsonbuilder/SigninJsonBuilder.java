@@ -25,7 +25,7 @@ public class SigninJsonBuilder extends JsonBuilder {
 	public void addResponseId(int id) throws JSONBuilderException {
 		DbgUtil.showLog(TAG, "addResponseId");
 		try {
-			mRootObject.put(JSONConstant.ID, id);
+			mRootObject.put(JsonConstant.ID, id);
 		} catch (JSONException e) {
 			DbgUtil.showLog(TAG, "JSONException: " + e.getMessage());
 		}
@@ -48,10 +48,10 @@ public class SigninJsonBuilder extends JsonBuilder {
 		JSONObject paramObject = new JSONObject();
 
 		try {
-			paramObject.put(JSONConstant.PARAM_USER_ID, data.getUserId());
-			paramObject.put(JSONConstant.PARAM_TWITTER_NAME,
+			paramObject.put(JsonConstant.PARAM_USER_ID, data.getUserId());
+			paramObject.put(JsonConstant.PARAM_TWITTER_NAME,
 					data.getTwitterName());
-			mRootObject.put(JSONConstant.PARAM, paramObject);
+			mRootObject.put(JsonConstant.PARAMS, paramObject);
 		} catch (JSONException e) {
 			DbgUtil.showLog(TAG, "JSONException: " + e.getMessage());
 		}
@@ -62,7 +62,7 @@ public class SigninJsonBuilder extends JsonBuilder {
 	protected void addVersion(String version) throws JSONBuilderException {
 		DbgUtil.showLog(TAG, "addVersion");
 		try {
-			mRootObject.put(JSONConstant.VERSION, version);
+			mRootObject.put(JsonConstant.VERSION, version);
 		} catch (JSONException e) {
 			DbgUtil.showLog(TAG, "JSONException: " + e.getMessage());
 			throw new JSONBuilderException(e.getMessage());
@@ -79,7 +79,7 @@ public class SigninJsonBuilder extends JsonBuilder {
 	public void addErrorMessage(String message) throws JSONBuilderException {
 		DbgUtil.showLog(TAG, "addErrorMessage");
 		try {
-			mRootObject.put(JSONConstant.PARAM_ERROR_MESSAGE, message);
+			mRootObject.put(JsonConstant.PARAM_ERROR_MESSAGE, message);
 		} catch (JSONException e) {
 			DbgUtil.showLog(TAG, "JSONException: " + e.getMessage());
 		}

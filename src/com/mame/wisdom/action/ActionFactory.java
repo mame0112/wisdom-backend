@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.mame.wisdom.exception.ActionException;
 import com.mame.wisdom.util.DbgUtil;
 
 public class ActionFactory {
@@ -17,15 +18,27 @@ public class ActionFactory {
 		DbgUtil.showLog(TAG, "static initializer");
 		mAction.put(ActionConstants.GET + ActionConstants.SIGNIN_KEY,
 				new SigninAction());
+		mAction.put(ActionConstants.GET + ActionConstants.INFOBAR_KEY,
+				new InfobarAction());
 	}
 
 	private ActionFactory() {
 
 	}
 
-	public static Action getAction(HttpServletRequest request) {
-		DbgUtil.showLog(TAG,
-				"getAction: " + request.getMethod() + request.getPathInfo());
-		return mAction.get(request.getMethod() + request.getPathInfo());
+	public static Action getAction(HttpServletRequest request)
+			throws ActionException {
+
+		String method = request.getMethod();
+		String path = request.getPathInfo();
+
+		if (method == null || path == null) {
+			DbgUtil.showLog(TAG, "getAction method or pathinfo is null");
+			throw new ActionException("method or path is null");
+		}
+
+		DbgUtil.showLog(TAG, "getAction: " + method + path);
+		return mAction.get(method + path);
+
 	}
 }

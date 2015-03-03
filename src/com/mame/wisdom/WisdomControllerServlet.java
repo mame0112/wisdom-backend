@@ -1,11 +1,14 @@
 package com.mame.wisdom;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.mame.wisdom.action.Action;
 import com.mame.wisdom.action.ActionFactory;
+import com.mame.wisdom.exception.ActionException;
 import com.mame.wisdom.util.DbgUtil;
 
 public class WisdomControllerServlet extends HttpServlet {
@@ -15,20 +18,43 @@ public class WisdomControllerServlet extends HttpServlet {
 	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response) {
 		DbgUtil.showLog(TAG, "service:" + request.getPathInfo());
-		Action action = ActionFactory.getAction(request);
-
 		String result = null;
+		Action action;
 		try {
-			result = action.execute(request, response);
-			response.setStatus(200);
-			response.setContentType("application/json");
-			response.setCharacterEncoding("UTF-8");
-			response.getWriter().write(result);
-		} catch (Exception e) {
-			DbgUtil.showLog(TAG, "Exception: " + e.getMessage());
-			response.setStatus(405);
+			action = ActionFactory.getAction(request);
+
+			// If passed action is expected
+			if (action != null) {
+				try {
+					result = action.execute(request, response);
+					response.setStatus(200);
+				} catch (Exception e) {
+					DbgUtil.showLog(TAG, "Exception: " + e.getMessage());
+					response.setStatus(405);
+				}
+			} else {
+				// If passed action is not expected (meaning it is not defined
+				// in ActionFactory)
+				response.setStatus(404);
+			}
+		} catch (ActionException e1) {
+			response.setStatus(400);
+		}
+
+		// TODO need to consider authentication (401)
+
+		if (result != null) {
+			try {
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write(result);
+			} catch (IOException e) {
+				DbgUtil.showLog(TAG, "IOException: " + e.getMessage());
+				response.setStatus(500);
+			}
+		} else {
+			response.setStatus(500);
 		}
 
 	}
-
 }
