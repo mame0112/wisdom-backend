@@ -13,6 +13,9 @@ public class DBConstant {
 
 	public final static String ENTITY_TOTAL_USER_NUM = "entity_total_user_nu,";
 
+	/**
+	 * Entity fields for User data
+	 */
 	public final static String ENTITY_USER_ID = "user_id";
 
 	public final static String ENTITY_USER_TWITTER_NAME = "user_twitter_name";
@@ -28,6 +31,25 @@ public class DBConstant {
 	public final static String ENTITY_USER_LAST_LOGIN = "user_last_login";
 
 	public final static String ENTITY_USER_TOTAL_POINT = "user_total_point";
+
+	/**
+	 * Entity fields for Wisdom data
+	 */
+	public final static String ENTITY_WISDOM_ID = "wisdom_id";
+	
+	public final static String ENTITY_WISDOM_TITLE = "wisdom_title";
+	
+	public final static String ENTITY_WISDOM_DESCRIPTION = "wisdom_description";
+	
+	public final static String ENTITY_WISDOM_TAG = "wisdom_tag";
+	
+	public final static String ENTITY_WISDOM_CREATED_USER_ID = "wisdom_created_user_id";
+	
+	public final static String ENTITY_WISDOM_LAST_UPDATED_DATE = "wisdom_last_updated_date";
+	
+	public final static String ENTITY_WISDOM_Thumbnail = "wisdom_thumbnail";
+	
+	public final static String ENTITY_WISDOM_ITMES = "wisdom_items";
 
 	// Test fields
 	public final static String ENTITY_ID = "id";

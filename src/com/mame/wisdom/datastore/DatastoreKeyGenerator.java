@@ -2,6 +2,7 @@ package com.mame.wisdom.datastore;
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
+import com.mame.wisdom.exception.WisdomDatastoreException;
 import com.mame.wisdom.util.DbgUtil;
 
 public class DatastoreKeyGenerator {
@@ -24,20 +25,28 @@ public class DatastoreKeyGenerator {
 		return key;
 	}
 
-	// TODO we have to update DBConstant.ENTITY_TOTAL_USER_NUM part.
-	public static Key getSubCategoryKey() {
+	public static Key getSubCategoryKey(String category, String subCategory)
+			throws WisdomDatastoreException {
 		DbgUtil.showLog(TAG, "getSubCategoryKey");
+
+		if (category == null || subCategory == null) {
+			throw new WisdomDatastoreException(
+					"category or subCategory identifier is null");
+		}
+
+		String identifier = category + "/" + subCategory;
+
 		Key ancKey = KeyFactory.createKey(DBConstant.KIND_SUB_CATEGORY,
-				DBConstant.ENTITY_TOTAL_USER_NUM);
+				identifier);
 		return ancKey;
 	}
 
-	public static Key getWisdomKey(long wisdomId) {
+	public static Key getWisdomKeyById(String category, String subCategory,
+			long wisdomId) throws WisdomDatastoreException {
 		DbgUtil.showLog(TAG, "getWisdomKey");
-		Key ancKey = getAllUserDataKey();
-		Key key = KeyFactory.createKey(ancKey, DBConstant.KIND_SUB_CATEGORY,
-				wisdomId);
+		Key ancKey = getSubCategoryKey(category, subCategory);
+		Key key = KeyFactory
+				.createKey(ancKey, DBConstant.KIND_WISDOM, wisdomId);
 		return key;
 	}
-
 }
