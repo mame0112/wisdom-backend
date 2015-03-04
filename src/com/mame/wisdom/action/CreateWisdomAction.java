@@ -5,14 +5,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mame.wisdom.util.DbgUtil;
 
-public class UserAction implements Action {
+public class CreateWisdomAction implements Action {
 
-	private final static String TAG = UserAction.class.getSimpleName();
+	private final static String TAG = CreateWisdomAction.class.getSimpleName();
 
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		DbgUtil.showLog(TAG, "UserAction execute");
+		DbgUtil.showLog(TAG, "CreateWisdomAction execute");
 		return null;
 	}
 

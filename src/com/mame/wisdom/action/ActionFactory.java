@@ -23,24 +23,35 @@ public class ActionFactory {
 				new InfobarAction());
 
 		// User APIs
+		// Sign in
 		mAction.put(ActionConstants.GET + ActionConstants.KEY_USER,
-				new UserAction());
+				new SigninAction());
+		// Sign up (Create account)
 		mAction.put(ActionConstants.POST + ActionConstants.KEY_USER,
-				new UserAction());
+				new SignupAction());
 
 		// Notification APIs
+		// TODO TO be updated.
+		// Show notification later.
 		mAction.put(ActionConstants.GET + ActionConstants.KEY_NOTIFICATION,
 				new NotificationAction());
+		// Update notification read state after the user check it.
 		mAction.put(ActionConstants.POST + ActionConstants.KEY_NOTIFICATION,
 				new NotificationAction());
 
 		// Wisdom APIs
+		// Get wisdom(s)
+		// TODO to be checked if we can reuse this action for single and
+		// multiple cases.
 		mAction.put(ActionConstants.GET + ActionConstants.KEY_WISDOM,
 				new WisdomAction());
+		// Create new wisdom
 		mAction.put(ActionConstants.POST + ActionConstants.KEY_WISDOM,
-				new WisdomAction());
+				new CreateWisdomAction());
+
+		// Update wisdom
 		mAction.put(ActionConstants.PUT + ActionConstants.KEY_WISDOM,
-				new WisdomAction());
+				new UpdateWisdomAction());
 
 		// Highlight information API
 		mAction.put(ActionConstants.GET + ActionConstants.KEY_HIGHLIGHT,
