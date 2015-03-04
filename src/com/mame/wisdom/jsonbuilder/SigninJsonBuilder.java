@@ -49,7 +49,7 @@ public class SigninJsonBuilder extends JsonBuilder {
 
 		try {
 			paramObject.put(JsonConstant.PARAM_USER_ID, data.getUserId());
-			paramObject.put(JsonConstant.PARAM_TWITTER_NAME,
+			paramObject.put(JsonConstant.PARAM_USER_TWITTER_NAME,
 					data.getTwitterName());
 			mRootObject.put(JsonConstant.PARAMS, paramObject);
 		} catch (JSONException e) {

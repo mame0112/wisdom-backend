@@ -36,4 +36,11 @@ public class WisdomFacade {
 		return null;
 	}
 
+	public WDWisdomData getWisdomById(long wisdomId) {
+		DbgUtil.showLog(TAG, "getWisdomById");
+		// TODO
+
+		return null;
+	}
+
 }

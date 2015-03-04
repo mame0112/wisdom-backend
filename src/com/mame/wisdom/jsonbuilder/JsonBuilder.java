@@ -4,7 +4,7 @@ import com.mame.wisdom.exception.JSONBuilderException;
 
 public abstract class JsonBuilder {
 
-	private final static String TAG = "JsonBuilder";
+	protected String VERSION = "1.0";
 
 	public abstract void addResponseId(int id) throws JSONBuilderException;
 
@@ -18,7 +18,5 @@ public abstract class JsonBuilder {
 			throws JSONBuilderException;
 
 	public abstract String getResultJson() throws JSONBuilderException;
-
-	protected String VERSION = "1.0";
 
 }

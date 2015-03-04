@@ -27,21 +27,18 @@ public class SigninAction implements Action {
 		long userId = WConstant.NO_USER;
 
 		JsonBuilder builder = new SigninJsonBuilder();
-		
+
 		String result = null;
 		builder.addResponseId(Integer.valueOf(responseId));
 
 		if (twitterName != null) {
 			WDUserData data = facade.getUserDataByTwitterName(twitterName);
 			builder.addResponseParam(data);
-			DbgUtil.showLog(TAG, "C");
 		} else {
 			builder.addErrorMessage("parameter is null");
 		}
 
 		result = builder.getResultJson();
-
-		// String result = MockJSONGenerator.generateMockNewWisdomJSON();
 
 		DbgUtil.showLog(TAG, "result: " + result);
 
