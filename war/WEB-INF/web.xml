@@ -1,35 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
               http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-         version="2.5"
-         xmlns="http://java.sun.com/xml/ns/javaee">
+	version="2.5" xmlns="http://java.sun.com/xml/ns/javaee">
 
-  <!-- Servlets -->
-  <servlet>
-    <servlet-name>greetServlet</servlet-name>
-    <servlet-class>com.mame.wisdom.server.GreetingServiceImpl</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/wisdom_backend/greet</url-pattern>
-  </servlet-mapping>
+	<!-- Servlets -->
+	<servlet>
+		<servlet-name>greetServlet</servlet-name>
+		<servlet-class>com.mame.wisdom.server.GreetingServiceImpl</servlet-class>
+	</servlet>
 
-<!-- Mail controller class for Wisdom backend -->
-  <servlet>
-    <servlet-name>controllerServlet</servlet-name>
-    <servlet-class>com.mame.wisdom.WisdomControllerServlet</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>controllerServlet</servlet-name>
-    <url-pattern>/controller/*</url-pattern>
-  </servlet-mapping>
-  
-  <!-- Default page to serve -->
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-  </welcome-file-list>
+	<servlet-mapping>
+		<servlet-name>greetServlet</servlet-name>
+		<url-pattern>/wisdom_backend/greet</url-pattern>
+	</servlet-mapping>
+
+	<!-- Mail controller class for Wisdom backend -->
+	<servlet>
+		<servlet-name>controllerServlet</servlet-name>
+		<servlet-class>com.mame.wisdom.WisdomControllerServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>controllerServlet</servlet-name>
+		<url-pattern>/controller/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>twitterServlet</servlet-name>
+		<servlet-class>com.mame.wisdom.WisdomTwitterServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>twitterServlet</servlet-name>
+		<url-pattern>/twitter</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>twitterCallbackServlet</servlet-name>
+		<servlet-class>com.mame.wisdom.TwitterCallbackServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>twitterCallbackServlet</servlet-name>
+		<url-pattern>/twitterCallback</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>twitterOauthServlet</servlet-name>
+		<servlet-class>com.mame.wisdom.TwitterOauthSuccessServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>twitterOauthServlet</servlet-name>
+		<url-pattern>/twitteroauth</url-pattern>
+	</servlet-mapping>
+
+	<!-- Default page to serve -->
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
 
 </web-app>

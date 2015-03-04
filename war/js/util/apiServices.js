@@ -98,6 +98,17 @@ wisdomApp.factory('apiService', ['$resource', 'log',
     }
 ]);
 
+// .factory('twitterAPIService', ['$resource', 'log',
+//  function($resource, log) {
+//     return $resource('/twitter',
+//          {},
+//          { 
+//             //Search widoms by given keyword
+//             account: {method: 'POST', isArray: false},
+//         });
+//     }
+// ]);
+
     // function infobar2 ($resource){
     //     $resource('/controller/infobar2',
     //      {},

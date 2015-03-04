@@ -1,1 +1,19 @@
-Sign up
+<div ng-controller="SignupController">
+<form role="form">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Mail address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Mail address">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="password">
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox"> Keep Sign in state
+    </label>
+  </div>
+  <button type="submit" class="btn btn-default">Sign in</button>
+  <button type="Sign up with Twitter" class="btn btn-default" ng-click="twitterCheck()">Sign up with Twitter</button>
+</form>
+</div>

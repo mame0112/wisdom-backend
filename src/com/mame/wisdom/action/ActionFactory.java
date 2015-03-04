@@ -65,6 +65,11 @@ public class ActionFactory {
 		mAction.put(ActionConstants.GET + ActionConstants.KEY_SEARCH,
 				new SearchAction());
 
+		// Twitter API
+		// Create account by Twitter
+		mAction.put(ActionConstants.POST + ActionConstants.KEY_TWITTER,
+				new TwitterCreateAccountAction());
+
 	}
 
 	private ActionFactory() {
