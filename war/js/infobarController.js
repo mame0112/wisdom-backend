@@ -3,8 +3,9 @@ wisdomApp.controller('infobarController', ['$scope', '$http', 'log', 'modeServic
  	log.d("infobarController");
  	var api = new apiService();
  	api.$popular(function(){
- 		log.d("signin finished");
+ 		log.d("infobar called");
  	});
+
  	// $http.get('data/mockdata.json').success(function(data){
  	// 	$scope.lists = data;
 		// modeService.changeCurrentMode();

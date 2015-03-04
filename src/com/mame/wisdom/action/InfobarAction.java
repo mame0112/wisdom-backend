@@ -23,13 +23,18 @@ public class InfobarAction implements Action {
 		DbgUtil.showLog(TAG, "execute");
 
 		String responseId = request.getParameter(WConstant.SERVLET_RESP_ID);
+		DbgUtil.showLog(TAG, "responseId: " + responseId);
 
 		WisdomFacade facade = new WisdomFacade();
 		List<WDWisdomData> data = facade.getPopularWisdoms();
+		DbgUtil.showLog(TAG, "AA");
 
 		JsonBuilder builder = new SigninJsonBuilder();
 		builder.addResponseId(Integer.valueOf(responseId));
+		DbgUtil.showLog(TAG, "BB");
 		builder.addResponseParam(data);
+		
+		DbgUtil.showLog(TAG, "CC");
 
 		String result = builder.getResultJson();
 		DbgUtil.showLog(TAG, "result: " + result);

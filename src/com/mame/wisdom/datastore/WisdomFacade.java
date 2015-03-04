@@ -20,7 +20,14 @@ public class WisdomFacade {
 		DAOFactory factory = DAOFactory.getDAOFactory();
 		try {
 			WisdomDAO wisdomDAO = factory.getWisdomDAO();
-			return wisdomDAO.getPopularWisdoms();
+			List<WDWisdomData> result = wisdomDAO.getPopularWisdoms();
+			if (result == null) {
+				DbgUtil.showLog(TAG, "result is null");
+				return null;
+			} else {
+				DbgUtil.showLog(TAG, "result is not null");
+				return wisdomDAO.getPopularWisdoms();
+			}
 
 		} catch (WisdomDatastoreException e) {
 			DbgUtil.showLog(TAG, "WisdomDatastoreException: " + e.getMessage());
