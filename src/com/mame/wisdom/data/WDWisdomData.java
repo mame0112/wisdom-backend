@@ -10,6 +10,8 @@ public class WDWisdomData {
 
 	private long mWisdomId = 0;
 
+	private String mTag = null;
+
 	private String mTitle = null;
 
 	private String mDescription = null;
@@ -20,13 +22,13 @@ public class WDWisdomData {
 
 	private long mLastUpdatedDate = 0;
 
-	private List<Long> mBelongMessageIds = new ArrayList<Long>();
+	private List<Long> mBelongWisdomIds = new ArrayList<Long>();
 
 	private List<Integer> mItemOrder = new ArrayList<Integer>();
 
-	private String mTag = null;
+	private List<WDWisdomItemEntry> mItems = new ArrayList<WDWisdomItemEntry>();
 
-	private List<String> mMessages = new ArrayList<String>();
+	// private List<Long> mTheNumberOf
 
 	public WDWisdomData(long id, String title, String description, String tag) {
 		mWisdomId = id;
@@ -51,10 +53,8 @@ public class WDWisdomData {
 		return mTag;
 	}
 
-	// TODO Have to consider if we have messages and titles here directly (or it
-	// is better to have another data class for them?)
-	public List<String> getMessages() {
-		return mMessages;
+	public List<WDWisdomItemEntry> getItems() {
+		return mItems;
 	}
 
 }
