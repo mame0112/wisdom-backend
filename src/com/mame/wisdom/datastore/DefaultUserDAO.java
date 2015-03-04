@@ -27,19 +27,8 @@ public class DefaultUserDAO implements UserDAO {
 	private final static DatastoreService mDS = DatastoreServiceFactory
 			.getDatastoreService();
 
-	private boolean isAllUserEntityExist() {
-		DbgUtil.showLog(TAG, "isAllUserEntityExist");
-		Key key = DatastoreKeyGenerator.getAllUserDataKey();
-
-		if (key != null) {
-			return true;
-		}
-		return false;
-
-	}
-
 	@Override
-	public void createAllUserDataIfNecessary() throws WisdomDatastoreException {
+	public void createAllUserDataIfNecessary() {
 		DbgUtil.showLog(TAG, "createAllUserDataIfNecessary");
 		Key key = DatastoreKeyGenerator.getAllUserDataKey();
 		try {
@@ -218,12 +207,6 @@ public class DefaultUserDAO implements UserDAO {
 				userName, password, thumbnail, lastLogin, totalPoint);
 
 		return data;
-	}
-
-	public long getNewUserId() {
-		DbgUtil.showLog(TAG, "getNewUserId");
-
-		return WConstant.NO_USER;
 	}
 
 }

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mame.wisdom.action.Action;
 import com.mame.wisdom.action.ActionFactory;
+import com.mame.wisdom.action.InitializeAction;
 import com.mame.wisdom.exception.ActionException;
 import com.mame.wisdom.util.DbgUtil;
 
@@ -17,7 +18,8 @@ public class WisdomControllerServlet extends HttpServlet {
 
 	@Override
 	public void init() {
-
+		InitializeAction action = new InitializeAction();
+		action.initializeService();
 	}
 
 	@Override
