@@ -2,7 +2,7 @@ wisdomApp.controller('infobarController', ['$scope', '$http', 'log', 'modeServic
  function($scope, $http, log, modeService, apiService){
  	log.d("infobarController");
  	var api = new apiService();
- 	api.$signin(function(){
+ 	api.$popular(function(){
  		log.d("signin finished");
  	});
  	// $http.get('data/mockdata.json').success(function(data){

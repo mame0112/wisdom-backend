@@ -17,6 +17,18 @@ public class DBConstant {
 
 	public final static String ENTITY_USER_TWITTER_NAME = "user_twitter_name";
 
+	public final static String ENTITY_USER_FACEBOOK_NAME = "user_facebook_name";
+
+	public final static String ENTITY_USER_NAME = "user_name";
+
+	public final static String ENTITY_USER_PASSWORD = "user_password";
+
+	public final static String ENTITY_USER_THUMBNAIL = "user_thumbnail";
+
+	public final static String ENTITY_USER_LAST_LOGIN = "user_last_login";
+
+	public final static String ENTITY_USER_TOTAL_POINT = "user_total_point";
+
 	// Test fields
 	public final static String ENTITY_ID = "id";
 

@@ -27,10 +27,10 @@ public class SigninAction implements Action {
 		long userId = WConstant.NO_USER;
 
 		JsonBuilder builder = new SigninJsonBuilder();
-		DbgUtil.showLog(TAG, "A");
+		
 		String result = null;
 		builder.addResponseId(Integer.valueOf(responseId));
-		DbgUtil.showLog(TAG, "B");
+
 		if (twitterName != null) {
 			WDUserData data = facade.getUserDataByTwitterName(twitterName);
 			builder.addResponseParam(data);

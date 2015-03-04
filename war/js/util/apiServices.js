@@ -1,11 +1,21 @@
 wisdomApp.factory('apiService', ['$resource', 'log',
+ // function($resource, log) {
+ //    return ($resource('/controller/signin',
+ //     {servlet_resp_id: 1, twitter_name: 'TwitterName'},
+ //     {
+ //        signin: {method: 'GET', isArray: false}
+ //     })
+ //    );
+ //  },
+
  function($resource, log) {
-    return ($resource('/controller/signin',
-     {servlet_resp_id: 1, twitter_name: 'TwitterName'},
+    return ($resource('/controller/infobar',
+     {},
      {
-        signin: {method: 'GET', isArray: false}
+        popular: {method: 'GET', isArray: false}
      })
     );
+  }
 
 
 
@@ -20,7 +30,7 @@ wisdomApp.factory('apiService', ['$resource', 'log',
  //        }
  //    };
 
-}]);
+]);
     // return $resource('api/wisdom/:id', {}, {
     //   // Get certain or all category
     //   get_category: {method: 'GET', isArray: false},

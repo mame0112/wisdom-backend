@@ -1,5 +1,6 @@
 package com.mame.wisdom.datastore;
 
+import com.google.appengine.api.datastore.Blob;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -138,8 +139,21 @@ public class DefaultUserDAO implements UserDAO {
 		long userId = (Long) entity.getProperty(DBConstant.ENTITY_USER_ID);
 		String twitterName = (String) entity
 				.getProperty(DBConstant.ENTITY_USER_TWITTER_NAME);
+		String facebookName = (String) entity
+				.getProperty(DBConstant.ENTITY_USER_FACEBOOK_NAME);
+		String userName = (String) entity
+				.getProperty(DBConstant.ENTITY_USER_NAME);
+		String password = (String) entity
+				.getProperty(DBConstant.ENTITY_USER_PASSWORD);
+		Blob thumbnail = (Blob) entity
+				.getProperty(DBConstant.ENTITY_USER_THUMBNAIL);
+		long lastLogin = (Long) entity
+				.getProperty(DBConstant.ENTITY_USER_LAST_LOGIN);
+		long totalPoint = (Long) entity
+				.getProperty(DBConstant.ENTITY_USER_TOTAL_POINT);
 
-		WDUserData data = new WDUserData(userId, twitterName);
+		WDUserData data = new WDUserData(userId, twitterName, facebookName,
+				userName, password, thumbnail, lastLogin, totalPoint);
 
 		return data;
 	}

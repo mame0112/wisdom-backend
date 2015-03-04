@@ -3,6 +3,9 @@ package com.mame.wisdom.data;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.appengine.api.datastore.Blob;
+import com.mame.wisdom.constant.WConstant;
+
 public class WDWisdomData {
 
 	private long mWisdomId = 0;
@@ -10,6 +13,14 @@ public class WDWisdomData {
 	private String mTitle = null;
 
 	private String mDescription = null;
+
+	private Blob mThumbnail = null;
+
+	private long mCreatedUserId = WConstant.NO_USER;
+
+	private long mLastUpdatedDate = 0;
+
+	private List<Long> mBelongMessageIds = new ArrayList<Long>();
 
 	private List<Integer> mItemOrder = new ArrayList<Integer>();
 
