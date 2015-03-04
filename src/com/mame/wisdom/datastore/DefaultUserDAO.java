@@ -128,6 +128,7 @@ public class DefaultUserDAO implements UserDAO {
 			if (tx.isActive()) {
 				tx.rollback();
 			}
+			throw new WisdomDatastoreException(e.getMessage());
 		}
 	}
 
