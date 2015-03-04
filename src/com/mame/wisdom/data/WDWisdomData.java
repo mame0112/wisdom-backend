@@ -22,19 +22,25 @@ public class WDWisdomData {
 
 	private long mLastUpdatedDate = 0;
 
+	// TODO need to consider how we handle this.
 	private List<Long> mBelongWisdomIds = new ArrayList<Long>();
 
+	// TODO need to consider how we handle this.
 	private List<Integer> mItemOrder = new ArrayList<Integer>();
 
 	private List<WDWisdomItemEntry> mItems = new ArrayList<WDWisdomItemEntry>();
 
-	// private List<Long> mTheNumberOf
-
-	public WDWisdomData(long id, String title, String description, String tag) {
+	public WDWisdomData(long id, String title, String description, String tag,
+			long createdUserId, long lastUpdatedDate, Blob thumbnail,
+			List<WDWisdomItemEntry> items) {
 		mWisdomId = id;
 		mTitle = title;
 		mDescription = description;
 		mTag = tag;
+		mCreatedUserId = createdUserId;
+		mLastUpdatedDate = lastUpdatedDate;
+		mThumbnail = thumbnail;
+		mItems = items;
 	}
 
 	public long getWisdomId() {
@@ -51,6 +57,18 @@ public class WDWisdomData {
 
 	public String getTag() {
 		return mTag;
+	}
+
+	public Blob getThumbnakl() {
+		return mThumbnail;
+	}
+
+	public long getCreatedUserId() {
+		return mCreatedUserId;
+	}
+
+	public long getLastUpdatedDate() {
+		return mLastUpdatedDate;
 	}
 
 	public List<WDWisdomItemEntry> getItems() {
