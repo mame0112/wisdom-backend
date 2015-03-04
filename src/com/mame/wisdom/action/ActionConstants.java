@@ -1,11 +1,33 @@
 package com.mame.wisdom.action;
 
 public class ActionConstants {
-	public final static String SIGNIN_KEY = "/signin";
-	
-	public final static String INFOBAR_KEY = "/infobar";
-	
+	/**
+	 * URL patterns for API
+	 */
+	public final static String KEY_SIGNIN = "/signin";
+
+	public final static String KEY_INFOBAR = "/infobar";
+
+	public final static String KEY_USER = "/user";
+
+	public final static String KEY_NOTIFICATION = "/notification";
+
+	public final static String KEY_WISDOM = "/wisdom";
+
+	public final static String KEY_HIGHLIGHT = "/highlight";
+
+	public final static String KEY_LATEST = "/latest";
+
+	public final static String KEY_SEARCH = "/search";
+
+	/**
+	 * Methods for RESTful APIs
+	 */
 	public final static String GET = "GET";
-	
+
 	public final static String POST = "POST";
+
+	public final static String PUT = "PUT";
+
+	public final static String DELETE = "DELETE";
 }

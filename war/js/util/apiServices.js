@@ -59,8 +59,8 @@ wisdomApp.factory('apiService', ['$resource', 'log',
             //Create new wisdom
             newwisdom: {method: 'POST', isArray: false},
 
-                        //Create new wisdom
-            updatewisdom: {method: 'POST', isArray: false},
+            //Update wisdom
+            updatewisdom: {method: 'PUT', isArray: false},
         });
     }
 ])

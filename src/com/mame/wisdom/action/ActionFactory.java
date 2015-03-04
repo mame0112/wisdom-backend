@@ -16,10 +16,44 @@ public class ActionFactory {
 
 	static {
 		DbgUtil.showLog(TAG, "static initializer");
-		mAction.put(ActionConstants.GET + ActionConstants.SIGNIN_KEY,
+		// Dummy APIs. To be removed.
+		mAction.put(ActionConstants.GET + ActionConstants.KEY_SIGNIN,
 				new SigninAction());
-		mAction.put(ActionConstants.GET + ActionConstants.INFOBAR_KEY,
+		mAction.put(ActionConstants.GET + ActionConstants.KEY_INFOBAR,
 				new InfobarAction());
+
+		// User APIs
+		mAction.put(ActionConstants.GET + ActionConstants.KEY_USER,
+				new UserAction());
+		mAction.put(ActionConstants.POST + ActionConstants.KEY_USER,
+				new UserAction());
+
+		// Notification APIs
+		mAction.put(ActionConstants.GET + ActionConstants.KEY_NOTIFICATION,
+				new NotificationAction());
+		mAction.put(ActionConstants.POST + ActionConstants.KEY_NOTIFICATION,
+				new NotificationAction());
+
+		// Wisdom APIs
+		mAction.put(ActionConstants.GET + ActionConstants.KEY_WISDOM,
+				new WisdomAction());
+		mAction.put(ActionConstants.POST + ActionConstants.KEY_WISDOM,
+				new WisdomAction());
+		mAction.put(ActionConstants.PUT + ActionConstants.KEY_WISDOM,
+				new WisdomAction());
+
+		// Highlight information API
+		mAction.put(ActionConstants.GET + ActionConstants.KEY_HIGHLIGHT,
+				new HighlightInfoAction());
+
+		// Latest information API
+		mAction.put(ActionConstants.GET + ActionConstants.KEY_LATEST,
+				new LatestInfoAction());
+
+		// Search API
+		mAction.put(ActionConstants.GET + ActionConstants.KEY_SEARCH,
+				new SearchAction());
+
 	}
 
 	private ActionFactory() {
