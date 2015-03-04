@@ -13,7 +13,7 @@ public class DatastoreKeyGenerator {
 	public static Key getAllUserDataKey() {
 		DbgUtil.showLog(TAG, "getAllUserDataKey");
 		Key ancKey = KeyFactory.createKey(DBConstant.KIND_ALL_USER,
-				DBConstant.ENTITY_TOTAL_USER_NUM);
+				DBConstant.ENTITY_TOTAL_USER_NUMBER);
 		return ancKey;
 	}
 

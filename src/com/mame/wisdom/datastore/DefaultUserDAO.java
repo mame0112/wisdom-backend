@@ -1,12 +1,16 @@
 package com.mame.wisdom.datastore;
 
+import java.util.ConcurrentModificationException;
+
 import com.google.appengine.api.datastore.Blob;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.EntityNotFoundException;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Transaction;
 import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.data.WDAllUserData;
 import com.mame.wisdom.data.WDUserData;
@@ -35,6 +39,28 @@ public class DefaultUserDAO implements UserDAO {
 	}
 
 	@Override
+	public void createAllUserDataIfNecessary() throws WisdomDatastoreException {
+		DbgUtil.showLog(TAG, "createAllUserDataIfNecessary");
+		Key key = DatastoreKeyGenerator.getAllUserDataKey();
+		try {
+			Entity entity = mDS.get(key);
+			long num = (Long) entity
+					.getProperty(DBConstant.ENTITY_TOTAL_USER_NUMBER);
+			DbgUtil.showLog(TAG, "total user Number: " + num);
+			if (num == -1) {
+				entity.setProperty(DBConstant.ENTITY_TOTAL_USER_NUMBER, 0);
+				mDS.put(entity);
+			}
+		} catch (EntityNotFoundException e) {
+			DbgUtil.showLog(TAG, "EntityNotFoundException: " + e.getMessage());
+			Entity entity = new Entity(key);
+			entity.setProperty(DBConstant.ENTITY_TOTAL_USER_NUMBER, 0);
+			mDS.put(entity);
+		}
+
+	}
+
+	@Override
 	public long getCurrentTotalUserNumber() throws WisdomDatastoreException {
 		DbgUtil.showLog(TAG, "getCurrentTotalUserNumber");
 
@@ -44,7 +70,7 @@ public class DefaultUserDAO implements UserDAO {
 		Entity entity = pQuery.asSingleEntity();
 
 		long numOfUser = (Long) entity
-				.getProperty(DBConstant.ENTITY_TOTAL_USER_NUM);
+				.getProperty(DBConstant.ENTITY_TOTAL_USER_NUMBER);
 
 		return numOfUser;
 	}
@@ -74,10 +100,12 @@ public class DefaultUserDAO implements UserDAO {
 
 	}
 
-	// TODO Need to check sequence if we can use userId that is stored on the
-	// WDUser data in argument.
+	/**
+	 * If userId is -1 (No user), it means we haven't assign user ID to him/her
+	 * yet.
+	 */
 	@Override
-	public void storeNewUserData(WDUserData data)
+	public synchronized void storeNewUserData(WDUserData data)
 			throws WisdomDatastoreException {
 		DbgUtil.showLog(TAG, "storeNewUserData");
 
@@ -87,49 +115,83 @@ public class DefaultUserDAO implements UserDAO {
 		}
 
 		long userId = data.getUserId();
-
-		if (userId == WConstant.NO_USER) {
+		if (userId != WConstant.NO_USER) {
 			throw new WisdomDatastoreException(
-					"Illegal argument. UserId is no user");
+					"Illegal userId. User Id is not NO_USER, which is -1");
 		}
 
-		// If all user entity exist
-		if (getCurrentTotalUserNumber() != WConstant.NO_USER) {
+		// Start transaction
+		Transaction tx = mDS.beginTransaction();
+		try {
 
-		} else {
-			// If all user entity doesn't exist
+			// add the number of user
+			long newUserNum = addTheNumberOfUser();
 
-			// Create all user Entity with total user number if 1
-			createTotalUserData();
+			// Set new userId
+			data.setUserId(newUserNum);
 
 			// store target user data
 			addNewUserData(data);
+
+			tx.commit();
+		} catch (ConcurrentModificationException e) {
+			DbgUtil.showLog(TAG, "ConcurrentModificationException");
+			if (tx.isActive()) {
+				tx.rollback();
+			}
 		}
-
-	}
-
-	private void createTotalUserData() {
-		DbgUtil.showLog(TAG, "createTotalUserData");
-
-		Key key = DatastoreKeyGenerator.getAllUserDataKey();
-		Entity entity = new Entity(key);
-		entity.setProperty(DBConstant.ENTITY_TOTAL_USER_NUM, (long) 1);
-		mDS.put(entity);
-
 	}
 
 	private void addNewUserData(WDUserData data) {
 		DbgUtil.showLog(TAG, "addNewUserData");
 		long userId = data.getUserId();
+		String userName = data.getUsername();
+		String password = data.getPassword();
+		String twitter = data.getTwitterName();
+		String facebook = data.getFacebookName();
+		Blob thumbnail = data.getThumbnail();
+		long lastLogin = data.getLastLoginDate();
+		long totalPoint = data.getTotalPoint();
 
 		Key ancKey = DatastoreKeyGenerator.getAllUserDataKey();
 		Entity entity = new Entity(DBConstant.KIND_USER_DATA, ancKey);
 
 		entity.setProperty(DBConstant.ENTITY_USER_ID, userId);
-		entity.setProperty(DBConstant.ENTITY_USER_TWITTER_NAME,
-				data.getTwitterName());
+		entity.setProperty(DBConstant.ENTITY_USER_NAME, userName);
+		entity.setProperty(DBConstant.ENTITY_USER_PASSWORD, password);
+		entity.setProperty(DBConstant.ENTITY_USER_TWITTER_NAME, twitter);
+		entity.setProperty(DBConstant.ENTITY_USER_FACEBOOK_NAME, facebook);
+		entity.setProperty(DBConstant.ENTITY_USER_THUMBNAIL, thumbnail);
+		entity.setProperty(DBConstant.ENTITY_USER_TOTAL_POINT, totalPoint);
+		entity.setProperty(DBConstant.ENTITY_USER_LAST_LOGIN, lastLogin);
 
 		mDS.put(entity);
+
+	}
+
+	/**
+	 * Increase the number of user and return the number of user number.
+	 * 
+	 * @return
+	 */
+	private long addTheNumberOfUser() {
+		DbgUtil.showLog(TAG, "increaseTheNumberOfUser");
+
+		Key ancKey = DatastoreKeyGenerator.getAllUserDataKey();
+
+		try {
+			Entity entity = mDS.get(ancKey);
+			long currentNum = (long) entity
+					.getProperty(DBConstant.ENTITY_TOTAL_USER_NUMBER);
+			long newNum = currentNum + 1;
+			entity.setProperty(DBConstant.ENTITY_TOTAL_USER_NUMBER, newNum);
+			mDS.put(entity);
+			return newNum;
+		} catch (EntityNotFoundException e) {
+			DbgUtil.showLog(TAG, "EntityNotFoundException: " + e.getMessage());
+		}
+
+		return WConstant.NO_USER;
 
 	}
 
@@ -156,6 +218,12 @@ public class DefaultUserDAO implements UserDAO {
 				userName, password, thumbnail, lastLogin, totalPoint);
 
 		return data;
+	}
+
+	public long getNewUserId() {
+		DbgUtil.showLog(TAG, "getNewUserId");
+
+		return WConstant.NO_USER;
 	}
 
 }

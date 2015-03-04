@@ -13,5 +13,13 @@ public class WConstant {
 	// Arguments to be used on Servlet
 	public final static String SERVLET_RESP_ID = "servlet_resp_id";
 
-	public final static String SERVLET_TWITTER_NAME = "twitter_name";
+	public final static String SERVLET_TWITTER_NAME = "servlet_twitter_name";
+
+	public final static String SERVLET_FACEBOOK_NAME = "servlet_facebook_name";
+
+	public final static String SERVLET_USER_NAME = "servlet_user_name";
+
+	public final static String SERVLET_PASSWORD_NAME = "servlet_password";
+
+	public final static String SERVLET_THUMBNAIL = "servlet_thumbnail";
 }

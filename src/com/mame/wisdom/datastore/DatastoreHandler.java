@@ -1,7 +1,5 @@
 package com.mame.wisdom.datastore;
 
-import java.util.ConcurrentModificationException;
-
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -10,7 +8,6 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
-import com.google.appengine.api.datastore.Transaction;
 import com.mame.wisdom.data.WDUserData;
 import com.mame.wisdom.util.DbgUtil;
 
@@ -23,7 +20,7 @@ public class DatastoreHandler {
 
 	private static Key getAllUserDataKey() {
 		Key ancKey = KeyFactory.createKey(DBConstant.KIND_ALL_USER,
-				DBConstant.ENTITY_TOTAL_USER_NUM);
+				DBConstant.ENTITY_TOTAL_USER_NUMBER);
 		return ancKey;
 	}
 
@@ -37,7 +34,7 @@ public class DatastoreHandler {
 	// TODO we have to update DBConstant.ENTITY_TOTAL_USER_NUM part.
 	private static Key getSubCategoryKey() {
 		Key ancKey = KeyFactory.createKey(DBConstant.KIND_SUB_CATEGORY,
-				DBConstant.ENTITY_TOTAL_USER_NUM);
+				DBConstant.ENTITY_TOTAL_USER_NUMBER);
 		return ancKey;
 	}
 

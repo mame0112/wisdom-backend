@@ -16,6 +16,11 @@ public class WisdomControllerServlet extends HttpServlet {
 	private final static String TAG = "WisdomControllerServlet";
 
 	@Override
+	public void init() {
+
+	}
+
+	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response) {
 		DbgUtil.showLog(TAG, "service:" + request.getPathInfo());
 		String result = null;

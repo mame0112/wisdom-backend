@@ -11,8 +11,11 @@ public class DBConstant {
 
 	public final static String KIND_UPDATE_INFO = "kind_update_info";
 
-	public final static String ENTITY_TOTAL_USER_NUM = "entity_total_user_nu,";
-
+	/**
+	 * Entity fields for all user data
+	 */
+	public final static String ENTITY_TOTAL_USER_NUMBER = "total_user_number";
+	
 	/**
 	 * Entity fields for User data
 	 */

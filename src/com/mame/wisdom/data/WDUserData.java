@@ -33,6 +33,10 @@ public class WDUserData {
 		mTotalPoint = totalPoint;
 	}
 
+	public void setUserId(long userId) {
+		mUserId = userId;
+	}
+
 	public long getUserId() {
 		return mUserId;
 	}
