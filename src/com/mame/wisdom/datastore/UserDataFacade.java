@@ -56,11 +56,22 @@ public class UserDataFacade {
 		DAOFactory factory = DAOFactory.getDAOFactory();
 		UserDAO userDAO = factory.getUserDAO();
 
-		long current = TimeUtil.getCurrentDate();
+		WDUserData currentData = userDAO
+				.findUserDataByTwitterAccount(twitterName);
+		if (currentData == null) {
+			DbgUtil.showLog(TAG, "Current data is null");
+			long current = TimeUtil.getCurrentDate();
 
-		WDUserData data = new WDUserData(WConstant.NO_USER, twitterName, token,
-				tokenSecret, null, null, null, profileImageURL, current, 0);
-		userDAO.storeNewUserData(data);
+			WDUserData data = new WDUserData(WConstant.NO_USER, twitterName,
+					token, tokenSecret, null, null, null, profileImageURL,
+					current, 0);
+			userDAO.storeNewUserData(data);
+		} else {
+			DbgUtil.showLog(TAG,
+					"Target twitter account has already been registered!");
+			throw new WisdomDatastoreException(
+					"Target twitter account has already been registered!");
+		}
 
 	}
 

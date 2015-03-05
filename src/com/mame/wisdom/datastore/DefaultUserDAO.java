@@ -9,6 +9,7 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.EntityNotFoundException;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.PreparedQuery.TooManyResultsException;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Transaction;
 import com.mame.wisdom.constant.WConstant;
@@ -67,7 +68,7 @@ public class DefaultUserDAO implements UserDAO {
 	@Override
 	public WDUserData findUserDataByTwitterAccount(String twitterName)
 			throws WisdomDatastoreException {
-		DbgUtil.showLog(TAG, "isTargetUserDataExist");
+		DbgUtil.showLog(TAG, "findUserDataByTwitterAccount");
 
 		if (twitterName == null) {
 			throw new WisdomDatastoreException(
@@ -79,13 +80,22 @@ public class DefaultUserDAO implements UserDAO {
 				DBConstant.ENTITY_USER_TWITTER_NAME, FilterOperator.EQUAL,
 				twitterName);
 
-		Key key = DatastoreKeyGenerator.getAllUserDataKey();
-		Query query = new Query(WDAllUserData.class.getSimpleName(), key);
-		query.setFilter(twitterFilter);
-		PreparedQuery pQuery = mDS.prepare(query);
-		Entity entity = pQuery.asSingleEntity();
+		try {
+			Key key = DatastoreKeyGenerator.getAllUserDataKey();
+			Query query = new Query(DBConstant.KIND_USER_DATA, key);
+			query.setFilter(twitterFilter);
+			PreparedQuery pQuery = mDS.prepare(query);
+			Entity entity = pQuery.asSingleEntity();
+			if (entity != null) {
+				return constructUserDataFromEntity(entity);
+			}
+		} catch (TooManyResultsException e1) {
+			DbgUtil.showLog(TAG, "TooManyResultsException: " + e1.getMessage());
+		} catch (IllegalStateException e2) {
+			DbgUtil.showLog(TAG, "IllegalStateException: " + e2.getMessage());
+		}
 
-		return constructUserDataFromEntity(entity);
+		return null;
 
 	}
 
@@ -138,6 +148,8 @@ public class DefaultUserDAO implements UserDAO {
 		String userName = data.getUsername();
 		String password = data.getPassword();
 		String twitter = data.getTwitterName();
+		String twitterToken = data.getTwitterToken();
+		String twitterTokenSecret = data.getTwitterTokenSecret();
 		String facebook = data.getFacebookName();
 		String thumbnail = data.getThumbnail();
 		long lastLogin = data.getLastLoginDate();
@@ -150,6 +162,9 @@ public class DefaultUserDAO implements UserDAO {
 		entity.setProperty(DBConstant.ENTITY_USER_NAME, userName);
 		entity.setProperty(DBConstant.ENTITY_USER_PASSWORD, password);
 		entity.setProperty(DBConstant.ENTITY_USER_TWITTER_NAME, twitter);
+		entity.setProperty(DBConstant.ENTITY_USER_TWITTER_TOKEN, twitterToken);
+		entity.setProperty(DBConstant.ENTITY_USER_TWITTER_TOKEN_SECRET,
+				twitterTokenSecret);
 		entity.setProperty(DBConstant.ENTITY_USER_FACEBOOK_NAME, facebook);
 		entity.setProperty(DBConstant.ENTITY_USER_THUMBNAIL, thumbnail);
 		entity.setProperty(DBConstant.ENTITY_USER_TOTAL_POINT, totalPoint);
@@ -256,6 +271,16 @@ public class DefaultUserDAO implements UserDAO {
 
 			if (data.getTwitterName() != null) {
 				entity.setProperty(DBConstant.ENTITY_USER_TWITTER_NAME,
+						data.getTwitterName());
+			}
+
+			if (data.getTwitterToken() != null) {
+				entity.setProperty(DBConstant.ENTITY_USER_TWITTER_TOKEN,
+						data.getTwitterName());
+			}
+
+			if (data.getTwitterTokenSecret() != null) {
+				entity.setProperty(DBConstant.ENTITY_USER_TWITTER_TOKEN_SECRET,
 						data.getTwitterName());
 			}
 

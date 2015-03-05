@@ -41,7 +41,6 @@ public class TwitterCallbackAction implements Action {
 
 			User user = twitter.showUser(twitter.getScreenName());
 
-			// TODO need to store thumbnail
 			facade.saveTwitterTokens(twitter.getScreenName(),
 					user.getProfileImageURL(), token.getToken(),
 					token.getTokenSecret());
