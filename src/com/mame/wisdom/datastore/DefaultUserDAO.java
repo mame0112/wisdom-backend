@@ -139,7 +139,7 @@ public class DefaultUserDAO implements UserDAO {
 		String password = data.getPassword();
 		String twitter = data.getTwitterName();
 		String facebook = data.getFacebookName();
-		Blob thumbnail = data.getThumbnail();
+		String thumbnail = data.getThumbnail();
 		long lastLogin = data.getLastLoginDate();
 		long totalPoint = data.getTotalPoint();
 
@@ -191,21 +191,26 @@ public class DefaultUserDAO implements UserDAO {
 		long userId = (Long) entity.getProperty(DBConstant.ENTITY_USER_ID);
 		String twitterName = (String) entity
 				.getProperty(DBConstant.ENTITY_USER_TWITTER_NAME);
+		String twitterToken = (String) entity
+				.getProperty(DBConstant.ENTITY_USER_TWITTER_TOKEN);
+		String twitterTokenSecret = (String) entity
+				.getProperty(DBConstant.ENTITY_USER_TWITTER_TOKEN_SECRET);
 		String facebookName = (String) entity
 				.getProperty(DBConstant.ENTITY_USER_FACEBOOK_NAME);
 		String userName = (String) entity
 				.getProperty(DBConstant.ENTITY_USER_NAME);
 		String password = (String) entity
 				.getProperty(DBConstant.ENTITY_USER_PASSWORD);
-		Blob thumbnail = (Blob) entity
+		String thumbnail = (String) entity
 				.getProperty(DBConstant.ENTITY_USER_THUMBNAIL);
 		long lastLogin = (Long) entity
 				.getProperty(DBConstant.ENTITY_USER_LAST_LOGIN);
 		long totalPoint = (Long) entity
 				.getProperty(DBConstant.ENTITY_USER_TOTAL_POINT);
 
-		WDUserData data = new WDUserData(userId, twitterName, facebookName,
-				userName, password, thumbnail, lastLogin, totalPoint);
+		WDUserData data = new WDUserData(userId, twitterName, twitterToken,
+				twitterTokenSecret, facebookName, userName, password,
+				thumbnail, lastLogin, totalPoint);
 
 		return data;
 	}
@@ -265,5 +270,11 @@ public class DefaultUserDAO implements UserDAO {
 			DbgUtil.showLog(TAG, "EntityNotFoundException: " + e.getMessage());
 		}
 
+	}
+
+	@Override
+	public WDUserData getUserData(long userId) throws WisdomDatastoreException {
+		DbgUtil.showLog(TAG, "getUserData");
+		return null;
 	}
 }

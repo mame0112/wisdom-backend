@@ -6,7 +6,7 @@ import com.mame.wisdom.exception.WisdomDatastoreException;
 public interface UserDAO {
 
 	public void createAllUserDataIfNecessary();
-	
+
 	public long getCurrentTotalUserNumber() throws WisdomDatastoreException;
 
 	public WDUserData findUserDataByTwitterAccount(String twitterName)
@@ -14,8 +14,9 @@ public interface UserDAO {
 
 	public void storeNewUserData(WDUserData data)
 			throws WisdomDatastoreException;
-	
-	public void updateUserData(WDUserData data)
-			throws WisdomDatastoreException;
+
+	public WDUserData getUserData(long userId) throws WisdomDatastoreException;
+
+	public void updateUserData(WDUserData data) throws WisdomDatastoreException;
 
 }

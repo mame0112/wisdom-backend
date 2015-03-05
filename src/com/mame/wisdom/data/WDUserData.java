@@ -8,23 +8,29 @@ public class WDUserData {
 
 	private String mTwitterName = null;
 
+	private String mTwitterToken = null;
+
+	private String mTwitterTokenSecret = null;
+
 	private String mFacebookName = null;
 
 	private String mUserName = null;
 
 	private String mPassword = null;
 
-	private Blob mThumbnail = null;
+	private String mThumbnail = null;
 
 	private long mLastLoginDate = 0;
 
 	private long mTotalPoint = 0;
 
-	public WDUserData(long userId, String twitterName, String facebookName,
-			String userName, String password, Blob thumbnail, long lastLogin,
-			long totalPoint) {
+	public WDUserData(long userId, String twitterName, String twitterToken,
+			String twitterTokenSecret, String facebookName, String userName,
+			String password, String thumbnail, long lastLogin, long totalPoint) {
 		mUserId = userId;
 		mTwitterName = twitterName;
+		mTwitterToken = twitterToken;
+		mTwitterTokenSecret = twitterTokenSecret;
 		mFacebookName = facebookName;
 		mUserName = userName;
 		mPassword = password;
@@ -45,6 +51,14 @@ public class WDUserData {
 		return mTwitterName;
 	}
 
+	public String getTwitterToken() {
+		return mTwitterToken;
+	}
+
+	public String getTwitterTokenSecret() {
+		return mTwitterTokenSecret;
+	}
+
 	public String getFacebookName() {
 		return mFacebookName;
 	}
@@ -57,7 +71,7 @@ public class WDUserData {
 		return mPassword;
 	}
 
-	public Blob getThumbnail() {
+	public String getThumbnail() {
 		return mThumbnail;
 	}
 

@@ -5,8 +5,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
+import twitter4j.User;
+import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 
+import com.mame.wisdom.datastore.UserDataFacade;
 import com.mame.wisdom.twitter.TwitterConstant;
 import com.mame.wisdom.util.DbgUtil;
 
@@ -31,6 +34,18 @@ public class TwitterCallbackAction implements Action {
 			request.getSession().removeAttribute(
 					TwitterConstant.KEY_REQUEST_TOKEN);
 			DbgUtil.showLog(TAG, "AA");
+
+			AccessToken token = twitter.getOAuthAccessToken();
+
+			UserDataFacade facade = new UserDataFacade();
+
+			User user = twitter.showUser(twitter.getScreenName());
+
+			// TODO need to store thumbnail
+			facade.saveTwitterTokens(twitter.getScreenName(),
+					user.getProfileImageURL(), token.getToken(),
+					token.getTokenSecret());
+
 		} catch (TwitterException e) {
 			DbgUtil.showLog(TAG, "TwitterException: " + e.getMessage());
 		}
@@ -38,5 +53,4 @@ public class TwitterCallbackAction implements Action {
 
 		return null;
 	}
-
 }

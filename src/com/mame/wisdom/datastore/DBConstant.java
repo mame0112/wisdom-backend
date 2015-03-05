@@ -15,13 +15,17 @@ public class DBConstant {
 	 * Entity fields for all user data
 	 */
 	public final static String ENTITY_TOTAL_USER_NUMBER = "total_user_number";
-	
+
 	/**
 	 * Entity fields for User data
 	 */
 	public final static String ENTITY_USER_ID = "user_id";
 
 	public final static String ENTITY_USER_TWITTER_NAME = "user_twitter_name";
+
+	public final static String ENTITY_USER_TWITTER_TOKEN = "user_twitter_token";
+
+	public final static String ENTITY_USER_TWITTER_TOKEN_SECRET = "user_twitter_token_secret";
 
 	public final static String ENTITY_USER_FACEBOOK_NAME = "user_facebook_name";
 
@@ -39,19 +43,19 @@ public class DBConstant {
 	 * Entity fields for Wisdom data
 	 */
 	public final static String ENTITY_WISDOM_ID = "wisdom_id";
-	
+
 	public final static String ENTITY_WISDOM_TITLE = "wisdom_title";
-	
+
 	public final static String ENTITY_WISDOM_DESCRIPTION = "wisdom_description";
-	
+
 	public final static String ENTITY_WISDOM_TAG = "wisdom_tag";
-	
+
 	public final static String ENTITY_WISDOM_CREATED_USER_ID = "wisdom_created_user_id";
-	
+
 	public final static String ENTITY_WISDOM_LAST_UPDATED_DATE = "wisdom_last_updated_date";
-	
+
 	public final static String ENTITY_WISDOM_THUMBNAIL = "wisdom_thumbnail";
-	
+
 	public final static String ENTITY_WISDOM_ITMES = "wisdom_items";
 
 	// Test fields

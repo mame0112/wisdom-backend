@@ -27,12 +27,17 @@ public class SignupAction implements Action {
 		String responseId = request.getParameter(WConstant.SERVLET_RESP_ID);
 		String twitterName = request
 				.getParameter(WConstant.SERVLET_TWITTER_NAME);
+		String twitterToken = request
+				.getParameter(WConstant.SERVLET_TWITTER_TOKEN);
+		String twitterTokenSecret = request
+				.getParameter(WConstant.SERVLET_TWITTER_TOKEN_SECRET);
 		String facebookName = request
 				.getParameter(WConstant.SERVLET_FACEBOOK_NAME);
 		String userName = request.getParameter(WConstant.SERVLET_USER_NAME);
 		String password = request.getParameter(WConstant.SERVLET_PASSWORD_NAME);
-		String thubmnail = request.getParameter(WConstant.SERVLET_THUMBNAIL);
-		Blob thumbBlob = DatastoreUtil.transcodeString2Blob(thubmnail);
+		String thubmnail = request
+				.getParameter(WConstant.SERVLET_THUMBNAIL_URL);
+		// Blob thumbBlob = DatastoreUtil.transcodeString2Blob(thubmnail);
 
 		String result = null;
 		JsonBuilder builder = new SignupJsonBuilder();
@@ -41,7 +46,8 @@ public class SignupAction implements Action {
 
 			long currentTime = TimeUtil.getCurrentDate();
 			WDUserData data = new WDUserData(WConstant.NO_USER, twitterName,
-					facebookName, userName, password, thumbBlob, currentTime, 0);
+					twitterToken, twitterTokenSecret, facebookName, userName,
+					password, thubmnail, currentTime, 0);
 
 			UserDAO userDAO = new DefaultUserDAO();
 			try {
