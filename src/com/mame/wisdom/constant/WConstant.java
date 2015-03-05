@@ -6,6 +6,8 @@ public class WConstant {
 
 	public final static long NO_USER = -1;
 
+	public final static long NO_WISDOM = -1;
+	
 	public final static int TAG_WISDOM_TITLE = 1;
 
 	public final static int TAG_WISDOM_MESSAGE = 2;

@@ -1,5 +1,7 @@
 package com.mame.wisdom.action;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -23,48 +25,28 @@ public class TwitterCreateAccountAction implements Action {
 			HttpServletResponse response) throws Exception {
 		DbgUtil.showLog(TAG, "TwitterCreateAccountAction execute");
 
-		TwitterFactory twitterFactory = new TwitterFactory();
+		DbgUtil.showLog(TAG, "TwitterServlet service");
 
-		// Titterオブジェクトの生成
-		Twitter twitter = twitterFactory.getInstance();
-		Configuration c = twitter.getConfiguration();
-		if (c.getOAuthConsumerKey() == null
-				|| c.getOAuthConsumerSecret() == null) {
-			twitter.setOAuthConsumer(TwitterConstant.CONSUMER_KEY,
-					TwitterConstant.CONSUMER_SECRET);
-		}
-
+		Twitter twitter = new TwitterFactory().getInstance();
+		twitter.setOAuthConsumer(TwitterConstant.CONSUMER_KEY,
+				TwitterConstant.CONSUMER_SECRET);
+		request.getSession().setAttribute("twitter", twitter);
 		try {
-			DbgUtil.showLog(TAG, "AAA");
-			// リクエストトークンの生成
-			RequestToken reqToken = twitter.getOAuthRequestToken();
+			StringBuffer callbackURL = request.getRequestURL();
+			int index = callbackURL.lastIndexOf("/");
+			callbackURL.replace(index, callbackURL.length(), "").append(
+					"/twitterCallback");
 
-			DbgUtil.showLog(TAG, "BBB");
+			RequestToken requestToken = twitter
+					.getOAuthRequestToken(callbackURL.toString());
+			request.getSession().setAttribute("requestToken", requestToken);
+			response.sendRedirect(requestToken.getAuthenticationURL());
 
-			// RequestTokenとTwitterオブジェクトをセッションに保存
-			HttpSession session = request.getSession();
-			session.setAttribute("RequestToken", reqToken);
-			session.setAttribute("Twitter", twitter);
-
-			DbgUtil.showLog(TAG, "CCC");
-
-			// 認証画面にリダイレクトするためのURLを生成
-			String strUrl = reqToken.getAuthorizationURL();
-			DbgUtil.showLog(TAG, "DDD: " + strUrl);
-			response.sendRedirect(strUrl);
-			DbgUtil.showLog(TAG, "EEE");
 		} catch (TwitterException e) {
 			DbgUtil.showLog(TAG, "TwitterException: " + e.getMessage());
+		} catch (IOException e) {
+			DbgUtil.showLog(TAG, "IOException: " + e.getMessage());
 		}
-
-		// WisdomTwitter twitter = new WisdomTwitter();
-		// String authURL = twitter.getAuthorizationURL();
-		// DbgUtil.showLog(TAG, "authURL: " + authURL);
-		// if (authURL != null) {
-		// response.sendRedirect(authURL);
-		// } else {
-		// DbgUtil.showLog(TAG, "authURL is null");
-		// }
 
 		return null;
 	}

@@ -26,36 +26,6 @@
 		<url-pattern>/controller/*</url-pattern>
 	</servlet-mapping>
 
-	<servlet>
-		<servlet-name>twitterServlet</servlet-name>
-		<servlet-class>com.mame.wisdom.WisdomTwitterServlet</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>twitterServlet</servlet-name>
-		<url-pattern>/twitter</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>twitterCallbackServlet</servlet-name>
-		<servlet-class>com.mame.wisdom.TwitterCallbackServlet</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>twitterCallbackServlet</servlet-name>
-		<url-pattern>/twitterCallback</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>twitterOauthServlet</servlet-name>
-		<servlet-class>com.mame.wisdom.TwitterOauthSuccessServlet</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>twitterOauthServlet</servlet-name>
-		<url-pattern>/twitteroauth</url-pattern>
-	</servlet-mapping>
-
 	<!-- Default page to serve -->
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>

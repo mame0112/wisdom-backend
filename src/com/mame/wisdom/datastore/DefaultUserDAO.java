@@ -210,4 +210,60 @@ public class DefaultUserDAO implements UserDAO {
 		return data;
 	}
 
+	@Override
+	public void updateUserData(WDUserData data) throws WisdomDatastoreException {
+		DbgUtil.showLog(TAG, "updateUserData");
+
+		if (data != null) {
+			throw new WisdomDatastoreException("Parameter user data is null");
+		}
+
+		long userId = data.getUserId();
+
+		if (userId == WConstant.NO_USER) {
+			throw new WisdomDatastoreException("Illegal user Id");
+		}
+
+		Key key = DatastoreKeyGenerator.getUserDataKey(userId);
+		try {
+			Entity entity = mDS.get(key);
+
+			// TODO Need to support other fields if we add new one
+			if (data.getFacebookName() != null) {
+				entity.setProperty(DBConstant.ENTITY_USER_FACEBOOK_NAME,
+						data.getFacebookName());
+			}
+
+			if (data.getPassword() != null) {
+				entity.setProperty(DBConstant.ENTITY_USER_PASSWORD,
+						data.getPassword());
+			}
+
+			if (data.getThumbnail() != null) {
+				entity.setProperty(DBConstant.ENTITY_USER_THUMBNAIL,
+						data.getThumbnail());
+			}
+
+			if (data.getTotalPoint() != 0) {
+				entity.setProperty(DBConstant.ENTITY_USER_TOTAL_POINT,
+						data.getTotalPoint());
+			}
+
+			if (data.getTwitterName() != null) {
+				entity.setProperty(DBConstant.ENTITY_USER_TWITTER_NAME,
+						data.getTwitterName());
+			}
+
+			if (data.getUsername() != null) {
+				entity.setProperty(DBConstant.ENTITY_USER_NAME,
+						data.getUsername());
+			}
+
+			mDS.put(entity);
+
+		} catch (EntityNotFoundException e) {
+			DbgUtil.showLog(TAG, "EntityNotFoundException: " + e.getMessage());
+		}
+
+	}
 }

@@ -67,8 +67,12 @@ public class ActionFactory {
 
 		// Twitter API
 		// Create account by Twitter
-		mAction.put(ActionConstants.POST + ActionConstants.KEY_TWITTER,
+		mAction.put(ActionConstants.GET + ActionConstants.KEY_TWITTER,
 				new TwitterCreateAccountAction());
+
+		// Callback action by twitter
+		mAction.put(ActionConstants.GET + ActionConstants.KEY_TWITTER_CALLBACK,
+				new TwitterCallbackAction());
 
 	}
 

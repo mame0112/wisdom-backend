@@ -13,6 +13,9 @@ public class CreateWisdomAction implements Action {
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		DbgUtil.showLog(TAG, "CreateWisdomAction execute");
+		
+		
+		
 		return null;
 	}
 

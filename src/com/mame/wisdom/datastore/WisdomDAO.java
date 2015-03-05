@@ -32,4 +32,15 @@ public interface WisdomDAO {
 	public WDWisdomData getWisdom(String category, String subCategory,
 			long wisdomId) throws WisdomDatastoreException;
 
+	/**
+	 * This would be used if the user wants to create new wisdom
+	 * 
+	 * @param category
+	 * @param subCategory
+	 * @param wisdom
+	 * @throws WisdomDatastoreException
+	 */
+	public void addWisdom(String category, String subCategory,
+			WDWisdomData wisdom) throws WisdomDatastoreException;
+
 }

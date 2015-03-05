@@ -50,7 +50,7 @@ public class DBConstant {
 	
 	public final static String ENTITY_WISDOM_LAST_UPDATED_DATE = "wisdom_last_updated_date";
 	
-	public final static String ENTITY_WISDOM_Thumbnail = "wisdom_thumbnail";
+	public final static String ENTITY_WISDOM_THUMBNAIL = "wisdom_thumbnail";
 	
 	public final static String ENTITY_WISDOM_ITMES = "wisdom_items";
 

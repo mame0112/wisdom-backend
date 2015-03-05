@@ -14,5 +14,8 @@ public interface UserDAO {
 
 	public void storeNewUserData(WDUserData data)
 			throws WisdomDatastoreException;
+	
+	public void updateUserData(WDUserData data)
+			throws WisdomDatastoreException;
 
 }

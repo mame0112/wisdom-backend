@@ -7,7 +7,7 @@ wisdomApp.controller('SignupController', ['$scope', '$routeParams', 'log',  '$wi
  	$scope.twitterCheck = function()
  	{
  		log.d("twitterCheck");
- 		$window.location.href = '/twitter';
+ 		$window.location.href = '/controller/twitter';
 	 	// var api = new twitterAPIService();
 	 	// api.$account(function(){
 	 	// 	log.d("API called");

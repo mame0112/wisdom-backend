@@ -29,7 +29,7 @@ public class DefaultWisdomDAOHelper {
 			long lastUpdatedDate = (Long) e
 					.getProperty(DBConstant.ENTITY_WISDOM_LAST_UPDATED_DATE);
 			Blob thumbnail = (Blob) e
-					.getProperty(DBConstant.ENTITY_WISDOM_Thumbnail);
+					.getProperty(DBConstant.ENTITY_WISDOM_THUMBNAIL);
 			List<WDWisdomItemEntry> items = (List<WDWisdomItemEntry>) e
 					.getProperty(DBConstant.ENTITY_WISDOM_ITMES);
 
@@ -56,6 +56,30 @@ public class DefaultWisdomDAOHelper {
 			return result;
 		}
 
+		return null;
+	}
+
+	public Entity parseWisdomDataToEntity(WDWisdomData data, Entity entity) {
+		DbgUtil.showLog(TAG, "parseWisdomDataToEntity");
+
+		if (data != null && entity != null) {
+			// TODO we have to consider wisdom items.
+			entity.setProperty(DBConstant.ENTITY_WISDOM_ID, data.getWisdomId());
+			entity.setProperty(DBConstant.ENTITY_WISDOM_CREATED_USER_ID,
+					data.getCreatedUserId());
+			entity.setProperty(DBConstant.ENTITY_WISDOM_DESCRIPTION,
+					data.getDescription());
+			entity.setProperty(DBConstant.ENTITY_WISDOM_ITMES, data.getItems());
+			entity.setProperty(DBConstant.ENTITY_WISDOM_LAST_UPDATED_DATE,
+					data.getLastUpdatedDate());
+			entity.setProperty(DBConstant.ENTITY_WISDOM_TAG, data.getTag());
+			entity.setProperty(DBConstant.ENTITY_WISDOM_THUMBNAIL,
+					data.getThumbnakl());
+			entity.setProperty(DBConstant.ENTITY_WISDOM_TITLE, data.getTitle());
+			return entity;
+		} else {
+			DbgUtil.showLog(TAG, "data or entity is null");
+		}
 		return null;
 	}
 }

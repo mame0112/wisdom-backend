@@ -1,29 +1,23 @@
-package com.mame.wisdom;
+package com.mame.wisdom.action;
 
-import java.io.IOException;
-
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import com.mame.wisdom.twitter.TwitterConstant;
-import com.mame.wisdom.util.DbgUtil;
 
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
-import twitter4j.TwitterFactory;
-import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
-import twitter4j.conf.Configuration;
 
-public class TwitterCallbackServlet extends HttpServlet {
+import com.mame.wisdom.util.DbgUtil;
 
-	private final static String TAG = TwitterCallbackServlet.class
+public class TwitterCallbackAction implements Action {
+
+	private final static String TAG = TwitterCallbackAction.class
 			.getSimpleName();
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws IOException {
+	@Override
+	public String execute(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		DbgUtil.showLog(TAG, "TwitterCallbackAction execute");
 
 		Twitter twitter = (Twitter) request.getSession()
 				.getAttribute("twitter");
@@ -38,5 +32,8 @@ public class TwitterCallbackServlet extends HttpServlet {
 			DbgUtil.showLog(TAG, "TwitterException: " + e.getMessage());
 		}
 		response.sendRedirect(request.getContextPath() + "/");
+
+		return null;
 	}
+
 }
