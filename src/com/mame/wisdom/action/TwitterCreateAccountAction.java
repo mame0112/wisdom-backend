@@ -25,8 +25,6 @@ public class TwitterCreateAccountAction implements Action {
 			HttpServletResponse response) throws Exception {
 		DbgUtil.showLog(TAG, "TwitterCreateAccountAction execute");
 
-		DbgUtil.showLog(TAG, "TwitterServlet service");
-
 		Twitter twitter = new TwitterFactory().getInstance();
 		twitter.setOAuthConsumer(TwitterConstant.CONSUMER_KEY,
 				TwitterConstant.CONSUMER_SECRET);

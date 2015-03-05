@@ -9,6 +9,7 @@ import twitter4j.User;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 
+import com.mame.wisdom.data.WDUserData;
 import com.mame.wisdom.datastore.UserDataFacade;
 import com.mame.wisdom.twitter.TwitterConstant;
 import com.mame.wisdom.util.DbgUtil;
@@ -33,7 +34,6 @@ public class TwitterCallbackAction implements Action {
 			twitter.getOAuthAccessToken(requestToken, verifier);
 			request.getSession().removeAttribute(
 					TwitterConstant.KEY_REQUEST_TOKEN);
-			DbgUtil.showLog(TAG, "AA");
 
 			AccessToken token = twitter.getOAuthAccessToken();
 
@@ -41,9 +41,13 @@ public class TwitterCallbackAction implements Action {
 
 			User user = twitter.showUser(twitter.getScreenName());
 
-			facade.saveTwitterTokens(twitter.getScreenName(),
+			WDUserData data = facade.saveTwitterTokens(twitter.getScreenName(),
 					user.getProfileImageURL(), token.getToken(),
 					token.getTokenSecret());
+
+			if (data != null) {
+				DbgUtil.showLog(TAG, "userId: " + data.getUserId());
+			}
 
 		} catch (TwitterException e) {
 			DbgUtil.showLog(TAG, "TwitterException: " + e.getMessage());

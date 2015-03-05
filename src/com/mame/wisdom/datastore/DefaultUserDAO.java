@@ -104,7 +104,7 @@ public class DefaultUserDAO implements UserDAO {
 	 * yet.
 	 */
 	@Override
-	public synchronized void storeNewUserData(WDUserData data)
+	public synchronized long storeNewUserData(WDUserData data)
 			throws WisdomDatastoreException {
 		DbgUtil.showLog(TAG, "storeNewUserData");
 
@@ -133,6 +133,10 @@ public class DefaultUserDAO implements UserDAO {
 			addNewUserData(data);
 
 			tx.commit();
+
+			// Return new User id
+			return newUserNum;
+
 		} catch (ConcurrentModificationException e) {
 			DbgUtil.showLog(TAG, "ConcurrentModificationException");
 			if (tx.isActive()) {

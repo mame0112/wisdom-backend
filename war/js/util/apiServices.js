@@ -96,18 +96,18 @@ wisdomApp.factory('apiService', ['$resource', 'log',
             search: {method: 'GET', isArray: false},
         });
     }
-]);
+])
 
-// .factory('twitterAPIService', ['$resource', 'log',
-//  function($resource, log) {
-//     return $resource('/twitter',
-//          {},
-//          { 
-//             //Search widoms by given keyword
-//             account: {method: 'POST', isArray: false},
-//         });
-//     }
-// ]);
+.factory('twitterAPIService', ['$resource', 'log',
+ function($resource, log) {
+    return $resource('/controller/twitter',
+         {servlet_resp_id: 1},
+         { 
+            //Search widoms by given keyword
+            account: {method: 'GET', isArray: false},
+        });
+    }
+]);
 
     // function infobar2 ($resource){
     //     $resource('/controller/infobar2',

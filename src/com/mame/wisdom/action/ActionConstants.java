@@ -19,9 +19,11 @@ public class ActionConstants {
 	public final static String KEY_LATEST = "/latest";
 
 	public final static String KEY_SEARCH = "/search";
-	
+
 	public final static String KEY_TWITTER = "/twitter";
-	
+
+	public final static String KEY_TWITTER_SIGNUP = "/twitterSignup";
+
 	public final static String KEY_TWITTER_CALLBACK = "/twitterCallback";
 
 	/**

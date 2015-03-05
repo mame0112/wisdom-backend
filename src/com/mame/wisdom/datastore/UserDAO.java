@@ -12,7 +12,7 @@ public interface UserDAO {
 	public WDUserData findUserDataByTwitterAccount(String twitterName)
 			throws WisdomDatastoreException;
 
-	public void storeNewUserData(WDUserData data)
+	public long storeNewUserData(WDUserData data)
 			throws WisdomDatastoreException;
 
 	public WDUserData getUserData(long userId) throws WisdomDatastoreException;

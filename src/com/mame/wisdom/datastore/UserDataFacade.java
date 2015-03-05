@@ -45,8 +45,9 @@ public class UserDataFacade {
 
 	}
 
-	public void saveTwitterTokens(String twitterName, String profileImageURL,
-			String token, String tokenSecret) throws WisdomDatastoreException {
+	public WDUserData saveTwitterTokens(String twitterName,
+			String profileImageURL, String token, String tokenSecret)
+			throws WisdomDatastoreException {
 		DbgUtil.showLog(TAG, "saveTwitterTokens");
 
 		if (twitterName == null || token == null || tokenSecret == null) {
@@ -58,6 +59,7 @@ public class UserDataFacade {
 
 		WDUserData currentData = userDAO
 				.findUserDataByTwitterAccount(twitterName);
+		long userId = WConstant.NO_USER;
 		if (currentData == null) {
 			DbgUtil.showLog(TAG, "Current data is null");
 			long current = TimeUtil.getCurrentDate();
@@ -66,13 +68,12 @@ public class UserDataFacade {
 					token, tokenSecret, null, null, null, profileImageURL,
 					current, 0);
 			userDAO.storeNewUserData(data);
+			return data;
 		} else {
 			DbgUtil.showLog(TAG,
 					"Target twitter account has already been registered!");
-			throw new WisdomDatastoreException(
-					"Target twitter account has already been registered!");
+			return currentData;
 		}
-
 	}
 
 }
