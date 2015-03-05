@@ -30,16 +30,17 @@ public class TwitterCreateAccountAction implements Action {
 		Twitter twitter = new TwitterFactory().getInstance();
 		twitter.setOAuthConsumer(TwitterConstant.CONSUMER_KEY,
 				TwitterConstant.CONSUMER_SECRET);
-		request.getSession().setAttribute("twitter", twitter);
+		request.getSession().setAttribute(TwitterConstant.KEY_TWITTER, twitter);
 		try {
 			StringBuffer callbackURL = request.getRequestURL();
 			int index = callbackURL.lastIndexOf("/");
 			callbackURL.replace(index, callbackURL.length(), "").append(
-					"/twitterCallback");
+					ActionConstants.KEY_TWITTER_CALLBACK);
 
 			RequestToken requestToken = twitter
 					.getOAuthRequestToken(callbackURL.toString());
-			request.getSession().setAttribute("requestToken", requestToken);
+			request.getSession().setAttribute(
+					TwitterConstant.KEY_REQUEST_TOKEN, requestToken);
 			response.sendRedirect(requestToken.getAuthenticationURL());
 
 		} catch (TwitterException e) {

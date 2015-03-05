@@ -7,6 +7,7 @@ import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.auth.RequestToken;
 
+import com.mame.wisdom.twitter.TwitterConstant;
 import com.mame.wisdom.util.DbgUtil;
 
 public class TwitterCallbackAction implements Action {
@@ -19,14 +20,16 @@ public class TwitterCallbackAction implements Action {
 			HttpServletResponse response) throws Exception {
 		DbgUtil.showLog(TAG, "TwitterCallbackAction execute");
 
-		Twitter twitter = (Twitter) request.getSession()
-				.getAttribute("twitter");
+		Twitter twitter = (Twitter) request.getSession().getAttribute(
+				TwitterConstant.KEY_TWITTER);
 		RequestToken requestToken = (RequestToken) request.getSession()
-				.getAttribute("requestToken");
-		String verifier = request.getParameter("oauth_verifier");
+				.getAttribute(TwitterConstant.KEY_REQUEST_TOKEN);
+		String verifier = request
+				.getParameter(TwitterConstant.KEY_OAUTH_VERIFIER);
 		try {
 			twitter.getOAuthAccessToken(requestToken, verifier);
-			request.getSession().removeAttribute("requestToken");
+			request.getSession().removeAttribute(
+					TwitterConstant.KEY_REQUEST_TOKEN);
 			DbgUtil.showLog(TAG, "AA");
 		} catch (TwitterException e) {
 			DbgUtil.showLog(TAG, "TwitterException: " + e.getMessage());
