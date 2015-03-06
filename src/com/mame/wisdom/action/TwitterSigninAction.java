@@ -41,8 +41,12 @@ public class TwitterSigninAction implements Action {
 						.getScreenName());
 				if (data != null) {
 					DbgUtil.showLog(TAG, "data is not null");
+					builder.addResponseParam(data);
 					long userId = data.getUserId();
 					DbgUtil.showLog(TAG, "userId: " + userId);
+				} else {
+					builder.addErrorMessage("user data is not available");
+					builder.addErrorMessage("response id is null");
 				}
 
 			} else {
@@ -54,6 +58,7 @@ public class TwitterSigninAction implements Action {
 		}
 
 		result = builder.getResultJson();
+		DbgUtil.showLog(TAG, "result: " + result);
 
 		return result;
 	}

@@ -24,6 +24,10 @@ public class JsonConstant {
 
 	public final static String PARAM_USER_TWITTER_NAME = "twitterName";
 
+	public final static String PARAM_USER_TWITTER_TOKEN = "twitterToken";
+
+	public final static String PARAM_USER_TWITTER_TOKEN_SECRET = "twitterTokenSecret";
+
 	public final static String PARAM_USER_FACEBOOK_NAME = "facebookName";
 
 	public final static String PARAM_USER_THUMBNAIL = "thumbnail";
@@ -50,7 +54,7 @@ public class JsonConstant {
 	public final static String PARAM_WISDOM_SUB_TITLE = "sub_title";
 
 	public final static String PARAM_WISDOM_ITEM_ID = "id";
-	
+
 	public final static String PARAM_WISDOM_ITEM_MESSAGE = "message";
 
 	public final static String PARAM_WISDOM_ITEM_LIKE = "like_num";
