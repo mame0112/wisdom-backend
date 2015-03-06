@@ -18,8 +18,10 @@ wisdomApp.controller('SignupController', ['$scope', '$routeParams', 'log',  '$wi
  	{
  		log.d("twitterSignin");
 	 	var api = new twitterAPIService();
-	 	api.$account(function(){
+	 	api.$account(function(data){
 	 		log.d("API called");
+	 		$scope.userData = data;
+	 		// log.d("data.twitterName: " + $scope.userData.twitterName);
  		});
  	};
 
