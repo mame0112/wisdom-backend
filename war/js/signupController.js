@@ -32,6 +32,42 @@ wisdomApp.controller('SignupController', ['$scope', '$routeParams', 'log',  '$wi
 
  	};
 
+ 	$scope.getPoint = function(data)
+ 	{
+ 		log.d("getPoint");
+ 		return dataRetriveService.getPoint(data);
+ 	};
+
+ 	$scope.getTwitterTokenSecret = function(data)
+ 	{
+ 		log.d("getTwitterTokenSecret");
+ 		return dataRetriveService.getTwitterTokenSecret(data);
+ 	};
+
+ 	 $scope.getThumbnail = function(data)
+ 	{
+ 		log.d("getThumbnail");
+ 		return dataRetriveService.getThumbnail(data);
+ 	};
+
+  	 $scope.getLogindate = function(data)
+ 	{
+ 		log.d("getLogindate");
+ 		return dataRetriveService.getLogindate(data);
+ 	};
+
+  	 $scope.getUserId = function(data)
+ 	{
+ 		log.d("getUserId");
+ 		return dataRetriveService.getUserId(data);
+ 	};
+
+   	 $scope.getTwitterToken = function(data)
+ 	{
+ 		log.d("getTwitterToken");
+ 		return dataRetriveService.getTwitterToken(data);
+ 	};
+
 
 
 }]);
