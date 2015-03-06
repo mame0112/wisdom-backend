@@ -5,8 +5,12 @@ import java.util.List;
 
 import com.google.appengine.api.datastore.Blob;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.labs.repackaged.org.json.JSONArray;
+import com.google.appengine.labs.repackaged.org.json.JSONException;
+import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import com.mame.wisdom.data.WDWisdomData;
 import com.mame.wisdom.data.WDWisdomItemEntry;
+import com.mame.wisdom.jsonbuilder.JsonConstant;
 import com.mame.wisdom.util.DbgUtil;
 
 public class DefaultWisdomDAOHelper {
@@ -63,13 +67,16 @@ public class DefaultWisdomDAOHelper {
 		DbgUtil.showLog(TAG, "parseWisdomDataToEntity");
 
 		if (data != null && entity != null) {
-			// TODO we have to consider wisdom items.
+
+			// Get entities belong to one wisdom
+			String itemsJSON = parseWisdomItemEntitiesToJson(data.getItems());
+
 			entity.setProperty(DBConstant.ENTITY_WISDOM_ID, data.getWisdomId());
 			entity.setProperty(DBConstant.ENTITY_WISDOM_CREATED_USER_ID,
 					data.getCreatedUserId());
 			entity.setProperty(DBConstant.ENTITY_WISDOM_DESCRIPTION,
 					data.getDescription());
-			entity.setProperty(DBConstant.ENTITY_WISDOM_ITMES, data.getItems());
+			entity.setProperty(DBConstant.ENTITY_WISDOM_ITMES, itemsJSON);
 			entity.setProperty(DBConstant.ENTITY_WISDOM_LAST_UPDATED_DATE,
 					data.getLastUpdatedDate());
 			entity.setProperty(DBConstant.ENTITY_WISDOM_TAG, data.getTag());
@@ -81,5 +88,51 @@ public class DefaultWisdomDAOHelper {
 			DbgUtil.showLog(TAG, "data or entity is null");
 		}
 		return null;
+	}
+
+	private String parseWisdomItemEntitiesToJson(List<WDWisdomItemEntry> items) {
+		DbgUtil.showLog(TAG, "parseWisdomItemEntitiesToJson");
+
+		if (items != null) {
+			JSONArray rootArray = new JSONArray();
+
+			for (WDWisdomItemEntry item : items) {
+				JSONObject object = parseWDWisdomItemEntryToJsonObject(item);
+				rootArray.put(object);
+			}
+
+			return rootArray.toString();
+		}
+
+		return null;
+
+	}
+
+	private JSONObject parseWDWisdomItemEntryToJsonObject(WDWisdomItemEntry item) {
+		DbgUtil.showLog(TAG, "parseWDWisdomItemEntryToJsonObject");
+		if (item != null) {
+			JSONObject object = new JSONObject();
+
+			try {
+				object.put(JsonConstant.PARAM_WISDOM_ITEM_UPDATE_USER_ID,
+						item.getItem());
+				object.put(JsonConstant.PARAM_WISDOM_ITEM_ID, item.getItemId());
+
+				object.put(JsonConstant.PARAM_WISDOM_ITEM_UPDATE_USER_ID,
+						item.getLastUpdateUserId());
+				object.put(JsonConstant.PARAM_WISDOM_ITEM_UPDAtE_USER_NAME,
+						item.getLastUpdateUserName());
+				object.put(JsonConstant.PARAM_WISDOM_ITEM_LIKE,
+						item.getNumberOfLike());
+				object.put(JsonConstant.PARAM_WISDOM_TAG, item.getTag());
+			} catch (JSONException e) {
+				DbgUtil.showLog(TAG, "JSONException");
+				return null;
+			}
+
+			return object;
+		}
+		return null;
+
 	}
 }

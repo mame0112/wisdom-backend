@@ -14,19 +14,19 @@ public class WisdomFacade {
 		DbgUtil.showLog(TAG, "WisdomFacade");
 	}
 
-	public List<WDWisdomData> getPopularWisdoms() {
+	public List<WDWisdomData> getPopularWisdoms(int num) {
 		DbgUtil.showLog(TAG, "getPopularWisdoms");
 
 		DAOFactory factory = DAOFactory.getDAOFactory();
 		try {
 			WisdomDAO wisdomDAO = factory.getWisdomDAO();
-			List<WDWisdomData> result = wisdomDAO.getPopularWisdoms();
+			List<WDWisdomData> result = wisdomDAO.getPopularWisdoms(num);
 			if (result == null) {
 				DbgUtil.showLog(TAG, "result is null");
 				return null;
 			} else {
 				DbgUtil.showLog(TAG, "result is not null");
-				return wisdomDAO.getPopularWisdoms();
+				return wisdomDAO.getPopularWisdoms(num);
 			}
 
 		} catch (WisdomDatastoreException e) {
@@ -36,7 +36,8 @@ public class WisdomFacade {
 		return null;
 	}
 
-	public WDWisdomData getWisdomById(long wisdomId) {
+	public WDWisdomData getWisdomById(String category, String subCategory,
+			long wisdomId) {
 		DbgUtil.showLog(TAG, "getWisdomById");
 		// TODO
 

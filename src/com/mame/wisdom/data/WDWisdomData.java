@@ -23,9 +23,6 @@ public class WDWisdomData {
 	private long mLastUpdatedDate = 0;
 
 	// TODO need to consider how we handle this.
-	private List<Long> mBelongWisdomIds = new ArrayList<Long>();
-
-	// TODO need to consider how we handle this.
 	private List<Integer> mItemOrder = new ArrayList<Integer>();
 
 	private List<WDWisdomItemEntry> mItems = new ArrayList<WDWisdomItemEntry>();

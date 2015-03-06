@@ -23,10 +23,16 @@ public class WisdomAction implements Action {
 
 		String responseId = request.getParameter(WConstant.SERVLET_RESP_ID);
 		String wisdomId = request.getParameter(WConstant.SERVLET_WISDOM_ID);
+		String category = request
+				.getParameter(WConstant.SERVLET_WISDOM_CATEGORY);
+		String subCategory = request
+				.getParameter(WConstant.SERVLET_WISDOM_SUB_CATEGORY);
 
-		if (responseId != null && wisdomId != null) {
+		if (responseId != null && wisdomId != null && category != null
+				&& subCategory != null) {
 			WisdomFacade facade = new WisdomFacade();
-			WDWisdomData data = facade.getWisdomById(Integer.valueOf(wisdomId));
+			WDWisdomData data = facade.getWisdomById(category, subCategory,
+					Integer.valueOf(wisdomId));
 
 			if (data != null) {
 				builder.addResponseParam(data);

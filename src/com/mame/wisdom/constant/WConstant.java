@@ -19,6 +19,11 @@ public class WConstant {
 	public final static String SERVLET_RESP_ID = "servlet_resp_id";
 
 	/**
+	 * Public fields
+	 */
+	public final static String SERVLET_WISDOM_REQUEST_NUM = "servlet_wisdom_req_num";
+
+	/**
 	 * User data field
 	 */
 	public final static String SERVLET_TWITTER_NAME = "servlet_twitter_name";
@@ -38,6 +43,10 @@ public class WConstant {
 	/**
 	 * Wisdom data field
 	 */
+	public final static String SERVLET_WISDOM_CATEGORY = "servlet_wisdom_category";
+
+	public final static String SERVLET_WISDOM_SUB_CATEGORY = "servlet_wisdom_subcategory";
+
 	public final static String SERVLET_WISDOM_ID = "servlet_wisdom_id";
 
 }

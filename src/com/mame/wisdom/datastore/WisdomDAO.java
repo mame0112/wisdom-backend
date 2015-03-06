@@ -7,7 +7,25 @@ import com.mame.wisdom.exception.WisdomDatastoreException;
 
 public interface WisdomDAO {
 
-	public List<WDWisdomData> getPopularWisdoms();
+	/**
+	 * Get popular wisdom
+	 * 
+	 * @param num
+	 * @return
+	 * @throws WisdomDatastoreException
+	 */
+	public List<WDWisdomData> getPopularWisdoms(int num)
+			throws WisdomDatastoreException;
+
+	/**
+	 * Get latest wisdoms
+	 * 
+	 * @param num
+	 * @return
+	 * @throws WisdomDatastoreException
+	 */
+	public List<WDWisdomData> getLatestWisdoms(int num)
+			throws WisdomDatastoreException;
 
 	/**
 	 * This would be used if the user selects category and sub category on UI.
@@ -41,6 +59,17 @@ public interface WisdomDAO {
 	 * @throws WisdomDatastoreException
 	 */
 	public void addWisdom(String category, String subCategory,
+			WDWisdomData wisdom) throws WisdomDatastoreException;
+
+	/**
+	 * This would be used if the user updates wisdom
+	 * 
+	 * @param category
+	 * @param subCategory
+	 * @param wisdom
+	 * @throws WisdomDatastoreException
+	 */
+	public void updateWisdom(String category, String subCategory,
 			WDWisdomData wisdom) throws WisdomDatastoreException;
 
 }

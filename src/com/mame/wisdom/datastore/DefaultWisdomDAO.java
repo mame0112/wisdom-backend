@@ -24,10 +24,28 @@ public class DefaultWisdomDAO implements WisdomDAO {
 			.getDatastoreService();
 
 	@Override
-	public List<WDWisdomData> getPopularWisdoms() {
+	public List<WDWisdomData> getPopularWisdoms(int num)
+			throws WisdomDatastoreException {
 		DbgUtil.showLog(TAG, "getPopularWisdoms");
 
 		// TODO
+
+		return null;
+	}
+
+	@Override
+	public List<WDWisdomData> getLatestWisdoms(int num)
+			throws WisdomDatastoreException {
+		DbgUtil.showLog(TAG, "getLatestWisdoms");
+		// try {
+		// Key key = DatastoreKeyGenerator.getSubCategoryKey(category,
+		// subCategory)
+		// subCategory);
+		// Query query = new Query(DBConstant.KIND_WISDOM, key);
+		// PreparedQuery pQuery = mDS.prepare(query);
+		// } catch (WisdomDatastoreException e) {
+		// DbgUtil.showLog(TAG, "WisdomDatastoreException: " + e.getMessage());
+		// }
 
 		return null;
 	}
@@ -112,7 +130,44 @@ public class DefaultWisdomDAO implements WisdomDAO {
 			DbgUtil.showLog(TAG, "EntityNotFoundException: " + e.getMessage());
 			throw new WisdomDatastoreException(e.getMessage());
 		}
+	}
 
+	@Override
+	public void updateWisdom(String category, String subCategory,
+			WDWisdomData wisdom) throws WisdomDatastoreException {
+		DbgUtil.showLog(TAG, "updateWisdom");
+
+		if (category == null || subCategory == null || wisdom == null) {
+			DbgUtil.showLog(TAG,
+					"Illegal parameter. category, subcategory or wisdom is null");
+			throw new WisdomDatastoreException(
+					"Illegal parameter. category, subcategory or wisdom is null");
+		}
+
+		long wisdomId = wisdom.getWisdomId();
+
+		if (wisdomId == WConstant.NO_WISDOM) {
+			DbgUtil.showLog(TAG, "Illegal wisdomId");
+			throw new WisdomDatastoreException("Illegal wisdomId");
+		}
+
+		Key key = DatastoreKeyGenerator.getWisdomKeyById(category, subCategory,
+				wisdomId);
+		try {
+			Entity entity = mDS.get(key);
+			if (entity != null) {
+				DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
+				entity = helper.parseWisdomDataToEntity(wisdom, entity);
+				if (entity != null) {
+					mDS.put(entity);
+				}
+			} else {
+				DbgUtil.showLog(TAG, "Entity doesn't exist");
+			}
+		} catch (EntityNotFoundException e) {
+			DbgUtil.showLog(TAG, "EntityNotFoundException: " + e.getMessage());
+			// TODO need to consider if data for target wisdomId doesn't exist.
+		}
 	}
 
 }

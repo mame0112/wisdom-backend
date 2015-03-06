@@ -43,12 +43,20 @@ public class JsonConstant {
 
 	public final static String PARAM_WISDOM_TAG = "tag";
 
-	public final static String PARAM_WISDOM_UPDATED_DATE = "updated_date";
+	public final static String PARAM_WISDOM_ITEM_UPDATED_DATE = "updated_date";
 
 	public final static String PARAM_WISDOM_CREATE_USER_ID = "create_user_id";
 
 	public final static String PARAM_WISDOM_SUB_TITLE = "sub_title";
 
-	public final static String PARAM_WISDOM_MESSAGE = "message";
+	public final static String PARAM_WISDOM_ITEM_ID = "id";
+	
+	public final static String PARAM_WISDOM_ITEM_MESSAGE = "message";
+
+	public final static String PARAM_WISDOM_ITEM_LIKE = "like_num";
+
+	public final static String PARAM_WISDOM_ITEM_UPDATE_USER_ID = "update_userid";
+
+	public final static String PARAM_WISDOM_ITEM_UPDAtE_USER_NAME = "update_username";
 
 }

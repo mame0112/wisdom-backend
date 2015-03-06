@@ -17,23 +17,33 @@ public class InfobarAction implements Action {
 
 	private final static String TAG = "InfobarAction";
 
+	private final static int NUM_OF_WISDOM = 10;
+
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		DbgUtil.showLog(TAG, "execute");
 
 		String responseId = request.getParameter(WConstant.SERVLET_RESP_ID);
+		String requestWisdomNum = request
+				.getParameter(WConstant.SERVLET_WISDOM_REQUEST_NUM);
+
 		DbgUtil.showLog(TAG, "responseId: " + responseId);
 
+		int num = NUM_OF_WISDOM;
+		if (requestWisdomNum != null) {
+			num = Integer.valueOf(requestWisdomNum);
+		}
+
 		WisdomFacade facade = new WisdomFacade();
-		List<WDWisdomData> data = facade.getPopularWisdoms();
+		List<WDWisdomData> data = facade.getPopularWisdoms(num);
 		DbgUtil.showLog(TAG, "AA");
 
 		JsonBuilder builder = new SigninJsonBuilder();
 		builder.addResponseId(Integer.valueOf(responseId));
 		DbgUtil.showLog(TAG, "BB");
 		builder.addResponseParam(data);
-		
+
 		DbgUtil.showLog(TAG, "CC");
 
 		String result = builder.getResultJson();

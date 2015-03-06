@@ -1,6 +1,9 @@
 package com.mame.wisdom.datastore;
 
 public class DBConstant {
+	/**
+	 * Datastore kinds
+	 */
 	public final static String KIND_ALL_USER = "kind_all_user";
 
 	public final static String KIND_USER_DATA = "kind_user_data";
@@ -64,4 +67,8 @@ public class DBConstant {
 	public final static String ENTITY_TITLE = "title";
 
 	public final static String ENTITY_DESCRIPTION = "description";
+
+	/**
+	 * Separator for Wisdom item
+	 */
 }
