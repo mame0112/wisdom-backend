@@ -1,5 +1,5 @@
-wisdomApp.controller('SignupController', ['$scope', '$routeParams', 'log',  '$window', 'twitterAPIService',
- function($scope, $routeParams, log, $window, twitterAPIService){
+wisdomApp.controller('SignupController', ['$scope', '$routeParams', 'log',  '$window', 'twitterAPIService', 'fieldConstants',
+ function($scope, $routeParams, log, $window, twitterAPIService, fieldConstants){
  	log.d("SignupController");
  	// $scope.userId = $routeParams.userId;
  	// log.d("userId: " + $scope.userId);
@@ -21,8 +21,22 @@ wisdomApp.controller('SignupController', ['$scope', '$routeParams', 'log',  '$wi
 	 	api.$account(function(data){
 	 		log.d("API called");
 	 		$scope.userData = data;
-	 		// log.d("data.twitterName: " + $scope.userData.twitterName);
+
  		});
  	};
+
+ 	$scope.getTwitterName = function(data)
+ 	{
+ 		log.d("getTwitterName");
+ 		if(data !== null && data !== undefined)
+ 		{
+	 		log.d("Not null");
+	 		return $scope.userData.params.twitterName;
+ 		}
+ 		return null;
+
+ 	};
+
+
 
 }]);
