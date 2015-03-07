@@ -1,6 +1,5 @@
 package com.mame.wisdom.datastore;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.google.appengine.api.datastore.DatastoreService;
@@ -13,11 +12,11 @@ import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.Filter;
 import com.google.appengine.api.datastore.Query.FilterOperator;
+import com.google.appengine.api.datastore.Query.FilterPredicate;
 import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.data.WDWisdomData;
 import com.mame.wisdom.exception.WisdomDatastoreException;
 import com.mame.wisdom.util.DbgUtil;
-import com.google.appengine.api.datastore.Query.FilterPredicate;
 
 public class DefaultWisdomDAO implements WisdomDAO {
 

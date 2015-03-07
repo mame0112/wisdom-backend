@@ -45,4 +45,11 @@ wisdomApp.directive('headerDirective', function(){
 		restrict: 'A',
 		templateUrl: 'breadcrumb-directive.html'
 	};
+})
+
+.directive('debugDirective', function(){
+	return {
+		restrict: 'A',
+		templateUrl: 'debug-directive.html'
+	};
 });

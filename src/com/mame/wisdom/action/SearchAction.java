@@ -11,7 +11,6 @@ import com.mame.wisdom.datastore.DAOFactory;
 import com.mame.wisdom.datastore.WisdomDAO;
 import com.mame.wisdom.jsonbuilder.JsonBuilder;
 import com.mame.wisdom.jsonbuilder.SearchJsonBuilder;
-import com.mame.wisdom.jsonbuilder.SigninJsonBuilder;
 import com.mame.wisdom.util.DbgUtil;
 
 public class SearchAction implements Action {
