@@ -7,7 +7,8 @@ wisdomApp.controller('SignupController',
 	'dataRetriveService', 
 	'Constants',
 	'modeService',
- function($scope, $routeParams, log, $window, twitterAPIService, dataRetriveService, Constants, modeService){
+	'userDataHolder',
+ function($scope, $routeParams, log, $window, twitterAPIService, dataRetriveService, Constants, modeService, userDataHolder){
  	log.d("SignupController");
  	// $scope.userId = $routeParams.userId;
  	// log.d("userId: " + $scope.userId);
@@ -31,6 +32,7 @@ wisdomApp.controller('SignupController',
 	 		$scope.userData = data;
 	 		var userId = dataRetriveService.getUserId(data);
 	 		if(userId !== null && userId !== Constants.NO_USER){
+	 			userDataHolder.setUserData(data);
 	 			modeService.changeCurrentMode(Constants.STATE.STATE_HOME_LOGIN);
 		 		$window.location.href = '/';
 	 		}

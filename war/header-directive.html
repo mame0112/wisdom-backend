@@ -37,8 +37,10 @@
       </form>
       <ul class="nav navbar-nav navbar-right">
         <li><a ng-href="#/view/1">User page</a></li>
-        <li><a ng-href="#/signin" ng-click="onSigninOptionSelect()">Sign in</a></li>
-        <li><a ng-href="#/signup" ng-click="onSignupOptionSelect()">Sign up</a></li>
+        <li><a ng-href="#/signin" ng-click="onSigninOptionSelect()" ng-show="isSigninVisible()">Sign in</a></li>
+        <li><a ng-href="#/signup" ng-click="onSignupOptionSelect()" ng-show="isSignupVisible()">Sign up</a></li>
+        <li><a ng-href="#/view" ng-click="onSignupOptionSelect()" ng-show="isUserInfoVisible()">User info</a></li>
+        <li><a ng-href="#/view" ng-click="onSignupOptionSelect()" ng-show="isNotificationVisible()">Notification</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
