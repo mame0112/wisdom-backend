@@ -1,40 +1,66 @@
 <div ng-controller="wisdomCreateController">
-<h2>Category</h2>
-
-<h2>Sub category</h2>
-<div class="dropdown">
-  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-    Dropdown
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
-  </ul>
+<form role="form">
+<div class="form-group">
+	<h3>Category</h3>
+	<div class="btn-group" dropdown is-open="status.isopen1">
+	      <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+	        Select category <span class="caret"></span>
+	      </button>
+	      <ul class="dropdown-menu" role="menu">
+	        <li><a href="#">Action</a></li>
+	        <li><a href="#">Another action</a></li>
+	        <li><a href="#">Something else here</a></li>
+	        <li class="divider"></li>
+	        <li><a href="#">Separated link</a></li>
+	      </ul>
+	</div>
+</div>
+<div class="form-group">
+	<h3>Sub category</h3>
+	<div class="btn-group" dropdown is-open="status.isopen2">
+	      <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+	        Select sub category <span class="caret"></span>
+	      </button>
+	      <ul class="dropdown-menu" role="menu">
+	        <li><a href="#">Action</a></li>
+	        <li><a href="#">Another action</a></li>
+	        <li><a href="#">Something else here</a></li>
+	        <li class="divider"></li>
+	        <li><a href="#">Separated link</a></li>
+	      </ul>
+	</div>
+</div>
+<div class="form-group">
+	<h3>input tag</h3>
+	<p>Input tag if necessary. (e.g. “Classic” or “Jazz” for “Music” category / “Piano” sub category)</p>
+	<input type="text" class="form-control" placeholder="Search" ng-model="searchParam">
 </div>
 
- <div class="dropdown">
-    <a class="btn btn-default" data-toggle="dropdown" href="#">AAAAAAA <b class="caret"></b></a>
-    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownCountry">
-      <li><a>BBBBBBB</a></li>
-      <li><a>BBBBBBB2</a></li>
-      <li><a>BBBBBBB3</a></li>
-      <li><a>BBBBBBB4</a></li>
-    </ul>
-  </div>
-
-<div class="btn-group" dropdown is-open="status.isopen">
-      <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
-        Button dropdown <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <li><a href="#">Action</a></li>
-        <li><a href="#">Another action</a></li>
-        <li><a href="#">Something else here</a></li>
-        <li class="divider"></li>
-        <li><a href="#">Separated link</a></li>
-      </ul>
-    </div>
+<div class="form-group">
+	<h3>Thumbnail</h3>
+	<input type="file" name="thumbnail" value="select image">
 </div>
+
+<div class="form-group">
+	<h3>Title</h3>
+	<input type="text" class="form-control" placeholder="Search" ng-model="searchParam">
+</div>
+
+<div class="form-group">
+	<h3>Description</h3>
+	<input type="text" class="form-control" placeholder="Search" ng-model="searchParam">
+</div>
+
+<div class="form-group">
+	<div class="btn-group" role="group" aria-label="item selection">
+	  <button type="button" class="btn btn-default">Sub title</button>
+	  <button type="button" class="btn btn-default">Free text</button>
+	</div>
+</div>
+
+<div class="form-group">
+	<button type="submit" class="btn btn-default">Create new wisdom</button>
+</div>
+</form>
+</div>
+
