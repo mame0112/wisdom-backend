@@ -89,7 +89,6 @@ public class ActionFactory {
 
 		String method = request.getMethod();
 		String path = request.getPathInfo();
-		// String path = request.get
 
 		if (method == null || path == null) {
 			DbgUtil.showLog(TAG, "getAction method or pathinfo is null");

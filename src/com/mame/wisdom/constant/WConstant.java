@@ -49,4 +49,11 @@ public class WConstant {
 
 	public final static String SERVLET_WISDOM_ID = "servlet_wisdom_id";
 
+	public final static String SERVLET_WISDOM_SEARCH_PARAM = "searchParam";
+
+	/**
+	 * The number of items in one page for search
+	 */
+	public final static int SEARCH_LIMIT_NUM = 20;
+
 }

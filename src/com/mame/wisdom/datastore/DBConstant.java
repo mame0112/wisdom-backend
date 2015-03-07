@@ -1,6 +1,7 @@
 package com.mame.wisdom.datastore;
 
 public class DBConstant {
+
 	/**
 	 * Datastore kinds
 	 */

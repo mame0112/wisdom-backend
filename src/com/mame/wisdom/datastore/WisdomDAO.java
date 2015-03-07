@@ -28,6 +28,18 @@ public interface WisdomDAO {
 			throws WisdomDatastoreException;
 
 	/**
+	 * Search out wisdom by given search parameter.
+	 * 
+	 * @param searchParam
+	 * @param offset
+	 * @param limit
+	 * @return
+	 * @throws WisdomDatastoreException
+	 */
+	public List<WDWisdomData> searchWisdoms(String searchParam, int offset,
+			int limit) throws WisdomDatastoreException;
+
+	/**
 	 * This would be used if the user selects category and sub category on UI.
 	 * 
 	 * @param category

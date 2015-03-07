@@ -50,9 +50,10 @@ public class DatastoreKeyGenerator {
 		return key;
 	}
 
-//	public static Key getWisdomKeyForAll() {
+//	public static Key getWAllCategoryKey() {
 //		DbgUtil.showLog(TAG, "getSubcategoryKeyForAll");
-//		Key ancKey = getSubCategoryKey(category, subCategory);
+//		Key key = KeyFactory.createkey
+//		Key ancKey = getSubCategoryKey(category, subCategory);		
 //		Key key = KeyFactory.createKey(ancKey, DBConstant.KIND_WISDOM);
-//	}
+	//	}
 }

@@ -11,10 +11,13 @@ import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.Filter;
+import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.data.WDWisdomData;
 import com.mame.wisdom.exception.WisdomDatastoreException;
 import com.mame.wisdom.util.DbgUtil;
+import com.google.appengine.api.datastore.Query.FilterPredicate;
 
 public class DefaultWisdomDAO implements WisdomDAO {
 
@@ -170,4 +173,37 @@ public class DefaultWisdomDAO implements WisdomDAO {
 		}
 	}
 
+	@Override
+	public List<WDWisdomData> searchWisdoms(String searchParam, int offset,
+			int limit) throws WisdomDatastoreException {
+		DbgUtil.showLog(TAG, "searchWisdoms");
+
+		if (offset <= 0 || limit <= 0) {
+			throw new WisdomDatastoreException(
+					"Illegal offset or limit parameter");
+		}
+
+		if (searchParam != null) {
+			Filter searchFilter = new FilterPredicate("height",
+					FilterOperator.IN, searchParam);
+			Query q = new Query(DBConstant.KIND_WISDOM).setFilter(searchFilter);
+			PreparedQuery pq = mDS.prepare(q);
+			for (Entity result : pq.asIterable()) {
+				DbgUtil.showLog(
+						TAG,
+						"result title:"
+								+ result.getProperty(DBConstant.ENTITY_WISDOM_TITLE));
+			}
+
+			FetchOptions fetch = FetchOptions.Builder.withOffset(offset).limit(
+					limit);
+			List<Entity> entities = pq.asList(fetch);
+			if (entities != null) {
+				DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
+				return helper.parseListEntityToWDWisdomData(entities);
+			}
+		}
+
+		return null;
+	}
 }
