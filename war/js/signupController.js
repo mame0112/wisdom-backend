@@ -1,5 +1,13 @@
-wisdomApp.controller('SignupController', ['$scope', '$routeParams', 'log',  '$window', 'twitterAPIService', 'dataRetriveService',
- function($scope, $routeParams, log, $window, twitterAPIService, dataRetriveService){
+wisdomApp.controller('SignupController', 
+	['$scope', 
+	'$routeParams', 
+	'log',  
+	'$window', 
+	'twitterAPIService', 
+	'dataRetriveService', 
+	'Constants',
+	'modeService',
+ function($scope, $routeParams, log, $window, twitterAPIService, dataRetriveService, Constants, modeService){
  	log.d("SignupController");
  	// $scope.userId = $routeParams.userId;
  	// log.d("userId: " + $scope.userId);
@@ -21,9 +29,17 @@ wisdomApp.controller('SignupController', ['$scope', '$routeParams', 'log',  '$wi
 	 	api.$account(function(data){
 	 		log.d("API called");
 	 		$scope.userData = data;
-
+	 		var userId = dataRetriveService.getUserId(data);
+	 		if(userId !== null && userId !== Constants.NO_USER){
+	 			modeService.changeCurrentMode(Constants.STATE.STATE_HOME_LOGIN);
+		 		$window.location.href = '/';
+	 		}
  		});
  	};
+
+	$scope.$on(Constants.MODE_CHNAGE, function(event, param){
+ 		log.d("Mode changed: " + param);
+ 	});
 
  	$scope.getTwitterName = function(data)
  	{

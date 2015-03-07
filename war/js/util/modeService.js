@@ -9,7 +9,7 @@ wisdomApp.service('modeService', ['$rootScope', 'log', 'Constants', function($ro
 
         changeCurrentMode : function(param){
         	log.d("changeCurrentMode");
-        	$rootScope.$broadcast('mode_changed', param);
+        	$rootScope.$broadcast(Constants.MODE_CHNAGE, param);
         }
     };
 }]);
