@@ -65,6 +65,15 @@ wisdomApp.controller('headerController',
  		return false;
  	};
 
+  	$scope.isCreatePageVisible = function (){
+ 		log.d("isCreatePageVisible");
+ 		var data = userDataHolder.getUserData();
+ 		if(data !== null && data !== undefined){
+ 			return true;
+ 		}
+ 		return false;
+ 	};
+
  	$scope.initialize = function() {
  		log.d("initialize");
  		var data =  userDataHolder.getUserData();

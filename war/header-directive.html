@@ -38,6 +38,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a ng-href="#/signin" ng-click="onSigninOptionSelect()" ng-show="isSigninVisible()">Sign in</a></li>
         <li><a ng-href="#/signup" ng-click="onSignupOptionSelect()" ng-show="isSignupVisible()">Sign up</a></li>
+        <li><a ng-href="#/wisdom" ng-click="onSigninOptionSelect()" ng-show="isCreatePageVisible()">Create page</a></li>
         <li><a ng-href="#/view/{{getUserId(userData)}}" ng-click="onUserInfoSelect()" ng-show="isUserInfoVisible()"><img ng-src="{{getThumbnail(userData)}}"></a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" ng-show="isNotificationVisible()">Notification <span class="caret"></span></a>
