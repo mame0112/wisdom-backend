@@ -32,8 +32,9 @@ var wisdomApp = angular.module('WidsomApp', ['ngRoute','ngResource', 'ngCookies'
 		when('/category/:categoryId',{
 			templateUrl: 'view/category.html',
 			controller: 'categoryController'
-		}).
-		otherwise({
-			redirectTo: '/'
 		});
+		// otherwise({
+		// 	redirectTo: '/'
+		// });
+
 }]);

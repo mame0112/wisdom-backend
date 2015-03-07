@@ -47,7 +47,6 @@ wisdomApp.controller('SignupController',
  	{
  		log.d("getTwitterName");
  		return dataRetriveService.getTwitterName(data);
-
  	};
 
  	$scope.getPoint = function(data)

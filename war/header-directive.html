@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default" ng-controller="headerController">
+<nav class="navbar navbar-default" ng-controller="headerController" ng-init="initialize()">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -39,8 +39,23 @@
         <li><a ng-href="#/view/1">User page</a></li>
         <li><a ng-href="#/signin" ng-click="onSigninOptionSelect()" ng-show="isSigninVisible()">Sign in</a></li>
         <li><a ng-href="#/signup" ng-click="onSignupOptionSelect()" ng-show="isSignupVisible()">Sign up</a></li>
-        <li><a ng-href="#/view" ng-click="onSignupOptionSelect()" ng-show="isUserInfoVisible()">User info</a></li>
-        <li><a ng-href="#/view" ng-click="onSignupOptionSelect()" ng-show="isNotificationVisible()">Notification</a></li>
+        <li><a ng-href="#/view" ng-click="onUserInfoSelect()" ng-show="isUserInfoVisible()"><img ng-src="{{getThumbnail(userData)}}"></a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" ng-show="isNotificationVisible()">Notification <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li class="divider"></li>
+            <li><a href="#">One more separated link</a></li>
+          </ul>
+        </li>
+
+
+<!--        <li><a ng-href="#/view" ng-click="onNotificationSelect()" ng-show="isNotificationVisible()">Notification</a></li>
+-->
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
