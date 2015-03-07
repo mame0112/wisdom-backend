@@ -6,7 +6,8 @@ wisdomApp.controller('headerController',
  'Constants', 
  'userDataHolder',
  'dataRetriveService', 
- function($scope, $http, log, modeService, Constants, userDataHolder, dataRetriveService){
+ 'searchAPIService',
+ function($scope, $http, log, modeService, Constants, userDataHolder, dataRetriveService, searchAPIService){
  	log.d("headerController");
 
  	$scope.onSigninOptionSelect = function (){
@@ -80,6 +81,14 @@ wisdomApp.controller('headerController',
  		if(data !== null && data !== undefined){
 	 		$scope.userData = data;
 	 	}
+ 	};
+
+ 	$scope.searchWisdom = function(data) {
+ 		log.d("searchWisdom");
+ 		if(data !== null && data !== undefined){
+	 		log.d("input value: " + data);
+	 		searchAPIService.search({searchParam : data});
+ 		}
  	};
 
  	$scope.getTwitterName = function(data)

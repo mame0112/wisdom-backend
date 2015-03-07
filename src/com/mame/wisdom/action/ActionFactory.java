@@ -66,10 +66,10 @@ public class ActionFactory {
 				new SearchAction());
 
 		// Twitter API
-		//Sign in with Twitter
+		// Sign in with Twitter
 		mAction.put(ActionConstants.GET + ActionConstants.KEY_TWITTER,
 				new TwitterSigninAction());
-		
+
 		// Create account by Twitter (This is not API)
 		mAction.put(ActionConstants.GET + ActionConstants.KEY_TWITTER_SIGNUP,
 				new TwitterCreateAccountAction());
@@ -89,6 +89,7 @@ public class ActionFactory {
 
 		String method = request.getMethod();
 		String path = request.getPathInfo();
+		// String path = request.get
 
 		if (method == null || path == null) {
 			DbgUtil.showLog(TAG, "getAction method or pathinfo is null");

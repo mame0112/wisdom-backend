@@ -90,7 +90,7 @@ wisdomApp.factory('apiService', ['$resource', 'log',
 .factory('searchAPIService', ['$resource', 'log',
  function($resource, log) {
     return $resource('/controller/search:key',
-         {},
+         {key: '@searchParam'},
          { 
             //Search widoms by given keyword
             search: {method: 'GET', isArray: false},
