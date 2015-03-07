@@ -1,9 +1,5 @@
-var wisdomApp = angular.module('WidsomApp', ['ngRoute','ngResource', 'ngCookies'])
+var wisdomApp = angular.module('WidsomApp', ['ngRoute','ngResource', 'ngCookies', 'ui.bootstrap'])
 .controller('WidsomController', ['$scope', 'Constants', 'log', function($scope, Constants, log){
- 	log.d("WidsomController");
- 	log.d(Constants.planetName);
-//	console.log("planet: " + Constants.planetName);
-	$scope.message =  'Test message from controller';
 }])
 
 .config(['$routeProvider',

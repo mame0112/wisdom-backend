@@ -1,3 +1,40 @@
 <div ng-controller="wisdomCreateController">
-	wisdomCreateController
+<h2>Category</h2>
+
+<h2>Sub category</h2>
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+    Dropdown
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+  </ul>
+</div>
+
+ <div class="dropdown">
+    <a class="btn btn-default" data-toggle="dropdown" href="#">AAAAAAA <b class="caret"></b></a>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownCountry">
+      <li><a>BBBBBBB</a></li>
+      <li><a>BBBBBBB2</a></li>
+      <li><a>BBBBBBB3</a></li>
+      <li><a>BBBBBBB4</a></li>
+    </ul>
+  </div>
+
+<div class="btn-group" dropdown is-open="status.isopen">
+      <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+        Button dropdown <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li><a href="#">Action</a></li>
+        <li><a href="#">Another action</a></li>
+        <li><a href="#">Something else here</a></li>
+        <li class="divider"></li>
+        <li><a href="#">Separated link</a></li>
+      </ul>
+    </div>
 </div>
