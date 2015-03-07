@@ -178,14 +178,16 @@ public class DefaultWisdomDAO implements WisdomDAO {
 			int limit) throws WisdomDatastoreException {
 		DbgUtil.showLog(TAG, "searchWisdoms");
 
-		if (offset <= 0 || limit <= 0) {
+		if (offset <= -1 || limit <= 0) {
 			throw new WisdomDatastoreException(
 					"Illegal offset or limit parameter");
 		}
 
 		if (searchParam != null) {
-			Filter searchFilter = new FilterPredicate("height",
-					FilterOperator.IN, searchParam);
+			// Need to check if this work
+			Filter searchFilter = new FilterPredicate(
+					DBConstant.ENTITY_WISDOM_ITMES, FilterOperator.IN,
+					searchParam);
 			Query q = new Query(DBConstant.KIND_WISDOM).setFilter(searchFilter);
 			PreparedQuery pq = mDS.prepare(q);
 			for (Entity result : pq.asIterable()) {
