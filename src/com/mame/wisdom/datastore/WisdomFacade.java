@@ -97,7 +97,7 @@ public class WisdomFacade {
 
 					try {
 						String entryName = item
-								.getString(JsonConstant.PARAM_WISDOM_SUB_TITLE);
+								.getString(JsonConstant.PARAM_WISDOM_ENTRY_NAME);
 						int entryType = item
 								.getInt(JsonConstant.PARAM_WISDOM_ITEM_TYPE);
 						switch (entryType) {

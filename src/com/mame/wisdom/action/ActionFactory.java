@@ -46,7 +46,7 @@ public class ActionFactory {
 		mAction.put(ActionConstants.GET + ActionConstants.KEY_WISDOM,
 				new WisdomAction());
 		// Create new wisdom
-		mAction.put(ActionConstants.POST + ActionConstants.KEY_WISDOM,
+		mAction.put(ActionConstants.GET + ActionConstants.KEY_WISDOM,
 				new CreateWisdomAction());
 
 		// Update wisdom

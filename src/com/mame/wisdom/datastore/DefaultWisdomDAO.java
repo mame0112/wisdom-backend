@@ -110,27 +110,46 @@ public class DefaultWisdomDAO implements WisdomDAO {
 			throw new WisdomDatastoreException("Illegal wisdom Id");
 		}
 
-		Key key = DatastoreKeyGenerator.getWisdomKeyById(category, subCategory,
-				wisdomId);
+		Key key = DatastoreKeyGenerator
+				.getSubCategoryKey(category, subCategory);
+		DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
 
+		// Get entity for target category / sub cateogry
 		try {
 			Entity entity = mDS.get(key);
-
-			// If target entity is null
-			if (entity == null) {
-				DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
+			// If target entity is not null, which mean there are more than
+			// 1
+			// wisdoms for target category.
+			if (entity != null) {
+				DbgUtil.showLog(TAG, "Entity already exist");
+				int num = (int) entity
+						.getProperty(DBConstant.ENTITY_WISDOM_NUM);
+				wisdomId = num + 1;
+				wisdom.setWisdomId(wisdomId);
 				entity = helper.parseWisdomDataToEntity(wisdom, entity);
-				if (entity != null) {
-					mDS.put(entity);
-				} else {
-					DbgUtil.showLog(TAG, "Entity is not updated");
-				}
+				mDS.put(entity);
 			} else {
-				throw new WisdomDatastoreException("Entity already exist");
+				DbgUtil.showLog(TAG, "Entity doesn't exist 1");
+				// If target entity is null. which means there is no wisdom
+				// for
+				// target category / sub category yet.
+				wisdom.setWisdomId(1);
+				Entity newWisdomEntity = new Entity(DBConstant.KIND_WISDOM, 1,
+						key);
+				newWisdomEntity = helper.parseWisdomDataToEntity(wisdom,
+						newWisdomEntity);
+				mDS.put(newWisdomEntity);
 			}
 		} catch (EntityNotFoundException e) {
-			DbgUtil.showLog(TAG, "EntityNotFoundException: " + e.getMessage());
-			throw new WisdomDatastoreException(e.getMessage());
+			// IF target entity doesn't exist, which means there is no
+			// wisdom
+			// for target category / sub category yet.
+			DbgUtil.showLog(TAG, "Entity doesn't exist 2");
+			wisdom.setWisdomId(1);
+			Entity newWisdomEntity = new Entity(DBConstant.KIND_WISDOM, 1, key);
+			newWisdomEntity = helper.parseWisdomDataToEntity(wisdom,
+					newWisdomEntity);
+			mDS.put(newWisdomEntity);
 		}
 	}
 

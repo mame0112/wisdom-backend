@@ -35,7 +35,7 @@ public class CreateWisdomAction implements Action {
 	// },
 	// {
 	// entry: desc text1
-	// type: 1, 
+	// type: 1,
 	// },
 	// {
 	// ]
@@ -56,9 +56,11 @@ public class CreateWisdomAction implements Action {
 		String result = null;
 
 		if (responseId != null && params != null) {
+			DbgUtil.showLog(TAG, "params: " + params);
 			builder.addResponseId(Integer.valueOf(responseId));
 			facade.createNewWisdom(params);
 		} else {
+			DbgUtil.showLog(TAG, "responseId or content is null");
 			builder.addErrorMessage("responseId or content is null");
 		}
 

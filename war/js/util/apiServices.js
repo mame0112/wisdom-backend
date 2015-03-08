@@ -50,14 +50,14 @@ wisdomApp.factory('apiService', ['$resource', 'log',
 
 .factory('wisdomAPIService', ['$resource', 'log',
  function($resource, log) {
-    return $resource('/controller/wisdom:key',
-         {},
+    return $resource('/controller/wisdom:param',
+         {servlet_resp_id: 1, param: '@servlet_new_wisdom_param'},
          { 
             //Get one wisdom (by key, under certain category/subcategory)
             wisdom: {method: 'GET', isArray: false},
 
             //Create new wisdom
-            newwisdom: {method: 'POST', isArray: false},
+            newwisdom: {method: 'GET', isArray: false},
 
             //Update wisdom
             updatewisdom: {method: 'PUT', isArray: false},
@@ -109,36 +109,3 @@ wisdomApp.factory('apiService', ['$resource', 'log',
     }
 ]);
 
-    // function infobar2 ($resource){
-    //     $resource('/controller/infobar2',
-    //      {},
-    //      { 
-    //         popular: {method: 'GET', isArray: false
-    //     }
-    //  });
-    // }
-
-    // return{
-    //     infobar:function(){
-    //         log.d("infobar...");
-    //         return infobar($resource);
-    //     },
-    //     infobar2:function(){
-    //         log.d("infobar2...");
-    //         return infobar2($resource);
-    //     }
-    // };
-
-
-
-
-	// return {
- //      infoa:function(){
- //        log.d("infoa");        
- //        var response = $resource('/controller', 
- //    		{servlet_resp_id: 1, twitter_name: 'TwitterName'}, {
- //                signin: {method: 'GET', isArray: false}
- //    		});
- //        log.d("response: " + response);
- //        }
- //    };

@@ -46,6 +46,10 @@ public class DBConstant {
 	/**
 	 * Entity fields for Wisdom data
 	 */
+	// This is a field for the number of wisdom which belong to certain
+	// category/sub category
+	public final static String ENTITY_WISDOM_NUM = "num";
+
 	public final static String ENTITY_WISDOM_ID = "id";
 
 	public final static String ENTITY_WISDOM_TITLE = "title";

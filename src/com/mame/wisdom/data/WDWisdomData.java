@@ -44,6 +44,10 @@ public class WDWisdomData {
 		return mWisdomId;
 	}
 
+	public void setWisdomId(long id) {
+		mWisdomId = id;
+	}
+
 	public String getTitle() {
 		return mTitle;
 	}
