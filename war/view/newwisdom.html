@@ -7,11 +7,7 @@
 	        Select category <span class="caret"></span>
 	      </button>
 	      <ul class="dropdown-menu" role="menu">
-	        <li><a href="#">Action</a></li>
-	        <li><a href="#">Another action</a></li>
-	        <li><a href="#">Something else here</a></li>
-	        <li class="divider"></li>
-	        <li><a href="#">Separated link</a></li>
+	        <li ng-repeat="data in category"><a ng-href="#">{{data.name}}</a></li>
 	      </ul>
 	</div>
 </div>

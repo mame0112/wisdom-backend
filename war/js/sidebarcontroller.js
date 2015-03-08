@@ -1,6 +1,4 @@
 wisdomApp.controller('SidebarController', ['$scope', 'Constants', 'log', function($scope, Constants, log){
- 	log.d("SidebarController");
- 	log.d(Constants.planetName);
 
  	$scope.Category = Constants.Category;
 
