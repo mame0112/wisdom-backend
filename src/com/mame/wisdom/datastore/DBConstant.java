@@ -46,21 +46,21 @@ public class DBConstant {
 	/**
 	 * Entity fields for Wisdom data
 	 */
-	public final static String ENTITY_WISDOM_ID = "wisdom_id";
+	public final static String ENTITY_WISDOM_ID = "id";
 
-	public final static String ENTITY_WISDOM_TITLE = "wisdom_title";
+	public final static String ENTITY_WISDOM_TITLE = "title";
 
-	public final static String ENTITY_WISDOM_DESCRIPTION = "wisdom_description";
+	public final static String ENTITY_WISDOM_DESCRIPTION = "description";
 
-	public final static String ENTITY_WISDOM_TAG = "wisdom_tag";
+	public final static String ENTITY_WISDOM_TAG = "tag";
 
-	public final static String ENTITY_WISDOM_CREATED_USER_ID = "wisdom_created_user_id";
+	public final static String ENTITY_WISDOM_CREATED_USER_ID = "create_user_id";
 
-	public final static String ENTITY_WISDOM_LAST_UPDATED_DATE = "wisdom_last_updated_date";
+	public final static String ENTITY_WISDOM_LAST_UPDATED_DATE = "last_updated_date";
 
-	public final static String ENTITY_WISDOM_THUMBNAIL = "wisdom_thumbnail";
+	public final static String ENTITY_WISDOM_THUMBNAIL = "thumbnail";
 
-	public final static String ENTITY_WISDOM_ITMES = "wisdom_items";
+	public final static String ENTITY_WISDOM_ITMES = "items";
 
 	// Test fields
 	public final static String ENTITY_ID = "id";

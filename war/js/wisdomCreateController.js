@@ -11,7 +11,9 @@ wisdomApp.controller('wisdomCreateController',
 		isopen2: false
 	};
 
-	$scope.category = Constants.Category;
+	$scope.categories = Constants.Category;
+
+	$scope.category = $scope.categories[2];
 
  	// $scope.userId = $routeParams.userId;
  	// log.d("userId: " + $scope.userId);

@@ -49,6 +49,10 @@ public class WConstant {
 
 	public final static String SERVLET_WISDOM_ID = "servlet_wisdom_id";
 
+	// This would be used if the user tries to create new wisdom content. This
+	// includes more than two title or description content.
+	public final static String SERVLET_WISDOM_PARAM = "servlet_wisdom_content";
+
 	public final static String SERVLET_WISDOM_SEARCH_PARAM = "searchParam";
 
 	/**

@@ -39,15 +39,24 @@ public class JsonConstant {
 	/**
 	 * Json fields for wisdom data
 	 */
-	public final static String PARAM_WISDOM_ID = "wisdomid";
+	public final static String PARAM_WISDOM_ID = "id";
 
-	public final static String PARAM_WISDOM_TITLE = "wisdom_title";
+	public final static String PARAM_WISDOM_TITLE = "title";
 
-	public final static String PARAM_WISDOM_DESCRIPTION = "wisdom_description";
+	public final static String PARAM_WISDOM_DESCRIPTION = "description";
 
 	public final static String PARAM_WISDOM_TAG = "tag";
 
-	public final static String PARAM_WISDOM_ITEM_UPDATED_DATE = "updated_date";
+	public final static String PARAM_WISDOM_CATEGORY = "category";
+
+	public final static String PARAM_WISDOM_SUB_CATEGORY = "subcategory";
+
+	public final static String PARAM_WISDOM_THUMBNAIL = "thumbnail";
+
+	// This shall be used when the user create new wisdom
+	public final static String PARAM_WISDOM_CONTENT = "thumbnail";
+
+	public final static String PARAM_WISDOM_UPDATED_DATE = "updated_date";
 
 	public final static String PARAM_WISDOM_CREATE_USER_ID = "create_user_id";
 
@@ -55,6 +64,8 @@ public class JsonConstant {
 
 	public final static String PARAM_WISDOM_ITEM_ID = "id";
 
+	public final static String PARAM_WISDOM_ITEM_TYPE = "type";
+	
 	public final static String PARAM_WISDOM_ITEM_MESSAGE = "message";
 
 	public final static String PARAM_WISDOM_ITEM_LIKE = "like_num";

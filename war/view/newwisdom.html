@@ -2,6 +2,12 @@
 <form role="form">
 <div class="form-group">
 	<h3>Category</h3>
+	<div class="btn-group" dropdown>
+	<select ng-model="category" ng-options="c.name as c.name for c in categories">
+	   <option value="">Select category</option>
+	</select>
+   </div>
+
 	<div class="btn-group" dropdown is-open="status.isopen1">
 	      <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
 	        Select category <span class="caret"></span>
