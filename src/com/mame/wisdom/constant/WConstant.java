@@ -60,4 +60,10 @@ public class WConstant {
 	 */
 	public final static int SEARCH_LIMIT_NUM = 20;
 
+	/**
+	 * The number of wisdoms that shall be shown as hightlight or pickup wisdom
+	 * on public timeline
+	 */
+	public final static int PUBLIC_WISDOM_NUM = 10;
+
 }

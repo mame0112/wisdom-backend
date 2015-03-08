@@ -63,7 +63,7 @@ wisdomApp.controller('SignupController',
 
  	 $scope.getThumbnail = function(data)
  	{
- 		log.d("getThumbnail");
+ 		// log.d("getThumbnail");
  		return dataRetriveService.getThumbnail(data);
  	};
 

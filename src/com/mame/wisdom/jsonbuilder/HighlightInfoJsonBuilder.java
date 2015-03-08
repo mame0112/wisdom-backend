@@ -10,14 +10,15 @@ import com.mame.wisdom.exception.JSONBuilderException;
 import com.mame.wisdom.util.DbgUtil;
 import com.mame.wisdom.util.JsonParseUtil;
 
-public class SearchJsonBuilder extends JsonBuilder {
+public class HighlightInfoJsonBuilder extends JsonBuilder {
 
-	private final static String TAG = SearchJsonBuilder.class.getSimpleName();
+	private final static String TAG = HighlightInfoJsonBuilder.class
+			.getSimpleName();
 
 	private JSONObject mRootObject = new JSONObject();
 
-	public SearchJsonBuilder() {
-		DbgUtil.showLog(TAG, "SearchJsonBuilder");
+	public HighlightInfoJsonBuilder() {
+		DbgUtil.showLog(TAG, "HighlightInfoJsonBuilder");
 		try {
 			addVersion(VERSION);
 		} catch (JSONBuilderException e) {
@@ -28,6 +29,7 @@ public class SearchJsonBuilder extends JsonBuilder {
 	@Override
 	public void addResponseId(int id) throws JSONBuilderException {
 		DbgUtil.showLog(TAG, "addResponseId");
+
 		try {
 			mRootObject.put(JsonConstant.ID, id);
 		} catch (JSONException e) {
@@ -38,7 +40,6 @@ public class SearchJsonBuilder extends JsonBuilder {
 
 	@Override
 	protected void addVersion(String version) throws JSONBuilderException {
-		DbgUtil.showLog(TAG, "addVersion");
 		try {
 			mRootObject.put(JsonConstant.VERSION, version);
 		} catch (JSONException e) {
@@ -49,7 +50,8 @@ public class SearchJsonBuilder extends JsonBuilder {
 
 	@Override
 	public void addResponseParam(Object param) throws JSONBuilderException {
-		DbgUtil.showLog(TAG, "addResponseParam");
+		DbgUtil.showLog(TAG, TAG + "/addResponseParam");
+
 		if (param == null) {
 			throw new JSONBuilderException("param is null");
 		}
@@ -58,39 +60,14 @@ public class SearchJsonBuilder extends JsonBuilder {
 			throw new JSONBuilderException("Illegal param type");
 		}
 
-		List<WDWisdomData> result = (List<WDWisdomData>) param;
+		List<WDWisdomData> wisdoms = (List<WDWisdomData>) param;
 
-		JSONArray array = JsonParseUtil.parseWisdomListToJsonArray(result);
-
-		// for (WDWisdomData data : result) {
-		// JSONObject obj = new JSONObject();
-		// try {
-		//
-		// obj.put(JsonConstant.PARAM_WISDOM_ITEM_MESSAGE, JsonParseUtil
-		// .parseWisdomItemEntitiesToJson(data.getItems()));
-		// obj.put(JsonConstant.PARAM_WISDOM_ID, data.getWisdomId());
-		//
-		// obj.put(JsonConstant.PARAM_WISDOM_TITLE, data.getTitle());
-		// obj.put(JsonConstant.PARAM_WISDOM_TAG, data.getTag());
-		// obj.put(JsonConstant.PARAM_WISDOM_DESCRIPTION,
-		// data.getDescription());
-		// obj.put(JsonConstant.PARAM_WISDOM_UPDATED_DATE,
-		// data.getLastUpdatedDate());
-		// obj.put(JsonConstant.PARAM_WISDOM_CREATE_USER_ID,
-		// data.getCreatedUserId());
-		//
-		// // Put completed object to array
-		// array.put(obj);
-		//
-		// } catch (JSONException e) {
-		// DbgUtil.showLog(TAG, "JSONException: " + e.getMessage());
-		// }
-		// }
-
+		JSONArray array = JsonParseUtil.parseWisdomListToJsonArray(wisdoms);
 		try {
 			mRootObject.put(JsonConstant.PARAMS, array);
 		} catch (JSONException e) {
 			DbgUtil.showLog(TAG, "JSONException: " + e.getMessage());
+			throw new JSONBuilderException(e.getMessage());
 		}
 
 	}
@@ -103,7 +80,6 @@ public class SearchJsonBuilder extends JsonBuilder {
 		} catch (JSONException e) {
 			DbgUtil.showLog(TAG, "JSONException: " + e.getMessage());
 		}
-
 	}
 
 	@Override
@@ -111,5 +87,4 @@ public class SearchJsonBuilder extends JsonBuilder {
 		DbgUtil.showLog(TAG, "getResultJson");
 		return mRootObject.toString();
 	}
-
 }

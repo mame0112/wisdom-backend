@@ -33,7 +33,7 @@ wisdomApp.factory('dataRetriveService', ['log',
 		},
 	 	getThumbnail : function(data)
 	 	{
-	 		log.d("getThumbnail");
+	 		// log.d("getThumbnail");
 	 		if(data !== null && data !== undefined)
 	 		{
 		 		log.d("Not null");

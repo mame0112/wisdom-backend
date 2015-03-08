@@ -5,12 +5,8 @@ import java.util.List;
 
 import com.google.appengine.api.datastore.Blob;
 import com.google.appengine.api.datastore.Entity;
-import com.google.appengine.labs.repackaged.org.json.JSONArray;
-import com.google.appengine.labs.repackaged.org.json.JSONException;
-import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import com.mame.wisdom.data.WDWisdomData;
 import com.mame.wisdom.data.WDWisdomItemEntry;
-import com.mame.wisdom.jsonbuilder.JsonConstant;
 import com.mame.wisdom.util.DbgUtil;
 import com.mame.wisdom.util.JsonParseUtil;
 
@@ -35,8 +31,11 @@ public class DefaultWisdomDAOHelper {
 					.getProperty(DBConstant.ENTITY_WISDOM_LAST_UPDATED_DATE);
 			Blob thumbnail = (Blob) e
 					.getProperty(DBConstant.ENTITY_WISDOM_THUMBNAIL);
-			List<WDWisdomItemEntry> items = (List<WDWisdomItemEntry>) e
+
+			String entryJson = (String) e
 					.getProperty(DBConstant.ENTITY_WISDOM_ITMES);
+			List<WDWisdomItemEntry> items = JsonParseUtil
+					.createWisdomItemEntryListFromJson(entryJson);
 
 			WDWisdomData data = new WDWisdomData(wisdomId, title, description,
 					tag, createdUserId, lastUpdatedDate, thumbnail, items);
@@ -70,7 +69,8 @@ public class DefaultWisdomDAOHelper {
 		if (data != null && entity != null) {
 
 			// Get entities belong to one wisdom
-			String itemsJSON = JsonParseUtil.parseWisdomItemEntitiesToJson(data.getItems());
+			String itemsJSON = JsonParseUtil.parseWisdomItemEntitiesToJson(data
+					.getItems());
 
 			entity.setProperty(DBConstant.ENTITY_WISDOM_ID, data.getWisdomId());
 			entity.setProperty(DBConstant.ENTITY_WISDOM_CREATED_USER_ID,

@@ -68,7 +68,7 @@ wisdomApp.factory('apiService', ['$resource', 'log',
 .factory('highlightAPIService', ['$resource', 'log',
  function($resource, log) {
     return $resource('/controller/highlight',
-         {},
+         {servlet_resp_id: 1},
          { 
             //Get today's highlight wisdoms
             highlight: {method: 'GET', isArray: false},
@@ -82,7 +82,7 @@ wisdomApp.factory('apiService', ['$resource', 'log',
          {},
          { 
             //Get latest wisdoms
-            highlight: {method: 'GET', isArray: false},
+            latest: {method: 'GET', isArray: false},
         });
     }
 ])

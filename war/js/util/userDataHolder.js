@@ -9,7 +9,7 @@ wisdomApp.service('userDataHolder', ['$cookieStore', 'log', function($cookieStor
     	},
 
         getUserData : function(){
-        	log.d("getUserData");
+        	// log.d("getUserData");
             // var nowDate = new Date();
             //FIXME
             // var endDate = new Date("2015/09/22 22:00:00");

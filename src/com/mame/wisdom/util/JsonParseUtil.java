@@ -1,12 +1,17 @@
 package com.mame.wisdom.util;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.appengine.labs.repackaged.org.json.JSONArray;
 import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
+import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.data.WDUserData;
+import com.mame.wisdom.data.WDWisdomData;
 import com.mame.wisdom.data.WDWisdomItemEntry;
+import com.mame.wisdom.data.WDWisdomMessage;
+import com.mame.wisdom.data.WDWisdomTitle;
 import com.mame.wisdom.jsonbuilder.JsonConstant;
 
 public class JsonParseUtil {
@@ -47,7 +52,60 @@ public class JsonParseUtil {
 		return null;
 	}
 
-	public static String parseWisdomItemEntitiesToJson(List<WDWisdomItemEntry> items) {
+	public static List<WDWisdomItemEntry> createWisdomItemEntryListFromJson(
+			String originalJson) {
+		DbgUtil.showLog(TAG, "createWisdomItemEntryListFromJson");
+
+		if (originalJson != null) {
+			List<WDWisdomItemEntry> result = new ArrayList<WDWisdomItemEntry>();
+
+			try {
+
+				JSONArray array = new JSONArray(originalJson);
+
+				for (int i = 0; i < array.length(); i++) {
+
+					JSONObject obj = array.getJSONObject(i);
+					String message = obj
+							.getString(JsonConstant.PARAM_WISDOM_ITEM_MESSAGE);
+					long id = obj.getLong(JsonConstant.PARAM_WISDOM_ITEM_ID);
+					long updateUserId = obj
+							.getLong(JsonConstant.PARAM_WISDOM_ITEM_UPDATE_USER_ID);
+					String updateUserName = obj
+							.getString(JsonConstant.PARAM_WISDOM_ITEM_UPDAtE_USER_NAME);
+					int likeNum = obj
+							.getInt(JsonConstant.PARAM_WISDOM_ITEM_LIKE);
+					int tag = obj.getInt(JsonConstant.PARAM_WISDOM_TAG);
+
+					WDWisdomItemEntry entry = null;
+
+					switch (tag) {
+					case WConstant.TAG_WISDOM_MESSAGE:
+						entry = new WDWisdomMessage(id, message, likeNum,
+								updateUserId, updateUserName);
+						result.add(entry);
+						break;
+					case WConstant.TAG_WISDOM_TITLE:
+						entry = new WDWisdomTitle(id, message, likeNum,
+								updateUserId, updateUserName);
+						result.add(entry);
+						break;
+					default:
+						DbgUtil.showLog(TAG, "Illegal tag id");
+						break;
+					}
+				}
+				return result;
+			} catch (JSONException e) {
+				DbgUtil.showLog(TAG, "(JSONException: " + e.getMessage());
+			}
+		}
+
+		return null;
+	}
+
+	public static String parseWisdomItemEntitiesToJson(
+			List<WDWisdomItemEntry> items) {
 		DbgUtil.showLog(TAG, "parseWisdomItemEntitiesToJson");
 
 		if (items != null) {
@@ -65,13 +123,14 @@ public class JsonParseUtil {
 
 	}
 
-	public static JSONObject parseWDWisdomItemEntryToJsonObject(WDWisdomItemEntry item) {
+	public static JSONObject parseWDWisdomItemEntryToJsonObject(
+			WDWisdomItemEntry item) {
 		DbgUtil.showLog(TAG, "parseWDWisdomItemEntryToJsonObject");
 		if (item != null) {
 			JSONObject object = new JSONObject();
 
 			try {
-				object.put(JsonConstant.PARAM_WISDOM_ITEM_UPDATE_USER_ID,
+				object.put(JsonConstant.PARAM_WISDOM_ITEM_MESSAGE,
 						item.getItem());
 				object.put(JsonConstant.PARAM_WISDOM_ITEM_ID, item.getItemId());
 
@@ -90,6 +149,53 @@ public class JsonParseUtil {
 			return object;
 		}
 		return null;
-
 	}
+
+	public static JSONArray parseWisdomListToJsonArray(
+			List<WDWisdomData> wisdoms) {
+		DbgUtil.showLog(TAG, "parseWisdomListToJsonArray");
+
+		if (wisdoms != null) {
+
+			JSONArray array = new JSONArray();
+
+			for (WDWisdomData data : wisdoms) {
+				// Put completed object to array
+				array.put(parseWisdomDataToJsonObject(data));
+			}
+
+			return array;
+		}
+
+		return null;
+	}
+
+	public static JSONObject parseWisdomDataToJsonObject(WDWisdomData wisdom) {
+		DbgUtil.showLog(TAG, "parseWisdomDataToJsonObject");
+
+		if (wisdom != null) {
+			try {
+				JSONObject obj = new JSONObject();
+				obj.put(JsonConstant.PARAM_WISDOM_ITEM_MESSAGE, JsonParseUtil
+						.parseWisdomItemEntitiesToJson(wisdom.getItems()));
+				obj.put(JsonConstant.PARAM_WISDOM_ID, wisdom.getWisdomId());
+
+				obj.put(JsonConstant.PARAM_WISDOM_TITLE, wisdom.getTitle());
+				obj.put(JsonConstant.PARAM_WISDOM_TAG, wisdom.getTag());
+				obj.put(JsonConstant.PARAM_WISDOM_DESCRIPTION,
+						wisdom.getDescription());
+				obj.put(JsonConstant.PARAM_WISDOM_UPDATED_DATE,
+						wisdom.getLastUpdatedDate());
+				obj.put(JsonConstant.PARAM_WISDOM_CREATE_USER_ID,
+						wisdom.getCreatedUserId());
+				return obj;
+
+			} catch (JSONException e) {
+				DbgUtil.showLog(TAG, "JSONException: " + e.getMessage());
+			}
+		}
+
+		return null;
+	}
+
 }

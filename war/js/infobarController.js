@@ -1,10 +1,14 @@
-wisdomApp.controller('infobarController', ['$scope', '$http', 'log', 'modeService', 'apiService',
- function($scope, $http, log, modeService, apiService){
+wisdomApp.controller('infobarController', ['$scope', '$http', 'log', 'modeService', 'apiService', 'highlightAPIService',
+ function($scope, $http, log, modeService, apiService, highlightAPIService){
  	log.d("infobarController");
- 	var api = new apiService();
- 	api.$popular(function(){
- 		log.d("infobar called");
+
+ 	$scope.highlight = null;
+
+ 	highlightAPIService.highlight(function(data){
+ 		log.d("response data: " + data); 		
+	 	$scope.highlights = data.params;
  	});
+
 
  	// $http.get('data/mockdata.json').success(function(data){
  	// 	$scope.lists = data;
