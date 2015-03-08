@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.datastore.WisdomFacade;
+import com.mame.wisdom.exception.WisdomFacadeException;
 import com.mame.wisdom.jsonbuilder.JsonBuilder;
 import com.mame.wisdom.jsonbuilder.NewWisdomJsonBuilder;
 import com.mame.wisdom.util.DbgUtil;
@@ -58,7 +59,13 @@ public class CreateWisdomAction implements Action {
 		if (responseId != null && params != null) {
 			DbgUtil.showLog(TAG, "params: " + params);
 			builder.addResponseId(Integer.valueOf(responseId));
-			facade.createNewWisdom(params);
+			try {
+				facade.createNewWisdom(params);
+			} catch (WisdomFacadeException e) {
+				DbgUtil.showLog(TAG, "WisdomFacadeException: " + e.getMessage());
+				builder.addErrorMessage(e.getMessage());
+			}
+
 		} else {
 			DbgUtil.showLog(TAG, "responseId or content is null");
 			builder.addErrorMessage("responseId or content is null");

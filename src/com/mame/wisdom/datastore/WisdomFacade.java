@@ -13,6 +13,7 @@ import com.mame.wisdom.data.WDWisdomItemEntry;
 import com.mame.wisdom.data.WDWisdomMessage;
 import com.mame.wisdom.data.WDWisdomTitle;
 import com.mame.wisdom.exception.WisdomDatastoreException;
+import com.mame.wisdom.exception.WisdomFacadeException;
 import com.mame.wisdom.jsonbuilder.JsonConstant;
 import com.mame.wisdom.util.DatastoreUtil;
 import com.mame.wisdom.util.DbgUtil;
@@ -56,7 +57,7 @@ public class WisdomFacade {
 		return null;
 	}
 
-	public void createNewWisdom(String input) {
+	public void createNewWisdom(String input) throws WisdomFacadeException {
 		DbgUtil.showLog(TAG, "createNewWisdom");
 		if (input != null) {
 			try {
@@ -122,6 +123,7 @@ public class WisdomFacade {
 					} catch (JSONException e1) {
 						DbgUtil.showLog(TAG,
 								"JSONException e1: " + e1.getMessage());
+						throw new WisdomFacadeException(e1.getMessage());
 					}
 				}
 
@@ -132,9 +134,11 @@ public class WisdomFacade {
 
 			} catch (JSONException e) {
 				DbgUtil.showLog(TAG, "JSONException: " + e.getMessage());
+				throw new WisdomFacadeException(e.getMessage());
 			} catch (WisdomDatastoreException e) {
 				DbgUtil.showLog(TAG,
 						"WisdomDatastoreException: " + e.getMessage());
+				throw new WisdomFacadeException(e.getMessage());
 			}
 		}
 	}
