@@ -1,8 +1,27 @@
-<dib ng-controller="messageOperationController">
+<dib ng-controller="messageOperationController" ng-init="initialize()">
 	<div class="form-group">
 	<div class="btn-group" role="group" aria-label="item selection">
-	  <button type="button" class="btn btn-default">Sub title</button>
-	  <button type="button" class="btn btn-default">Free text</button>
+		<div ng-show="panelCondition">
+		  <button type="button" class="btn btn-default">Left</button>
+		  <button type="button" class="btn btn-default">Middle</button>
+		  <button type="button" class="btn btn-default">Right</button>
+		</div>
+		<button type="button" class="btn btn-default" ng-click="showTitleField()">Title</button>
+		<button type="button" class="btn btn-default" ng-click="showDescriptionField()">Description</button>
+	</div>
+
+	<div class="form-group" ng-model="subTitle" ng-show="titleState">
+		<h3>input sub title</h3>
+		<input type="text" class="form-control" placeholder="Input sub text" ng-model="subTitleField">
+		<button type="button" class="btn btn-default">Cancel</button>
+		<button type="button" class="btn btn-primary" ng-click="saveSubTitleTexts(subTitleField)">Save</button>
+	</div>
+
+	<div class="form-group"　ng-model="subDescription" ng-show="descriptionState">
+		<h3>input sub description</h3>
+		<input type="text" class="form-control" placeholder="Input sub description" ng-model="subDescriptionField">
+		<button type="button" class="btn btn-default">Cancel</button>
+		<button type="button" class="btn btn-primary"　ng-click="saveSubDescriptionTexts(subDescriptionField)">Save</button>
 	</div>
 </div>
 </dib>
