@@ -35,7 +35,7 @@
 <div class="form-group">
 	<h3>input tag</h3>
 	<p>Input tag if necessary. (e.g. “Classic” or “Jazz” for “Music” category / “Piano” sub category)</p>
-	<input type="text" class="form-control" placeholder="Search" ng-model="searchParam">
+	<input type="text" class="form-control" placeholder="Input tag" ng-model="tag">
 </div>
 
 <div class="form-group">
@@ -45,12 +45,12 @@
 
 <div class="form-group">
 	<h3>Title</h3>
-	<input type="text" class="form-control" placeholder="Search" ng-model="searchParam">
+	<input type="text" class="form-control" placeholder="Input title" ng-model="title" ng->
 </div>
 
 <div class="form-group">
 	<h3>Description</h3>
-	<input type="text" class="form-control" placeholder="Search" ng-model="searchParam">
+	<input type="text" class="form-control" placeholder="Input description">
 </div>
 
 <div class="form-group">
@@ -61,7 +61,7 @@
 </div>
 
 <div class="form-group">
-	<button type="submit" class="btn btn-default">Create new wisdom</button>
+	<button type="submit" class="btn btn-default" ng-click="{{addNewWisdom(title)}}">Create new wisdom</button>
 </div>
 </form>
 </div>

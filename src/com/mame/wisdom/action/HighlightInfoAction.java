@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.data.WDWisdomData;
 import com.mame.wisdom.datastore.WisdomFacade;
-import com.mame.wisdom.jsonbuilder.HighlightInfoJsonBuilder;
+import com.mame.wisdom.jsonbuilder.PublicWisdomJsonBuilder;
 import com.mame.wisdom.jsonbuilder.JsonBuilder;
 import com.mame.wisdom.util.DbgUtil;
 
@@ -22,7 +22,7 @@ public class HighlightInfoAction implements Action {
 		DbgUtil.showLog(TAG, "HighlightInfoAction execute");
 
 		String responseId = request.getParameter(WConstant.SERVLET_RESP_ID);
-		JsonBuilder builder = new HighlightInfoJsonBuilder();
+		JsonBuilder builder = new PublicWisdomJsonBuilder();
 
 		if (responseId != null) {
 			builder.addResponseId(Integer.valueOf(responseId));

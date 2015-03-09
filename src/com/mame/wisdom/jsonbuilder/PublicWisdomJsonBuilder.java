@@ -10,14 +10,14 @@ import com.mame.wisdom.exception.JSONBuilderException;
 import com.mame.wisdom.util.DbgUtil;
 import com.mame.wisdom.util.JsonParseUtil;
 
-public class HighlightInfoJsonBuilder extends JsonBuilder {
+public class PublicWisdomJsonBuilder extends JsonBuilder {
 
-	private final static String TAG = HighlightInfoJsonBuilder.class
+	private final static String TAG = PublicWisdomJsonBuilder.class
 			.getSimpleName();
 
 	private JSONObject mRootObject = new JSONObject();
 
-	public HighlightInfoJsonBuilder() {
+	public PublicWisdomJsonBuilder() {
 		DbgUtil.showLog(TAG, "HighlightInfoJsonBuilder");
 		try {
 			addVersion(VERSION);

@@ -16,7 +16,7 @@ public interface WisdomDAO {
 	 */
 	public List<WDWisdomData> getPopularWisdoms(int num)
 			throws WisdomDatastoreException;
-
+	
 	/**
 	 * Get latest wisdoms
 	 * 

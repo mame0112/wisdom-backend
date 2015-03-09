@@ -49,6 +49,28 @@ public class WisdomFacade {
 		return null;
 	}
 
+	public List<WDWisdomData> getLatestWisdoms(int num) {
+		DbgUtil.showLog(TAG, "getLatestWisdoms");
+
+		DAOFactory factory = DAOFactory.getDAOFactory();
+		try {
+			WisdomDAO wisdomDAO = factory.getWisdomDAO();
+			List<WDWisdomData> result = wisdomDAO.getPopularWisdoms(num);
+			if (result == null) {
+				DbgUtil.showLog(TAG, "result is null");
+				return null;
+			} else {
+				DbgUtil.showLog(TAG, "result is not null");
+				return wisdomDAO.getPopularWisdoms(num);
+			}
+
+		} catch (WisdomDatastoreException e) {
+			DbgUtil.showLog(TAG, "WisdomDatastoreException: " + e.getMessage());
+		}
+
+		return null;
+	}
+
 	public WDWisdomData getWisdomById(String category, String subCategory,
 			long wisdomId) {
 		DbgUtil.showLog(TAG, "getWisdomById");

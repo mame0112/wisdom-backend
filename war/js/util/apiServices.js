@@ -79,7 +79,7 @@ wisdomApp.factory('apiService', ['$resource', 'log',
 .factory('latestAPIService', ['$resource', 'log',
  function($resource, log) {
     return $resource('/controller/latest',
-         {},
+         {servlet_resp_id: 1},
          { 
             //Get latest wisdoms
             latest: {method: 'GET', isArray: false},

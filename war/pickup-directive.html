@@ -1,21 +1,13 @@
 <div ng-controller="pickupController">
 	<ul class="media-list">
-		<li class="media">
-		    <a class="pull-left" ng-href="#/view/1">
+		<li class="media" ng-repeat="data in wisdoms">
+		    <a class="pull-left" ng-href="#/view/{{data}}">
 		        <img src="image/64-64.png" alt="" class="media-object" />
 		    </a>
 		    <div class="media-body">
-		        <h4 class="media-heading">メディアを左配置</h4>
-			左よせ。
-		    </div>
-		</li>
-		<li class="media">
-		    <a class="pull-left" ng-href="/#/view/2">
-		        <img src="image/64-64.png" alt="" class="media-object" />
-		    </a>
-		    <div class="media-body">
-		        <h4 class="media-heading">Left alignment</h4>
-		        test
+		        <h4 class="media-heading">{{data.title}}</h4>
+			<p>{{data.description}}</p>
+			<p>{{data.tag}}</p>
 		    </div>
 		</li>
 	</ul>

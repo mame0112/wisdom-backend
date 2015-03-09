@@ -51,17 +51,22 @@ public class DefaultWisdomDAO implements WisdomDAO {
 	public List<WDWisdomData> getLatestWisdoms(int num)
 			throws WisdomDatastoreException {
 		DbgUtil.showLog(TAG, "getLatestWisdoms");
-		// try {
-		// Key key = DatastoreKeyGenerator.getSubCategoryKey(category,
-		// subCategory)
-		// subCategory);
-		// Query query = new Query(DBConstant.KIND_WISDOM, key);
-		// PreparedQuery pQuery = mDS.prepare(query);
-		// } catch (WisdomDatastoreException e) {
-		// DbgUtil.showLog(TAG, "WisdomDatastoreException: " + e.getMessage());
-		// }
 
-		return null;
+		Query q = new Query(DBConstant.KIND_WISDOM);
+		PreparedQuery pq = mDS.prepare(q);
+		for (Entity result : pq.asIterable()) {
+			DbgUtil.showLog(
+					TAG,
+					"result title:"
+							+ result.getProperty(DBConstant.ENTITY_WISDOM_TITLE));
+		}
+
+		FetchOptions fetch = FetchOptions.Builder.withOffset(0).limit(10);
+		List<Entity> entities = pq.asList(fetch);
+
+		DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
+
+		return helper.parseListEntityToWDWisdomData(entities);
 	}
 
 	@Override
