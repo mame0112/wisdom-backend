@@ -12,22 +12,44 @@ wisdomApp.controller('wisdomCreateController',
 		isopen2: false
 	};
 
-	var title = null;
-
 	$scope.categories = Constants.Category;
 
 	$scope.category = $scope.categories[2];
 
-	$scope.addNewWisdom = function(data){
-		log.d("addNewWisdom");
 
-		// var output = {
-		// 	"title": this.title
-		// };
+	var title = null;
+	var tag = null;
+	var thumbnail = null;
+	var description = null;
 
-		log.d("result: " + data);
+	var result = {
+		"title": title,
+		"tag": tag,
+		"thumbnail": thumbnail,
+		"description": description
 	};
 
- 	// $scope.userId = $routeParams.userId;
- 	// log.d("userId: " + $scope.userId);
+
+	$scope.addNewWisdom = function(){
+		log.d("addNewWisdom");
+		log.d("result: " + " tag: " + result.tag + " thumbnail: " + result.thumbnail + " title: " + result.title + " description: " + result.description);
+
+	};
+
+	$scope.$watch('title', function(newValue, oldValue) {
+		result.title = newValue;
+	});
+
+	$scope.$watch('description', function(newValue, oldValue) {
+		result.description = newValue;
+	});
+
+	$scope.$watch('tag', function(newValue, oldValue) {
+		result.tag = newValue;
+	});
+
+	$scope.$watch('thumbnail', function(newValue, oldValue) {
+		result.thumbnail = newValue;
+	});
+
 }]);

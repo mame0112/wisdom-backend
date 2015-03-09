@@ -47,6 +47,13 @@ wisdomApp.directive('headerDirective', function(){
 	};
 })
 
+.directive('messageControlDirective', function(){
+	return {
+		restrict: 'A',
+		templateUrl: 'message-control-directive.html'
+	};
+})
+
 .directive('debugDirective', function(){
 	return {
 		restrict: 'A',
