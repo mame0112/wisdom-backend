@@ -10,6 +10,12 @@
 		<button type="button" class="btn btn-default" ng-click="showDescriptionField()">Description</button>
 	</div>
 
+	<div>
+		<li ng-repeat="data in saveArray track by $index">
+		<ul>{{data.text}}</ul>
+		</li>
+	</div>
+
 	<div class="form-group" ng-model="subTitle" ng-show="titleState">
 		<h3>input sub title</h3>
 		<input type="text" class="form-control" placeholder="Input sub text" ng-model="subTitleField">

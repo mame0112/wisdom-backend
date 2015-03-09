@@ -9,9 +9,7 @@ wisdomApp.controller('messageOperationController',
  	var NOT_DISPLAY = false;
 
 	//TODO need to consider how we handle delete action
- 	var textArray = [];
-
- 	var descArray = [];
+ 	$scope.saveArray = [];
 
  	$scope.initialize = function()
  	{
@@ -55,11 +53,19 @@ wisdomApp.controller('messageOperationController',
  	$scope.saveSubTitleTexts = function(input)
  	{
  		log.d("saveSubTitleTexts: " + input);
+ 		if(input !== null){
+	 		var str = '{"text": "' +input +'"}';
+	 		$scope.saveArray.push(JSON.parse(str));
+	 	}
  	};
 
  	$scope.saveSubDescriptionTexts = function(input)
  	{
  		log.d("saveSubDescriptionTexts: " + input);
+ 		if(input !== null){
+	 		var str = '{"text": "' +input +'"}';
+	 		$scope.saveArray.push(JSON.parse(str));
+ 		}
  	};
 
 
