@@ -5,10 +5,12 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.appengine.labs.repackaged.org.json.JSONArray;
 import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.data.WDWisdomData;
 import com.mame.wisdom.datastore.DAOFactory;
 import com.mame.wisdom.datastore.WisdomDAO;
+import com.mame.wisdom.datastore.WisdomFacade;
 import com.mame.wisdom.jsonbuilder.JsonBuilder;
 import com.mame.wisdom.jsonbuilder.SearchJsonBuilder;
 import com.mame.wisdom.util.DbgUtil;
@@ -33,12 +35,9 @@ public class SearchAction implements Action {
 
 		if (responseId != null || searchParam != null) {
 
-			DAOFactory factory = DAOFactory.getDAOFactory();
-			WisdomDAO dao = factory.getWisdomDAO();
-			List<WDWisdomData> foundItems = dao.searchWisdoms(searchParam, 0,
-					WConstant.SEARCH_LIMIT_NUM);
-
-			builder.addResponseParam(foundItems);
+			WisdomFacade facade = new WisdomFacade();
+			List<WDWisdomData> results = facade.searchWisdom(searchParam);
+			builder.addResponseParam(results);
 		} else {
 			builder.addErrorMessage("parameter is null");
 		}

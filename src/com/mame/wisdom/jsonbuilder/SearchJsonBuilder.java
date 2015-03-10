@@ -61,32 +61,7 @@ public class SearchJsonBuilder extends JsonBuilder {
 		List<WDWisdomData> result = (List<WDWisdomData>) param;
 
 		JSONArray array = JsonParseUtil.parseWisdomListToJsonArray(result);
-
-		// for (WDWisdomData data : result) {
-		// JSONObject obj = new JSONObject();
-		// try {
-		//
-		// obj.put(JsonConstant.PARAM_WISDOM_ITEM_MESSAGE, JsonParseUtil
-		// .parseWisdomItemEntitiesToJson(data.getItems()));
-		// obj.put(JsonConstant.PARAM_WISDOM_ID, data.getWisdomId());
-		//
-		// obj.put(JsonConstant.PARAM_WISDOM_TITLE, data.getTitle());
-		// obj.put(JsonConstant.PARAM_WISDOM_TAG, data.getTag());
-		// obj.put(JsonConstant.PARAM_WISDOM_DESCRIPTION,
-		// data.getDescription());
-		// obj.put(JsonConstant.PARAM_WISDOM_UPDATED_DATE,
-		// data.getLastUpdatedDate());
-		// obj.put(JsonConstant.PARAM_WISDOM_CREATE_USER_ID,
-		// data.getCreatedUserId());
-		//
-		// // Put completed object to array
-		// array.put(obj);
-		//
-		// } catch (JSONException e) {
-		// DbgUtil.showLog(TAG, "JSONException: " + e.getMessage());
-		// }
-		// }
-
+		
 		try {
 			mRootObject.put(JsonConstant.PARAMS, array);
 		} catch (JSONException e) {
