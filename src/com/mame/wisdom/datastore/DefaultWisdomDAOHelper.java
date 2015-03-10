@@ -50,6 +50,7 @@ public class DefaultWisdomDAOHelper {
 		DbgUtil.showLog(TAG, "parseListEntityToWDWisdomData");
 
 		if (entities != null && entities.size() != 0) {
+			DbgUtil.showLog(TAG, "CC");
 
 			List<WDWisdomData> result = new ArrayList<WDWisdomData>();
 

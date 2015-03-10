@@ -13,16 +13,19 @@ wisdomApp.controller('wisdomCreateController',
 	};
 
 	$scope.categories = Constants.Category;
+	$scope.subCategories = null;
 
 	$scope.category = $scope.categories[2];
 
 
+	var category = null;
 	var title = null;
 	var tag = null;
 	var thumbnail = null;
 	var description = null;
 
 	var result = {
+		"category": category,
 		"title": title,
 		"tag": tag,
 		"thumbnail": thumbnail,
@@ -32,9 +35,19 @@ wisdomApp.controller('wisdomCreateController',
 
 	$scope.addNewWisdom = function(){
 		log.d("addNewWisdom");
-		log.d("result: " + " tag: " + result.tag + " thumbnail: " + result.thumbnail + " title: " + result.title + " description: " + result.description);
+		log.d("result: " + "category: " + result.category + " tag: " + result.tag + " thumbnail: " + result.thumbnail + " title: " + result.title + " description: " + result.description);
 
 	};
+
+	$scope.$watch('category', function(newValue, oldValue) {
+		result.category = newValue;
+		findSubCategoryByKey(newValue);
+	});
+
+	$scope.$watch('subCategory', function(newValue, oldValue) {
+		// result.category = newValue;
+		// findSubCategoryByKey(newValue);
+	});
 
 	$scope.$watch('title', function(newValue, oldValue) {
 		result.title = newValue;
@@ -51,5 +64,15 @@ wisdomApp.controller('wisdomCreateController',
 	$scope.$watch('thumbnail', function(newValue, oldValue) {
 		result.thumbnail = newValue;
 	});
+
+	var findSubCategoryByKey = function(category)
+	{
+		if(category === 'SPORTS')
+		{
+			$scope.subCategories = Constants.SUB_SPORTS;
+		}
+
+
+	};
 
 }]);

@@ -97,7 +97,7 @@ public class JsonParseUtil {
 				}
 				return result;
 			} catch (JSONException e) {
-				DbgUtil.showLog(TAG, "(JSONException: " + e.getMessage());
+				DbgUtil.showLog(TAG, "JSONException: " + e.getMessage());
 			}
 		}
 

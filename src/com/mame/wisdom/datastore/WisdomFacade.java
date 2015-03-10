@@ -85,6 +85,7 @@ public class WisdomFacade {
 			List<WDWisdomData> foundItems = dao.searchWisdoms(searchKey, 0,
 					WConstant.SEARCH_LIMIT_NUM);
 			if (foundItems != null) {
+				DbgUtil.showLog(TAG, "size: " + foundItems.size());
 				return foundItems;
 			}
 		} catch (WisdomDatastoreException e) {

@@ -7,31 +7,16 @@
 	   <option value="">Select category</option>
 	</select>
    </div>
-
-	<div class="btn-group" dropdown is-open="status.isopen1">
-	      <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
-	        Select category <span class="caret"></span>
-	      </button>
-	      <ul class="dropdown-menu" role="menu">
-	        <li ng-repeat="data in category"><a ng-href="#">{{data.name}}</a></li>
-	      </ul>
-	</div>
 </div>
 <div class="form-group">
-	<h3>Sub category</h3>
-	<div class="btn-group" dropdown is-open="status.isopen2">
-	      <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
-	        Select sub category <span class="caret"></span>
-	      </button>
-	      <ul class="dropdown-menu" role="menu">
-	        <li><a href="#">Action</a></li>
-	        <li><a href="#">Another action</a></li>
-	        <li><a href="#">Something else here</a></li>
-	        <li class="divider"></li>
-	        <li><a href="#">Separated link</a></li>
-	      </ul>
-	</div>
+	<h3>Sub Category</h3>
+	<div class="btn-group" dropdown>
+	<select ng-model="subCategory" ng-options="c.name as c.name for c in subcategories">
+	   <option value="">Select sub category</option>
+	</select>
+   </div>
 </div>
+
 <div class="form-group">
 	<h3>input tag</h3>
 	<p>Input tag if necessary. (e.g. “Classic” or “Jazz” for “Music” category / “Piano” sub category)</p>

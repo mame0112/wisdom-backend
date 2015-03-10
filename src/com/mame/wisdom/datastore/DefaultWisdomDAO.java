@@ -219,26 +219,39 @@ public class DefaultWisdomDAO implements WisdomDAO {
 		}
 
 		if (searchParam != null) {
-			// Need to check if this work
-			Filter searchFilter = new FilterPredicate(
-					DBConstant.ENTITY_WISDOM_ITMES, FilterOperator.IN,
-					searchParam);
-			Query q = new Query(DBConstant.KIND_WISDOM).setFilter(searchFilter);
-			PreparedQuery pq = mDS.prepare(q);
-			for (Entity result : pq.asIterable()) {
-				DbgUtil.showLog(
-						TAG,
-						"result title:"
-								+ result.getProperty(DBConstant.ENTITY_WISDOM_TITLE));
+			try {
+				DbgUtil.showLog(TAG, "searchParam: " + searchParam);
+				// Need to check if this work
+				Filter searchFilter = new FilterPredicate(
+						DBConstant.ENTITY_WISDOM_ITMES, FilterOperator.EQUAL,
+						searchParam);
+				Query q = new Query(DBConstant.KIND_WISDOM)
+						.setFilter(searchFilter);
+				PreparedQuery pq = mDS.prepare(q);
+				for (Entity result : pq.asIterable()) {
+					DbgUtil.showLog(
+							TAG,
+							"result title:"
+									+ result.getProperty(DBConstant.ENTITY_WISDOM_TITLE));
+				}
+
+				FetchOptions fetch = FetchOptions.Builder.withOffset(offset)
+						.limit(limit);
+
+				List<Entity> entities = pq.asList(fetch);
+				if (entities != null) {
+					DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
+					return helper.parseListEntityToWDWisdomData(entities);
+				}
+			} catch (IllegalStateException e) {
+				DbgUtil.showLog(TAG, "IllegalStateException: " + e.getMessage());
+				throw new WisdomDatastoreException(e.getMessage());
+			} catch (IllegalArgumentException e) {
+				DbgUtil.showLog(TAG,
+						"IllegalArgumentException: " + e.getMessage());
+				throw new WisdomDatastoreException(e.getMessage());
 			}
 
-			FetchOptions fetch = FetchOptions.Builder.withOffset(offset).limit(
-					limit);
-			List<Entity> entities = pq.asList(fetch);
-			if (entities != null) {
-				DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
-				return helper.parseListEntityToWDWisdomData(entities);
-			}
 		}
 
 		return null;
