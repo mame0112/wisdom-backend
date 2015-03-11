@@ -5,17 +5,16 @@ wisdomApp.controller('messageOperationController',
  function($scope, log, modeService){
  	log.d("SigninController");
 
- 	var DISPLAY = true;
- 	var NOT_DISPLAY = false;
+ 	var DISPLAY_TITLE = true;
+ 	var DISPLAY_DESCRIPTION= false;
 
 	//TODO need to consider how we handle delete action
  	$scope.saveArray = [];
 
  	$scope.initialize = function()
  	{
- 		$scope.panelCondition = NOT_DISPLAY;
- 		$scope.titleState = DISPLAY;
- 		$scope.descriptionState = NOT_DISPLAY;
+ 		$scope.panelCondition = DISPLAY_DESCRIPTION;
+ 		$scope.messageState = DISPLAY_TITLE;
  	};
 
 
@@ -27,46 +26,50 @@ wisdomApp.controller('messageOperationController',
  	$scope.onMouseOver = function()
  	{
  		log.d("onMouseOver");
- 		$scope.panelCondition = DISPLAY;
+ 		$scope.panelCondition = DISPLAY_TITLE;
  	};
 
  	$scope.onMouseLeave = function()
  	{
  		log.d("onMouseLeave");
- 		$scope.panelCondition = NOT_DISPLAY;
+ 		$scope.panelCondition = DISPLAY_DESCRIPTION;
  	};
 
  	$scope.showTitleField = function()
  	{
  		log.d("showTitleField");
- 		$scope.titleState = DISPLAY;
- 		$scope.descriptionState = NOT_DISPLAY;
+ 		$scope.titleState = DISPLAY_TITLE;
+ 		$scope.descriptionState = DISPLAY_DESCRIPTION;
  	};
 
  	$scope.showDescriptionField = function()
  	{
  		log.d("showDescriptionField");
- 		$scope.titleState = NOT_DISPLAY;
- 		$scope.descriptionState = DISPLAY;
+ 		$scope.titleState = DISPLAY_DESCRIPTION;
+ 		$scope.descriptionState = DISPLAY_TITLE;
+ 		$scope.messageState = DISPLAY_DESCRIPTION;
  	};
 
- 	$scope.saveSubTitleTexts = function(input)
+ 	$scope.saveMessageTexts = function(input)
  	{
- 		log.d("saveSubTitleTexts: " + input);
+ 		log.d("saveMessageTexts: " + input);
  		if(input !== null){
-	 		var str = '{"text": "' +input +'"}';
-	 		$scope.saveArray.push(JSON.parse(str));
-	 	}
- 	};
+ 			var type = input.type;
+ 			var str = null;
 
- 	$scope.saveSubDescriptionTexts = function(input)
- 	{
- 		log.d("saveSubDescriptionTexts: " + input);
- 		if(input !== null){
-	 		var str = '{"text": "' +input +'"}';
-	 		$scope.saveArray.push(JSON.parse(str));
+ 			if($scope.messageState === DISPLAY_TITLE){
+		 		str = '{"text": "' +input +'", "type": "title"}';
+		 		log.d("###################: " + str);
+		 		$scope.saveArray.push(JSON.parse(str));
+ 			} else {
+		 		str = '{"text": "' +input +'", "type": "description"}';
+		 		log.d("###################: " + str);
+		 		$scope.saveArray.push(JSON.parse(str));
+ 			}
+
  		}
  	};
+
 
 
 }]);
