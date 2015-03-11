@@ -41,7 +41,7 @@ wisdomApp.controller('wisdomCreateController',
 
 	$scope.$watch('category', function(newValue, oldValue) {
 		result.category = newValue;
-		findSubCategoryByKey(newValue);
+		// findSubCategoryByKey(newValue);
 	});
 
 	$scope.$watch('subCategory', function(newValue, oldValue) {
@@ -65,14 +65,40 @@ wisdomApp.controller('wisdomCreateController',
 		result.thumbnail = newValue;
 	});
 
-	var findSubCategoryByKey = function(category)
+	$scope.getSubcategoryItems = function(category)
 	{
-		if(category === 'SPORTS')
-		{
-			$scope.subCategories = Constants.SUB_SPORTS;
+		log.d("getSubcategoryItems: " + category);
+		switch (category){
+			case 'SPORTS':
+				log.d("Sports selected");
+				$scope.subCategories = Constants.SUB_SPORTS;
+			break;
+			case 'MUSIC':
+				log.d("Music selected");
+				$scope.subCategories = Constants.SUB_MUSIC;
+			break;
+			case 'COOKING':
+				log.d("Cooking selected");
+				$scope.subCategories = Constants.SUB_COOKING;
+			break;
+			default:			
+				log.d("Unexpected category selected");
+			break;
+
 		}
 
-
 	};
+
+	// var findSubCategoryByKey = function(category)
+	// {
+	// 	log.d("findSubCategoryByKey: " + category);
+	// 	if(category === 'SPORTS')
+	// 	{
+	// 	log.d("AAAAAAAAAAAAAAAA");
+	// 		$scope.subCategories = Constants.SUB_SPORTS;
+	// 	}
+
+
+	// };
 
 }]);
