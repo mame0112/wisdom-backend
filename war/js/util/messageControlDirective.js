@@ -38,15 +38,12 @@ wisdomApp.controller('messageOperationController',
  	$scope.showTitleField = function()
  	{
  		log.d("showTitleField");
- 		$scope.titleState = DISPLAY_TITLE;
- 		$scope.descriptionState = DISPLAY_DESCRIPTION;
+ 		$scope.messageState = DISPLAY_TITLE; 		
  	};
 
  	$scope.showDescriptionField = function()
  	{
  		log.d("showDescriptionField");
- 		$scope.titleState = DISPLAY_DESCRIPTION;
- 		$scope.descriptionState = DISPLAY_TITLE;
  		$scope.messageState = DISPLAY_DESCRIPTION;
  	};
 
@@ -70,6 +67,20 @@ wisdomApp.controller('messageOperationController',
  		}
  	};
 
-
+ 	$scope.getMessageType = function(data)
+ 	{
+ 		log.d("isDescription");
+ 		if(data.type === 'title')
+ 		{
+	 		log.d("THis is title");
+ 			return "panel-heading";
+ 		} else if (data.type === 'title'){
+	 		log.d("THis is description");
+ 			return "panel-body";
+ 		} else {
+ 			log.d("Unknown type.");
+ 			return "panel-body";
+ 		}
+ 	};
 
 }]);
