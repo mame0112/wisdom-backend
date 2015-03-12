@@ -15,6 +15,7 @@
   </div>
 
   <button type="Sign up with Twitter" class="btn btn-default" ng-click="twitterSignup()">Sign up with Twitter</button>
+  <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
 </form>
 <!--
 {{getTwitterName(userData)}}
