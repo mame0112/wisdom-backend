@@ -12,11 +12,6 @@
 
 	<div class="panel panel-default" ng-repeat="data in saveArray track by $index">
 	  <div ng-class="getMessageType(data)">{{data.text}}</div>
-	  <!--
-	  <div class="panel-body">
-	    {{data.text}}
-	  </div>
-	  -->
 	</div>
 
 	<div class="form-group" ng-model="message">

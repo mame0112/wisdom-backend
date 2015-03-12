@@ -2,8 +2,9 @@ wisdomApp.controller('messageOperationController',
  ['$scope', 
  'log',
  'modeService',
- function($scope, log, modeService){
- 	log.d("SigninController");
+ 'createWisdomSharedStateService',
+ function($scope, log, modeService, createWisdomSharedStateService){
+ 	log.d("messageOperationController");
 
  	var DISPLAY_TITLE = true;
  	var DISPLAY_DESCRIPTION= false;
@@ -63,6 +64,8 @@ wisdomApp.controller('messageOperationController',
 		 		log.d("###################: " + str);
 		 		$scope.saveArray.push(JSON.parse(str));
  			}
+
+ 			createWisdomSharedStateService.shareInputMessages($scope.saveArray);
 
  		}
  	};

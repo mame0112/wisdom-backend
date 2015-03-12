@@ -2,7 +2,8 @@ wisdomApp.controller('wisdomCreateController',
  ['$scope',
    'log',
    'Constants',
-    function($scope, log, Constants){
+   'createWisdomSharedStateService',
+    function($scope, log, Constants, createWisdomSharedStateService){
  	log.d("wisdomCreateController");
 
  	$scope.rootObject = null;
@@ -35,7 +36,10 @@ wisdomApp.controller('wisdomCreateController',
 
 	$scope.addNewWisdom = function(){
 		log.d("addNewWisdom");
-		log.d("result: " + "category: " + result.category + " tag: " + result.tag + " thumbnail: " + result.thumbnail + " title: " + result.title + " description: " + result.description);
+
+		var messageArray = createWisdomSharedStateService.getSharedMessages();
+
+		log.d("result: " + "category: " + result.category + " tag: " + result.tag + " thumbnail: " + result.thumbnail + " title: " + result.title + " description: " + result.description + "messages: " + messageArray);
 
 	};
 
