@@ -49,7 +49,7 @@ public class JsonConstant {
 
 	public final static String PARAM_WISDOM_CATEGORY = "category";
 
-	public final static String PARAM_WISDOM_SUB_CATEGORY = "subcategory";
+	public final static String PARAM_WISDOM_SUB_CATEGORY = "subCategory";
 
 	public final static String PARAM_WISDOM_THUMBNAIL = "thumbnail";
 

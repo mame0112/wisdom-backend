@@ -4,10 +4,9 @@ wisdomApp.controller('wisdomCreateController',
    'Constants',
    'createWisdomSharedStateService',
    'wisdomAPIService',
-    function($scope, log, Constants, createWisdomSharedStateService, wisdomAPIService){
+   '$http',
+    function($scope, log, Constants, createWisdomSharedStateService, wisdomAPIService, $http){
  	log.d("wisdomCreateController");
-
- 	$scope.rootObject = null;
 
 	$scope.status = {
 		isopen1: false,
@@ -17,10 +16,8 @@ wisdomApp.controller('wisdomCreateController',
 	$scope.categories = Constants.Category;
 	$scope.subCategories = null;
 
-	$scope.category = $scope.categories[2];
-
-
 	var category = null;
+	var subCategory = null;
 	var title = null;
 	var tag = null;
 	var thumbnail = null;
@@ -28,7 +25,9 @@ wisdomApp.controller('wisdomCreateController',
 	var messages = null;
 
 	var result = {
+		"id": -1,
 		"category": category,
+		"subCategory": subCategory,
 		"title": title,
 		"tag": tag,
 		"thumbnail": thumbnail,
@@ -41,7 +40,7 @@ wisdomApp.controller('wisdomCreateController',
 		log.d("addNewWisdom");
 
 		result.messages = createWisdomSharedStateService.getSharedMessages();
-		log.d("result: " + "category: " + result.category + " tag: " + result.tag + " thumbnail: " + result.thumbnail + " title: " + result.title + " description: " + result.description + "messages: " + result.messages);
+		log.d("result: " + "category: " + result.category + "subCategory: " + result.subCategory +  " tag: " + result.tag + " thumbnail: " + result.thumbnail + " title: " + result.title + " description: " + result.description + "messages: " + result.messages);
 
 		wisdomAPIService.newwisdom({servlet_new_wisdom_param : result});
 
@@ -49,12 +48,10 @@ wisdomApp.controller('wisdomCreateController',
 
 	$scope.$watch('category', function(newValue, oldValue) {
 		result.category = newValue;
-		// findSubCategoryByKey(newValue);
 	});
 
 	$scope.$watch('subCategory', function(newValue, oldValue) {
-		// result.category = newValue;
-		// findSubCategoryByKey(newValue);
+		result.subCategory = newValue;
 	});
 
 	$scope.$watch('title', function(newValue, oldValue) {
@@ -76,25 +73,21 @@ wisdomApp.controller('wisdomCreateController',
 	$scope.getSubcategoryItems = function(category)
 	{
 		log.d("getSubcategoryItems: " + category);
-		switch (category){
-			case 'SPORTS':
-				log.d("Sports selected");
-				$scope.subCategories = Constants.SUB_SPORTS;
-			break;
-			case 'MUSIC':
-				log.d("Music selected");
-				$scope.subCategories = Constants.SUB_MUSIC;
-			break;
-			case 'COOKING':
-				log.d("Cooking selected");
-				$scope.subCategories = Constants.SUB_COOKING;
-			break;
-			default:			
-				log.d("Unexpected category selected");
-			break;
+		if(category !== null) {
+			var jsonFile = category.toLowerCase();
 
+			$http({
+				method: 'GET', 
+				url: '/data/' + jsonFile + '.json'
+			}).
+	  		success(function(data, status, headers, config) {
+	  			log.d("success: " + data);
+	  			$scope.subCategoryTitles = data;
+	  		}).
+			error(function(data, status, headers, config) {
+				console.log('error');
+			});
 		}
-
 	};
 
 	// var findSubCategoryByKey = function(category)

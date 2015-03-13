@@ -1,0 +1,6 @@
+[
+	{"id": 0, "name": "Classic", "color":"#FF0000"},
+	{"id": 1, "name": "Jazz", "color":"#00FF00"},
+	{"id": 2, "name": "Piano", "color":"#0000FF"},
+	{"id": 3, "name": "Electone", "color":"#0FF000"}
+]

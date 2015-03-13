@@ -10,27 +10,6 @@ wisdomApp.constant(
 			{id: 2, name: "COOKING", color:"#0000FF"},
 		],
 
-		SUB_SPORTS: [
-			{id: 0, name: "Baseball", color:"#FF0000"},
-			{id: 1, name: "Football", color:"#00FF00"},
-			{id: 2, name: "Snow boarding", color:"#0000FF"},
-			{id: 3, name: "Tennis", color:"#0FF000"},
-		],
-
-		SUB_MUSIC: [
-			{id: 0, name: "Classic", color:"#FF0000"},
-			{id: 1, name: "Jazz", color:"#00FF00"},
-			{id: 2, name: "Piano", color:"#0000FF"},
-			{id: 3, name: "Electone", color:"#0FF000"},
-		],
-
-		SUB_COOKING: [
-			{id: 0, name: "Japanese", color:"#FF0000"},
-			{id: 1, name: "French", color:"#00FF00"},
-			{id: 2, name: "Itarian", color:"#0000FF"},
-		],
-
-
 		MODE_CHNAGE: 'mode_changed',
 
 		STATE: {
