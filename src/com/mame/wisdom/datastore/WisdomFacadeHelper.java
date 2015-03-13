@@ -95,8 +95,8 @@ public class WisdomFacadeHelper {
 					.getLong(JsonConstant.PARAM_WISDOM_UPDATED_DATE);
 			String thumbnail = rootObject
 					.getString(JsonConstant.PARAM_WISDOM_THUMBNAIL);
-			JSONArray contentArray = rootObject
-					.getJSONArray(JsonConstant.PARAM_WISDOM_CONTENT);
+			JSONArray messageArray = rootObject
+					.getJSONArray(JsonConstant.PARAM_WISDOM_MESSAGES);
 
 			Blob thumbBlob = null;
 
@@ -104,7 +104,7 @@ public class WisdomFacadeHelper {
 				thumbBlob = DatastoreUtil.transcodeString2Blob(thumbnail);
 			}
 
-			List<WDWisdomItemEntry> items = createItemEntityListFromJsonArray(contentArray);
+			List<WDWisdomItemEntry> items = createItemEntityListFromJsonArray(messageArray);
 
 			WDWisdomData data = new WDWisdomData(id, title, description, tag,
 					createdUserId, lastUpdatedDate, thumbBlob, items);

@@ -54,7 +54,7 @@ public class JsonConstant {
 	public final static String PARAM_WISDOM_THUMBNAIL = "thumbnail";
 
 	// This shall be used when the user create new wisdom
-	public final static String PARAM_WISDOM_CONTENT = "content";
+	public final static String PARAM_WISDOM_MESSAGES = "messages";
 
 	public final static String PARAM_WISDOM_UPDATED_DATE = "updated_date";
 
