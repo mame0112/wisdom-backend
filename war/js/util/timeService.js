@@ -5,7 +5,7 @@ wisdomApp.factory('timeService', ['log',
 		 	{
 		 		log.d("getCurrenttIme");
 		 		var date = new Date();
-				return date.getMilliseconds();
+				return date.getTime();
 		 	}
 		};
 	}
