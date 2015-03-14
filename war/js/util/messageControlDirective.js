@@ -29,62 +29,30 @@ wisdomApp.controller('messageOperationController',
  	};
 
 
- 	$scope.operateMessage = function()
- 	{
- 		log.d("operateMessage");
- 	};
-
- 	$scope.onMouseOver = function(index)
- 	{
- 		log.d("onMouseOver");
- 		$scope.panelCondition[index] = true;
- 		// $scope.panelCondition = DISPLAY_TITLE;
- 	};
-
- 	$scope.onMouseLeave = function(index)
- 	{
- 		log.d("onMouseLeave");
- 		$scope.panelCondition[index] = false;
- 		// $scope.panelCondition = DISPLAY_DESCRIPTION;
- 	};
-
  	$scope.showTitleField = function()
  	{
  		log.d("showTitleField");
- 		$scope.messageState = DISPLAY_TITLE; 		
+ 		$scope.messageState = DISPLAY_TITLE;
+ 		$scope.messageInputVisible = true;
  	};
 
  	$scope.showDescriptionField = function()
  	{
  		log.d("showDescriptionField");
  		$scope.messageState = DISPLAY_DESCRIPTION;
+ 		$scope.messageInputVisible = true;
  	};
 
- 	$scope.modidyInputMessage = function(data)
+ 	$scope.isMessageInputVisible = function()
  	{
- 		log.d("modidyInputMessage");
- 	};
-
- 	$scope.deleteInputMessage = function(data)
- 	{
- 		log.d("deleteInputMessage");
- 		for(i = 0; i<$scope.saveArray.length; i++){
- 		log.d("loop: " + data.entry);
- 			if($scope.saveArray[i].entry == data.entry){
-				$scope.saveArray.splice(i, 1);
- 			}
+ 		log.d("isMessageInputVisible");
+ 		if($scope.messageInputVisible === true){
+ 			return true;
+ 		} else {
+ 			return false;
  		}
  	};
 
- 	$scope.moveUpMessagePosition= function(data)
- 	{
- 		log.d("moveUpMessagePosition");
- 	};
-
- 	$scope.moveDownMessagePosition= function(data)
- 	{
- 		log.d("moveDownMessagePosition");
- 	};
 
  	$scope.saveMessageTexts = function(input)
  	{
@@ -104,13 +72,44 @@ wisdomApp.controller('messageOperationController',
  			}
 
  			createWisdomSharedStateService.shareInputMessages($scope.saveArray);
+
+ 			//Clear input texts
  			$scope.messageField = '';
 
+ 			//Make invisible message input area
+	 		$scope.messageInputVisible = false;
 
  		}
  	};
 
- 	$scope.getMessageType = function(data)
+ 	// $scope.getMessageType = function(data){
+ 	// 	log.d("getMessageType");
+
+ 	// 	if(data !== null){
+ 	// 		switch(data.type)
+ 	// 		{
+ 	// 			case YPE_TITLE:
+ 	// 			break;
+ 	// 			case TYPE_MESSAGE:
+ 	// 			break;
+ 	// 			default:
+ 	// 			break;
+ 	// 		}
+ 	// 	}
+ 	// 	if(data.type === TYPE_TITLE)
+ 	// 	{
+	 // 		log.d("This is title");
+ 	// 		return "panel-heading";
+ 	// 	} else if (data.type === TYPE_MESSAGE){
+	 // 		log.d("This is description");
+ 	// 		return "panel-body";
+ 	// 	} else {
+ 	// 		log.d("Unknown type.");
+ 	// 		return "panel-body";
+ 	// 	}
+ 	// };
+
+ 	$scope.findCssClassbyType = function(data)
  	{
  		log.d("isDescription");
  		if(data.type === TYPE_TITLE)
@@ -125,5 +124,61 @@ wisdomApp.controller('messageOperationController',
  			return "panel-body";
  		}
  	};
+
+ 	$scope.onMouseOver = function(index)
+ 	{
+ 		log.d("onMouseOver");
+ 		$scope.panelCondition[index] = true;
+ 		// $scope.panelCondition = DISPLAY_TITLE;
+ 	};
+
+ 	$scope.onMouseLeave = function(index)
+ 	{
+ 		log.d("onMouseLeave");
+ 		$scope.panelCondition[index] = false;
+ 		// $scope.panelCondition = DISPLAY_DESCRIPTION;
+ 	};
+
+  	$scope.deleteInputMessage = function(data)
+ 	{
+ 		log.d("deleteInputMessage");
+ 		for(i = 0; i<$scope.saveArray.length; i++){
+ 		log.d("loop: " + data.entry);
+ 			if($scope.saveArray[i].entry == data.entry){
+				$scope.saveArray.splice(i, 1);
+ 			}
+ 		}
+ 	};
+
+ 	$scope.modidyInputMessage = function(data)
+ 	{
+ 		log.d("modidyInputMessage");
+ 		$scope.messageField = data.entry;
+ 		switch(data.type){
+ 			case DISPLAY_TITLE:
+ 				$scope.messageState = DISPLAY_TITLE;
+ 			break;
+ 			case DISPLAY_DESCRIPTION:
+	 			$scope.messageState = DISPLAY_DESCRIPTION;
+ 			break;
+ 			default:
+ 				log.d("unknwon type");
+	 			$scope.messageState = DISPLAY_DESCRIPTION;
+ 			break;
+ 		}
+		$scope.messageInputVisible = true;
+ 	};
+
+ 	$scope.moveUpMessagePosition= function(data)
+ 	{
+ 		log.d("moveUpMessagePosition");
+ 	};
+
+ 	$scope.moveDownMessagePosition= function(data)
+ 	{
+ 		log.d("moveDownMessagePosition");
+ 	};
+
+
 
 }]);
