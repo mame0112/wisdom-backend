@@ -242,14 +242,23 @@ wisdomApp.controller('messageOperationController',
 		// $scope.messageModifyFieldVisible= false;
  	};
 
- 	$scope.moveUpMessagePosition= function(data)
+ 	$scope.moveUpMessagePosition= function(array, index)
  	{
  		log.d("moveUpMessagePosition");
+ 		if(index !== 0)
+ 		{
+			array.splice(index-1, 2, array[index], array[index-1]);
+ 		}
  	};
 
- 	$scope.moveDownMessagePosition= function(data)
+ 	$scope.moveDownMessagePosition= function(array, index)
  	{
  		log.d("moveDownMessagePosition");
+ 		if(array !== null && array.length !== 0)
+ 		{
+			array.splice(index, 2, array[index+1], array[index]);
+ 		}
+
  	};
 
  	$scope.hideDefaultMessageInputArea = function()

@@ -20,8 +20,8 @@
 			<div ng-show="panelCondition[$index]">
 			  <button type="button" class="btn btn-default" ng-click="modifyInputMessage(data, $index)">Modify</button>
 			  <button type="button" class="btn btn-default" ng-click="deleteInputMessage(data)">Delete</button>
-			  <button type="button" class="btn btn-default" ng-click="moveUpMessagePosition(data)">Up</button>
-			  <button type="button" class="btn btn-default" ng-click="moveDownMessagePosition(data)">Down</button>
+			  <button type="button" class="btn btn-default" ng-click="moveUpMessagePosition(saveArray, $index)">Up</button>
+			  <button type="button" class="btn btn-default" ng-click="moveDownMessagePosition(saveArray, $index)">Down</button>
 			</div>
 		</div>
 		<div ng-class="findCssClassbyType(data)" ng-show="isOriginalMessageDisplayed(index)">{{data.entry}}</div>
