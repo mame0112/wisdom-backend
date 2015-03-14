@@ -44,7 +44,6 @@ wisdomApp.controller('wisdomCreateController',
 	};
 
 	$scope.initialize = function(){
-		log.d("#########################");
 		// userData =  userDataHolder.getUserData();
 		// log.d("userId: " + userData.params.userId);
 		// result.createUserId = userData.params.userId;

@@ -12,13 +12,15 @@ wisdomApp.controller('messageOperationController',
  	var TYPE_TITLE = 1;
  	var TYPE_MESSAGE = 2;
 
+
+
 	//TODO need to consider how we handle delete action
  	$scope.saveArray = [];
 
  	$scope.initialize = function()
  	{
- 		$scope.panelCondition = DISPLAY_DESCRIPTION;
- 		$scope.messageState = DISPLAY_TITLE;
+ 		$scope.panelCondition = false;
+  		$scope.messageState = DISPLAY_TITLE;
  	};
 
 
@@ -30,13 +32,15 @@ wisdomApp.controller('messageOperationController',
  	$scope.onMouseOver = function()
  	{
  		log.d("onMouseOver");
- 		$scope.panelCondition = DISPLAY_TITLE;
+ 		$scope.panelCondition = true;
+ 		// $scope.panelCondition = DISPLAY_TITLE;
  	};
 
  	$scope.onMouseLeave = function()
  	{
  		log.d("onMouseLeave");
- 		$scope.panelCondition = DISPLAY_DESCRIPTION;
+ 		$scope.panelCondition = false;
+ 		// $scope.panelCondition = DISPLAY_DESCRIPTION;
  	};
 
  	$scope.showTitleField = function()

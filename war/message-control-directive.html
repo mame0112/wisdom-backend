@@ -1,16 +1,18 @@
 <dib ng-controller="messageOperationController" ng-init="initialize()">
 	<div class="form-group">
 	<div class="btn-group" role="group" aria-label="item selection">
-		<div ng-show="panelCondition">
-		  <button type="button" class="btn btn-default">Left</button>
-		  <button type="button" class="btn btn-default">Middle</button>
-		  <button type="button" class="btn btn-default">Right</button>
-		</div>
 		<button type="button" class="btn btn-default" ng-click="showTitleField()">Title</button>
 		<button type="button" class="btn btn-default" ng-click="showDescriptionField()">Description</button>
 	</div>
 
-	<div class="panel panel-default" ng-repeat="data in saveArray track by $index">
+	<div class="panel panel-default" ng-repeat="data in saveArray track by $index" ng-mouseenter="onMouseOver()" ng-mouseleave="onMouseLeave()">
+		<div class="btn-group" role="group" aria-label="Control selection">
+			<div ng-show="panelCondition">
+			  <button type="button" class="btn btn-default">Left</button>
+			  <button type="button" class="btn btn-default">Middle</button>
+			  <button type="button" class="btn btn-default">Right</button>
+			</div>
+		</div>
 	  <div ng-class="getMessageType(data)">{{data.entry}}</div>
 	</div>
 
