@@ -275,6 +275,20 @@ wisdomApp.controller('messageOperationController',
  		return false;
  	};
 
+ 	$scope.isOriginalMessageDisplayed = function(index)
+ 	{
+ 		if($scope.isMessageModifyingState() === false)
+ 		{
+ 			return true;
+ 		} else {
+			if($scope.modifyMessageCondition[index] === false)
+			{
+				return true;
+			}
+ 		}
+ 		return false;
+ 	};
+
  	//-------- Below is state handling ---------//
 
  	$scope.isDefaultState = function()
