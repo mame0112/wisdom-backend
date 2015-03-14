@@ -12,6 +12,8 @@ wisdomApp.controller('messageOperationController',
  	var TYPE_TITLE = 1;
  	var TYPE_MESSAGE = 2;
 
+ 	$scope.panelCondition = {};
+
 
 
 	//TODO need to consider how we handle delete action
@@ -19,7 +21,10 @@ wisdomApp.controller('messageOperationController',
 
  	$scope.initialize = function()
  	{
- 		$scope.panelCondition = false;
+ 		for(i=0; i<$scope.panelCondition.length; i++){
+ 		$scope.panelCondition[i] = false;
+ 		}
+
   		$scope.messageState = DISPLAY_TITLE;
  	};
 
@@ -29,17 +34,17 @@ wisdomApp.controller('messageOperationController',
  		log.d("operateMessage");
  	};
 
- 	$scope.onMouseOver = function()
+ 	$scope.onMouseOver = function(index)
  	{
  		log.d("onMouseOver");
- 		$scope.panelCondition = true;
+ 		$scope.panelCondition[index] = true;
  		// $scope.panelCondition = DISPLAY_TITLE;
  	};
 
- 	$scope.onMouseLeave = function()
+ 	$scope.onMouseLeave = function(index)
  	{
  		log.d("onMouseLeave");
- 		$scope.panelCondition = false;
+ 		$scope.panelCondition[index] = false;
  		// $scope.panelCondition = DISPLAY_DESCRIPTION;
  	};
 
@@ -53,6 +58,32 @@ wisdomApp.controller('messageOperationController',
  	{
  		log.d("showDescriptionField");
  		$scope.messageState = DISPLAY_DESCRIPTION;
+ 	};
+
+ 	$scope.modidyInputMessage = function(data)
+ 	{
+ 		log.d("modidyInputMessage");
+ 	};
+
+ 	$scope.deleteInputMessage = function(data)
+ 	{
+ 		log.d("deleteInputMessage");
+ 		for(i = 0; i<$scope.saveArray.length; i++){
+ 		log.d("loop: " + data.entry);
+ 			if($scope.saveArray[i].entry == data.entry){
+				$scope.saveArray.splice(i, 1);
+ 			}
+ 		}
+ 	};
+
+ 	$scope.moveUpMessagePosition= function(data)
+ 	{
+ 		log.d("moveUpMessagePosition");
+ 	};
+
+ 	$scope.moveDownMessagePosition= function(data)
+ 	{
+ 		log.d("moveDownMessagePosition");
  	};
 
  	$scope.saveMessageTexts = function(input)

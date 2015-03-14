@@ -5,12 +5,13 @@
 		<button type="button" class="btn btn-default" ng-click="showDescriptionField()">Description</button>
 	</div>
 
-	<div class="panel panel-default" ng-repeat="data in saveArray track by $index" ng-mouseenter="onMouseOver()" ng-mouseleave="onMouseLeave()">
+	<div class="panel panel-default" ng-repeat="data in saveArray track by $index" ng-mouseenter="onMouseOver($index)" ng-mouseleave="onMouseLeave($index)">
 		<div class="btn-group" role="group" aria-label="Control selection">
-			<div ng-show="panelCondition">
-			  <button type="button" class="btn btn-default">Left</button>
-			  <button type="button" class="btn btn-default">Middle</button>
-			  <button type="button" class="btn btn-default">Right</button>
+			<div ng-show="panelCondition[$index]">
+			  <button type="button" class="btn btn-default" ng-click="modidyInputMessage(data)">Modidy</button>
+			  <button type="button" class="btn btn-default" ng-click="deleteInputMessage(data)">Delete</button>
+			  <button type="button" class="btn btn-default" ng-click="moveUpMessagePosition(data)">Up</button>
+			  <button type="button" class="btn btn-default" ng-click="moveDownMessagePosition(data)">Down</button>
 			</div>
 		</div>
 	  <div ng-class="getMessageType(data)">{{data.entry}}</div>
