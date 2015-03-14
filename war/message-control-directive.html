@@ -5,25 +5,32 @@
 		<button type="button" class="btn btn-default" ng-click="showDescriptionField()">Description</button>
 	</div>
 
-	<div class="form-group" ng-show="messageInputVisible">
+	<!-- This part is for initial step (since saveArray is  0 at the beginning) -->
+	<div class="form-group" ng-show="isInputtingNewMessageState()">
 		<h3 ng-show="messageState">input sub title</h3>
 		<h3 ng-show="!messageState">input sub description</h3>
 		<input type="text" class="form-control" placeholder="Input something" ng-model="messageField">
-		<button type="button" class="btn btn-default">Cancel</button>
+		<button type="button" class="btn btn-default" ng-click="hideDefaultMessageInputArea()">Cancel</button>
 		<button type="button" class="btn btn-primary" ng-click="saveMessageTexts(messageField)">Save</button>
 	</div>
 
+	<!-- This part is for already input information. -->
 	<div class="panel panel-default" ng-repeat="data in saveArray track by $index" ng-mouseenter="onMouseOver($index)" ng-mouseleave="onMouseLeave($index)">
-		<div class="btn-group" role="group" aria-label="Control selection">
+		<div class="btn-group" role="group" aria-label="Control selection" ng-show="isMessageModifyingState() == false">
 			<div ng-show="panelCondition[$index]">
-			  <button type="button" class="btn btn-default" ng-click="modidyInputMessage(data)">Modidy</button>
+			  <button type="button" class="btn btn-default" ng-click="modifyInputMessage(data, $index)">Modify</button>
 			  <button type="button" class="btn btn-default" ng-click="deleteInputMessage(data)">Delete</button>
 			  <button type="button" class="btn btn-default" ng-click="moveUpMessagePosition(data)">Up</button>
 			  <button type="button" class="btn btn-default" ng-click="moveDownMessagePosition(data)">Down</button>
 			</div>
 		</div>
-	  <div ng-class="findCssClassbyType(data)">{{data.entry}}</div>
-
+		<div ng-class="findCssClassbyType(data)" ng-show="isMessageModifyingState() == false">{{data.entry}}</div>
+		<div class="form-group" ng-show="isModifyPanelVisible($index)">
+			<h3>Modify input text</h3>
+			<input type="text" class="form-control" placeholder="Input something" ng-model="messageModifyField">
+			<button type="button" class="btn btn-default" ng-click="hideMessageInputArea($index)">Cancel</button>
+			<button type="button" class="btn btn-primary" ng-click="saveModifiedTexts(data, messageModifyField, $index)">Save</button>
+		</div>
 	</div>
 </div>
 </dib>

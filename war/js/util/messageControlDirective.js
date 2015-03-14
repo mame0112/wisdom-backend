@@ -12,7 +12,18 @@ wisdomApp.controller('messageOperationController',
  	var TYPE_TITLE = 1;
  	var TYPE_MESSAGE = 2;
 
+ 	var DEFAULT = 0;
+ 	var NEW_TEXT_INPUT = 1;
+ 	var TEXT_INPUT_DONE = 2;
+ 	var TEXT_MODIFY = 3;
+
+ 	$scope.STATE = DEFAULT;
+
+ 	// Parameter to show floating panel
  	$scope.panelCondition = {};
+
+ 	// Parameter to show modify text area and buttons
+ 	$scope.modifyMessageCondition = {};
 
 
 
@@ -21,9 +32,20 @@ wisdomApp.controller('messageOperationController',
 
  	$scope.initialize = function()
  	{
- 		for(i=0; i<$scope.panelCondition.length; i++){
- 		$scope.panelCondition[i] = false;
+ 		//Initialize state
+		$scope.changeStateToStable();
+ 		
+	 	$scope.STATE = DEFAULT;
+ 		for(i=0; i<$scope.panelCondition.length; i++)
+ 		{
+	 		$scope.panelCondition[i] = false;
  		}
+
+ 		for(i=0; i<$scope.modifyMessageCondition.length; i++)
+ 		{
+ 			$scope.modifyMessageCondition[i] = false;
+ 		}
+
 
   		$scope.messageState = DISPLAY_TITLE;
  	};
@@ -31,27 +53,27 @@ wisdomApp.controller('messageOperationController',
 
  	$scope.showTitleField = function()
  	{
- 		log.d("showTitleField");
+ 		$scope.changeStateToInputtingNewText();
  		$scope.messageState = DISPLAY_TITLE;
- 		$scope.messageInputVisible = true;
+ 		// $scope.defaultMssageInputVisible = true;
  	};
 
  	$scope.showDescriptionField = function()
  	{
- 		log.d("showDescriptionField");
+ 		$scope.changeStateToInputtingNewText();
  		$scope.messageState = DISPLAY_DESCRIPTION;
- 		$scope.messageInputVisible = true;
+ 		// $scope.defaultMssageInputVisible = true;
  	};
 
- 	$scope.isMessageInputVisible = function()
- 	{
- 		log.d("isMessageInputVisible");
- 		if($scope.messageInputVisible === true){
- 			return true;
- 		} else {
- 			return false;
- 		}
- 	};
+ 	// $scope.isMessageInputVisible = function()
+ 	// {
+ 	// 	log.d("isMessageInputVisible");
+ 	// 	if($scope.defaultMssageInputVisible === true){
+ 	// 		return true;
+ 	// 	} else {
+ 	// 		return false;
+ 	// 	}
+ 	// };
 
 
  	$scope.saveMessageTexts = function(input)
@@ -73,13 +95,43 @@ wisdomApp.controller('messageOperationController',
 
  			createWisdomSharedStateService.shareInputMessages($scope.saveArray);
 
- 			//Clear input texts
- 			$scope.messageField = '';
-
- 			//Make invisible message input area
-	 		$scope.messageInputVisible = false;
+ 			//Prepare flag for modify
+ 			var index = $scope.saveArray.length-1;
+			$scope.modifyMessageCondition[index] = false;
 
  		}
+		$scope.changeStateToStable();
+ 	};
+
+ 	$scope.saveModifiedTexts = function(original, newMessage, index)
+ 	{
+ 		log.d("saveModifiedTexts: " + original + " / " + newMessage);
+ 		if(original !== null && newMessage !== null){
+ 			var type = original.type;
+ 			var oldText = original.entry;
+ 			var str = null;
+
+	 		log.d("oldText: " + oldText);
+	 		// log.d("newText: " + $scope.messageModifyField);
+
+	 		str = '{"entry": "' + newMessage +'", "type": ' + original.type + '}';
+	 		log.d("###################: " + str);
+
+	 		// $scope.saveArray.push(JSON.parse(str));
+
+	 		for(i = 0; i<$scope.saveArray.length; i++){
+ 				if($scope.saveArray[i].entry == oldText){
+					$scope.saveArray.splice(i, 1, JSON.parse(str));
+ 				}
+	 		}
+
+	 		//Set flag for showing modify panel for target item
+	 		$scope.modifyMessageCondition[index] = false;
+
+ 			createWisdomSharedStateService.shareInputMessages($scope.saveArray);
+
+ 		}
+		$scope.changeStateToStable();
  	};
 
  	// $scope.getMessageType = function(data){
@@ -150,23 +202,44 @@ wisdomApp.controller('messageOperationController',
  		}
  	};
 
- 	$scope.modidyInputMessage = function(data)
+ 	$scope.modifyInputMessage = function(data, index)
  	{
- 		log.d("modidyInputMessage");
- 		$scope.messageField = data.entry;
+ 		// $scope.messageField = data.entry;
  		switch(data.type){
  			case DISPLAY_TITLE:
- 				$scope.messageState = DISPLAY_TITLE;
+ 				$scope.modifyMessageState = DISPLAY_TITLE;
  			break;
  			case DISPLAY_DESCRIPTION:
-	 			$scope.messageState = DISPLAY_DESCRIPTION;
+	 			$scope.modifyMessageState = DISPLAY_DESCRIPTION;
  			break;
  			default:
  				log.d("unknwon type");
-	 			$scope.messageState = DISPLAY_DESCRIPTION;
+	 			$scope.modifyMessageState = DISPLAY_DESCRIPTION;
  			break;
  		}
-		$scope.messageInputVisible = true;
+		var text = data.entry;
+		$scope.messageModifyField = text;
+		//Dismiss default text area
+		// $scope.defaultMssageInputVisible = false;
+
+		//Show modify text area
+		// $scope.messageModifyFieldVisible = true;
+
+		//Set flag on for target modify panel
+		$scope.modifyMessageCondition[index] = true;
+
+		$scope.changeStateToModifyingText();
+
+ 	};
+
+ 	$scope.hideMessageInputArea = function(index)
+ 	{
+
+		$scope.modifyMessageCondition[index] = false;
+
+ 		$scope.changeStateToStable();
+		// $scope.defaultMssageInputVisible= false;
+		// $scope.messageModifyFieldVisible= false;
  	};
 
  	$scope.moveUpMessagePosition= function(data)
@@ -177,6 +250,83 @@ wisdomApp.controller('messageOperationController',
  	$scope.moveDownMessagePosition= function(data)
  	{
  		log.d("moveDownMessagePosition");
+ 	};
+
+ 	$scope.hideDefaultMessageInputArea = function()
+ 	{
+ 		// $scope.defaultMssageInputVisible = false;
+		$scope.messageField = '';
+		$scope.changeStateToStable();
+ 	};
+
+ 	$scope.isModifyPanelVisible = function(index)
+ 	{
+ 		log.d("isModifyPanelVisible");
+
+ 		if($scope.isMessageModifyingState() === true)
+ 		{
+ 			log.d("AAAAAAAA");
+ 			if($scope.modifyMessageCondition[index] === true)
+ 			{
+	 			log.d("BBBBBBBBBBBBB");
+	 			return true;
+ 			}
+ 		}
+ 		return false;
+ 	};
+
+ 	//-------- Below is state handling ---------//
+
+ 	$scope.isDefaultState = function()
+ 	{
+ 		if($scope.STATE === DEFAULT || $scope.STATE === TEXT_INPUT_DONE){
+ 			return true;
+ 		} else {
+ 			return false;
+ 		}
+ 	};
+
+   	$scope.isInputtingNewMessageState = function()
+ 	{
+ 		if($scope.STATE === NEW_TEXT_INPUT){
+ 			return true;
+ 		} else {
+ 			return false;
+ 		}
+ 	};
+
+  	$scope.isMessageModifyingState = function()
+ 	{
+ 		if($scope.STATE === TEXT_MODIFY){
+ 			return true;
+ 		} else {
+ 			return false;
+ 		}
+ 	};
+
+ 	$scope.changeStateToStable = function()
+ 	{
+		if($scope.saveArray.length !== 0){
+	 		$scope.STATE = TEXT_INPUT_DONE;
+		} else {
+	 		$scope.STATE = DEFAULT;
+		}
+
+		$scope.messageField = '';
+		$scope.messageModifyField = '';
+
+ 	};
+
+ 	$scope.changeStateToInputtingNewText = function()
+ 	{
+ 		$scope.STATE = NEW_TEXT_INPUT;
+		$scope.messageModifyField = '';
+ 	};
+
+   	$scope.changeStateToModifyingText = function()
+ 	{
+ 		$scope.STATE = TEXT_MODIFY;
+		$scope.messageField = '';
  	};
 
 
