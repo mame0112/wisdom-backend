@@ -69,6 +69,8 @@ wisdomApp.controller('messageOperationController',
  			}
 
  			createWisdomSharedStateService.shareInputMessages($scope.saveArray);
+ 			$scope.messageField = '';
+
 
  		}
  	};

@@ -10,7 +10,6 @@
 		<button type="button" class="btn btn-default" ng-click="showDescriptionField()">Description</button>
 	</div>
 
-	{{saveArray}}
 	<div class="panel panel-default" ng-repeat="data in saveArray track by $index">
 	  <div ng-class="getMessageType(data)">{{data.entry}}</div>
 	</div>
