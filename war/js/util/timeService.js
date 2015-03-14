@@ -3,7 +3,6 @@ wisdomApp.factory('timeService', ['log',
 		return {
 		 	getCurrentTime : function()
 		 	{
-		 		log.d("getCurrenttIme");
 		 		var date = new Date();
 				return date.getTime();
 		 	}

@@ -76,12 +76,12 @@ wisdomApp.controller('messageOperationController',
  	$scope.getMessageType = function(data)
  	{
  		log.d("isDescription");
- 		if(data.type === 'title')
+ 		if(data.type === TYPE_TITLE)
  		{
-	 		log.d("THis is title");
+	 		log.d("This is title");
  			return "panel-heading";
- 		} else if (data.type === 'title'){
-	 		log.d("THis is description");
+ 		} else if (data.type === TYPE_MESSAGE){
+	 		log.d("This is description");
  			return "panel-body";
  		} else {
  			log.d("Unknown type.");
