@@ -4,8 +4,10 @@ wisdomApp.controller('SigninController',
  'modeService',
  'userDataHolder',
  'twitterAPIService',
- 'dataRetriveService', 
- function($scope, log, modeService, userDataHolder, twitterAPIService, dataRetriveService){
+ 'dataRetriveService',
+ 'Constants',
+ '$window',
+ function($scope, log, modeService, userDataHolder, twitterAPIService, dataRetriveService, Constants, $window){
  	log.d("SigninController");
 
  	$scope.twitterSignin = function()

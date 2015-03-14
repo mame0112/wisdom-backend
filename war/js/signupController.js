@@ -69,9 +69,9 @@ wisdomApp.controller('SignupController',
  		return dataRetriveService.getTwitterToken(data);
  	};
 
- 	FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-	});
+ // 	FB.getLoginStatus(function(response) {
+ //    statusChangeCallback(response);
+	// });
 
 	$scope.checkLoginState = function() {
 		log.d("checkLoginState");

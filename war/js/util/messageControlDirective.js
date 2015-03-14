@@ -9,6 +9,9 @@ wisdomApp.controller('messageOperationController',
  	var DISPLAY_TITLE = true;
  	var DISPLAY_DESCRIPTION= false;
 
+ 	var TYPE_TITLE = 1;
+ 	var TYPE_MESSAGE = 2;
+
 	//TODO need to consider how we handle delete action
  	$scope.saveArray = [];
 
@@ -56,11 +59,11 @@ wisdomApp.controller('messageOperationController',
  			var str = null;
 
  			if($scope.messageState === DISPLAY_TITLE){
-		 		str = '{"text": "' +input +'", "type": "title"}';
+		 		str = '{"entry": "' +input +'", "type": ' + TYPE_TITLE + '}';
 		 		log.d("###################: " + str);
 		 		$scope.saveArray.push(JSON.parse(str));
  			} else {
-		 		str = '{"text": "' +input +'", "type": "description"}';
+		 		str = '{"entry": "' +input +'", "type": ' + TYPE_MESSAGE + '}';
 		 		log.d("###################: " + str);
 		 		$scope.saveArray.push(JSON.parse(str));
  			}

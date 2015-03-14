@@ -4,6 +4,7 @@ wisdomApp.service('userDataHolder', ['$cookieStore', 'log', function($cookieStor
         setUserData : function(data){
         	log.d("setUserData");
             if(data !== null){
+                log.d("SET");
                 $cookieStore.put("userData", data);
             }
     	},
@@ -19,7 +20,10 @@ wisdomApp.service('userDataHolder', ['$cookieStore', 'log', function($cookieStor
             // }
             // $scope.result = $cookieStore.get("userData");
             // return $scope.result;
-            return $cookieStore.get("userData");
+            var data  = $cookieStore.get("userData");
+            log.d("data:" + data);
+
+            return data;
         }
     };
 }]);

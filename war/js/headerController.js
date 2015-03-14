@@ -31,7 +31,7 @@ wisdomApp.controller('headerController',
  	};
 
  	$scope.isSigninVisible = function (){
- 		log.d("isSigninVisible");
+ 		// log.d("isSigninVisible");
  		var data = userDataHolder.getUserData();
  		if(data === null|| data === undefined){
  			return true;
@@ -40,7 +40,7 @@ wisdomApp.controller('headerController',
  	};
 
  	$scope.isSignupVisible = function (){
- 		log.d("isSignupVisible");
+ 		// log.d("isSignupVisible");
  		var data = userDataHolder.getUserData();
  		if(data === null || data === undefined){
  			return true;
@@ -58,7 +58,7 @@ wisdomApp.controller('headerController',
  	};
 
   	$scope.isNotificationVisible = function (){
- 		log.d("isNotificationVisible");
+ 		// log.d("isNotificationVisible");
  		var data = userDataHolder.getUserData();
  		if(data !== null && data !== undefined){
  			return true;

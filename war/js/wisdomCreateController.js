@@ -5,7 +5,9 @@ wisdomApp.controller('wisdomCreateController',
    'createWisdomSharedStateService',
    'wisdomAPIService',
    '$http',
-    function($scope, log, Constants, createWisdomSharedStateService, wisdomAPIService, $http){
+   'userDataHolder',
+   'timeService',
+    function($scope, log, Constants, createWisdomSharedStateService, wisdomAPIService, $http, userDataHolder, timeService){
  	log.d("wisdomCreateController");
 
 	$scope.status = {
@@ -16,6 +18,8 @@ wisdomApp.controller('wisdomCreateController',
 	$scope.categories = Constants.Category;
 	$scope.subCategories = null;
 
+	var userData = null;
+
 	var category = null;
 	var subCategory = null;
 	var title = null;
@@ -23,6 +27,8 @@ wisdomApp.controller('wisdomCreateController',
 	var thumbnail = null;
 	var description = null;
 	var messages = null;
+	var createUserId = -1;
+	var updateDate = -1;
 
 	var result = {
 		"id": -1,
@@ -32,15 +38,29 @@ wisdomApp.controller('wisdomCreateController',
 		"tag": tag,
 		"thumbnail": thumbnail,
 		"description": description,
-		"messages" : messages
+		"messages" : messages,
+		"create_user_id": createUserId,
+		"updated_date": updateDate,
+	};
+
+	$scope.initialize = function(){
+		log.d("#########################");
+		// userData =  userDataHolder.getUserData();
+		// log.d("userId: " + userData.params.userId);
+		// result.createUserId = userData.params.userId;
 	};
 
 
 	$scope.addNewWisdom = function(){
 		log.d("addNewWisdom");
 
+		userData =  userDataHolder.getUserData();
+		log.d("userId: " + userData.params.userId);
+		result.create_user_id = userData.params.userId;
+		result.updated_date = timeService.getCurrentTime();
+
 		result.messages = createWisdomSharedStateService.getSharedMessages();
-		log.d("result: " + "category: " + result.category + "subCategory: " + result.subCategory +  " tag: " + result.tag + " thumbnail: " + result.thumbnail + " title: " + result.title + " description: " + result.description + "messages: " + result.messages);
+		log.d("result: " + "category: " + result.category + "subCategory: " + result.subCategory +  " tag: " + result.tag + " thumbnail: " + result.thumbnail + " title: " + result.title + " description: " + result.description + "messages: " + result.messages + " createUserId: " + result.create_user_id + " updated time: " + result.updated_date);
 
 		wisdomAPIService.newwisdom({servlet_new_wisdom_param : result});
 

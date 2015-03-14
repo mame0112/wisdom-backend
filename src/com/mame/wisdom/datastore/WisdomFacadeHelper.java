@@ -41,7 +41,7 @@ public class WisdomFacadeHelper {
 			for (int i = 0; i < contentArray.length(); i++) {
 				try {
 					JSONObject item = (JSONObject) contentArray.get(i);
-					String entryName = item
+					String entryContent = item
 							.getString(JsonConstant.PARAM_WISDOM_ENTRY_NAME);
 					int entryType = item
 							.getInt(JsonConstant.PARAM_WISDOM_ITEM_TYPE);
@@ -49,13 +49,13 @@ public class WisdomFacadeHelper {
 					case WConstant.TAG_WISDOM_MESSAGE:
 						// TODO Need to add last user name if necessary
 						WDWisdomItemEntry messageEntry = new WDWisdomMessage(i,
-								entryName, 0, current, null);
+								entryContent, 0, current, null);
 						items.add(messageEntry);
 						break;
 					case WConstant.TAG_WISDOM_TITLE:
 						// TODO Need to add last user name if necessary
 						WDWisdomItemEntry titleEntry = new WDWisdomTitle(i,
-								entryName, 0, current, null);
+								entryContent, 0, current, null);
 						items.add(titleEntry);
 						break;
 					default:
@@ -93,15 +93,22 @@ public class WisdomFacadeHelper {
 					.getLong(JsonConstant.PARAM_WISDOM_CREATE_USER_ID);
 			long lastUpdatedDate = rootObject
 					.getLong(JsonConstant.PARAM_WISDOM_UPDATED_DATE);
-			String thumbnail = rootObject
-					.getString(JsonConstant.PARAM_WISDOM_THUMBNAIL);
 			JSONArray messageArray = rootObject
 					.getJSONArray(JsonConstant.PARAM_WISDOM_MESSAGES);
 
 			Blob thumbBlob = null;
+			// THumbnail is an optional parameter. THen, we should ignore even
+			// if it doesn't exist
+			try {
+				String thumbnail = rootObject
+						.getString(JsonConstant.PARAM_WISDOM_THUMBNAIL);
 
-			if (thumbnail != null) {
-				thumbBlob = DatastoreUtil.transcodeString2Blob(thumbnail);
+				if (thumbnail != null) {
+					thumbBlob = DatastoreUtil.transcodeString2Blob(thumbnail);
+				}
+			} catch (JSONException e1) {
+				DbgUtil.showLog(TAG,
+						"JSONException for thumbnail: " + e1.getMessage());
 			}
 
 			List<WDWisdomItemEntry> items = createItemEntityListFromJsonArray(messageArray);
