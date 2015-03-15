@@ -39,6 +39,11 @@ public class ActionFactory {
 		mAction.put(ActionConstants.POST + ActionConstants.KEY_NOTIFICATION,
 				new NotificationAction());
 
+		// Category API
+		// Get category
+		mAction.put(ActionConstants.GET + ActionConstants.KEY_CATEGORY,
+				new CategoryAction());
+
 		// Wisdom APIs
 		// Get wisdom(s)
 		// TODO to be checked if we can reuse this action for single and

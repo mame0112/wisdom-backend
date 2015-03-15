@@ -55,6 +55,8 @@ public class WConstant {
 
 	public final static String SERVLET_WISDOM_SEARCH_PARAM = "searchParam";
 
+	public final static String SERVLET_CATEGORY_PARAM = "servlet_category_param";
+
 	/**
 	 * The number of items in one page for search
 	 */

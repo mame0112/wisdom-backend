@@ -1,5 +1,13 @@
-wisdomApp.controller('categoryController', ['$scope', '$http', 'log', 'modeService', 'Constants', '$routeParams', 'paginationFactory',
- function($scope, $http, log, modeService, Constants, $routeParams, paginationFactory){
+wisdomApp.controller('categoryController', 
+	['$scope', 
+	'$http', 
+	'log', 
+	'modeService', 
+	'Constants', 
+	'$routeParams', 
+	'paginationFactory',
+	'categoryAPIService',
+ function($scope, $http, log, modeService, Constants, $routeParams, paginationFactory, categoryAPIService){
  	log.d("categoryController");
 
  	var ACTIVE = "active";
@@ -15,18 +23,32 @@ wisdomApp.controller('categoryController', ['$scope', '$http', 'log', 'modeServi
  	$scope.categoryId = $routeParams.categoryId;
  	log.d("categoryid: " + $scope.categoryId);
 
- 	 $http.get('data/categoryData.json').success(function(data){
- 	 	log.d("data received");
- 	 	$scope.result = data;
- 	 	$scope.categoryName = $scope.result.categoryName;
- 	 	$scope.params = $scope.result.params;
- 		$scope.totalNum = $scope.params.length;
+	$scope.subCategoryId = $routeParams.subCategoryId;
+ 	log.d("subCategoryid: " + $scope.subCategoryId);
 
-		// shouldPrevBeShown();
+ 	var param = {
+ 		"category": $scope.categoryId,
+ 		"subCategory": $scope.subCategoryId,
+ 	};
 
-		modeService.changeCurrentMode();
-		// log.d("lists: " + $scope.lists);
+ 	// Load categories
+ 	categoryAPIService.category({servlet_category_param : param}, function(response){
+ 		log.d("response: " + response);
+ 		$scope.categories = response.params;
  	});
+
+ 	//  $http.get('data/categoryData.json').success(function(data){
+ 	//  	log.d("data received");
+ 	//  	$scope.result = data;
+ 	//  	$scope.categoryName = $scope.result.categoryName;
+ 	//  	$scope.params = $scope.result.params;
+ 	// 	$scope.totalNum = $scope.params.length;
+
+		// // shouldPrevBeShown();
+
+		// modeService.changeCurrentMode();
+		// // log.d("lists: " + $scope.lists);
+ 	// });
 
  	 $scope.isActive = function(){
  	 	log.d("isActive");

@@ -65,6 +65,17 @@ wisdomApp.factory('apiService', ['$resource', 'log',
     }
 ])
 
+.factory('categoryAPIService', ['$resource', 'log',
+ function($resource, log) {
+    return $resource('/controller/category:param',
+         {servlet_resp_id: 1, param: '@servlet_category_param'},
+         { 
+            //Get one wisdom (by key, under certain category/subcategory)
+            category: {method: 'GET', isArray: false},
+        });
+    }
+])
+
 .factory('highlightAPIService', ['$resource', 'log',
  function($resource, log) {
     return $resource('/controller/highlight',

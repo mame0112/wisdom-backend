@@ -37,6 +37,21 @@ public class JsonConstant {
 	public final static String PARAM_USER_LAST_LOGIN = "logindate";
 
 	/**
+	 * Json fields for category data
+	 */
+	public final static String PARAM_CATEGORY_CATEGORY_ID = "categoryId";
+
+	public final static String PARAM_CATEGORY_SUBCATEGORY_ID = "subCategoryId";
+
+	public final static String PARAM_CATEGORY_CATEGORY_NAME = "categoryName";
+
+	public final static String PARAM_CATEGORY_SUB_CATEGORY_NAME = "subCategoryName";
+
+	public final static String PARAM_CATEGORY_DESCRIPTION = "description";
+
+	public final static String PARAM_CATEGORY_WISDOM_ID = "wisdomId";
+
+	/**
 	 * Json fields for wisdom data
 	 */
 	public final static String PARAM_WISDOM_ID = "id";
@@ -65,7 +80,7 @@ public class JsonConstant {
 	public final static String PARAM_WISDOM_ITEM_ID = "id";
 
 	public final static String PARAM_WISDOM_ITEM_TYPE = "type";
-	
+
 	public final static String PARAM_WISDOM_ITEM_MESSAGE = "message";
 
 	public final static String PARAM_WISDOM_ITEM_LIKE = "like_num";

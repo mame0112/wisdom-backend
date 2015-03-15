@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.google.appengine.labs.repackaged.org.json.JSONArray;
 import com.mame.wisdom.constant.WConstant;
+import com.mame.wisdom.data.WDSubCategoryData;
 import com.mame.wisdom.data.WDWisdomData;
 import com.mame.wisdom.data.WisdomDataStructure;
 import com.mame.wisdom.exception.WisdomDatastoreException;
@@ -114,6 +115,18 @@ public class WisdomFacade {
 			}
 
 		}
+	}
+
+	public List<WDSubCategoryData> getCategoryContent() {
+		DbgUtil.showLog(TAG, "getCategoryContent");
+
+		DAOFactory factory = DAOFactory.getDAOFactory();
+		try {
+			WisdomDAO dao = factory.getWisdomDAO();
+		} catch (WisdomDatastoreException e) {
+			DbgUtil.showLog(TAG, "WisdomDatastoreException: " + e.getMessage());
+		}
+		return null;
 	}
 
 }
