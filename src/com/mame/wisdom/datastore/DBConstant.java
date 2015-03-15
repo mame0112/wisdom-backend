@@ -44,6 +44,13 @@ public class DBConstant {
 	public final static String ENTITY_USER_TOTAL_POINT = "user_total_point";
 
 	/**
+	 * Entity fields for Category data
+	 */
+	public final static String ENTITY_CATEGORY_DESCRIPTION = "description";
+	
+	public final static String ENTITY_CATEGORY_WISDOM_IDS = "wisdomIds";
+
+	/**
 	 * Entity fields for Wisdom data
 	 */
 	// This is a field for the number of wisdom which belong to certain

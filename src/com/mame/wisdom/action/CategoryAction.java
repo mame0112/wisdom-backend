@@ -5,10 +5,12 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.data.WDSubCategoryData;
 import com.mame.wisdom.datastore.WisdomFacade;
 import com.mame.wisdom.jsonbuilder.CategoryJsonBuilder;
+import com.mame.wisdom.jsonbuilder.JsonConstant;
 import com.mame.wisdom.util.DbgUtil;
 
 public class CategoryAction implements Action {
@@ -31,8 +33,18 @@ public class CategoryAction implements Action {
 			builder.addResponseId(Integer.valueOf(responseId));
 			WisdomFacade facade = new WisdomFacade();
 
-			List<WDSubCategoryData> categories = facade.getCategoryContent();
-			builder.addResponseParam(categories);
+			JSONObject argObject = new JSONObject(params);
+			String category = (String) argObject
+					.get(JsonConstant.PARAM_CATEGORY_CATEGORY_NAME);
+			String subCategory = (String) argObject
+					.get(JsonConstant.PARAM_CATEGORY_SUB_CATEGORY_NAME);
+			if (category != null && subCategory != null) {
+				List<WDSubCategoryData> categories = facade.getCategoryContent(
+						category, subCategory);
+				builder.addResponseParam(categories);
+			} else {
+				builder.addErrorMessage("category name or sub category name is null");
+			}
 		} else {
 			builder.addErrorMessage("responseId or params is null");
 		}

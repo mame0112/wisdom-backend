@@ -2,10 +2,22 @@ package com.mame.wisdom.datastore;
 
 import java.util.List;
 
+import com.mame.wisdom.data.WDSubCategoryData;
 import com.mame.wisdom.data.WDWisdomData;
 import com.mame.wisdom.exception.WisdomDatastoreException;
 
 public interface WisdomDAO {
+
+	/**
+	 * Get content information that belongs to selected category/subcategory
+	 * 
+	 * @param categoryName
+	 * @param subCategoryName
+	 * @return
+	 * @throws WisdomDatastoreException
+	 */
+	public WDSubCategoryData getCategoryContents(String categoryName,
+			String subCategoryName) throws WisdomDatastoreException;
 
 	/**
 	 * Get popular wisdom
@@ -16,7 +28,7 @@ public interface WisdomDAO {
 	 */
 	public List<WDWisdomData> getPopularWisdoms(int num)
 			throws WisdomDatastoreException;
-	
+
 	/**
 	 * Get latest wisdoms
 	 * 
@@ -48,6 +60,17 @@ public interface WisdomDAO {
 	 * @throws WisdomDatastoreException
 	 */
 	public List<WDWisdomData> getWisdoms(String category, String subCategory)
+			throws WisdomDatastoreException;
+
+	/**
+	 * Get wisdom datas by wisdom ids
+	 * 
+	 * @param wisdomIds
+	 * @return
+	 * @throws WisdomDatastoreException
+	 */
+	public List<WDWisdomData> getWisdomsByIds(String categoryName,
+			String subCategoryName, List<Long> wisdomIds)
 			throws WisdomDatastoreException;
 
 	/**

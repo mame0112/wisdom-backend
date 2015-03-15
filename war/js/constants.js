@@ -5,9 +5,9 @@ wisdomApp.constant(
 		testMessage: 'test message from Constants',
 
 		Category: [
-			{id: 0, name: "SPORTS", color:"#FF0000"},
-			{id: 1, name: "MUSIC", color:"#00FF00"},
-			{id: 2, name: "COOKING", color:"#0000FF"},
+			{id: 0, name: "Sports", color:"#FF0000"},
+			{id: 1, name: "Music", color:"#00FF00"},
+			{id: 2, name: "Cooking", color:"#0000FF"},
 		],
 
 		MODE_CHNAGE: 'mode_changed',

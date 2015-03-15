@@ -24,10 +24,10 @@ wisdomApp.controller('categoryController',
  	log.d("categoryid: " + $scope.categoryId);
 
 	$scope.subCategoryId = $routeParams.subCategoryId;
- 	log.d("subCategoryid: " + $scope.subCategoryId);
+ 	log.d("subCategoryName: " + $scope.subCategoryId);
 
  	var param = {
- 		"category": $scope.categoryId,
+ 		"categoryName": $scope.categoryId,
  		"subCategory": $scope.subCategoryId,
  	};
 

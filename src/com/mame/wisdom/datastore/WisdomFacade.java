@@ -117,12 +117,23 @@ public class WisdomFacade {
 		}
 	}
 
-	public List<WDSubCategoryData> getCategoryContent() {
+	public List<WDSubCategoryData> getCategoryContent(String category,
+			String subCategory) throws WisdomFacadeException {
 		DbgUtil.showLog(TAG, "getCategoryContent");
+
+		if (category == null || subCategory == null) {
+			throw new WisdomFacadeException("category or sub category is null");
+		}
 
 		DAOFactory factory = DAOFactory.getDAOFactory();
 		try {
 			WisdomDAO dao = factory.getWisdomDAO();
+			WDSubCategoryData result = dao.getCategoryContents(category,
+					subCategory);
+			if (result != null) {
+				List<Long> ids = result.getWisdomIds();
+
+			}
 		} catch (WisdomDatastoreException e) {
 			DbgUtil.showLog(TAG, "WisdomDatastoreException: " + e.getMessage());
 		}

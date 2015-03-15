@@ -1,5 +1,6 @@
 package com.mame.wisdom.datastore;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.appengine.api.datastore.DatastoreService;
@@ -14,6 +15,7 @@ import com.google.appengine.api.datastore.Query.Filter;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.FilterPredicate;
 import com.mame.wisdom.constant.WConstant;
+import com.mame.wisdom.data.WDSubCategoryData;
 import com.mame.wisdom.data.WDWisdomData;
 import com.mame.wisdom.exception.WisdomDatastoreException;
 import com.mame.wisdom.util.DbgUtil;
@@ -252,6 +254,75 @@ public class DefaultWisdomDAO implements WisdomDAO {
 				throw new WisdomDatastoreException(e.getMessage());
 			}
 
+		}
+
+		return null;
+	}
+
+	@Override
+	public WDSubCategoryData getCategoryContents(String categoryName,
+			String subCategoryName) throws WisdomDatastoreException {
+		DbgUtil.showLog(TAG, "getCategoryContents");
+
+		if (categoryName == null || subCategoryName == null) {
+			throw new WisdomDatastoreException(
+					"categoryName or subCategoryName is null");
+		}
+
+		Key key = DatastoreKeyGenerator.getSubCategoryKey(categoryName,
+				subCategoryName);
+		try {
+			Entity entity = mDS.get(key);
+			// If entity already exist
+			if (entity != null) {
+				String description = (String) entity
+						.getProperty(DBConstant.ENTITY_CATEGORY_DESCRIPTION);
+				List<Long> wisdomIds = (List<Long>) entity
+						.getProperty(DBConstant.ENTITY_CATEGORY_WISDOM_IDS);
+				WDSubCategoryData data = new WDSubCategoryData(0, 0,
+						categoryName, subCategoryName, description, wisdomIds);
+				return data;
+			}
+		} catch (EntityNotFoundException e) {
+			DbgUtil.showLog(TAG, "EntityNotFoundException: " + e.getMessage());
+		}
+
+		return null;
+
+	}
+
+	@Override
+	public List<WDWisdomData> getWisdomsByIds(String category,
+			String subCategory, List<Long> wisdomIds)
+			throws WisdomDatastoreException {
+		DbgUtil.showLog(TAG, "getWisdomsByIds");
+
+		if (category == null || subCategory == null) {
+			throw new WisdomDatastoreException(
+					"category or subCategory name is null");
+		}
+
+		if (wisdomIds != null) {
+
+			List<WDWisdomData> result = new ArrayList<WDWisdomData>();
+			DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
+
+			for (long wisdomId : wisdomIds) {
+				Key key = DatastoreKeyGenerator.getWisdomKeyById(category,
+						subCategory, wisdomId);
+				try {
+					Entity entity = mDS.get(key);
+					WDWisdomData data = helper
+							.parseEntityToWDWisdomData(entity);
+					result.add(data);
+				} catch (EntityNotFoundException e) {
+					DbgUtil.showLog(TAG,
+							"EntityNotFoundException: " + e.getMessage());
+					throw new WisdomDatastoreException(e.getMessage());
+				}
+			}
+
+			return result;
 		}
 
 		return null;
