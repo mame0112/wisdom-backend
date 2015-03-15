@@ -43,7 +43,7 @@ wisdomApp.factory('dataRetriveService', ['log',
 		},
 	 	getLogindate : function(data)
 	 	{
-	 		log.d("getLogindate");
+	 		// log.d("getLogindate");
 	 		if(data !== null && data !== undefined)
 	 		{
 		 		log.d("Not null");
@@ -53,7 +53,7 @@ wisdomApp.factory('dataRetriveService', ['log',
 		},
 	 	getUserId : function(data)
 	 	{
-	 		log.d("getLogindate");
+	 		// log.d("getLogindate");
 	 		if(data !== null && data !== undefined)
 	 		{
 		 		log.d("Not null");

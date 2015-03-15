@@ -11,22 +11,22 @@ wisdomApp.controller('headerController',
  	log.d("headerController");
 
  	$scope.onSigninOptionSelect = function (){
- 		log.d("onSigninOptionSelect");
+ 		// log.d("onSigninOptionSelect");
 		modeService.changeCurrentMode(Constants.STATE.STATE_SIGNIN_PAGE);
  	};
 
  	$scope.onSignupOptionSelect = function (){
- 		log.d("onSignupOptionSelect");
+ 		// log.d("onSignupOptionSelect");
 		modeService.changeCurrentMode(Constants.STATE.STATE_SIGNUP_PAGE);
  	};
 
  	$scope.onUserInfoSelect = function (){
- 		log.d("onUserInfoSelect");
+ 		// log.d("onUserInfoSelect");
 		// modeService.changeCurrentMode(Constants.STATE.STATE_SIGNUP_PAGE);
  	};
 
  	$scope.onNotificationSelect = function (){
- 		log.d("onNotificationSelect");
+ 		// log.d("onNotificationSelect");
 		// modeService.changeCurrentMode(Constants.STATE.STATE_SIGNUP_PAGE);
  	};
 
@@ -49,7 +49,7 @@ wisdomApp.controller('headerController',
  	};
 
  	$scope.isUserInfoVisible = function (){
- 		log.d("isUserInfoVisible");
+ 		// log.d("isUserInfoVisible");
  		var data = userDataHolder.getUserData();
  		if(data !== null && data !== undefined){
  			return true;
@@ -67,7 +67,7 @@ wisdomApp.controller('headerController',
  	};
 
   	$scope.isCreatePageVisible = function (){
- 		log.d("isCreatePageVisible");
+ 		// log.d("isCreatePageVisible");
  		var data = userDataHolder.getUserData();
  		if(data !== null && data !== undefined){
  			return true;
@@ -76,7 +76,7 @@ wisdomApp.controller('headerController',
  	};
 
  	$scope.initialize = function() {
- 		log.d("initialize");
+ 		// log.d("initialize");
  		var data =  userDataHolder.getUserData();
  		if(data !== null && data !== undefined){
 	 		$scope.userData = data;
@@ -84,52 +84,52 @@ wisdomApp.controller('headerController',
  	};
 
  	$scope.searchWisdom = function(data) {
- 		log.d("searchWisdom");
+ 		// log.d("searchWisdom");
  		if(data !== null && data !== undefined){
-	 		log.d("input value: " + data);
+	 		// log.d("input value: " + data);
 	 		searchAPIService.search({searchParam : data});
  		}
  	};
 
  	$scope.getTwitterName = function(data)
  	{
- 		log.d("getTwitterName");
+ 		// log.d("getTwitterName");
  		return dataRetriveService.getTwitterName(data);
  	};
 
  	$scope.getPoint = function(data)
  	{
- 		log.d("getPoint");
+ 		// log.d("getPoint");
  		return dataRetriveService.getPoint(data);
  	};
 
  	$scope.getTwitterTokenSecret = function(data)
  	{
- 		log.d("getTwitterTokenSecret");
+ 		// log.d("getTwitterTokenSecret");
  		return dataRetriveService.getTwitterTokenSecret(data);
  	};
 
  	 $scope.getThumbnail = function(data)
  	{
- 		log.d("getThumbnail: " + dataRetriveService.getThumbnail(data));
+ 		// log.d("getThumbnail: " + dataRetriveService.getThumbnail(data));
  		return dataRetriveService.getThumbnail(data);
  	};
 
   	 $scope.getLogindate = function(data)
  	{
- 		log.d("getLogindate");
+ 		// log.d("getLogindate");
  		return dataRetriveService.getLogindate(data);
  	};
 
   	 $scope.getUserId = function(data)
  	{
- 		log.d("getUserId");
+ 		// log.d("getUserId");
  		return dataRetriveService.getUserId(data);
  	};
 
    	 $scope.getTwitterToken = function(data)
  	{
- 		log.d("getTwitterToken");
+ 		// log.d("getTwitterToken");
  		return dataRetriveService.getTwitterToken(data);
  	};
 

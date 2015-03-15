@@ -5,7 +5,7 @@ wisdomApp.controller('infobarController', ['$scope', '$http', 'log', 'modeServic
  	$scope.highlight = null;
 
  	highlightAPIService.highlight(function(data){
- 		log.d("response data: " + data); 		
+ 		// log.d("response data: " + data); 		
 	 	$scope.highlights = data.params;
  	});
 

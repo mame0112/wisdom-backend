@@ -21,7 +21,7 @@ wisdomApp.service('userDataHolder', ['$cookieStore', 'log', function($cookieStor
             // $scope.result = $cookieStore.get("userData");
             // return $scope.result;
             var data  = $cookieStore.get("userData");
-            log.d("data:" + data);
+            // log.d("data:" + data);
 
             return data;
         }

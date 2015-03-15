@@ -7,7 +7,8 @@ wisdomApp.controller('wisdomCreateController',
    '$http',
    'userDataHolder',
    'timeService',
-    function($scope, log, Constants, createWisdomSharedStateService, wisdomAPIService, $http, userDataHolder, timeService){
+   'subCategoryLoaderService',
+    function($scope, log, Constants, createWisdomSharedStateService, wisdomAPIService, $http, userDataHolder, timeService, subCategoryLoaderService){
  	log.d("wisdomCreateController");
 
 	$scope.status = {
@@ -93,19 +94,20 @@ wisdomApp.controller('wisdomCreateController',
 	{
 		log.d("getSubcategoryItems: " + category);
 		if(category !== null) {
-			var jsonFile = category.toLowerCase();
+			$scope.subCategoryTitles = subCategoryLoaderService.load(category);
+			// var jsonFile = category.toLowerCase();
 
-			$http({
-				method: 'GET', 
-				url: '/data/' + jsonFile + '.json'
-			}).
-	  		success(function(data, status, headers, config) {
-	  			log.d("success: " + data);
-	  			$scope.subCategoryTitles = data;
-	  		}).
-			error(function(data, status, headers, config) {
-				console.log('error');
-			});
+			// $http({
+			// 	method: 'GET', 
+			// 	url: '/data/' + jsonFile + '.json'
+			// }).
+	  // 		success(function(data, status, headers, config) {
+	  // 			log.d("success: " + data);
+	  // 			$scope.subCategoryTitles = data;
+	  // 		}).
+			// error(function(data, status, headers, config) {
+			// 	console.log('error');
+			// });
 		}
 	};
 

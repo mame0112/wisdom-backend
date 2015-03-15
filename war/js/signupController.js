@@ -53,7 +53,7 @@ wisdomApp.controller('SignupController',
 
   	 $scope.getLogindate = function(data)
  	{
- 		log.d("getLogindate");
+ 		// log.d("getLogindate");
  		return dataRetriveService.getLogindate(data);
  	};
 
