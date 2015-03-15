@@ -279,8 +279,16 @@ public class DefaultWisdomDAO implements WisdomDAO {
 						.getProperty(DBConstant.ENTITY_CATEGORY_DESCRIPTION);
 				List<Long> wisdomIds = (List<Long>) entity
 						.getProperty(DBConstant.ENTITY_CATEGORY_WISDOM_IDS);
+
+				long totalNum = 0;
+				if (wisdomIds != null) {
+					totalNum = wisdomIds.size();
+				}
+
+				// TODO Need to consider offset and limit handling
 				WDSubCategoryData data = new WDSubCategoryData(0, 0,
-						categoryName, subCategoryName, description, wisdomIds);
+						categoryName, subCategoryName, description, wisdomIds,
+						totalNum, 0, wisdomIds.size());
 				return data;
 			}
 		} catch (EntityNotFoundException e) {

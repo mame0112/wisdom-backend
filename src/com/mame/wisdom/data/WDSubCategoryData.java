@@ -14,17 +14,26 @@ public class WDSubCategoryData {
 
 	private String mCategoryDescription = null;
 
+	private long mTotalWisdomNum = 0;
+
+	private long mOffset = 0;
+
+	private int mLimit = 10;
+
 	private List<Long> mWisdomIds = new ArrayList<Long>();
 
 	public WDSubCategoryData(long categoryId, long subCategoryId,
 			String categoryName, String subCategoryName, String description,
-			List<Long> wisdomIds) {
+			List<Long> wisdomIds, long totalNum, long offset, int limit) {
 		mCategoryId = categoryId;
 		mSubCategoryId = subCategoryId;
 		mCategoryName = categoryName;
 		mSubCategoryName = subCategoryName;
 		mCategoryDescription = description;
 		mWisdomIds = wisdomIds;
+		mTotalWisdomNum = totalNum;
+		mOffset = offset;
+		mLimit = limit;
 	}
 
 	public long getCategoryId() {
@@ -49,6 +58,18 @@ public class WDSubCategoryData {
 
 	public List<Long> getWisdomIds() {
 		return mWisdomIds;
+	}
+
+	public long getTotalWisdomNum() {
+		return mTotalWisdomNum;
+	}
+
+	public long getOffset() {
+		return mOffset;
+	}
+
+	public int getmLimit() {
+		return mLimit;
 	}
 
 }

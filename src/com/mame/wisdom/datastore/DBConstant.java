@@ -47,7 +47,7 @@ public class DBConstant {
 	 * Entity fields for Category data
 	 */
 	public final static String ENTITY_CATEGORY_DESCRIPTION = "description";
-	
+
 	public final static String ENTITY_CATEGORY_WISDOM_IDS = "wisdomIds";
 
 	/**
