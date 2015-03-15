@@ -25,7 +25,7 @@ var wisdomApp = angular.module('WidsomApp', ['ngRoute','ngResource', 'ngCookies'
 			templateUrl: 'view/userpage.html',
 			controller: 'UserDataController'
 		}).
-		when('/category/:categoryId',{
+		when('/category/:categoryId/:subCategoryId',{
 			templateUrl: 'view/category.html',
 			controller: 'categoryController'
 		}).

@@ -1,10 +1,10 @@
 <div id="sidebar" ng-controller="SidebarController" ng-init="initialize()">
   <accordion close-others="true">
     <accordion-group heading="{{data.name}}"  ng-repeat="data in Category" ng-click="selectCategory(data)">
-      <a ng-href="#/category/{{data.id}}"><font color={{data.color}}>
       <p ng-repeat="subc in subCategory">
+      <a ng-href="#/category/{{data.id}}/{{subc.id}}"><font color={{data.color}}>
       {{subc.name}}
-      </p>
       </font></a>
+      </p>
     </accordion-group>
 </div>
