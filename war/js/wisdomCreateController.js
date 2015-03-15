@@ -55,8 +55,15 @@ wisdomApp.controller('wisdomCreateController',
 		log.d("addNewWisdom");
 
 		userData =  userDataHolder.getUserData();
-		log.d("userId: " + userData.params.userId);
-		result.create_user_id = userData.params.userId;
+		log.d("userData: " + userData);
+		if(userData !== null && userData !== undefined){
+			log.d("userId: " + userData.params.userId);
+			result.create_user_id = userData.params.userId;
+		} else {
+			//FIXME This is temporary solution for development.
+			result.create_user_id = 2;
+		}
+
 		result.updated_date = timeService.getCurrentTime();
 
 		result.messages = createWisdomSharedStateService.getSharedMessages();

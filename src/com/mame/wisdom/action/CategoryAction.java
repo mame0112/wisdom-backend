@@ -27,8 +27,6 @@ public class CategoryAction implements Action {
 
 		CategoryJsonBuilder builder = new CategoryJsonBuilder();
 
-		DbgUtil.showLog(TAG, "responseId: " + responseId);
-		DbgUtil.showLog(TAG, "params: " + params);
 		if (responseId != null && params != null) {
 			builder.addResponseId(Integer.valueOf(responseId));
 			WisdomFacade facade = new WisdomFacade();

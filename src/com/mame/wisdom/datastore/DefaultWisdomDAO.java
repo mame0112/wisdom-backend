@@ -1,6 +1,7 @@
 package com.mame.wisdom.datastore;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 
 import com.google.appengine.api.datastore.DatastoreService;
@@ -14,6 +15,8 @@ import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.Filter;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.FilterPredicate;
+import com.google.appengine.api.datastore.Transaction;
+import com.google.appengine.api.datastore.TransactionOptions;
 import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.data.WDSubCategoryData;
 import com.mame.wisdom.data.WDWisdomData;
@@ -131,44 +134,229 @@ public class DefaultWisdomDAO implements WisdomDAO {
 
 		Key key = DatastoreKeyGenerator
 				.getSubCategoryKey(category, subCategory);
-		DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
 
-		// Get entity for target category / sub cateogry
+		TransactionOptions options = TransactionOptions.Builder.withXG(true);
+		Transaction tx = mDS.beginTransaction(options);
+
+		// Check subcategory kind
 		try {
-			Entity entity = mDS.get(key);
-			// If target entity is not null, which mean there are more than
-			// 1
-			// wisdoms for target category.
+
+			long newId = getTotalWisdomNum() + 1;
+
+			Entity entity = getSubCategoryEntity(key);
+
+			// If target sub category entity already exist
 			if (entity != null) {
 				DbgUtil.showLog(TAG, "Entity already exist");
-				int num = (int) entity
-						.getProperty(DBConstant.ENTITY_WISDOM_NUM);
-				wisdomId = num + 1;
-				wisdom.setWisdomId(wisdomId);
-				entity = helper.parseWisdomDataToEntity(wisdom, entity);
+
+				// Update subcategory entity
+				entity = updateSubcategoryEntity(entity, newId);
+
+				// Put sub category entity
 				mDS.put(entity);
+
+				Key wisdomKey = DatastoreKeyGenerator.getWisdomKeyById(
+						category, subCategory, newId);
+
+				// Create or update wisdom entity
+				// TODO We have to consider if we try to input same tag name
+				// with previous time
+				createOrUpdateWisdomEntity(wisdom, wisdomKey, newId);
+
+				// Finish transaction with success
+				tx.commit();
+
 			} else {
-				DbgUtil.showLog(TAG, "Entity doesn't exist 1");
-				// If target entity is null. which means there is no wisdom
-				// for
-				// target category / sub category yet.
-				wisdom.setWisdomId(1);
-				Entity newWisdomEntity = new Entity(DBConstant.KIND_WISDOM, 1,
-						key);
-				newWisdomEntity = helper.parseWisdomDataToEntity(wisdom,
-						newWisdomEntity);
-				mDS.put(newWisdomEntity);
+				// If target sub category doesn't exist
+				DbgUtil.showLog(TAG, "Entity doesn't exist");
+
+				// Create and put new subcategory entity
+				Entity subCategoryEntity = createSubcategoryEntity(newId);
+				mDS.put(subCategoryEntity);
+
+				Key wisdomKey = DatastoreKeyGenerator.getWisdomKeyById(
+						category, subCategory, newId);
+
+				// Create or update wisdom entity
+				createOrUpdateWisdomEntity(wisdom, wisdomKey, newId);
+
+				// Finish transaction with success
+				tx.commit();
+
 			}
-		} catch (EntityNotFoundException e) {
-			// IF target entity doesn't exist, which means there is no
-			// wisdom
-			// for target category / sub category yet.
-			DbgUtil.showLog(TAG, "Entity doesn't exist 2");
-			wisdom.setWisdomId(1);
-			Entity newWisdomEntity = new Entity(DBConstant.KIND_WISDOM, 1, key);
+		} catch (ConcurrentModificationException e) {
+			DbgUtil.showLog(TAG, "ConcurrentModificationException");
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			throw new WisdomDatastoreException(e.getMessage());
+		}
+
+		// // Get entity for target category / sub cateogry
+		// Transaction tx = mDS.beginTransaction();
+		// try {
+		//
+		// Entity entity = mDS.get(key);
+		// // If target entity is not null, which mean there are more than
+		// // 1
+		// // wisdoms for target category.
+		// if (entity != null) {
+		// DbgUtil.showLog(TAG, "Entity already exist");
+		//
+		// // Count the number of entity
+		// Query query = new Query(DBConstant.KIND_WISDOM);
+		// long wisdomNum = mDS.prepare(query).countEntities(
+		// FetchOptions.Builder.withDefaults());
+		// DbgUtil.showLog(TAG, "wisdomNum: " + wisdomNum);
+		// long newId = wisdomNum + 1;
+		//
+		// // Update wisdom Id in Category kind
+		// List<Long> wisdomIds = (List<Long>) entity
+		// .getProperty(DBConstant.ENTITY_CATEGORY_WISDOM_IDS);
+		// if (wisdomIds != null) {
+		// wisdomIds.add(newId);
+		// entity.setProperty(DBConstant.ENTITY_CATEGORY_WISDOM_IDS,
+		// wisdomIds);
+		// } else {
+		// List<Long> ids = new ArrayList<Long>();
+		// ids.add(newId);
+		// entity.setProperty(DBConstant.ENTITY_CATEGORY_WISDOM_IDS,
+		// ids);
+		// }
+		//
+		// // Add new wisdom data to Wisdom Kind
+		// Key wisdomKey = DatastoreKeyGenerator.getWisdomKeyById(
+		// category, subCategory, newId);
+		// Entity wisdomEntity = new Entity(wisdomKey);
+		// wisdomEntity = helper.parseWisdomDataToEntity(wisdom,
+		// wisdomEntity);
+		// mDS.put(wisdomEntity);
+		//
+		// tx.commit();
+		// } else {
+		// // We shouldn't come into here.
+		// DbgUtil.showLog(TAG, "Entity doesn't exist 1");
+		// }
+		// } catch (EntityNotFoundException e) {
+		// // IF target entity doesn't exist, which means there is no
+		// // wisdom
+		// // for target category / sub category yet.
+		// DbgUtil.showLog(TAG, "Entity doesn't exist 2");
+		//
+		// Query query = new Query(DBConstant.KIND_WISDOM);
+		// long wisdomNum = mDS.prepare(query).countEntities(
+		// FetchOptions.Builder.withDefaults());
+		// long newNum = wisdomNum + 1;
+		//
+		// Entity newSubCategoryEntity = new Entity(
+		// DBConstant.KIND_SUB_CATEGORY, 1, key);
+		// List<Long> ids = new ArrayList<Long>();
+		// ids.add(newNum);
+		//
+		// newSubCategoryEntity.setProperty(
+		// DBConstant.ENTITY_CATEGORY_WISDOM_IDS, ids);
+		// mDS.put(newSubCategoryEntity);
+		//
+		// wisdom.setWisdomId(newNum);
+		//
+		// Key wisdomKey = DatastoreKeyGenerator.getWisdomKeyById(category,
+		// subCategory, newNum);
+		// Entity newWisdomEntity = new Entity(DBConstant.KIND_WISDOM, newNum,
+		// wisdomKey);
+		// newWisdomEntity = helper.parseWisdomDataToEntity(wisdom,
+		// newWisdomEntity);
+		// mDS.put(newWisdomEntity);
+		//
+		// tx.commit();
+		//
+		// } catch (ConcurrentModificationException e) {
+		// DbgUtil.showLog(TAG, "ConcurrentModificationException");
+		// if (tx.isActive()) {
+		// tx.rollback();
+		// }
+		// throw new WisdomDatastoreException(e.getMessage());
+		// }
+	}
+
+	private Entity createSubcategoryEntity(long newId) {
+		DbgUtil.showLog(TAG, "createSubcategoryEntity");
+
+		Entity newSubCategoryEntity = new Entity(DBConstant.KIND_SUB_CATEGORY,
+				1);
+		List<Long> ids = new ArrayList<Long>();
+		ids.add(newId);
+
+		newSubCategoryEntity.setProperty(DBConstant.ENTITY_CATEGORY_WISDOM_IDS,
+				ids);
+		return newSubCategoryEntity;
+	}
+
+	private Entity updateSubcategoryEntity(Entity entity, long newId) {
+		DbgUtil.showLog(TAG, "updateSubcategoryEntity");
+
+		List<Long> wisdomIds = (List<Long>) entity
+				.getProperty(DBConstant.ENTITY_CATEGORY_WISDOM_IDS);
+		if (wisdomIds != null) {
+			wisdomIds.add(newId);
+			entity.setProperty(DBConstant.ENTITY_CATEGORY_WISDOM_IDS, wisdomIds);
+		} else {
+			List<Long> ids = new ArrayList<Long>();
+			ids.add(newId);
+			entity.setProperty(DBConstant.ENTITY_CATEGORY_WISDOM_IDS, ids);
+		}
+
+		return entity;
+	}
+
+	private void createOrUpdateWisdomEntity(WDWisdomData wisdom, Key wisdomKey,
+			long newId) {
+		DbgUtil.showLog(TAG, "createOrUpdateWisdomEntity");
+
+		Entity wisdomEntity = getWisdomEntity(wisdomKey);
+		wisdom.setWisdomId(newId);
+
+		DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
+
+		// If target wisdomEntity already exist
+		if (wisdomEntity != null) {
+			DbgUtil.showLog(TAG, "Wisdom already exist");
+			wisdomEntity = helper.parseWisdomDataToEntity(wisdom, wisdomEntity);
+			mDS.put(wisdomEntity);
+			// wisdomEntity = updateWisdomEntity(wisdomEntity, newId);
+		} else {
+			DbgUtil.showLog(TAG, "Wisdom doesn't exist");
+			Entity newWisdomEntity = new Entity(wisdomKey);
 			newWisdomEntity = helper.parseWisdomDataToEntity(wisdom,
 					newWisdomEntity);
 			mDS.put(newWisdomEntity);
+		}
+	}
+
+	private long getTotalWisdomNum() {
+		Query query = new Query(DBConstant.KIND_WISDOM);
+		long wisdomNum = mDS.prepare(query).countEntities(
+				FetchOptions.Builder.withDefaults());
+		return wisdomNum;
+	}
+
+	private Entity getSubCategoryEntity(Key subCategoryKey) {
+		DbgUtil.showLog(TAG, "getSubCategoryEntity");
+		try {
+			DbgUtil.showLog(TAG, "getSubCategoryEntity: " + subCategoryKey);
+			return mDS.get(subCategoryKey);
+		} catch (EntityNotFoundException e) {
+			DbgUtil.showLog(TAG, "EntityNotFoundException: " + e.getMessage());
+			return null;
+		}
+	}
+
+	private Entity getWisdomEntity(Key wisdomKey) {
+		DbgUtil.showLog(TAG, "getWisdomEntity");
+		try {
+			return mDS.get(wisdomKey);
+		} catch (EntityNotFoundException e) {
+			DbgUtil.showLog(TAG, "EntityNotFoundException: " + e.getMessage());
+			return null;
 		}
 	}
 

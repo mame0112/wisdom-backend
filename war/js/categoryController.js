@@ -28,7 +28,7 @@ wisdomApp.controller('categoryController',
 
  	var param = {
  		"categoryName": $scope.categoryId,
- 		"subCategory": $scope.subCategoryId,
+ 		"subCategoryName": $scope.subCategoryId,
  	};
 
  	// Load categories

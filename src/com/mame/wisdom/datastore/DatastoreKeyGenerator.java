@@ -34,11 +34,11 @@ public class DatastoreKeyGenerator {
 					"category or subCategory identifier is null");
 		}
 
-		String identifier = category + "/" + subCategory;
+		String identifier = category + "-" + subCategory;
 
-		Key ancKey = KeyFactory.createKey(DBConstant.KIND_SUB_CATEGORY,
-				identifier);
-		return ancKey;
+		Key key = KeyFactory
+				.createKey(DBConstant.KIND_SUB_CATEGORY, identifier);
+		return key;
 	}
 
 	public static Key getWisdomKeyById(String category, String subCategory,
@@ -50,10 +50,10 @@ public class DatastoreKeyGenerator {
 		return key;
 	}
 
-//	public static Key getWAllCategoryKey() {
-//		DbgUtil.showLog(TAG, "getSubcategoryKeyForAll");
-//		Key key = KeyFactory.createkey
-//		Key ancKey = getSubCategoryKey(category, subCategory);		
-//		Key key = KeyFactory.createKey(ancKey, DBConstant.KIND_WISDOM);
-	//	}
+	// public static Key getWAllCategoryKey() {
+	// DbgUtil.showLog(TAG, "getSubcategoryKeyForAll");
+	// Key key = KeyFactory.createkey
+	// Key ancKey = getSubCategoryKey(category, subCategory);
+	// Key key = KeyFactory.createKey(ancKey, DBConstant.KIND_WISDOM);
+	// }
 }
