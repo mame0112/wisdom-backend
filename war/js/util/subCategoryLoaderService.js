@@ -8,8 +8,8 @@
 //     }
 // ]);
 
-wisdomApp.factory('subCategoryLoaderService', ['$resource', 'log', '$http',
- function($resource, log, $http) {
+wisdomApp.factory('subCategoryLoaderService', ['log', '$http',
+ function(log, $http) {
     var loader = {
     	load : function(category)
     	{

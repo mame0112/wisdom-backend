@@ -94,7 +94,11 @@ wisdomApp.controller('wisdomCreateController',
 	{
 		log.d("getSubcategoryItems: " + category);
 		if(category !== null) {
-			$scope.subCategoryTitles = subCategoryLoaderService.load(category);
+	 		subCategoryLoaderService.load(category).then(function(d){
+	 			log.d("d: " + d.data);
+	 			$scope.subCategory = d.data;
+	 		});
+
 			// var jsonFile = category.toLowerCase();
 
 			// $http({
