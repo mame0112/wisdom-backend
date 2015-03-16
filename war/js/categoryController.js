@@ -5,10 +5,9 @@ wisdomApp.controller('categoryController',
 	'modeService', 
 	'Constants', 
 	'$routeParams', 
-	'paginationFactory',
 	'categoryAPIService',
 	'timeFormatService',
- function($scope, $http, log, modeService, Constants, $routeParams, paginationFactory, categoryAPIService, timeFormatService){
+ function($scope, $http, log, modeService, Constants, $routeParams, categoryAPIService, timeFormatService){
  	log.d("categoryController");
 
  	var ACTIVE = "active";
@@ -17,9 +16,9 @@ wisdomApp.controller('categoryController',
 
  	var currentPage = 0;
 
- 	$scope.pagination = paginationFactory.getNew();
- 	$scope.pagination = paginationFactory.getNew(10);
- 	$scope.pagination.numPages = 3;
+ 	// $scope.pagination = paginationFactory.getNew();
+ 	// $scope.pagination = paginationFactory.getNew(10);
+ 	// $scope.pagination.numPages = 3;
 
  	$scope.categoryId = $routeParams.categoryId;
  	log.d("categoryid: " + $scope.categoryId);
@@ -31,6 +30,11 @@ wisdomApp.controller('categoryController',
  		"categoryName": $scope.categoryId,
  		"subCategoryName": $scope.subCategoryId,
  	};
+
+ 	//Variables for pagination
+ 	$scope.totalItems = 0;
+	$scope.currentPage = 1;
+
 
  	//Put timeFormatService to $scope so that we can use this service from HTML side.
  	$scope.timeFormatService = timeFormatService;
@@ -48,25 +52,27 @@ wisdomApp.controller('categoryController',
  		$scope.categoryName = params.categoryName;
  		$scope.subCategoryName = params.subCategoryName;
 
+	 	$scope.totalItems = params.wisdomNum;
+
  	});
 
- 	//  $http.get('data/categoryData.json').success(function(data){
- 	//  	log.d("data received");
- 	//  	$scope.result = data;
- 	//  	$scope.categoryName = $scope.result.categoryName;
- 	//  	$scope.params = $scope.result.params;
- 	// 	$scope.totalNum = $scope.params.length;
+	// modeService.changeCurrentMode();
 
-		// // shouldPrevBeShown();
-
-		// modeService.changeCurrentMode();
-		// // log.d("lists: " + $scope.lists);
- 	// });
 
  	 $scope.isActive = function(){
  	 	log.d("isActive");
  	 	return ACTIVE;
  	 };
+
+
+	$scope.setPage = function (pageNo) {
+	$scope.currentPage = pageNo;
+	};
+
+	$scope.pageChanged = function() {
+	log.d('Page changed to: ' + $scope.currentPage);
+	};
+
 
  	 // var shouldPrevBeShown = function(){
  	 // 	log.d("shouldPrevBeShown: " + $scope.totalNum);

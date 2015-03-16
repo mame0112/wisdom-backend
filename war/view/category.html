@@ -6,28 +6,14 @@
 		        <img src="image/64-64.png" alt="" class="media-object" />
 		    </a>
 		    <div class="media-body">
-		        <h4 class="media-heading">{{data.title}}</h4>
-		        {{data.tag}}
+		        <h4 class="media-heading">{{data.tag}}</h4>
 		        {{data.description}}
 		        {{timeFormatService.getFormattedTime(data.updated_date)}}
 		    </div>
 		</li>
 	</ul>
 
-	<nav>
-	  <ul class="pagination">
-	    <li class="active"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-	    <li class="{{isActive()}}"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-	    <li class="active"><a href="#">2 <span class="sr-only">(current)</span></a></li>
-	    <li class="disabled"><a href="#">3 <span class="sr-only">(current)</span></a></li>
-		<li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&raquo;</span></a></li>
-	  </ul>
-	</nav>
+	<!--Oagination part -->
+	<pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></pagination>
 
-	<ul class="pagination">
-    <li><a aria-label="Previous" ng-click="pagination.prevPage()">&laquo;</a></li>
-	<li ng-repeat="data in params | startFrom: pagination.page * pagination.perPage | limitTo: pagination.perPage">
-	<a ng-click="pagination.toPageId(data.id)">{{data.id}}</a></li>
-	<li><a aria-label="Previous" ng-click="pagination.nextPage()">&raquo;</a></li>
-	</ul>
 </div>
