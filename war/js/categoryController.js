@@ -7,7 +7,8 @@ wisdomApp.controller('categoryController',
 	'$routeParams', 
 	'paginationFactory',
 	'categoryAPIService',
- function($scope, $http, log, modeService, Constants, $routeParams, paginationFactory, categoryAPIService){
+	'timeFormatService',
+ function($scope, $http, log, modeService, Constants, $routeParams, paginationFactory, categoryAPIService, timeFormatService){
  	log.d("categoryController");
 
  	var ACTIVE = "active";
@@ -31,6 +32,9 @@ wisdomApp.controller('categoryController',
  		"subCategoryName": $scope.subCategoryId,
  	};
 
+ 	//Put timeFormatService to $scope so that we can use this service from HTML side.
+ 	$scope.timeFormatService = timeFormatService;
+
  	// Load categories
  	categoryAPIService.category({servlet_category_param : param}, function(response){
  		// log.d("response.params: " + response.params);
@@ -43,6 +47,7 @@ wisdomApp.controller('categoryController',
  		$scope.wisdoms = params.wisdoms;
  		$scope.categoryName = params.categoryName;
  		$scope.subCategoryName = params.subCategoryName;
+
  	});
 
  	//  $http.get('data/categoryData.json').success(function(data){
