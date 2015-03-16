@@ -30,6 +30,7 @@ public class DatastoreKeyGenerator {
 		DbgUtil.showLog(TAG, "getSubCategoryKey");
 
 		if (category == null || subCategory == null) {
+			DbgUtil.showLog(TAG, "category or subCategory identifier is null");
 			throw new WisdomDatastoreException(
 					"category or subCategory identifier is null");
 		}
@@ -39,6 +40,21 @@ public class DatastoreKeyGenerator {
 		Key key = KeyFactory
 				.createKey(DBConstant.KIND_SUB_CATEGORY, identifier);
 		return key;
+	}
+
+	public static String getSubCategoryKeyName(String category,
+			String subCategory) throws WisdomDatastoreException {
+		DbgUtil.showLog(TAG, "getSubCategoryKeyName");
+
+		if (category == null || subCategory == null) {
+			DbgUtil.showLog(TAG, "category or subCategory identifier is null");
+			throw new WisdomDatastoreException(
+					"category or subCategory identifier is null");
+		}
+
+		String identifier = category + "-" + subCategory;
+
+		return identifier;
 	}
 
 	public static Key getWisdomKeyById(String category, String subCategory,

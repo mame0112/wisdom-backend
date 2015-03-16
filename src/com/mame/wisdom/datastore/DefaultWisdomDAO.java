@@ -132,16 +132,16 @@ public class DefaultWisdomDAO implements WisdomDAO {
 			throw new WisdomDatastoreException("Illegal wisdom Id");
 		}
 
-		Key key = DatastoreKeyGenerator
-				.getSubCategoryKey(category, subCategory);
-
 		TransactionOptions options = TransactionOptions.Builder.withXG(true);
 		Transaction tx = mDS.beginTransaction(options);
+
+		Key key = DatastoreKeyGenerator
+				.getSubCategoryKey(category, subCategory);
 
 		// Check subcategory kind
 		try {
 
-			long newId = getTotalWisdomNum() + 1;
+			long newId = getTotalWisdomNum(key) + 1;
 
 			Entity entity = getSubCategoryEntity(key);
 
@@ -170,8 +170,12 @@ public class DefaultWisdomDAO implements WisdomDAO {
 				// If target sub category doesn't exist
 				DbgUtil.showLog(TAG, "Entity doesn't exist");
 
+				String keyName = DatastoreKeyGenerator.getSubCategoryKeyName(
+						category, subCategory);
+
 				// Create and put new subcategory entity
-				Entity subCategoryEntity = createSubcategoryEntity(newId);
+				Entity subCategoryEntity = createSubcategoryEntity(newId,
+						keyName);
 				mDS.put(subCategoryEntity);
 
 				Key wisdomKey = DatastoreKeyGenerator.getWisdomKeyById(
@@ -278,11 +282,11 @@ public class DefaultWisdomDAO implements WisdomDAO {
 		// }
 	}
 
-	private Entity createSubcategoryEntity(long newId) {
+	private Entity createSubcategoryEntity(long newId, String keyName) {
 		DbgUtil.showLog(TAG, "createSubcategoryEntity");
 
 		Entity newSubCategoryEntity = new Entity(DBConstant.KIND_SUB_CATEGORY,
-				1);
+				keyName);
 		List<Long> ids = new ArrayList<Long>();
 		ids.add(newId);
 
@@ -332,10 +336,12 @@ public class DefaultWisdomDAO implements WisdomDAO {
 		}
 	}
 
-	private long getTotalWisdomNum() {
-		Query query = new Query(DBConstant.KIND_WISDOM);
+	private long getTotalWisdomNum(Key ancestrKey) {
+		DbgUtil.showLog(TAG, "getTotalWisdomNum");
+		Query query = new Query(DBConstant.KIND_WISDOM, ancestrKey);
 		long wisdomNum = mDS.prepare(query).countEntities(
 				FetchOptions.Builder.withDefaults());
+		DbgUtil.showLog(TAG, "wisdomNum: " + wisdomNum);
 		return wisdomNum;
 	}
 
