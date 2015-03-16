@@ -86,6 +86,16 @@ public interface WisdomDAO {
 			long wisdomId) throws WisdomDatastoreException;
 
 	/**
+	 * Find wisdom by given ID (without category and sub category informaton)
+	 * 
+	 * @param wisdomId
+	 * @return
+	 * @throws WisdomDatastoreException
+	 */
+	public WDWisdomData findWisdomById(long wisdomId)
+			throws WisdomDatastoreException;
+
+	/**
 	 * This would be used if the user wants to create new wisdom
 	 * 
 	 * @param category

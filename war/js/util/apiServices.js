@@ -53,8 +53,8 @@ wisdomApp.factory('apiService', ['$resource', 'log',
     return $resource('/controller/wisdom:param',
          {servlet_resp_id: 1, param: '@servlet_new_wisdom_param'},
          { 
-            // //Get one wisdom (by key, under certain category/subcategory)
-            // wisdom: {method: 'GET', isArray: false},
+            //Get one wisdom (by key, under certain category/subcategory)
+            wisdom: {method: 'GET', isArray: false},
 
             // //Create new wisdom
             // newwisdom: {method: 'GET', isArray: false},

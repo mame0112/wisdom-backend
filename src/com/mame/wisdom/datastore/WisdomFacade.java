@@ -106,6 +106,26 @@ public class WisdomFacade {
 		}
 	}
 
+	public WDWisdomData findWisdomById(long wisdomId)
+			throws WisdomFacadeException {
+		DbgUtil.showLog(TAG, "findWisdomById");
+
+		if (wisdomId < 0) {
+			throw new WisdomFacadeException("illegal wisdom id");
+		}
+
+		DAOFactory factory = DAOFactory.getDAOFactory();
+		try {
+			WisdomDAO dao = factory.getWisdomDAO();
+			return dao.findWisdomById(wisdomId);
+
+		} catch (WisdomDatastoreException e) {
+			DbgUtil.showLog(TAG, "WisdomDatastoreException: " + e.getMessage());
+		}
+
+		return null;
+	}
+
 	public List<WDWisdomData> searchWisdom(String searchKey)
 			throws WisdomFacadeException {
 		DbgUtil.showLog(TAG, "searchWisdom");

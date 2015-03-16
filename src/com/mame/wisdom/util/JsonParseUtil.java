@@ -69,12 +69,33 @@ public class JsonParseUtil {
 					String message = obj
 							.getString(JsonConstant.PARAM_WISDOM_ITEM_MESSAGE);
 					long id = obj.getLong(JsonConstant.PARAM_WISDOM_ITEM_ID);
-					long updateUserId = obj
-							.getLong(JsonConstant.PARAM_WISDOM_ITEM_UPDATE_USER_ID);
-					String updateUserName = obj
-							.getString(JsonConstant.PARAM_WISDOM_ITEM_UPDAtE_USER_NAME);
-					int likeNum = obj
-							.getInt(JsonConstant.PARAM_WISDOM_ITEM_LIKE);
+					
+					long updateUserId = WConstant.NO_USER;
+
+					try {
+						updateUserId = obj
+								.getLong(JsonConstant.PARAM_WISDOM_ITEM_UPDATE_USER_ID);
+					} catch (JSONException e) {
+						// Ignore since this is optional parameter.
+					}
+
+					String updateUserName = null;
+
+					try {
+						updateUserName = obj
+								.getString(JsonConstant.PARAM_WISDOM_ITEM_UPDAtE_USER_NAME);
+					} catch (JSONException e) {
+						// Ignore since this is optional parameter.
+					}
+
+					int likeNum = 0;
+					try {
+						likeNum = obj
+								.getInt(JsonConstant.PARAM_WISDOM_ITEM_LIKE);
+					} catch (JSONException e) {
+						// Ignore since this is optional parameter.
+					}
+
 					int tag = obj.getInt(JsonConstant.PARAM_WISDOM_TAG);
 
 					WDWisdomItemEntry entry = null;

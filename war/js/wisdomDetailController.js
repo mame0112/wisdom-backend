@@ -6,17 +6,18 @@ wisdomApp.controller('wisdomDetailController',
 function($scope, log, wisdomAPIService, $routeParams){
  	log.d("wisdomDetailController");
 
- 	$scope.wisdomId = $routeParams.wisdomId;
- 	log.d("wisdomId: " + $scope.wisdomId);
+ 	var wisdomId = $routeParams.wisdomId;
+ 	log.d("wisdomId: " + wisdomId);
 
  	// $scope.wisdoms = null;
 
 	//Get target wisdom
- 	wisdomAPIService.wisdom({servlet_resp_id: 1, param: '@servlet_new_wisdom_param'}, function(response){
+ 	wisdomAPIService.wisdom({servlet_wisdom_id : wisdomId}, function(response){
  		log.d("response received");
 
  		//Set data under "params"
- 		$scope.wisdoms = response.params;
+ 		$scope.wisdom = response.params;
+ 		log.d("response:" + $scope.wisdom.tag);
 	});
 
  	// latestAPIService.latest(function(response){

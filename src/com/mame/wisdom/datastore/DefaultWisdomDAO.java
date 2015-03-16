@@ -12,6 +12,7 @@ import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.PreparedQuery.TooManyResultsException;
 import com.google.appengine.api.datastore.Query.Filter;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.FilterPredicate;
@@ -525,6 +526,30 @@ public class DefaultWisdomDAO implements WisdomDAO {
 			}
 
 			return result;
+		}
+
+		return null;
+	}
+
+	@Override
+	public WDWisdomData findWisdomById(long wisdomId)
+			throws WisdomDatastoreException {
+		DbgUtil.showLog(TAG, "findWisdomById");
+
+		Filter searchFilter = new FilterPredicate(DBConstant.ENTITY_WISDOM_ID,
+				FilterOperator.EQUAL, wisdomId);
+		Query q = new Query(DBConstant.KIND_WISDOM).setFilter(searchFilter);
+		PreparedQuery pq = mDS.prepare(q);
+		try {
+			Entity entity = pq.asSingleEntity();
+			DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
+
+			return helper.parseEntityToWDWisdomData(entity);
+
+		} catch (TooManyResultsException e) {
+			DbgUtil.showLog(TAG, "TooManyResultsException: " + e.getMessage());
+		} catch (IllegalStateException e) {
+			DbgUtil.showLog(TAG, "IllegalStateException: " + e.getMessage());
 		}
 
 		return null;
