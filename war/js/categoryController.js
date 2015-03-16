@@ -33,7 +33,8 @@ wisdomApp.controller('categoryController',
 
  	// Load categories
  	categoryAPIService.category({servlet_category_param : param}, function(response){
- 		log.d("response: " + response);
+ 		log.d("response.params: " + response.params);
+ 		log.d("response.params.limit: " + response.params.limit);
  		$scope.categories = response.params;
  	});
 

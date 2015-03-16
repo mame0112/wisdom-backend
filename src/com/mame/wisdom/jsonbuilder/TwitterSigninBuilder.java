@@ -45,20 +45,20 @@ public class TwitterSigninBuilder extends JsonBuilder {
 	}
 
 	@Override
-	public void addResponseParam(Object param) throws JSONBuilderException {
+	public void addResponseParam(Object... param) throws JSONBuilderException {
 		DbgUtil.showLog(TAG, "addResponseParam");
 
 		if (param == null) {
 			throw new JSONBuilderException("param is null");
 		}
 
-		if (!(param instanceof WDUserData)) {
+		if (!(param[0] instanceof WDUserData)) {
 			throw new JSONBuilderException("param type is not WDUserData");
 		}
 
 		try {
 			mRootObject.put(JsonConstant.PARAMS, JsonParseUtil
-					.createJsonObjectFromUserData((WDUserData) param));
+					.createJsonObjectFromUserData((WDUserData) param[0]));
 		} catch (JSONException e) {
 			DbgUtil.showLog(TAG, "JSONException: " + e.getMessage());
 		}

@@ -50,6 +50,14 @@ public class JsonConstant {
 	public final static String PARAM_CATEGORY_DESCRIPTION = "description";
 
 	public final static String PARAM_CATEGORY_WISDOM_ID = "wisdomId";
+	
+	public final static String PARAM_CATEGORY_OFFSET = "offset";
+	
+	public final static String PARAM_CATEGORY_LIMIT = "limit";
+	
+	public final static String PARAM_CATEGORY_WISDOM_NUM = "wisdomNum";
+	
+	public final static String PARAM_CATEGORY_WISDOMS = "wisdoms";
 
 	/**
 	 * Json fields for wisdom data

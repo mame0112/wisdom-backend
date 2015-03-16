@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.data.WDSubCategoryData;
+import com.mame.wisdom.data.WDWisdomData;
 import com.mame.wisdom.datastore.WisdomFacade;
+import com.mame.wisdom.exception.JSONBuilderException;
 import com.mame.wisdom.jsonbuilder.CategoryJsonBuilder;
 import com.mame.wisdom.jsonbuilder.JsonConstant;
 import com.mame.wisdom.util.DbgUtil;
@@ -36,10 +38,28 @@ public class CategoryAction implements Action {
 					.get(JsonConstant.PARAM_CATEGORY_CATEGORY_NAME);
 			String subCategory = (String) argObject
 					.get(JsonConstant.PARAM_CATEGORY_SUB_CATEGORY_NAME);
+
 			if (category != null && subCategory != null) {
-				List<WDSubCategoryData> categories = facade.getCategoryContent(
+
+				// Get target category data
+				WDSubCategoryData categoryData = facade.getCategoryContent(
 						category, subCategory);
-				builder.addResponseParam(categories);
+
+				if (categoryData != null) {
+					List<Long> ids = categoryData.getWisdomIds();
+
+					// Then, get wisdoms belong to this category
+					List<WDWisdomData> wisdoms = facade.getWisdomByIds(
+							category, subCategory, ids);
+					try {
+						builder.addResponseParam(categoryData, wisdoms);
+					} catch (JSONBuilderException e) {
+						DbgUtil.showLog(TAG,
+								"JSONBuilderException: " + e.getMessage());
+					}
+
+				}
+
 			} else {
 				builder.addErrorMessage("category name or sub category name is null");
 			}

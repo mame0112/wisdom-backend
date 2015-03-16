@@ -68,7 +68,7 @@ public class WDSubCategoryData {
 		return mOffset;
 	}
 
-	public int getmLimit() {
+	public int getLimit() {
 		return mLimit;
 	}
 

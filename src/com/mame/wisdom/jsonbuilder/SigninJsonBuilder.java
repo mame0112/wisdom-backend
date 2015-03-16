@@ -32,7 +32,7 @@ public class SigninJsonBuilder extends JsonBuilder {
 	}
 
 	@Override
-	public void addResponseParam(Object param) throws JSONBuilderException {
+	public void addResponseParam(Object... param) throws JSONBuilderException {
 		DbgUtil.showLog(TAG, "addResponseParam");
 
 		if (param == null) {
@@ -40,11 +40,11 @@ public class SigninJsonBuilder extends JsonBuilder {
 		}
 
 		// If instance type is not correct
-		if (!(param instanceof WDUserData)) {
+		if (!(param[0] instanceof WDUserData)) {
 			throw new JSONBuilderException("illegal instance type");
 		}
 
-		WDUserData data = (WDUserData) param;
+		WDUserData data = (WDUserData) param[0];
 		JSONObject paramObject = new JSONObject();
 
 		try {

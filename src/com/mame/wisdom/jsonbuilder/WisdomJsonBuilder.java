@@ -48,14 +48,18 @@ public class WisdomJsonBuilder extends JsonBuilder {
 	}
 
 	@Override
-	public void addResponseParam(Object param) throws JSONBuilderException {
+	public void addResponseParam(Object... param) throws JSONBuilderException {
 		DbgUtil.showLog(TAG, "addResponseParam");
 
-		if (!(param instanceof WDWisdomData)) {
+		if (param == null) {
+			throw new JSONBuilderException("param is null");
+		}
+
+		if (!(param[0] instanceof WDWisdomData)) {
 			throw new JSONBuilderException("Illegal param type");
 		}
 
-		WDWisdomData data = (WDWisdomData) param;
+		WDWisdomData data = (WDWisdomData) param[0];
 
 		JSONObject obj = new JSONObject();
 		try {

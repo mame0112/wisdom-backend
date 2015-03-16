@@ -11,7 +11,7 @@ public abstract class JsonBuilder {
 	protected abstract void addVersion(String version)
 			throws JSONBuilderException;
 
-	public abstract void addResponseParam(Object param)
+	public abstract void addResponseParam(Object... param)
 			throws JSONBuilderException;
 
 	public abstract void addErrorMessage(String message)

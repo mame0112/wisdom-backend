@@ -45,8 +45,9 @@ public class UpdateWisdomJsonBuilder extends JsonBuilder {
 	}
 
 	@Override
-	public void addResponseParam(Object param) throws JSONBuilderException {
+	public void addResponseParam(Object... param) throws JSONBuilderException {
 		DbgUtil.showLog(TAG, "addResponseParam");
+		//TODO
 
 	}
 
