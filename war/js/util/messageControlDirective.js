@@ -3,7 +3,8 @@ wisdomApp.controller('messageOperationController',
  'log',
  'modeService',
  'createWisdomSharedStateService',
- function($scope, log, modeService, createWisdomSharedStateService){
+ 'timeService',
+ function($scope, log, modeService, createWisdomSharedStateService, timeService){
  	log.d("messageOperationController");
 
  	var DISPLAY_TITLE = true;
@@ -83,12 +84,14 @@ wisdomApp.controller('messageOperationController',
  			var type = input.type;
  			var str = null;
 
+ 			var current = timeService.getCurrentTime();
+
  			if($scope.messageState === DISPLAY_TITLE){
-		 		str = '{"entry": "' +input +'", "type": ' + TYPE_TITLE + '}';
+		 		str = '{"entry": "' +input +'", "type": ' + TYPE_TITLE +  ', "updated_date": ' + current + '}';
 		 		log.d("###################: " + str);
 		 		$scope.saveArray.push(JSON.parse(str));
  			} else {
-		 		str = '{"entry": "' +input +'", "type": ' + TYPE_MESSAGE + '}';
+		 		str = '{"entry": "' +input +'", "type": ' + TYPE_MESSAGE + ', "updated_date": ' + current + '}';
 		 		log.d("###################: " + str);
 		 		$scope.saveArray.push(JSON.parse(str));
  			}

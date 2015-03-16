@@ -46,13 +46,18 @@ wisdomApp.controller('categoryController',
 
  		var params = response.params;
 
- 		$scope.categories = response.params.wisdoms;
- 		$scope.wisdomNum = params.wisdomNum;
- 		$scope.wisdoms = params.wisdoms;
- 		$scope.categoryName = params.categoryName;
- 		$scope.subCategoryName = params.subCategoryName;
+ 		if(params !== null && params !== undefined){
+	 		$scope.categories = params.wisdoms;
+	 		$scope.wisdomNum = params.wisdomNum;
+	 		$scope.wisdoms = params.wisdoms;
+	 		$scope.categoryName = params.categoryName;
+	 		$scope.subCategoryName = params.subCategoryName;
 
-	 	$scope.totalItems = params.wisdomNum;
+		 	$scope.totalItems = params.wisdomNum;
+ 		} else {
+ 			//Error handling
+ 		}
+
 
  	});
 

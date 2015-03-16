@@ -20,5 +20,7 @@ public interface WDWisdomItemEntry {
 	public long getLastUpdateUserId();
 
 	public String getLastUpdateUserName();
+	
+	public long getLastUpdateDate();
 
 }

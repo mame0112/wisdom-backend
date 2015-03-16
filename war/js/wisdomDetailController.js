@@ -9,6 +9,8 @@ function($scope, log, wisdomAPIService, $routeParams){
  	var wisdomId = $routeParams.wisdomId;
  	log.d("wisdomId: " + wisdomId);
 
+ 	$scope.noContent = null;
+
  	// $scope.wisdoms = null;
 
 	//Get target wisdom
@@ -17,7 +19,17 @@ function($scope, log, wisdomAPIService, $routeParams){
 
  		//Set data under "params"
  		$scope.wisdom = response.params;
- 		$scope.messages = JSON.parse(response.params.messages);
+ 		if($scope.wisdom !== null && $scope.wisdom !== undefined){
+ 			if($scope.wisdom.messages !== null && $scope.wisdom.messages !== undefined){
+	 			log.d("AAAA: " + $scope.wisdom.messages);
+		 		$scope.messages = JSON.parse(response.params.messages);
+ 			} else {
+				//Error handling 
+ 			}
+ 		} else {
+ 			//Error handling
+ 		}
+
  		// log.d("response:" + $scope.wisdom.messages);
 	});
 

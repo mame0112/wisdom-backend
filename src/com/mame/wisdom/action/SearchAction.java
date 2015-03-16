@@ -31,9 +31,9 @@ public class SearchAction implements Action {
 
 		JsonBuilder builder = new SearchJsonBuilder();
 		String result = null;
-		builder.addResponseId(Integer.valueOf(responseId));
 
-		if (responseId != null || searchParam != null) {
+		if (responseId != null && searchParam != null) {
+			builder.addResponseId(Integer.valueOf(responseId));
 
 			WisdomFacade facade = new WisdomFacade();
 			List<WDWisdomData> results = facade.searchWisdom(searchParam);

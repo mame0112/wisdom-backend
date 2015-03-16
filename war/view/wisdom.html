@@ -1,9 +1,9 @@
 <div ng-controller="wisdomDetailController" ng-init="initialize()">
-wisdom.html
-<p>{{wisdom.title}} / {{wisdom.description}} /  {{wisdom.tag}}</p>
+<h2>{{wisdom.title}}</h2><h3>{{wisdom.tag}}</h3>
+<h4>{{wisdom.description}}</h4>
 
 <ul ng-repeat="entry in messages track by $index">
-	<li>{{entry.message}} / {{entry.update_userid}}</li>
+	<li>{{entry.message}} / {{entry.updated_date}} / Like: {{entry.like_num}}</li>
 </ul>
 
 </div>

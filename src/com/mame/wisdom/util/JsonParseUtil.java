@@ -72,6 +72,8 @@ public class JsonParseUtil {
 					long id = obj.getLong(JsonConstant.PARAM_WISDOM_ITEM_ID);
 
 					long updateUserId = WConstant.NO_USER;
+					long updateTime = obj
+							.getLong(JsonConstant.PARAM_WISDOM_UPDATED_DATE);
 
 					try {
 						updateUserId = obj
@@ -104,12 +106,12 @@ public class JsonParseUtil {
 					switch (tag) {
 					case WConstant.TAG_WISDOM_MESSAGE:
 						entry = new WDWisdomMessage(id, message, likeNum,
-								updateUserId, updateUserName);
+								updateUserId, updateUserName, updateTime);
 						result.add(entry);
 						break;
 					case WConstant.TAG_WISDOM_TITLE:
 						entry = new WDWisdomTitle(id, message, likeNum,
-								updateUserId, updateUserName);
+								updateUserId, updateUserName, updateTime);
 						result.add(entry);
 						break;
 					default:
@@ -162,6 +164,8 @@ public class JsonParseUtil {
 						item.getLastUpdateUserName());
 				object.put(JsonConstant.PARAM_WISDOM_ITEM_LIKE,
 						item.getNumberOfLike());
+				object.put(JsonConstant.PARAM_WISDOM_UPDATED_DATE,
+						item.getLastUpdateDate());
 				object.put(JsonConstant.PARAM_WISDOM_TAG, item.getTag());
 			} catch (JSONException e) {
 				DbgUtil.showLog(TAG, "JSONException");

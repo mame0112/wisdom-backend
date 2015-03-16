@@ -9,6 +9,7 @@ import com.mame.wisdom.data.WDWisdomData;
 import com.mame.wisdom.data.WDWisdomItemEntry;
 import com.mame.wisdom.util.DbgUtil;
 import com.mame.wisdom.util.JsonParseUtil;
+import com.mame.wisdom.util.TimeUtil;
 
 public class DefaultWisdomDAOHelper {
 
@@ -72,7 +73,7 @@ public class DefaultWisdomDAOHelper {
 			// Get entities belong to one wisdom
 			String itemsJSON = JsonParseUtil.parseWisdomItemEntitiesToJson(data
 					.getItems());
-
+			
 			entity.setProperty(DBConstant.ENTITY_WISDOM_ID, data.getWisdomId());
 			entity.setProperty(DBConstant.ENTITY_WISDOM_CREATED_USER_ID,
 					data.getCreatedUserId());

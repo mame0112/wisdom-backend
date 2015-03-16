@@ -7,12 +7,16 @@ public class WDWisdomTitle implements WDWisdomItemEntry {
 
 	private String mTitle = null;
 
+	private int mNumOfLiked = 0;
+
 	private long mLastUpdateUserId = WConstant.NO_USER;
 
 	private String mLastUpdateUserName = null;
 
+	private long mLastUpdateDate = 0;
+
 	public WDWisdomTitle(long id, String title, int numOfLike,
-			long lastUpdateUserId, String lastUpdateUserName) {
+			long lastUpdateUserId, String lastUpdateUserName, long updateDate) {
 		mItemId = id;
 		mTitle = title;
 		mLastUpdateUserId = lastUpdateUserId;
@@ -49,5 +53,10 @@ public class WDWisdomTitle implements WDWisdomItemEntry {
 	@Override
 	public String getLastUpdateUserName() {
 		return mLastUpdateUserName;
+	}
+
+	@Override
+	public long getLastUpdateDate() {
+		return mLastUpdateDate;
 	}
 }

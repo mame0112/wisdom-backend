@@ -1,4 +1,5 @@
 <div ng-controller="categoryController">
+<div ng-if="wisdomNum > 0">
 	{{categoryName}} / {{subCategoryName}} /{{wisdomNum}}
 	<ul class="media-list">
 		<li class="media" ng-repeat="data in wisdoms">
@@ -15,5 +16,10 @@
 
 	<!--Oagination part -->
 	<pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></pagination>
+</div>
+
+<div ng-if="!!wisdomNum == false">
+	No content.
+</div>
 
 </div>

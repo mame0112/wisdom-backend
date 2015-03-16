@@ -45,17 +45,47 @@ public class WisdomFacadeHelper {
 							.getString(JsonConstant.PARAM_WISDOM_ENTRY_NAME);
 					int entryType = item
 							.getInt(JsonConstant.PARAM_WISDOM_ITEM_TYPE);
+
+					// long id = (Long)
+					// item.getLong(JsonConstant.PARAM_WISDOM_ID);
+					// int numOfLike = (Integer) item
+					// .getInt(JsonConstant.PARAM_WISDOM_ITEM_LIKE);
+					long lastUpdateuserId = WConstant.NO_USER;
+					try {
+						lastUpdateuserId = (Long) item
+								.getLong(JsonConstant.PARAM_WISDOM_ITEM_UPDATE_USER_ID);
+					} catch (JSONException e) {
+						DbgUtil.showLog(TAG, "JSONException: " + e.getMessage());
+						// Ignore because last update user id is optional
+					}
+
+					String lastUpdateUserName = null;
+					try {
+						lastUpdateUserName = (String) item
+								.getString(JsonConstant.PARAM_WISDOM_ITEM_UPDAtE_USER_NAME);
+					} catch (JSONException e) {
+						DbgUtil.showLog(TAG, "JSONException: " + e.getMessage());
+						// Ignore because last update user id is optional
+					}
+
 					switch (entryType) {
 					case WConstant.TAG_WISDOM_MESSAGE:
 						// TODO Need to add last user name if necessary
-						WDWisdomItemEntry messageEntry = new WDWisdomMessage(i,
-								entryContent, 0, current, null);
+						WDWisdomItemEntry messageEntry = new WDWisdomMessage(
+								WConstant.NO_WISDOM, entryContent, 0,
+								lastUpdateuserId, lastUpdateUserName, current);
+
+						// long id, String message, int numOfLike,
+						// long lastUpdateUserId, String lastUpdateUserName,
+						// long updateDate
+
 						items.add(messageEntry);
 						break;
 					case WConstant.TAG_WISDOM_TITLE:
 						// TODO Need to add last user name if necessary
-						WDWisdomItemEntry titleEntry = new WDWisdomTitle(i,
-								entryContent, 0, current, null);
+						WDWisdomItemEntry titleEntry = new WDWisdomTitle(
+								WConstant.NO_WISDOM, entryContent, 0,
+								lastUpdateuserId, lastUpdateUserName, current);
 						items.add(titleEntry);
 						break;
 					default:
@@ -112,6 +142,9 @@ public class WisdomFacadeHelper {
 			}
 
 			List<WDWisdomItemEntry> items = createItemEntityListFromJsonArray(messageArray);
+
+			DbgUtil.showLog(TAG, "createdUserId: " + createdUserId);
+			DbgUtil.showLog(TAG, "lastUpdatedDate: " + lastUpdatedDate);
 
 			WDWisdomData data = new WDWisdomData(id, title, description, tag,
 					createdUserId, lastUpdatedDate, thumbBlob, items);

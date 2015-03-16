@@ -14,13 +14,16 @@ public class WDWisdomMessage implements WDWisdomItemEntry {
 
 	private String mLastUpdateUserName = null;
 
+	private long mLastUpdateDate = 0;
+
 	public WDWisdomMessage(long id, String message, int numOfLike,
-			long lastUpdateUserId, String lastUpdateUserName) {
+			long lastUpdateUserId, String lastUpdateUserName, long updateDate) {
 		mItemId = id;
 		mMessage = message;
 		mNumOfLiked = numOfLike;
 		mLastUpdateUserId = lastUpdateUserId;
 		mLastUpdateUserName = lastUpdateUserName;
+		mLastUpdateDate = updateDate;
 	}
 
 	@Override
@@ -51,6 +54,11 @@ public class WDWisdomMessage implements WDWisdomItemEntry {
 	@Override
 	public String getLastUpdateUserName() {
 		return mLastUpdateUserName;
+	}
+
+	@Override
+	public long getLastUpdateDate() {
+		return mLastUpdateDate;
 	}
 
 }
