@@ -22,8 +22,6 @@ wisdomApp.service('timeFormatService', ['log', 'Constants', function(log, Consta
 
             var result = y + '/' + m + '/' + d + ' ' + h + ':' + min;
 
-            log.d("format time: " + result);
-
             return result;
         }
 

@@ -20,7 +20,8 @@ wisdomApp.constant(
 			STATE_USER_PAGE: "state_user_page",
 			STATE_USER_DETAIL_PAGE: "state_user_detail_page",
 			STATE_CATEGORY_PAGE: "state_category_page",
-			STATE_WISDOM_PAGE: "state_widsom_page"
+			STATE_WISDOM_PAGE: "state_widsom_page",
+			STATE_WISDOM_CREATE_PAGE: "state_widsom_create_page"
 		},
 
 		PAGING: "paging",

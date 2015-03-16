@@ -7,8 +7,16 @@ wisdomApp.controller('breadcrumbController', ['$scope', '$http', 'log', 'modeSer
  	});
 
  	$scope.isBreadcrumbVisible = function (){
- 		return modeService.getCurrentMode() === Constants.STATE.STATE_HOME_NO_LOGIN || 
- 		modeService.getCurrentMode() === Constants.STATE.STATE_HOME_LOGIN;
+ 		log.d("modeService.getCurrentMode(): " + modeService.getCurrentMode());
+ 		if(modeService.getCurrentMode() !== Constants.STATE.STATE_HOME_NO_LOGIN && modeService.getCurrentMode() !== Constants.STATE.STATE_HOME_LOGIN)
+ 		{
+ 			log.d("true");
+ 			return true;
+ 		} else {
+ 			log.d("false");
+ 			return false;
+ 		}
+
  	};
 
 }]);

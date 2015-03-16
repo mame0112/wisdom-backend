@@ -9,7 +9,8 @@ wisdomApp.controller('wisdomCreateController',
    'userDataHolder',
    'timeService',
    'subCategoryLoaderService',
-    function($scope, log, Constants, createWisdomSharedStateService, newWisdomAPIService, $http, userDataHolder, timeService, subCategoryLoaderService){
+   'modeService',
+    function($scope, log, Constants, createWisdomSharedStateService, newWisdomAPIService, $http, userDataHolder, timeService, subCategoryLoaderService, modeService){
  	log.d("wisdomCreateController");
 
 	$scope.status = {
@@ -46,6 +47,9 @@ wisdomApp.controller('wisdomCreateController',
 	};
 
 	$scope.initialize = function(){
+		//Mode change
+		modeService.changeCurrentMode(Constants.STATE.STATE_WISDOM_CREATE_PAGE);
+
 		// userData =  userDataHolder.getUserData();
 		// log.d("userId: " + userData.params.userId);
 		// result.createUserId = userData.params.userId;

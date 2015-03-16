@@ -8,8 +8,11 @@ wisdomApp.service('modeService', ['$rootScope', 'log', 'Constants', function($ro
         },
 
         changeCurrentMode : function(param){
-        	log.d("changeCurrentMode");
-        	$rootScope.$broadcast(Constants.MODE_CHNAGE, param);
+        	log.d("changeCurrentMode: " + param);
+            if(param !== null && param !== undefined){
+                currentMode = param;
+                $rootScope.$broadcast(Constants.MODE_CHNAGE, param);
+            }
         }
     };
 }]);

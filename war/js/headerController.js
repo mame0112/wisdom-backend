@@ -80,6 +80,9 @@ wisdomApp.controller('headerController',
  		var data =  userDataHolder.getUserData();
  		if(data !== null && data !== undefined){
 	 		$scope.userData = data;
+			modeService.changeCurrentMode(Constants.STATE.STATE_HOME_LOGIN);
+	 	} else {
+			modeService.changeCurrentMode(Constants.STATE.STATE_HOME_NO_LOGIN);
 	 	}
  	};
 

@@ -3,13 +3,20 @@ wisdomApp.controller('wisdomDetailController',
 'log', 
 'wisdomAPIService',
 '$routeParams',
-function($scope, log, wisdomAPIService, $routeParams){
+'modeService', 
+'Constants', 
+function($scope, log, wisdomAPIService, $routeParams, modeService, Constants){
  	log.d("wisdomDetailController");
 
  	var wisdomId = $routeParams.wisdomId;
  	log.d("wisdomId: " + wisdomId);
 
  	$scope.noContent = null;
+
+ 	$scope.initialize = function(){
+ 		log.d("wisdomDetailController initialize");
+		modeService.changeCurrentMode(Constants.STATE.STATE_WISDOM_PAGE);
+ 	};
 
  	// $scope.wisdoms = null;
 
@@ -32,12 +39,5 @@ function($scope, log, wisdomAPIService, $routeParams){
 
  		// log.d("response:" + $scope.wisdom.messages);
 	});
-
-
-	$scope.initialize = function()
-	{
-		log.d("initialize");
-
-	};
 
 }]);

@@ -39,6 +39,11 @@ wisdomApp.controller('categoryController',
  	//Put timeFormatService to $scope so that we can use this service from HTML side.
  	$scope.timeFormatService = timeFormatService;
 
+ 	$scope.initialize = function(){
+ 		log.d("categoryController initialize");
+		modeService.changeCurrentMode(Constants.STATE.STATE_CATEGORY_PAGE);
+ 	};
+
  	// Load categories
  	categoryAPIService.category({servlet_category_param : param}, function(response){
  		// log.d("response.params: " + response.params);
