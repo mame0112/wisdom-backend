@@ -25,6 +25,10 @@ var wisdomApp = angular.module('WidsomApp', ['ngRoute','ngResource', 'ngCookies'
 			templateUrl: 'view/userpage.html',
 			controller: 'UserDataController'
 		}).
+		when('/detail/:wisdomId',{
+			templateUrl: 'view/wisdom.html',
+			controller: 'wisdomDetailController'
+		}).
 		when('/category/:categoryId/:subCategoryId',{
 			templateUrl: 'view/category.html',
 			controller: 'categoryController'
@@ -32,9 +36,9 @@ var wisdomApp = angular.module('WidsomApp', ['ngRoute','ngResource', 'ngCookies'
 		when('/wisdom',{
 			templateUrl: 'view/newwisdom.html',
 			controller: 'wisdomCreateController'
+		}).
+		otherwise({
+			redirectTo: '/'
 		});
-		// otherwise({
-		// 	redirectTo: '/'
-		// });
 
 }]);

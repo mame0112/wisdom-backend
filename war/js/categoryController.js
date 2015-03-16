@@ -66,11 +66,11 @@ wisdomApp.controller('categoryController',
 
 
 	$scope.setPage = function (pageNo) {
-	$scope.currentPage = pageNo;
+		$scope.currentPage = pageNo;
 	};
 
 	$scope.pageChanged = function() {
-	log.d('Page changed to: ' + $scope.currentPage);
+		log.d('Page changed to: ' + $scope.currentPage);
 	};
 
 

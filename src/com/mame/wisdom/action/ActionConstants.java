@@ -14,6 +14,8 @@ public class ActionConstants {
 
 	public final static String KEY_WISDOM = "/wisdom";
 	
+	public final static String KEY_NEW_WISDOM = "/newwisdom";
+	
 	public final static String KEY_CATEGORY = "/category";
 
 	public final static String KEY_HIGHLIGHT = "/highlight";

@@ -122,16 +122,4 @@ wisdomApp.controller('wisdomCreateController',
 		}
 	};
 
-	// var findSubCategoryByKey = function(category)
-	// {
-	// 	log.d("findSubCategoryByKey: " + category);
-	// 	if(category === 'SPORTS')
-	// 	{
-	// 	log.d("AAAAAAAAAAAAAAAA");
-	// 		$scope.subCategories = Constants.SUB_SPORTS;
-	// 	}
-
-
-	// };
-
 }]);
