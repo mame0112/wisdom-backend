@@ -1,7 +1,7 @@
 <div ng-controller="categoryController">
-	{{categoryName}}: {{totalNum}}
+	{{categoryName}} / {{subCategoryName}} /{{wisdomNum}}
 	<ul class="media-list">
-		<li class="media" ng-repeat="data in categories">
+		<li class="media" ng-repeat="data in wisdoms">
 		    <a class="pull-left" ng-href="#/view/1">
 		        <img src="image/64-64.png" alt="" class="media-object" />
 		    </a>
@@ -9,7 +9,7 @@
 		        <h4 class="media-heading">{{data.title}}</h4>
 		        {{data.tag}}
 		        {{data.description}}
-		        {{data.updated}}
+		        {{data.updated_date}}
 		    </div>
 		</li>
 	</ul>

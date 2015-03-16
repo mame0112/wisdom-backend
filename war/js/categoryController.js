@@ -33,9 +33,16 @@ wisdomApp.controller('categoryController',
 
  	// Load categories
  	categoryAPIService.category({servlet_category_param : param}, function(response){
- 		log.d("response.params: " + response.params);
- 		log.d("response.params.limit: " + response.params.limit);
- 		$scope.categories = response.params;
+ 		// log.d("response.params: " + response.params);
+ 		// log.d("response.params.limit: " + response.params.limit);
+
+ 		var params = response.params;
+
+ 		$scope.categories = response.params.wisdoms;
+ 		$scope.wisdomNum = params.wisdomNum;
+ 		$scope.wisdoms = params.wisdoms;
+ 		$scope.categoryName = params.categoryName;
+ 		$scope.subCategoryName = params.subCategoryName;
  	});
 
  	//  $http.get('data/categoryData.json').success(function(data){
