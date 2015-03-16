@@ -142,7 +142,7 @@ public class DefaultWisdomDAO implements WisdomDAO {
 		// Check subcategory kind
 		try {
 
-			long newId = getTotalWisdomNum(key) + 1;
+			long newId = getTotalWisdomNum() + 1;
 
 			Entity entity = getSubCategoryEntity(key);
 
@@ -196,91 +196,6 @@ public class DefaultWisdomDAO implements WisdomDAO {
 			}
 			throw new WisdomDatastoreException(e.getMessage());
 		}
-
-		// // Get entity for target category / sub cateogry
-		// Transaction tx = mDS.beginTransaction();
-		// try {
-		//
-		// Entity entity = mDS.get(key);
-		// // If target entity is not null, which mean there are more than
-		// // 1
-		// // wisdoms for target category.
-		// if (entity != null) {
-		// DbgUtil.showLog(TAG, "Entity already exist");
-		//
-		// // Count the number of entity
-		// Query query = new Query(DBConstant.KIND_WISDOM);
-		// long wisdomNum = mDS.prepare(query).countEntities(
-		// FetchOptions.Builder.withDefaults());
-		// DbgUtil.showLog(TAG, "wisdomNum: " + wisdomNum);
-		// long newId = wisdomNum + 1;
-		//
-		// // Update wisdom Id in Category kind
-		// List<Long> wisdomIds = (List<Long>) entity
-		// .getProperty(DBConstant.ENTITY_CATEGORY_WISDOM_IDS);
-		// if (wisdomIds != null) {
-		// wisdomIds.add(newId);
-		// entity.setProperty(DBConstant.ENTITY_CATEGORY_WISDOM_IDS,
-		// wisdomIds);
-		// } else {
-		// List<Long> ids = new ArrayList<Long>();
-		// ids.add(newId);
-		// entity.setProperty(DBConstant.ENTITY_CATEGORY_WISDOM_IDS,
-		// ids);
-		// }
-		//
-		// // Add new wisdom data to Wisdom Kind
-		// Key wisdomKey = DatastoreKeyGenerator.getWisdomKeyById(
-		// category, subCategory, newId);
-		// Entity wisdomEntity = new Entity(wisdomKey);
-		// wisdomEntity = helper.parseWisdomDataToEntity(wisdom,
-		// wisdomEntity);
-		// mDS.put(wisdomEntity);
-		//
-		// tx.commit();
-		// } else {
-		// // We shouldn't come into here.
-		// DbgUtil.showLog(TAG, "Entity doesn't exist 1");
-		// }
-		// } catch (EntityNotFoundException e) {
-		// // IF target entity doesn't exist, which means there is no
-		// // wisdom
-		// // for target category / sub category yet.
-		// DbgUtil.showLog(TAG, "Entity doesn't exist 2");
-		//
-		// Query query = new Query(DBConstant.KIND_WISDOM);
-		// long wisdomNum = mDS.prepare(query).countEntities(
-		// FetchOptions.Builder.withDefaults());
-		// long newNum = wisdomNum + 1;
-		//
-		// Entity newSubCategoryEntity = new Entity(
-		// DBConstant.KIND_SUB_CATEGORY, 1, key);
-		// List<Long> ids = new ArrayList<Long>();
-		// ids.add(newNum);
-		//
-		// newSubCategoryEntity.setProperty(
-		// DBConstant.ENTITY_CATEGORY_WISDOM_IDS, ids);
-		// mDS.put(newSubCategoryEntity);
-		//
-		// wisdom.setWisdomId(newNum);
-		//
-		// Key wisdomKey = DatastoreKeyGenerator.getWisdomKeyById(category,
-		// subCategory, newNum);
-		// Entity newWisdomEntity = new Entity(DBConstant.KIND_WISDOM, newNum,
-		// wisdomKey);
-		// newWisdomEntity = helper.parseWisdomDataToEntity(wisdom,
-		// newWisdomEntity);
-		// mDS.put(newWisdomEntity);
-		//
-		// tx.commit();
-		//
-		// } catch (ConcurrentModificationException e) {
-		// DbgUtil.showLog(TAG, "ConcurrentModificationException");
-		// if (tx.isActive()) {
-		// tx.rollback();
-		// }
-		// throw new WisdomDatastoreException(e.getMessage());
-		// }
 	}
 
 	private Entity createSubcategoryEntity(long newId, String keyName) {
@@ -337,9 +252,18 @@ public class DefaultWisdomDAO implements WisdomDAO {
 		}
 	}
 
-	private long getTotalWisdomNum(Key ancestrKey) {
+//	private long getTotalWisdomNum(Key ancestrKey) {
+//		DbgUtil.showLog(TAG, "getTotalWisdomNum");
+//		Query query = new Query(DBConstant.KIND_WISDOM, ancestrKey);
+//		long wisdomNum = mDS.prepare(query).countEntities(
+//				FetchOptions.Builder.withDefaults());
+//		DbgUtil.showLog(TAG, "wisdomNum: " + wisdomNum);
+//		return wisdomNum;
+//	}
+	
+	private long getTotalWisdomNum() {
 		DbgUtil.showLog(TAG, "getTotalWisdomNum");
-		Query query = new Query(DBConstant.KIND_WISDOM, ancestrKey);
+		Query query = new Query(DBConstant.KIND_WISDOM);
 		long wisdomNum = mDS.prepare(query).countEntities(
 				FetchOptions.Builder.withDefaults());
 		DbgUtil.showLog(TAG, "wisdomNum: " + wisdomNum);
