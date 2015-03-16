@@ -12,7 +12,7 @@ function($scope, log, wisdomAPIService, $routeParams){
  	// $scope.wisdoms = null;
 
 	//Get target wisdom
- 	wisdomAPIService.wisdom({servlet_new_wisdom_param : $scope.wisdomId}, function(response){
+ 	wisdomAPIService.wisdom({servlet_resp_id: 1, param: '@servlet_new_wisdom_param'}, function(response){
  		log.d("response received");
 
  		//Set data under "params"

@@ -37,6 +37,6 @@ wisdomApp.controller('debugController',
 		],
 	};
 
-	wisdomAPIService.newwisdom({servlet_new_wisdom_param : data});
+	// wisdomAPIService.newwisdom({servlet_new_wisdom_param : data});
 
  }]);
