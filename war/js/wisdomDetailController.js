@@ -17,15 +17,9 @@ function($scope, log, wisdomAPIService, $routeParams){
 
  		//Set data under "params"
  		$scope.wisdom = response.params;
- 		log.d("response:" + $scope.wisdom.tag);
+ 		$scope.messages = JSON.parse(response.params.messages);
+ 		// log.d("response:" + $scope.wisdom.messages);
 	});
-
- 	// latestAPIService.latest(function(response){
- 	// 	log.d("latest received");
-
- 	// 	//Set data under "params"
- 	// 	$scope.wisdoms = response.params;
- 	// });
 
 
 	$scope.initialize = function()

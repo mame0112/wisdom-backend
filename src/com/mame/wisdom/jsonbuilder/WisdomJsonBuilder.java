@@ -8,6 +8,7 @@ import com.mame.wisdom.data.WDWisdomData;
 import com.mame.wisdom.data.WDWisdomItemEntry;
 import com.mame.wisdom.exception.JSONBuilderException;
 import com.mame.wisdom.util.DbgUtil;
+import com.mame.wisdom.util.JsonParseUtil;
 
 public class WisdomJsonBuilder extends JsonBuilder {
 
@@ -75,9 +76,9 @@ public class WisdomJsonBuilder extends JsonBuilder {
 					data.getLastUpdatedDate());
 			obj.put(JsonConstant.PARAM_WISDOM_CREATE_USER_ID,
 					data.getCreatedUserId());
-			// obj.put(JsonConstant.param_wis );
+			obj.put(JsonConstant.PARAM_WISDOM_MESSAGES,
+					JsonParseUtil.parseWisdomItemEntitiesToJson(content));
 
-			// TODO need to parse Wisdom content.
 			mRootObject.put(JsonConstant.PARAMS, obj);
 
 		} catch (JSONException e) {

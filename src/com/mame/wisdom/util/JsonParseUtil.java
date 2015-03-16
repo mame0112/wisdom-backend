@@ -68,8 +68,9 @@ public class JsonParseUtil {
 					JSONObject obj = array.getJSONObject(i);
 					String message = obj
 							.getString(JsonConstant.PARAM_WISDOM_ITEM_MESSAGE);
+					DbgUtil.showLog(TAG, "message:" + message);
 					long id = obj.getLong(JsonConstant.PARAM_WISDOM_ITEM_ID);
-					
+
 					long updateUserId = WConstant.NO_USER;
 
 					try {

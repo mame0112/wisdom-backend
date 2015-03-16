@@ -1,4 +1,9 @@
 <div ng-controller="wisdomDetailController" ng-init="initialize()">
 wisdom.html
-	<p>{{wisdom.title}} / {{wisdom.description}} /  {{wisdom.tag}}</p>
+<p>{{wisdom.title}} / {{wisdom.description}} /  {{wisdom.tag}}</p>
+
+<ul ng-repeat="entry in messages track by $index">
+	<li>{{entry.message}} / {{entry.update_userid}}</li>
+</ul>
+
 </div>
