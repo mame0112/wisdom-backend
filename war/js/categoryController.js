@@ -26,7 +26,12 @@ wisdomApp.controller('categoryController',
 	$scope.subCategoryId = $routeParams.subCategoryId;
  	log.d("subCategoryName: " + $scope.subCategoryId);
 
+ 	var offset = 0;
+ 	var limit = 10;
+
  	var param = {
+ 		"offset" : offset,
+ 		"limit" : limit,
  		"categoryName": $scope.categoryId,
  		"subCategoryName": $scope.subCategoryId,
  	};
@@ -45,7 +50,7 @@ wisdomApp.controller('categoryController',
  	};
 
  	// Load categories
- 	categoryAPIService.category({servlet_category_param : param}, function(response){
+ 	categoryAPIService.category({servlet_params : param}, function(response){
  		// log.d("response.params: " + response.params);
  		// log.d("response.params.limit: " + response.params.limit);
 

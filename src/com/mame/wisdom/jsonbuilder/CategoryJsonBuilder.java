@@ -63,6 +63,8 @@ public class CategoryJsonBuilder extends JsonBuilder {
 
 		WDSubCategoryData category = (WDSubCategoryData) param[0];
 		List<WDWisdomData> wisdoms = (List<WDWisdomData>) param[1];
+		int offset = (int) param[2];
+		int count = (int) param[3];
 
 		JSONObject resp = new JSONObject();
 
@@ -81,6 +83,8 @@ public class CategoryJsonBuilder extends JsonBuilder {
 			resp.put(JsonConstant.PARAM_CATEGORY_LIMIT, category.getLimit());
 			resp.put(JsonConstant.PARAM_CATEGORY_WISDOM_NUM,
 					category.getTotalWisdomNum());
+			resp.put(JsonConstant.PARAM_CATEGORY_LIMIT, count);
+			resp.put(JsonConstant.PARAM_CATEGORY_OFFSET, offset);
 
 			JSONArray wisdomArray = JsonParseUtil
 					.parseWisdomListToJsonArray(wisdoms);

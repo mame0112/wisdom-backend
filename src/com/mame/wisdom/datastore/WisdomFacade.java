@@ -26,7 +26,8 @@ public class WisdomFacade {
 		DAOFactory factory = DAOFactory.getDAOFactory();
 		try {
 			WisdomDAO wisdomDAO = factory.getWisdomDAO();
-			List<WDWisdomData> result = wisdomDAO.getPopularWisdoms(offset, limit);
+			List<WDWisdomData> result = wisdomDAO.getPopularWisdoms(offset,
+					limit);
 			if (result == null) {
 				DbgUtil.showLog(TAG, "result is null");
 				return null;
@@ -45,22 +46,22 @@ public class WisdomFacade {
 	public List<WDWisdomData> getLatestWisdoms(int num) {
 		DbgUtil.showLog(TAG, "getLatestWisdoms");
 
-		//TODO Need to fix
-//		DAOFactory factory = DAOFactory.getDAOFactory();
-//		try {
-//			WisdomDAO wisdomDAO = factory.getWisdomDAO();
-//			List<WDWisdomData> result = wisdomDAO.getPopularWisdoms(num);
-//			if (result == null) {
-//				DbgUtil.showLog(TAG, "result is null");
-//				return null;
-//			} else {
-//				DbgUtil.showLog(TAG, "result is not null");
-//				return wisdomDAO.getPopularWisdoms(num);
-//			}
-//
-//		} catch (WisdomDatastoreException e) {
-//			DbgUtil.showLog(TAG, "WisdomDatastoreException: " + e.getMessage());
-//		}
+		// TODO Need to fix
+		// DAOFactory factory = DAOFactory.getDAOFactory();
+		// try {
+		// WisdomDAO wisdomDAO = factory.getWisdomDAO();
+		// List<WDWisdomData> result = wisdomDAO.getPopularWisdoms(num);
+		// if (result == null) {
+		// DbgUtil.showLog(TAG, "result is null");
+		// return null;
+		// } else {
+		// DbgUtil.showLog(TAG, "result is not null");
+		// return wisdomDAO.getPopularWisdoms(num);
+		// }
+		//
+		// } catch (WisdomDatastoreException e) {
+		// DbgUtil.showLog(TAG, "WisdomDatastoreException: " + e.getMessage());
+		// }
 
 		return null;
 	}
@@ -174,7 +175,8 @@ public class WisdomFacade {
 	}
 
 	public WDSubCategoryData getCategoryContent(String category,
-			String subCategory) throws WisdomFacadeException {
+			String subCategory)
+			throws WisdomFacadeException {
 		DbgUtil.showLog(TAG, "getCategoryContent");
 
 		if (category == null || subCategory == null) {
@@ -186,7 +188,8 @@ public class WisdomFacade {
 			WisdomDAO dao = factory.getWisdomDAO();
 
 			// Get target subcategory content (no wisdom info at this timing)
-			return dao.getCategoryContents(category, subCategory);
+			return dao
+					.getCategoryContents(category, subCategory);
 		} catch (WisdomDatastoreException e) {
 			DbgUtil.showLog(TAG, "WisdomDatastoreException: " + e.getMessage());
 		}

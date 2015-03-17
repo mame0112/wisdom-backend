@@ -1,5 +1,6 @@
 package com.mame.wisdom.action;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +26,7 @@ public class CategoryAction implements Action {
 		DbgUtil.showLog(TAG, "execute");
 
 		String responseId = request.getParameter(WConstant.SERVLET_RESP_ID);
-		String params = request.getParameter(WConstant.SERVLET_CATEGORY_PARAM);
+		String params = request.getParameter(WConstant.SERVLET_PARAMS);
 
 		CategoryJsonBuilder builder = new CategoryJsonBuilder();
 
@@ -33,11 +34,16 @@ public class CategoryAction implements Action {
 			builder.addResponseId(Integer.valueOf(responseId));
 			WisdomFacade facade = new WisdomFacade();
 
+			DbgUtil.showLog(TAG, "params: " + params);
+
 			JSONObject argObject = new JSONObject(params);
 			String category = (String) argObject
 					.get(JsonConstant.PARAM_CATEGORY_CATEGORY_NAME);
 			String subCategory = (String) argObject
 					.get(JsonConstant.PARAM_CATEGORY_SUB_CATEGORY_NAME);
+			int limit = (int) argObject.get(JsonConstant.PARAM_CATEGORY_LIMIT);
+			int offset = (int) argObject
+					.get(JsonConstant.PARAM_CATEGORY_OFFSET);
 
 			if (category != null && subCategory != null) {
 
@@ -48,11 +54,21 @@ public class CategoryAction implements Action {
 				if (categoryData != null) {
 					List<Long> ids = categoryData.getWisdomIds();
 
+					List<Long> input = new ArrayList<Long>();
+
+					int count = 0;
+
+					for (int i = offset; i < (offset + limit); i++) {
+						input.add(ids.get(i));
+						count = count + 1;
+					}
+
 					// Then, get wisdoms belong to this category
 					List<WDWisdomData> wisdoms = facade.getWisdomByIds(
-							category, subCategory, ids);
+							category, subCategory, input);
 					try {
-						builder.addResponseParam(categoryData, wisdoms);
+						builder.addResponseParam(categoryData, wisdoms, offset,
+								count);
 					} catch (JSONBuilderException e) {
 						DbgUtil.showLog(TAG,
 								"JSONBuilderException: " + e.getMessage());
@@ -61,9 +77,12 @@ public class CategoryAction implements Action {
 				}
 
 			} else {
+				DbgUtil.showLog(TAG,
+						"category name or sub category name is null");
 				builder.addErrorMessage("category name or sub category name is null");
 			}
 		} else {
+			DbgUtil.showLog(TAG, "responseId or params is null");
 			builder.addErrorMessage("responseId or params is null");
 		}
 
@@ -72,5 +91,4 @@ public class CategoryAction implements Action {
 
 		return result;
 	}
-
 }
