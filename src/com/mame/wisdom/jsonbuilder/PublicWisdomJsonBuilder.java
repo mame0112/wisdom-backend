@@ -60,10 +60,16 @@ public class PublicWisdomJsonBuilder extends JsonBuilder {
 			throw new JSONBuilderException("Illegal param type");
 		}
 
+		if (!(param[1] instanceof Integer)) {
+			throw new JSONBuilderException("Illegal param type for integer");
+		}
+
 		List<WDWisdomData> wisdoms = (List<WDWisdomData>) param[0];
+		int offset = (int) param[1];
 
 		JSONArray array = JsonParseUtil.parseWisdomListToJsonArray(wisdoms);
 		try {
+			mRootObject.put(JsonConstant.PARAM_CATEGORY_OFFSET, offset);
 			mRootObject.put(JsonConstant.PARAMS, array);
 		} catch (JSONException e) {
 			DbgUtil.showLog(TAG, "JSONException: " + e.getMessage());

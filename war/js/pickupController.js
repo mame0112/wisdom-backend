@@ -7,8 +7,16 @@ function($scope, log, latestAPIService){
 
  	$scope.wisdoms = null;
 
- 	latestAPIService.latest(function(response){
+ 	var offset = 10;
+
+ 	var param = {
+ 		"offset" : offset
+ 	};
+
+ 	latestAPIService.latest({servlet_params : param}, function(response){
  		log.d("latest received");
+
+ 		$scope.response = response;
 
  		//Set data under "params"
  		$scope.wisdoms = response.params;

@@ -18,6 +18,9 @@ public class WConstant {
 	 */
 	public final static String SERVLET_RESP_ID = "servlet_resp_id";
 
+	// THis would be used if cliend side wants to send value to backend
+	public final static String SERVLET_PARAMS = "servlet_params";
+
 	/**
 	 * Public fields
 	 */

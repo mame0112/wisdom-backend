@@ -21,12 +21,13 @@ public interface WisdomDAO {
 
 	/**
 	 * Get popular wisdom
-	 * 
-	 * @param num
+	 * @param offset
+	 * @param limit
 	 * @return
 	 * @throws WisdomDatastoreException
 	 */
-	public List<WDWisdomData> getPopularWisdoms(int num)
+	
+	public List<WDWisdomData> getPopularWisdoms(int offset, int limit)
 			throws WisdomDatastoreException;
 
 	/**

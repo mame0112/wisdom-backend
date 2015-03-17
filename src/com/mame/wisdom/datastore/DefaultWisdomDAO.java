@@ -32,7 +32,7 @@ public class DefaultWisdomDAO implements WisdomDAO {
 			.getDatastoreService();
 
 	@Override
-	public List<WDWisdomData> getPopularWisdoms(int num)
+	public List<WDWisdomData> getPopularWisdoms(int offset, int limit)
 			throws WisdomDatastoreException {
 		DbgUtil.showLog(TAG, "getPopularWisdoms");
 
@@ -45,7 +45,8 @@ public class DefaultWisdomDAO implements WisdomDAO {
 							+ result.getProperty(DBConstant.ENTITY_WISDOM_TITLE));
 		}
 
-		FetchOptions fetch = FetchOptions.Builder.withOffset(0).limit(10);
+		FetchOptions fetch = FetchOptions.Builder.withOffset(offset).limit(
+				limit);
 		List<Entity> entities = pq.asList(fetch);
 
 		DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
@@ -252,15 +253,15 @@ public class DefaultWisdomDAO implements WisdomDAO {
 		}
 	}
 
-//	private long getTotalWisdomNum(Key ancestrKey) {
-//		DbgUtil.showLog(TAG, "getTotalWisdomNum");
-//		Query query = new Query(DBConstant.KIND_WISDOM, ancestrKey);
-//		long wisdomNum = mDS.prepare(query).countEntities(
-//				FetchOptions.Builder.withDefaults());
-//		DbgUtil.showLog(TAG, "wisdomNum: " + wisdomNum);
-//		return wisdomNum;
-//	}
-	
+	// private long getTotalWisdomNum(Key ancestrKey) {
+	// DbgUtil.showLog(TAG, "getTotalWisdomNum");
+	// Query query = new Query(DBConstant.KIND_WISDOM, ancestrKey);
+	// long wisdomNum = mDS.prepare(query).countEntities(
+	// FetchOptions.Builder.withDefaults());
+	// DbgUtil.showLog(TAG, "wisdomNum: " + wisdomNum);
+	// return wisdomNum;
+	// }
+
 	private long getTotalWisdomNum() {
 		DbgUtil.showLog(TAG, "getTotalWisdomNum");
 		Query query = new Query(DBConstant.KIND_WISDOM);

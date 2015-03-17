@@ -20,19 +20,19 @@ public class WisdomFacade {
 		DbgUtil.showLog(TAG, "WisdomFacade");
 	}
 
-	public List<WDWisdomData> getPopularWisdoms(int num) {
+	public List<WDWisdomData> getPopularWisdoms(int offset, int limit) {
 		DbgUtil.showLog(TAG, "getPopularWisdoms");
 
 		DAOFactory factory = DAOFactory.getDAOFactory();
 		try {
 			WisdomDAO wisdomDAO = factory.getWisdomDAO();
-			List<WDWisdomData> result = wisdomDAO.getPopularWisdoms(num);
+			List<WDWisdomData> result = wisdomDAO.getPopularWisdoms(offset, limit);
 			if (result == null) {
 				DbgUtil.showLog(TAG, "result is null");
 				return null;
 			} else {
 				DbgUtil.showLog(TAG, "result is not null");
-				return wisdomDAO.getPopularWisdoms(num);
+				return wisdomDAO.getPopularWisdoms(offset, limit);
 			}
 
 		} catch (WisdomDatastoreException e) {
@@ -45,21 +45,22 @@ public class WisdomFacade {
 	public List<WDWisdomData> getLatestWisdoms(int num) {
 		DbgUtil.showLog(TAG, "getLatestWisdoms");
 
-		DAOFactory factory = DAOFactory.getDAOFactory();
-		try {
-			WisdomDAO wisdomDAO = factory.getWisdomDAO();
-			List<WDWisdomData> result = wisdomDAO.getPopularWisdoms(num);
-			if (result == null) {
-				DbgUtil.showLog(TAG, "result is null");
-				return null;
-			} else {
-				DbgUtil.showLog(TAG, "result is not null");
-				return wisdomDAO.getPopularWisdoms(num);
-			}
-
-		} catch (WisdomDatastoreException e) {
-			DbgUtil.showLog(TAG, "WisdomDatastoreException: " + e.getMessage());
-		}
+		//TODO Need to fix
+//		DAOFactory factory = DAOFactory.getDAOFactory();
+//		try {
+//			WisdomDAO wisdomDAO = factory.getWisdomDAO();
+//			List<WDWisdomData> result = wisdomDAO.getPopularWisdoms(num);
+//			if (result == null) {
+//				DbgUtil.showLog(TAG, "result is null");
+//				return null;
+//			} else {
+//				DbgUtil.showLog(TAG, "result is not null");
+//				return wisdomDAO.getPopularWisdoms(num);
+//			}
+//
+//		} catch (WisdomDatastoreException e) {
+//			DbgUtil.showLog(TAG, "WisdomDatastoreException: " + e.getMessage());
+//		}
 
 		return null;
 	}

@@ -36,7 +36,8 @@ public class InfobarAction implements Action {
 		}
 
 		WisdomFacade facade = new WisdomFacade();
-		List<WDWisdomData> data = facade.getPopularWisdoms(num);
+		// TODO
+		List<WDWisdomData> data = facade.getPopularWisdoms(0, num);
 		DbgUtil.showLog(TAG, "AA");
 
 		JsonBuilder builder = new SigninJsonBuilder();
