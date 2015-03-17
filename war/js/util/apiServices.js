@@ -1,14 +1,3 @@
-// wisdomApp.factory('apiService', ['$resource', 'log',
-//  function($resource, log) {
-//     return ($resource('/controller/infobar',
-//      {},
-//      {
-//         popular: {method: 'GET', isArray: false}
-//      })
-//     );
-//   }
-// ]);
-
 wisdomApp.factory('apiService', ['$resource', 'log',
  function($resource, log) {
     return $resource('/controller/infobar',
@@ -18,9 +7,9 @@ wisdomApp.factory('apiService', ['$resource', 'log',
         }
      });
     }
-])
+]);
 
-.factory('userAPIService', ['$resource', 'log',
+wisdomApp.factory('userAPIService', ['$resource', 'log',
  function($resource, log) {
     return $resource('/controller/user',
          {},

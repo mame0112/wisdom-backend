@@ -7,7 +7,7 @@ function($scope, log, latestAPIService){
 
  	$scope.wisdoms = null;
 
- 	var offset = 10;
+ 	var offset = 0;
 
  	var param = {
  		"offset" : offset

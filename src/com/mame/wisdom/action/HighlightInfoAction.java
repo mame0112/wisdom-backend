@@ -36,14 +36,14 @@ public class HighlightInfoAction implements Action {
 			WisdomFacade facade = new WisdomFacade();
 			List<WDWisdomData> wisdoms = facade.getPopularWisdoms(start,
 					WConstant.PUBLIC_WISDOM_NUM);
-			builder.addResponseParam(wisdoms);
+			builder.addResponseParam(wisdoms, start);
 
 		} else {
 			builder.addErrorMessage("response id is null");
 		}
 
 		String result = builder.getResultJson();
-		DbgUtil.showLog(TAG, "result: " + result);
+		DbgUtil.showLog(TAG, "result:::::::::::::: " + result);
 
 		return result;
 	}

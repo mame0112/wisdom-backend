@@ -4,9 +4,16 @@ wisdomApp.controller('infobarController', ['$scope', '$http', 'log', 'modeServic
 
  	$scope.highlight = null;
 
- 	highlightAPIService.highlight(function(data){
+ 	var offset = 0;
+
+ 	var param = {
+ 		"offset" : offset
+ 	};
+
+ 	highlightAPIService.highlight({servlet_params : param}, function(data){
  		// log.d("response data: " + data); 		
 	 	$scope.highlights = data.params;
+	 	$scope.data = data;
  	});
 
 
