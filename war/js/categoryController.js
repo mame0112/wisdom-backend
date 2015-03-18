@@ -40,23 +40,52 @@ wisdomApp.controller('categoryController',
  	$scope.totalItems = 0;
 	$scope.currentPage = 1;
 
-
  	//Put timeFormatService to $scope so that we can use this service from HTML side.
  	$scope.timeFormatService = timeFormatService;
 
  	$scope.initialize = function(){
  		log.d("categoryController initialize");
 		modeService.changeCurrentMode(Constants.STATE.STATE_CATEGORY_PAGE);
+		$scope.loadCategoryData(0);
  	};
 
- 	// Load categories
- 	categoryAPIService.category({servlet_params : param}, function(response){
+
+	// modeService.changeCurrentMode();
+
+
+ 	 $scope.isActive = function(){
+ 	 	log.d("isActive");
+ 	 	return ACTIVE;
+ 	 };
+
+
+	$scope.setPage = function (pageNo) {
+		log.d("setPage: " + pageNo);
+		$scope.currentPage = pageNo - 1;
+		$scope.loadCategoryData($scope.currentPage);
+	};
+
+	$scope.pageChanged = function(page) {
+		log.d("new page: " + page);
+		$scope.currentPage = page -1;
+		// log.d('Page changed to: ' + $scope.currentPage);
+		$scope.loadCategoryData($scope.currentPage);
+	};
+
+	$scope.loadCategoryData = function(currentPage){
+		log.d("currentPage: " + currentPage);
+
+		param.offset = currentPage * param.limit;
+
+	 	// Load categories
+	 	categoryAPIService.category({servlet_params : param}, function(response){
  		// log.d("response.params: " + response.params);
  		// log.d("response.params.limit: " + response.params.limit);
 
  		var params = response.params;
 
  		if(params !== null && params !== undefined){
+ 			log.d("params: " + params);
 	 		$scope.categories = params.wisdoms;
 	 		$scope.wisdomNum = params.wisdomNum;
 	 		$scope.wisdoms = params.wisdoms;
@@ -71,21 +100,6 @@ wisdomApp.controller('categoryController',
 
  	});
 
-	// modeService.changeCurrentMode();
-
-
- 	 $scope.isActive = function(){
- 	 	log.d("isActive");
- 	 	return ACTIVE;
- 	 };
-
-
-	$scope.setPage = function (pageNo) {
-		$scope.currentPage = pageNo;
-	};
-
-	$scope.pageChanged = function() {
-		log.d('Page changed to: ' + $scope.currentPage);
 	};
 
 

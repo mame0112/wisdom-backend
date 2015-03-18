@@ -59,8 +59,14 @@ public class CategoryAction implements Action {
 					int count = 0;
 
 					for (int i = offset; i < (offset + limit); i++) {
-						input.add(ids.get(i));
-						count = count + 1;
+						try {
+							input.add(ids.get(i));
+							count = count + 1;
+						} catch (IndexOutOfBoundsException e) {
+							// If target range exceeds, we escape from this loop
+							break;
+						}
+
 					}
 
 					// Then, get wisdoms belong to this category
