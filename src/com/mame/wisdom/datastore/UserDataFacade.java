@@ -4,6 +4,7 @@ import com.google.appengine.api.datastore.Blob;
 import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.data.WDUserData;
 import com.mame.wisdom.exception.WisdomDatastoreException;
+import com.mame.wisdom.exception.WisdomFacadeException;
 import com.mame.wisdom.util.DbgUtil;
 import com.mame.wisdom.util.TimeUtil;
 
@@ -74,6 +75,23 @@ public class UserDataFacade {
 					"Target twitter account has already been registered!");
 			return currentData;
 		}
+	}
+
+	public WDUserData getUserData(long userId) throws WisdomFacadeException {
+		DbgUtil.showLog(TAG, "getUserStatus");
+
+		if (userId == WConstant.NO_USER) {
+			throw new WisdomFacadeException("Illegal userId, -1");
+		}
+
+		DAOFactory factory = DAOFactory.getDAOFactory();
+		try {
+			UserDAO dao = factory.getUserDAO();
+			return dao.getUserData(userId);
+		} catch (WisdomDatastoreException e) {
+			DbgUtil.showLog(TAG, "WisdomDatastoreException: " + e.getMessage());
+		}
+		return null;
 	}
 
 }

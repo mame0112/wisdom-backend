@@ -9,6 +9,8 @@ public class ActionConstants {
 	public final static String KEY_INFOBAR = "/infobar";
 
 	public final static String KEY_USER = "/user";
+	
+	public final static String KEY_USERINFO = "/userInfo";
 
 	public final static String KEY_NOTIFICATION = "/notification";
 

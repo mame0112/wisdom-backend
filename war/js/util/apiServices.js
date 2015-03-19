@@ -7,9 +7,9 @@ wisdomApp.factory('apiService', ['$resource', 'log',
         }
      });
     }
-]);
+])
 
-wisdomApp.factory('userAPIService', ['$resource', 'log',
+.factory('userAPIService', ['$resource', 'log',
  function($resource, log) {
     return $resource('/controller/user',
          {},
@@ -19,6 +19,17 @@ wisdomApp.factory('userAPIService', ['$resource', 'log',
 
             //Sign up (create account)
             signup: {method: 'POST', isArray: false}
+        });
+    }
+])
+
+.factory('userInfoAPIService', ['$resource', 'log',
+ function($resource, log) {
+    return $resource('/controller/userInfo',
+         {servlet_resp_id: 1, param: '@servlet_params'},
+         { 
+            //Get user info
+            status: {method: 'GET', isArray: false},
         });
     }
 ])

@@ -175,8 +175,7 @@ public class WisdomFacade {
 	}
 
 	public WDSubCategoryData getCategoryContent(String category,
-			String subCategory)
-			throws WisdomFacadeException {
+			String subCategory) throws WisdomFacadeException {
 		DbgUtil.showLog(TAG, "getCategoryContent");
 
 		if (category == null || subCategory == null) {
@@ -188,11 +187,32 @@ public class WisdomFacade {
 			WisdomDAO dao = factory.getWisdomDAO();
 
 			// Get target subcategory content (no wisdom info at this timing)
-			return dao
-					.getCategoryContents(category, subCategory);
+			return dao.getCategoryContents(category, subCategory);
 		} catch (WisdomDatastoreException e) {
 			DbgUtil.showLog(TAG, "WisdomDatastoreException: " + e.getMessage());
 		}
 		return null;
 	}
+
+	public List<WDWisdomData> getUserGeneratedData(long userId, int offset,
+			int limit) throws WisdomFacadeException {
+		DbgUtil.showLog(TAG, "getUserGeneratedData");
+
+		if (userId == WConstant.NO_USER) {
+			throw new WisdomFacadeException("Illegal userId parameter");
+		}
+
+		DAOFactory factory = DAOFactory.getDAOFactory();
+		try {
+			WisdomDAO dao = factory.getWisdomDAO();
+			return dao.getUserLikedWisdoms(userId, offset, limit);
+
+		} catch (WisdomDatastoreException e) {
+			DbgUtil.showLog(TAG, "WisdomDatastoreException: " + e.getMessage());
+		}
+
+		return null;
+
+	}
+
 }

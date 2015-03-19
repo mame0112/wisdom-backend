@@ -45,13 +45,18 @@ public class DefaultWisdomDAO implements WisdomDAO {
 							+ result.getProperty(DBConstant.ENTITY_WISDOM_TITLE));
 		}
 
-		FetchOptions fetch = FetchOptions.Builder.withOffset(offset).limit(
-				limit);
-		List<Entity> entities = pq.asList(fetch);
+		try {
+			FetchOptions fetch = FetchOptions.Builder.withOffset(offset).limit(
+					limit);
+			List<Entity> entities = pq.asList(fetch);
+			DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
 
-		DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
+			return helper.parseListEntityToWDWisdomData(entities);
 
-		return helper.parseListEntityToWDWisdomData(entities);
+		} catch (IllegalStateException e) {
+			DbgUtil.showLog(TAG, "IllegalStateException: " + e.getMessage());
+			throw new WisdomDatastoreException(e.getMessage());
+		}
 	}
 
 	@Override
@@ -478,5 +483,32 @@ public class DefaultWisdomDAO implements WisdomDAO {
 		}
 
 		return null;
+	}
+
+	@Override
+	public List<WDWisdomData> getUserLikedWisdoms(long userId, int offset,
+			int limit) throws WisdomDatastoreException {
+		DbgUtil.showLog(TAG, "getUserLikedWisdoms");
+
+		Filter searchFilter = new FilterPredicate(
+				DBConstant.ENTITY_WISDOM_CREATED_USER_ID, FilterOperator.EQUAL,
+				userId);
+		Query q = new Query(DBConstant.KIND_WISDOM).setFilter(searchFilter);
+		PreparedQuery pq = mDS.prepare(q);
+
+		try {
+			FetchOptions fetch = FetchOptions.Builder.withOffset(offset).limit(
+					limit);
+			List<Entity> wisdoms = pq.asList(fetch);
+			DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
+
+			return helper.parseListEntityToWDWisdomData(wisdoms);
+
+		} catch (IllegalStateException e) {
+			DbgUtil.showLog(TAG, "IllegalStateException: " + e.getMessage());
+			throw new WisdomDatastoreException("IllegalStateException: "
+					+ e.getMessage());
+		}
+
 	}
 }

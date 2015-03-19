@@ -304,6 +304,23 @@ public class DefaultUserDAO implements UserDAO {
 	@Override
 	public WDUserData getUserData(long userId) throws WisdomDatastoreException {
 		DbgUtil.showLog(TAG, "getUserData");
+		if (userId == WConstant.NO_USER) {
+			throw new WisdomDatastoreException("illegal userid parameter.");
+		}
+
+		Key userKey = DatastoreKeyGenerator.getUserDataKey(userId);
+
+		if (userKey != null) {
+			try {
+				Entity entity = mDS.get(userKey);
+				return constructUserDataFromEntity(entity);
+			} catch (EntityNotFoundException e) {
+				DbgUtil.showLog(TAG,
+						"EntityNotFoundException: " + e.getMessage());
+			}
+		}
+
 		return null;
 	}
+
 }

@@ -71,10 +71,15 @@ public class JsonParseUtil {
 					DbgUtil.showLog(TAG, "message:" + message);
 					long id = obj.getLong(JsonConstant.PARAM_WISDOM_ITEM_ID);
 
-					long updateUserId = WConstant.NO_USER;
-					long updateTime = obj
-							.getLong(JsonConstant.PARAM_WISDOM_UPDATED_DATE);
+					long updateTime = 0;
+					try {
+						updateTime = obj
+								.getLong(JsonConstant.PARAM_WISDOM_UPDATED_DATE);
+					} catch (JSONException e) {
+						// Ignore since this is optional parameter.
+					}
 
+					long updateUserId = WConstant.NO_USER;
 					try {
 						updateUserId = obj
 								.getLong(JsonConstant.PARAM_WISDOM_ITEM_UPDATE_USER_ID);

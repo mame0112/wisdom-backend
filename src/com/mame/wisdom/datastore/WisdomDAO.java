@@ -21,12 +21,13 @@ public interface WisdomDAO {
 
 	/**
 	 * Get popular wisdom
+	 * 
 	 * @param offset
 	 * @param limit
 	 * @return
 	 * @throws WisdomDatastoreException
 	 */
-	
+
 	public List<WDWisdomData> getPopularWisdoms(int offset, int limit)
 			throws WisdomDatastoreException;
 
@@ -117,5 +118,17 @@ public interface WisdomDAO {
 	 */
 	public void updateWisdom(String category, String subCategory,
 			WDWisdomData wisdom) throws WisdomDatastoreException;
+
+	/**
+	 * Get wisdoms those are liked by user.
+	 * 
+	 * @param userId
+	 * @param offset
+	 * @param limits
+	 * @return
+	 * @throws WisdomDatastoreException
+	 */
+	public List<WDWisdomData> getUserLikedWisdoms(long userId, int offset,
+			int limits) throws WisdomDatastoreException;
 
 }

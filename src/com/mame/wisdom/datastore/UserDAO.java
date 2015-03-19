@@ -15,6 +15,14 @@ public interface UserDAO {
 	public long storeNewUserData(WDUserData data)
 			throws WisdomDatastoreException;
 
+	/**
+	 * Return user data. This API should return core user data (user name and
+	 * thumbnail etc.)
+	 * 
+	 * @param userId
+	 * @return
+	 * @throws WisdomDatastoreException
+	 */
 	public WDUserData getUserData(long userId) throws WisdomDatastoreException;
 
 	public void updateUserData(WDUserData data) throws WisdomDatastoreException;
