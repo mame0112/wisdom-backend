@@ -2,7 +2,9 @@ wisdomApp.controller('pickupController',
 ['$scope', 
 'log', 
 'latestAPIService',
-function($scope, log, latestAPIService){
+'timeService',
+'timeFormatService',
+function($scope, log, latestAPIService, timeService, timeFormatService){
  	log.d("pickupController");
 
  	$scope.wisdoms = null;
@@ -11,6 +13,12 @@ function($scope, log, latestAPIService){
 
  	var param = {
  		"offset" : offset
+ 	};
+
+ 	$scope.initialize = function()
+ 	{
+ 		var now = timeService.getCurrentTime();
+ 		$scope.today = timeFormatService.getFormattedToday(now);
  	};
 
  	latestAPIService.latest({servlet_params : param}, function(response){

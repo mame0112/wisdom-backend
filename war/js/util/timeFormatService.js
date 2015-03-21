@@ -23,6 +23,17 @@ wisdomApp.service('timeFormatService', ['log', 'Constants', function(log, Consta
             var result = y + '/' + m + '/' + d + ' ' + h + ':' + min;
 
             return result;
+        },
+
+        getFormattedToday : function(time){
+            var date = new Date(time);
+
+            var m = date.getMonth() + 1;
+            var d = date.getDate();
+
+            var result = m + '/' + d;
+            return result;
+
         }
 
     };

@@ -2,6 +2,7 @@ package com.mame.wisdom.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -47,11 +48,16 @@ public class TwitterCallbackAction implements Action {
 
 			if (data != null) {
 				DbgUtil.showLog(TAG, "userId: " + data.getUserId());
+				HttpSession session = request.getSession();
+				session.setAttribute("AA", data.getUserId());
 			}
 
 		} catch (TwitterException e) {
 			DbgUtil.showLog(TAG, "TwitterException: " + e.getMessage());
 		}
+
+		// String result = "{11}";
+
 		response.sendRedirect(request.getContextPath() + "/");
 
 		return null;

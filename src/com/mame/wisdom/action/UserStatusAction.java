@@ -49,7 +49,8 @@ public class UserStatusAction implements Action {
 				List<WDWisdomData> wisdoms = wisdomFacade.getUserGeneratedData(
 						userId, offset, limit);
 
-				builder.addResponseParam(userData, wisdoms);
+				((UserStatusJsonBuilder) builder).addResponseParamExtra(
+						userData, wisdoms);
 			} else {
 				DbgUtil.showLog(TAG, "Illegal user Id -1");
 				builder.addErrorMessage("Illegal user Id -1");

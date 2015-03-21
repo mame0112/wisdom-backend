@@ -1,4 +1,5 @@
-<div ng-controller="pickupController">
+<div ng-controller="pickupController" ng-init="initialize()">
+	{{today}}'s wisdom
 	<ul class="media-list">
 		<li class="media" ng-repeat="data in wisdoms">
 		    <a class="pull-left" ng-href="#/detail/{{data.id}}">
