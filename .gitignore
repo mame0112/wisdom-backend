@@ -1,3 +1,4 @@
 .DS_Store
 .settings/
 gwt-unitCache/
+war/bootstrap/node_modules
