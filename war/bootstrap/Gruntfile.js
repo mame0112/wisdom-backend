@@ -159,7 +159,8 @@ module.exports = function (grunt) {
           sourceMapFilename: 'dist/css/<%= pkg.name %>.css.map'
         },
         src: 'less/bootstrap.less',
-        dest: 'dist/css/<%= pkg.name %>.css'
+        // dest: 'dist/css/<%= pkg.name %>.css'
+        dest: '../css/<%= pkg.name %>.css'
       },
       compileTheme: {
         options: {
