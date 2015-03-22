@@ -1,44 +1,50 @@
-var wisdomApp = angular.module('WidsomApp', ['ngRoute','ngResource', 'ngCookies', 'ui.bootstrap'])
+var wisdomApp = angular.module('WidsomApp', ['ngResource', 'ngCookies', 'ui.bootstrap', 'ui.router'])
 .controller('WidsomController', ['$scope', 'Constants', 'log', function($scope, Constants, log){
 }])
 
-.config(['$routeProvider',
-	function($routeProvider) {
-		$routeProvider.
-		when('/', {
+.config(['$stateProvider', '$urlRouterProvider',
+	function($stateProvider, $urlRouterProvider) {
+		$urlRouterProvider.otherwise('/');
+		$stateProvider.
+		state('/', {
+			url: '/',
 			templateUrl: 'view/toppage.html',
 			controller: 'WidsomController'
 		}).
-		when('/signin', {
+		state('/signin', {
+			url: '/signin',
 			templateUrl: 'view/signin.html',
 			controller: 'SigninController'
 		}).
-		when('/signup', {
+		state('/signup', {
+			url: '/signup',
 			templateUrl: 'view/signup.html',
 			controller: 'SignupController'
 		}).
-		when('/view', {
+		state('/view', {
+			url: '/view',
 			templateUrl: 'view/userpage.html',
 			controller: 'UserDataController'
 		}).
-		when('/view/:userId',{
+		state('/view/:userId',{
+			url: '/view/:userId',
 			templateUrl: 'view/userpage.html',
 			controller: 'UserDataController'
 		}).
-		when('/detail/:wisdomId',{
+		state('/detail/:wisdomId',{
+			url: '/detail/:wisdomId',
 			templateUrl: 'view/wisdom.html',
 			controller: 'wisdomDetailController'
 		}).
-		when('/category/:categoryId/:subCategoryId',{
+		state('/category/:categoryId/:subCategoryId',{
+			url: '/category/:categoryId/:subCategoryId',
 			templateUrl: 'view/category.html',
 			controller: 'categoryController'
 		}).
-		when('/wisdom',{
+		state('/wisdom',{
+			url: '/wisdom',
 			templateUrl: 'view/newwisdom.html',
 			controller: 'wisdomCreateController'
-		}).
-		otherwise({
-			redirectTo: '/'
 		});
 
 }]);
