@@ -2,7 +2,7 @@
 	{{today}}'s wisdom
 	<ul class="media-list">
 		<li class="media" ng-repeat="data in wisdoms">
-		    <a class="pull-left" ng-href="#/detail/{{data.id}}">
+		    <a class="pull-left" ui-sref="category.wisdom({wisdomId: data.id})">
 		        <img src="image/64-64.png" alt="" class="media-object" />
 		    </a>
 		    <div class="media-body">

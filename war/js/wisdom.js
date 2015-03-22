@@ -11,37 +11,37 @@ var wisdomApp = angular.module('WidsomApp', ['ngResource', 'ngCookies', 'ui.boot
 			templateUrl: 'view/toppage.html',
 			controller: 'WidsomController'
 		}).
-		state('/signin', {
+		state('signin', {
 			url: '/signin',
 			templateUrl: 'view/signin.html',
 			controller: 'SigninController'
 		}).
-		state('/signup', {
+		state('signup', {
 			url: '/signup',
 			templateUrl: 'view/signup.html',
 			controller: 'SignupController'
 		}).
-		state('/view', {
+		state('user', {
 			url: '/view',
 			templateUrl: 'view/userpage.html',
 			controller: 'UserDataController'
 		}).
-		state('/view/:userId',{
+		state('user.detail',{
 			url: '/view/:userId',
 			templateUrl: 'view/userpage.html',
 			controller: 'UserDataController'
 		}).
-		state('/detail/:wisdomId',{
+		state('category.wisdom',{
 			url: '/detail/:wisdomId',
 			templateUrl: 'view/wisdom.html',
 			controller: 'wisdomDetailController'
 		}).
-		state('/category/:categoryId/:subCategoryId',{
+		state('category',{
 			url: '/category/:categoryId/:subCategoryId',
 			templateUrl: 'view/category.html',
 			controller: 'categoryController'
 		}).
-		state('/wisdom',{
+		state('newwisdom',{
 			url: '/wisdom',
 			templateUrl: 'view/newwisdom.html',
 			controller: 'wisdomCreateController'
