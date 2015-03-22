@@ -1,13 +1,13 @@
 wisdomApp.controller('UserDataController',
  ['$scope', 
- '$routeParams', 
+ '$stateParams', 
  'userInfoAPIService',
  'log',
  'Constants',
- function($scope, $routeParams, userInfoAPIService, log, Constants){
+ function($scope, $stateParams, userInfoAPIService, log, Constants){
 
  	console.log("UserDataController");
- 	$scope.userId = $routeParams.userId;
+ 	$scope.userId = $stateParams.userId;
  	console.log("userId: " + $scope.userId);
 
  	var offset = 0;

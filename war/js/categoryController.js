@@ -4,10 +4,10 @@ wisdomApp.controller('categoryController',
 	'log', 
 	'modeService', 
 	'Constants', 
-	'$routeParams', 
+	'$stateParams', 
 	'categoryAPIService',
 	'timeFormatService',
- function($scope, $http, log, modeService, Constants, $routeParams, categoryAPIService, timeFormatService){
+ function($scope, $http, log, modeService, Constants, $stateParams, categoryAPIService, timeFormatService){
  	log.d("categoryController");
 
  	var ACTIVE = "active";
@@ -20,10 +20,10 @@ wisdomApp.controller('categoryController',
  	// $scope.pagination = paginationFactory.getNew(10);
  	// $scope.pagination.numPages = 3;
 
- 	$scope.categoryId = $routeParams.categoryId;
+ 	$scope.categoryId = $stateParams.categoryId;
  	log.d("categoryid: " + $scope.categoryId);
 
-	$scope.subCategoryId = $routeParams.subCategoryId;
+	$scope.subCategoryId = $stateParams.subCategoryId;
  	log.d("subCategoryName: " + $scope.subCategoryId);
 
  	var offset = 0;

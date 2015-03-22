@@ -1,5 +1,5 @@
-wisdomApp.controller('UserAccountController', ['$scope', '$routeParams', 'log', function($scope, $routeParams, log){
+wisdomApp.controller('UserAccountController', ['$scope', '$stateParams', 'log', function($scope, $stateParams, log){
  	log.d("UserAccountController");
- 	// $scope.userId = $routeParams.userId;
+ 	// $scope.userId = $stateParams.userId;
  	// log.d("userId: " + $scope.userId);
 }]);

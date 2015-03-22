@@ -1,6 +1,6 @@
 wisdomApp.controller('SignupController', 
 	['$scope', 
-	'$routeParams', 
+	'$stateParams', 
 	'log',  
 	'$window', 
 	'twitterAPIService', 
@@ -8,9 +8,8 @@ wisdomApp.controller('SignupController',
 	'Constants',
 	'modeService',
 	'userDataHolder',
- function($scope, $routeParams, log, $window, twitterAPIService, dataRetriveService, Constants, modeService, userDataHolder){
+ function($scope, $stateParams, log, $window, twitterAPIService, dataRetriveService, Constants, modeService, userDataHolder){
  	log.d("SignupController");
- 	// $scope.userId = $routeParams.userId;
  	// log.d("userId: " + $scope.userId);
 
  	$scope.twitterSignup = function()

@@ -2,13 +2,13 @@ wisdomApp.controller('wisdomDetailController',
 ['$scope', 
 'log', 
 'wisdomAPIService',
-'$routeParams',
+'$stateParams',
 'modeService', 
 'Constants', 
-function($scope, log, wisdomAPIService, $routeParams, modeService, Constants){
+function($scope, log, wisdomAPIService, $stateParams, modeService, Constants){
  	log.d("wisdomDetailController");
 
- 	var wisdomId = $routeParams.wisdomId;
+ 	var wisdomId = $stateParams.wisdomId;
  	log.d("wisdomId: " + wisdomId);
 
  	$scope.noContent = null;
