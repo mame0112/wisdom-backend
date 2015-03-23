@@ -1,4 +1,5 @@
 <div ng-controller="rankingController" ng-init="initialize()">
-{{scores}}
-
+<ul ng-repeat="score in scores">
+<li>{{score.username}} / {{score.point}} / </li>
+</ul>
 </div>
