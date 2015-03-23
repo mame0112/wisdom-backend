@@ -1,5 +1,7 @@
 package com.mame.wisdom.datastore;
 
+import java.util.List;
+
 import com.mame.wisdom.data.WDUserData;
 import com.mame.wisdom.exception.WisdomDatastoreException;
 
@@ -26,5 +28,14 @@ public interface UserDAO {
 	public WDUserData getUserData(long userId) throws WisdomDatastoreException;
 
 	public void updateUserData(WDUserData data) throws WisdomDatastoreException;
+
+	/**
+	 * Get highest user list based on point
+	 * 
+	 * @param limit
+	 * @throws WisdomDatastoreException
+	 */
+	public List<WDUserData> getHighestPointUserList(int limit)
+			throws WisdomDatastoreException;
 
 }

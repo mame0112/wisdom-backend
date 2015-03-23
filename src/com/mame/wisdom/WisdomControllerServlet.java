@@ -14,7 +14,8 @@ import com.mame.wisdom.util.DbgUtil;
 
 public class WisdomControllerServlet extends HttpServlet {
 
-	private final static String TAG = "WisdomControllerServlet";
+	private final static String TAG = WisdomControllerServlet.class
+			.getSimpleName();
 
 	@Override
 	public void init() {

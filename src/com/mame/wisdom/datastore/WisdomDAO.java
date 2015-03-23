@@ -131,4 +131,11 @@ public interface WisdomDAO {
 	public List<WDWisdomData> getUserLikedWisdoms(long userId, int offset,
 			int limits) throws WisdomDatastoreException;
 
+	/**
+	 * Refresh old memcache data
+	 * 
+	 * @throws WisdomDatastoreException
+	 */
+	public void refreshOldMemcacheData() throws WisdomDatastoreException;
+
 }

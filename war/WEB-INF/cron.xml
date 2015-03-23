@@ -1,0 +1,9 @@
+<cronentries>
+	<cron>
+		<url>/cron/latestInfo</url>
+		<description>Create latest information of the day every day
+		</description>
+		<schedule>every day 00:00</schedule>
+		<timezone>Asia/Tokyo</timezone>
+	</cron>
+</cronentries>

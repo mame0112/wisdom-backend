@@ -20,6 +20,18 @@ public class WisdomFacade {
 		DbgUtil.showLog(TAG, "WisdomFacade");
 	}
 
+	public void refreshOldWisdomData() {
+		DbgUtil.showLog(TAG, "refreshOldWisdomData");
+
+		DAOFactory factory = DAOFactory.getDAOFactory();
+		try {
+			WisdomDAO wisdomDAO = factory.getWisdomDAO();
+			wisdomDAO.refreshOldMemcacheData();
+		} catch (WisdomDatastoreException e) {
+			DbgUtil.showLog(TAG, "WisdomDatastoreException: " + e.getMessage());
+		}
+	}
+
 	public List<WDWisdomData> getPopularWisdoms(int offset, int limit) {
 		DbgUtil.showLog(TAG, "getPopularWisdoms");
 
@@ -46,22 +58,14 @@ public class WisdomFacade {
 	public List<WDWisdomData> getLatestWisdoms(int num) {
 		DbgUtil.showLog(TAG, "getLatestWisdoms");
 
-		// TODO Need to fix
-		// DAOFactory factory = DAOFactory.getDAOFactory();
-		// try {
-		// WisdomDAO wisdomDAO = factory.getWisdomDAO();
-		// List<WDWisdomData> result = wisdomDAO.getPopularWisdoms(num);
-		// if (result == null) {
-		// DbgUtil.showLog(TAG, "result is null");
-		// return null;
-		// } else {
-		// DbgUtil.showLog(TAG, "result is not null");
-		// return wisdomDAO.getPopularWisdoms(num);
-		// }
-		//
-		// } catch (WisdomDatastoreException e) {
-		// DbgUtil.showLog(TAG, "WisdomDatastoreException: " + e.getMessage());
-		// }
+		DAOFactory factory = DAOFactory.getDAOFactory();
+		try {
+			WisdomDAO wisdomDAO = factory.getWisdomDAO();
+			List<WDWisdomData> result = wisdomDAO.getLatestWisdoms(num);
+
+		} catch (WisdomDatastoreException e) {
+			DbgUtil.showLog(TAG, "WisdomDatastoreException: " + e.getMessage());
+		}
 
 		return null;
 	}

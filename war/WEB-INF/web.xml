@@ -15,7 +15,7 @@
 		<url-pattern>/wisdom_backend/greet</url-pattern>
 	</servlet-mapping>
 
-	<!-- Mail controller class for Wisdom backend -->
+	<!-- Main controller class for Wisdom backend -->
 	<servlet>
 		<servlet-name>controllerServlet</servlet-name>
 		<servlet-class>com.mame.wisdom.WisdomControllerServlet</servlet-class>
@@ -24,6 +24,17 @@
 	<servlet-mapping>
 		<servlet-name>controllerServlet</servlet-name>
 		<url-pattern>/controller/*</url-pattern>
+	</servlet-mapping>
+
+	<!-- cron job -->
+	<servlet>
+		<servlet-name>cronServlet</servlet-name>
+		<servlet-class>com.mame.wisdom.WisdomCronServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>cronServlet</servlet-name>
+		<url-pattern>/cron/*</url-pattern>
 	</servlet-mapping>
 
 	<!-- Default page to serve -->

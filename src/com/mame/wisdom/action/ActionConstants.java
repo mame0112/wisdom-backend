@@ -11,6 +11,8 @@ public class ActionConstants {
 	public final static String KEY_USER = "/user";
 	
 	public final static String KEY_USERINFO = "/userInfo";
+	
+	public final static String KEY_USERRANKING = "/ranking";
 
 	public final static String KEY_NOTIFICATION = "/notification";
 

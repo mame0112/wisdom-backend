@@ -21,6 +21,9 @@ import com.google.appengine.api.datastore.TransactionOptions;
 import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.data.WDSubCategoryData;
 import com.mame.wisdom.data.WDWisdomData;
+import com.mame.wisdom.datastore.memcache.WDMemcacheManager;
+import com.mame.wisdom.datastore.memcache.WDMemcacheService;
+import com.mame.wisdom.datastore.memcache.WisdomMemcacheService;
 import com.mame.wisdom.exception.WisdomDatastoreException;
 import com.mame.wisdom.util.DbgUtil;
 
@@ -64,21 +67,31 @@ public class DefaultWisdomDAO implements WisdomDAO {
 			throws WisdomDatastoreException {
 		DbgUtil.showLog(TAG, "getLatestWisdoms");
 
-		Query q = new Query(DBConstant.KIND_WISDOM);
-		PreparedQuery pq = mDS.prepare(q);
-		for (Entity result : pq.asIterable()) {
-			DbgUtil.showLog(
-					TAG,
-					"result title:"
-							+ result.getProperty(DBConstant.ENTITY_WISDOM_TITLE));
+		WDMemcacheManager memManager = WDMemcacheManager
+				.getInstance(new WisdomMemcacheService());
+		List<WDWisdomData> result = (List<WDWisdomData>) memManager.getCache();
+
+		// If no memcache exist
+		if (result == null) {
+			Query q = new Query(DBConstant.KIND_WISDOM);
+			PreparedQuery pq = mDS.prepare(q);
+			for (Entity e : pq.asIterable()) {
+				DbgUtil.showLog(
+						TAG,
+						"result title:"
+								+ e.getProperty(DBConstant.ENTITY_WISDOM_TITLE));
+			}
+
+			FetchOptions fetch = FetchOptions.Builder.withOffset(0).limit(10);
+			List<Entity> entities = pq.asList(fetch);
+
+			DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
+
+			result = helper.parseListEntityToWDWisdomData(entities);
+
 		}
 
-		FetchOptions fetch = FetchOptions.Builder.withOffset(0).limit(10);
-		List<Entity> entities = pq.asList(fetch);
-
-		DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
-
-		return helper.parseListEntityToWDWisdomData(entities);
+		return result;
 	}
 
 	@Override
@@ -509,6 +522,16 @@ public class DefaultWisdomDAO implements WisdomDAO {
 			throw new WisdomDatastoreException("IllegalStateException: "
 					+ e.getMessage());
 		}
+
+	}
+
+	@Override
+	public void refreshOldMemcacheData() throws WisdomDatastoreException {
+		DbgUtil.showLog(TAG, "refreshOldMemcacheData");
+
+		WDMemcacheManager memManager = WDMemcacheManager
+				.getInstance(new WisdomMemcacheService());
+		List<WDWisdomData> result = (List<WDWisdomData>) memManager.getCache();
 
 	}
 }

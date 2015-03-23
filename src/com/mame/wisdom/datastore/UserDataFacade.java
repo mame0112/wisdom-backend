@@ -1,5 +1,7 @@
 package com.mame.wisdom.datastore;
 
+import java.util.List;
+
 import com.google.appengine.api.datastore.Blob;
 import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.data.WDUserData;
@@ -91,6 +93,20 @@ public class UserDataFacade {
 		} catch (WisdomDatastoreException e) {
 			DbgUtil.showLog(TAG, "WisdomDatastoreException: " + e.getMessage());
 		}
+		return null;
+	}
+
+	public List<WDUserData> getUserPointRankingList(int limit) {
+		DbgUtil.showLog(TAG, "getUserPointRankingList");
+
+		DAOFactory factory = DAOFactory.getDAOFactory();
+		try {
+			UserDAO dao = factory.getUserDAO();
+			return dao.getHighestPointUserList(limit);
+		} catch (WisdomDatastoreException e) {
+			DbgUtil.showLog(TAG, "WisdomDatastoreException: " + e.getMessage());
+		}
+
 		return null;
 	}
 

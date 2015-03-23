@@ -36,6 +36,9 @@ public class JsonConstant {
 
 	public final static String PARAM_USER_LAST_LOGIN = "logindate";
 
+	// This shall be used for the number of users for ranking
+	public final static String PARAM_USER_RANKING_NUM = "limit";
+
 	/**
 	 * Json fields for category data
 	 */
@@ -50,13 +53,13 @@ public class JsonConstant {
 	public final static String PARAM_CATEGORY_DESCRIPTION = "description";
 
 	public final static String PARAM_CATEGORY_WISDOM_ID = "wisdomId";
-	
+
 	public final static String PARAM_CATEGORY_OFFSET = "offset";
-	
+
 	public final static String PARAM_CATEGORY_LIMIT = "limit";
-	
+
 	public final static String PARAM_CATEGORY_WISDOM_NUM = "wisdomNum";
-	
+
 	public final static String PARAM_CATEGORY_WISDOMS = "wisdoms";
 
 	/**

@@ -15,3 +15,24 @@ body {
 	bottom: 0;
 	width: 100%;
 }
+
+#pickupDirective{
+
+}
+
+#pickupDirective .title{
+	font-size: 18px;
+	font-weight: bold;
+}
+
+#pickupDirective .title{
+	font-size: 18px;
+	font-weight: bold;
+}
+
+#pickupDirective ul li .media-body p{
+	color: #888888;
+	font-size: 12px;
+	font-weight: thin;
+}
+

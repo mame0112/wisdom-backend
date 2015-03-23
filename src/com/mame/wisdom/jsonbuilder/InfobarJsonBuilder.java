@@ -16,13 +16,22 @@ public class InfobarJsonBuilder extends JsonBuilder {
 
 	private JSONObject mRootObject = new JSONObject();
 
-	@Override
-	public void addResponseId(int id) throws JSONBuilderException {
-		DbgUtil.showLog(TAG, "addResponseId");
+	public InfobarJsonBuilder() {
+		DbgUtil.showLog(TAG, "InfobarJsonBuilder");
 		try {
 			addVersion(VERSION);
 		} catch (JSONBuilderException e) {
 			DbgUtil.showLog(TAG, "JSONBuilderException: " + e.getMessage());
+		}
+	}
+
+	@Override
+	public void addResponseId(int id) throws JSONBuilderException {
+		DbgUtil.showLog(TAG, "addResponseId");
+		try {
+			mRootObject.put(JsonConstant.ID, id);
+		} catch (JSONException e) {
+			DbgUtil.showLog(TAG, "JSONException: " + e.getMessage());
 		}
 
 	}

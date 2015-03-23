@@ -10,7 +10,7 @@ import com.mame.wisdom.util.DbgUtil;
 
 public class ActionFactory {
 
-	private final static String TAG = "ActionFactory";
+	private final static String TAG = ActionFactory.class.getSimpleName();
 
 	private final static Map<String, Action> mAction = new HashMap<String, Action>();
 
@@ -30,10 +30,13 @@ public class ActionFactory {
 		mAction.put(ActionConstants.POST + ActionConstants.KEY_USER,
 				new SignupAction());
 
-		//Get current user status API
+		// Get current user status API
 		mAction.put(ActionConstants.GET + ActionConstants.KEY_USERINFO,
 				new UserStatusAction());
-		
+
+		// Get current user status API
+		mAction.put(ActionConstants.GET + ActionConstants.KEY_USERRANKING,
+				new UserPointRankingAction());
 
 		// Notification APIs
 		// TODO TO be updated.

@@ -1,16 +1,19 @@
 package com.mame.wisdom.datastore;
 
 import java.util.ConcurrentModificationException;
+import java.util.List;
 
 import com.google.appengine.api.datastore.Blob;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.EntityNotFoundException;
+import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.PreparedQuery.TooManyResultsException;
 import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.appengine.api.datastore.Transaction;
 import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.data.WDAllUserData;
@@ -87,7 +90,8 @@ public class DefaultUserDAO implements UserDAO {
 			PreparedQuery pQuery = mDS.prepare(query);
 			Entity entity = pQuery.asSingleEntity();
 			if (entity != null) {
-				return constructUserDataFromEntity(entity);
+				DefaultUserDAOHelper helper = new DefaultUserDAOHelper();
+				return helper.constructUserDataFromEntity(entity);
 			}
 		} catch (TooManyResultsException e1) {
 			DbgUtil.showLog(TAG, "TooManyResultsException: " + e1.getMessage());
@@ -204,36 +208,6 @@ public class DefaultUserDAO implements UserDAO {
 
 	}
 
-	private WDUserData constructUserDataFromEntity(Entity entity) {
-		DbgUtil.showLog(TAG, "constructUserDataFromEntity");
-
-		long userId = (Long) entity.getProperty(DBConstant.ENTITY_USER_ID);
-		String twitterName = (String) entity
-				.getProperty(DBConstant.ENTITY_USER_TWITTER_NAME);
-		String twitterToken = (String) entity
-				.getProperty(DBConstant.ENTITY_USER_TWITTER_TOKEN);
-		String twitterTokenSecret = (String) entity
-				.getProperty(DBConstant.ENTITY_USER_TWITTER_TOKEN_SECRET);
-		String facebookName = (String) entity
-				.getProperty(DBConstant.ENTITY_USER_FACEBOOK_NAME);
-		String userName = (String) entity
-				.getProperty(DBConstant.ENTITY_USER_NAME);
-		String password = (String) entity
-				.getProperty(DBConstant.ENTITY_USER_PASSWORD);
-		String thumbnail = (String) entity
-				.getProperty(DBConstant.ENTITY_USER_THUMBNAIL);
-		long lastLogin = (Long) entity
-				.getProperty(DBConstant.ENTITY_USER_LAST_LOGIN);
-		long totalPoint = (Long) entity
-				.getProperty(DBConstant.ENTITY_USER_TOTAL_POINT);
-
-		WDUserData data = new WDUserData(userId, twitterName, twitterToken,
-				twitterTokenSecret, facebookName, userName, password,
-				thumbnail, lastLogin, totalPoint);
-
-		return data;
-	}
-
 	@Override
 	public void updateUserData(WDUserData data) throws WisdomDatastoreException {
 		DbgUtil.showLog(TAG, "updateUserData");
@@ -313,11 +287,44 @@ public class DefaultUserDAO implements UserDAO {
 		if (userKey != null) {
 			try {
 				Entity entity = mDS.get(userKey);
-				return constructUserDataFromEntity(entity);
+				DefaultUserDAOHelper helper = new DefaultUserDAOHelper();
+				return helper.constructUserDataFromEntity(entity);
 			} catch (EntityNotFoundException e) {
 				DbgUtil.showLog(TAG,
 						"EntityNotFoundException: " + e.getMessage());
 			}
+		}
+
+		return null;
+	}
+
+	@Override
+	public List<WDUserData> getHighestPointUserList(int limit)
+			throws WisdomDatastoreException {
+		DbgUtil.showLog(TAG, "getHighestPointUserList");
+
+		Filter pointFilter = new FilterPredicate(
+				DBConstant.ENTITY_USER_TOTAL_POINT, FilterOperator.NOT_EQUAL, 0);
+
+		try {
+			Key key = DatastoreKeyGenerator.getAllUserDataKey();
+			Query query = new Query(DBConstant.KIND_USER_DATA, key).addSort(
+					DBConstant.ENTITY_USER_TOTAL_POINT,
+					SortDirection.DESCENDING);
+			query.setFilter(pointFilter);
+			PreparedQuery pQuery = mDS.prepare(query);
+			FetchOptions fetch = FetchOptions.Builder.withOffset(0)
+					.limit(limit);
+			List<Entity> entities = pQuery.asList(fetch);
+
+			if (entities != null) {
+				DefaultUserDAOHelper helper = new DefaultUserDAOHelper();
+				return helper.parseEntityListToUserDataList(entities);
+			}
+		} catch (IllegalArgumentException e) {
+			DbgUtil.showLog(TAG, "IllegalArgumentException: " + e.getMessage());
+		} catch (IllegalStateException e) {
+			DbgUtil.showLog(TAG, "IllegalStateException: " + e.getMessage());
 		}
 
 		return null;
