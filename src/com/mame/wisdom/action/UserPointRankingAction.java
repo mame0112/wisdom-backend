@@ -35,6 +35,7 @@ public class UserPointRankingAction implements Action {
 			JSONObject object = new JSONObject(params);
 			int limit = (int) object
 					.getInt(JsonConstant.PARAM_USER_RANKING_NUM);
+			DbgUtil.showLog(TAG, "limit: " + limit);
 
 			List<WDUserData> users = facade.getUserPointRankingList(limit);
 

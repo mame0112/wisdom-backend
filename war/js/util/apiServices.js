@@ -34,6 +34,17 @@ wisdomApp.factory('apiService', ['$resource', 'log',
     }
 ])
 
+.factory('userRankingAPIService', ['$resource', 'log',
+ function($resource, log) {
+    return $resource('/controller/ranking',
+         {servlet_resp_id: 1, param: '@servlet_params'},
+         { 
+            //Get user info
+            status: {method: 'GET', isArray: false},
+        });
+    }
+])
+
 .factory('notificationAPIService', ['$resource', 'log',
  function($resource, log) {
     return $resource('/controller/notification',

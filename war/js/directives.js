@@ -40,6 +40,13 @@ wisdomApp.directive('headerDirective', function(){
 	};
 })
 
+.directive('rankingDirective', function(){
+	return {
+		restrict: 'A',
+		templateUrl: 'ranking-directive.html'
+	};
+})
+
 .directive('breadcrumbDirective', function(){
 	return {
 		restrict: 'A',

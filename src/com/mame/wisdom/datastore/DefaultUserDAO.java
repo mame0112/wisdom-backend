@@ -318,6 +318,7 @@ public class DefaultUserDAO implements UserDAO {
 			List<Entity> entities = pQuery.asList(fetch);
 
 			if (entities != null) {
+				DbgUtil.showLog(TAG, "size: " + entities.size());
 				DefaultUserDAOHelper helper = new DefaultUserDAOHelper();
 				return helper.parseEntityListToUserDataList(entities);
 			}
