@@ -20,32 +20,36 @@ public class DebugAction implements Action {
 
 		// Create dummy user data
 		UserDataFacade userDatafacade = new UserDataFacade();
+		for (int i = 1; i < 15; i++) {
+			try {
 
-		try {
-			if (userDatafacade.getUserData(1) == null) {
+				if (userDatafacade.getUserData(i) == null) {
+					WDUserData data = new WDUserData(WConstant.NO_USER,
+							"Test twitter name" + i, "twitter token" + i,
+							"twitterTokenSecret" + i, "facebookName" + i,
+							"userName" + i, "password" + i, null,
+							TimeUtil.getCurrentDate(), i * 10);
+					userDatafacade.createNewUserData(data);
+
+				}
+
+			} catch (Exception e) {
 				WDUserData data = new WDUserData(WConstant.NO_USER,
-						"Test twitter name1", "twitter token",
-						"twitterTokenSecret", "facebookName", "userName",
-						"password", null, TimeUtil.getCurrentDate(), 10);
+						"Test twitter name" + i, "twitter token" + i,
+						"twitterTokenSecret" + i, "facebookName" + i,
+						"userName" + i, "password" + i, null,
+						TimeUtil.getCurrentDate(), i * 10);
 				userDatafacade.createNewUserData(data);
-
 			}
-		} catch (Exception e) {
-			WDUserData data = new WDUserData(WConstant.NO_USER,
-					"Test twitter name1", "twitter token",
-					"twitterTokenSecret", "facebookName", "userName",
-					"password", null, TimeUtil.getCurrentDate(), 10);
-			userDatafacade.createNewUserData(data);
 		}
-
-//		if (userDatafacade.getUserData(2) == null) {
-//			WDUserData data = new WDUserData(WConstant.NO_USER,
-//					"Test twitter name2", "twitter token2",
-//					"twitterTokenSecret2", "facebookName2", "userName2",
-//					"password2", null, TimeUtil.getCurrentDate(), 20);
-//			userDatafacade.createNewUserData(data);
-//
-//		}
+		// if (userDatafacade.getUserData(2) == null) {
+		// WDUserData data = new WDUserData(WConstant.NO_USER,
+		// "Test twitter name2", "twitter token2",
+		// "twitterTokenSecret2", "facebookName2", "userName2",
+		// "password2", null, TimeUtil.getCurrentDate(), 20);
+		// userDatafacade.createNewUserData(data);
+		//
+		// }
 
 		return null;
 	}

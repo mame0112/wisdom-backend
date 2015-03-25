@@ -34,3 +34,12 @@
 #sidebar .childItem{
 	color: #888888;
 }
+
+#ranking{
+
+}
+
+#ranking .title{
+    font-size: 18px;
+    font-weight: bold;
+}

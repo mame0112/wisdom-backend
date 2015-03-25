@@ -1,5 +1,16 @@
-<div ng-controller="rankingController" ng-init="initialize()">
-<ul ng-repeat="score in scores">
-<li>{{score.username}} / {{score.point}} / </li>
-</ul>
+<div id="ranking" ng-controller="rankingController" ng-init="initialize()">
+<div class="title">{{today}}'s ranking</div>
+<div ng-repeat="score in scores">
+	<div class="media">
+	  <div class="media-left">
+	    <a href="#">
+	      <img class="media-object" src="../image/prize.jpg" alt="...">
+	    </a>
+	  </div>
+	  <div class="media-body">
+	    <h4 class="media-heading">{{score.username}}</h4>
+{{score.point}}pt
+	  </div>
+	</div>
+</div>
 </div>

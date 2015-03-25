@@ -18,7 +18,7 @@ public class UserDataFacade {
 		DbgUtil.showLog(TAG, "UserDataFacade");
 	}
 
-	public boolean createNewUserData(WDUserData data)
+	public synchronized boolean createNewUserData(WDUserData data)
 			throws WisdomDatastoreException {
 		DbgUtil.showLog(TAG, "createNewUserData");
 
