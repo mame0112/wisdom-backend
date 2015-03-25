@@ -1,19 +1,15 @@
 <div id="ranking" ng-controller="rankingController" ng-init="initialize()">
 <div class="title">{{today}}'s ranking</div>
-<div ng-repeat="score in scores">
-	<div class="media">
-	  <div class="media-left">
-	    <a href="#">
-	      <img class="media-object" src="../image/prize1.jpg" alt="..." ng-if="$index == 0">
-	      <img class="media-object" src="../image/prize2.jpg" alt="..." ng-if="$index == 1">
-	      <img class="media-object" src="../image/prize3.jpg" alt="..." ng-if="$index == 2">
-	      <img class="media-object" src="../image/prize.jpg" alt="..." ng-if="$index !== 0 && $index !== 1 && $index !== 2">
-	    </a>
-	  </div>
-	  <div class="media-body">
-	    <h4 class="media-heading">{{score.username}}</h4>
+<div class="media" ng-repeat="score in scores">
+  <div class="media-left">
+	  <img class="media-object" src="../image/prize1.jpg" alt="..." ng-if="$index == 0">
+	  <img class="media-object" src="../image/prize2.jpg" alt="..." ng-if="$index == 1">
+	  <img class="media-object" src="../image/prize3.jpg" alt="..." ng-if="$index == 2">
+	  <img class="media-object" src="../image/prize.jpg" alt="..." ng-if="$index !== 0 && $index !== 1 && $index !== 2">
+  </div>
+  <div class="media-body">
+    <h4 class="media-heading">{{score.username}}</h4>
 {{score.point}}pt
-	  </div>
-	</div>
+  </div>
 </div>
 </div>

@@ -42,4 +42,22 @@
 #ranking .title{
     font-size: 18px;
     font-weight: bold;
+    padding-bottom: 0px;
+    margin-bottom: 0.0em;
+}
+
+#ranking .media{
+
+}
+
+#ranking .media-heading{
+    font-size: 14px;
+    font-weight: thin;
+    color: #333333;
+}
+
+#ranking .media-body{
+    font-size: 14px;
+    font-weight: thin;
+    color: #888888;
 }
