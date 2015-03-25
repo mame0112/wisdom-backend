@@ -5,7 +5,8 @@ wisdomApp.controller('wisdomDetailController',
 '$stateParams',
 'modeService', 
 'Constants', 
-function($scope, log, wisdomAPIService, $stateParams, modeService, Constants){
+'timeFormatService',
+function($scope, log, wisdomAPIService, $stateParams, modeService, Constants, timeFormatService){
  	log.d("wisdomDetailController");
 
  	var wisdomId = $stateParams.wisdomId;
@@ -16,6 +17,13 @@ function($scope, log, wisdomAPIService, $stateParams, modeService, Constants){
  	$scope.initialize = function(){
  		log.d("wisdomDetailController initialize");
 		modeService.changeCurrentMode(Constants.STATE.STATE_WISDOM_PAGE);
+ 	};
+
+ 	$scope.formatTimeInfo = function(date){
+ 		//If date information is correct, we return formatted date
+ 		if(date !== null && date !== undefined && date !== 0){
+ 			return timeFormatService.getFormattedTime(date);
+ 		}
  	};
 
  	// $scope.wisdoms = null;

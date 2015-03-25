@@ -36,3 +36,43 @@ body {
 	font-weight: thin;
 }
 
+.wisdom {
+
+}
+
+.wisdom li{
+	margin-left: 0px;
+	list-style-type: none;
+}
+
+.wisdom .titlearea{
+	background-color: #fcfcfc;
+}
+
+.wisdom .titlearea .title{
+	color: #333333;
+	padding-top: 0px;
+	margin-top: -0.2em;
+}
+
+.wisdom .titlearea .description{
+	color: #333333;
+}
+
+.wisdom .bodyarea{
+	background-color: #ffffff;
+}
+
+.wisdom .date{
+	color: #888888;
+}
+
+
+
+
+
+
+
+
+
+
