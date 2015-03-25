@@ -28,6 +28,20 @@
 	<input type="file" name="thumbnail" value="select image">
 </div>
 
+<!-- -->
+<div class="form-group">
+ watching model:
+    <button class="button" ng-file-select ng-model="files">Upload using model $watch {{files}}</button>
+    <button class="button" ng-file-select ng-file-change="upload($files)">Upload on file change</button>
+    <button class="button" ng-click="uploadFile()">Upload</button>
+    Drop File:
+    <div ng-file-drop ng-model="files" class="drop-box" 
+        drag-over-class="dragover" ng-multiple="true" allow-dir="true"
+        accept=".jpg,.png,.pdf">Drop Images or PDFs files here</div>
+    <div ng-no-file-drop>File Drag/Drop is not supported for this browser</div>
+</div>
+<!-- -->
+
 <div class="form-group">
 	<h3>Title</h3>
 	<input type="text" class="form-control" placeholder="Input title" ng-model="title">

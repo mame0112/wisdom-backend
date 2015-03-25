@@ -1,4 +1,4 @@
-var wisdomApp = angular.module('WidsomApp', ['ngResource', 'ngCookies', 'ui.bootstrap', 'ui.router'])
+var wisdomApp = angular.module('WidsomApp', ['ngResource', 'ngCookies', 'ui.bootstrap', 'ui.router', 'angularFileUpload'])
 .controller('WidsomController', ['$scope', 'Constants', 'log', function($scope, Constants, log){
 }])
 

@@ -10,7 +10,19 @@ wisdomApp.controller('wisdomCreateController',
    'timeService',
    'subCategoryLoaderService',
    'modeService',
-    function($scope, log, Constants, createWisdomSharedStateService, newWisdomAPIService, $http, userDataHolder, timeService, subCategoryLoaderService, modeService){
+   '$upload',
+    function(
+    	$scope, 
+    	log, 
+    	Constants, 
+    	createWisdomSharedStateService, 
+    	newWisdomAPIService, 
+    	$http, 
+    	userDataHolder, 
+    	timeService, 
+    	subCategoryLoaderService, 
+    	modeService, 
+    	$upload){
  	log.d("wisdomCreateController");
 
 	$scope.status = {
@@ -106,8 +118,14 @@ wisdomApp.controller('wisdomCreateController',
 	});
 
 	$scope.$watch('thumbnail', function(newValue, oldValue) {
+		log.d("thumbnail loaded");
 		result.thumbnail = newValue;
 	});
+
+	$scope.$watch('files', function () {
+		result.thumbnail = $scope.files;
+        // $scope.upload($scope.files);
+    });
 
 	$scope.getSubcategoryItems = function(category)
 	{
@@ -133,5 +151,37 @@ wisdomApp.controller('wisdomCreateController',
 			// });
 		}
 	};
+
+	$scope.uploadFile = function () {
+		log.d("uploadFile");
+		var file = $scope.files;
+		$upload.upload({
+            url: '/controller/newwisdom',
+            fields: {servlet_resp_id: 1, result: '@servlet_new_wisdom_param'},
+            // fields: {'username': $scope.username},
+            file: file
+        }).progress(function (evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+        }).success(function (data, status, headers, config) {
+                console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
+        });
+    };
+
+	$scope.upload = function (files) {
+        if (files && files.length) {
+			var file = files[0];
+			$upload.upload({
+                url: 'upload/url',
+                fields: {'username': $scope.username},
+                file: file
+            }).progress(function (evt) {
+                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+            }).success(function (data, status, headers, config) {
+                    console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
+            });
+        }
+    };
 
 }]);
