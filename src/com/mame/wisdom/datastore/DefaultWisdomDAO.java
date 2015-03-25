@@ -362,9 +362,13 @@ public class DefaultWisdomDAO implements WisdomDAO {
 			try {
 				DbgUtil.showLog(TAG, "searchParam: " + searchParam);
 				// Need to check if this work
+
 				Filter searchFilter = new FilterPredicate(
-						DBConstant.ENTITY_WISDOM_ITMES, FilterOperator.EQUAL,
-						searchParam);
+						DBConstant.ENTITY_WISDOM_DESCRIPTION,
+						FilterOperator.IN, searchParam);
+				// Filter searchFilter = new FilterPredicate(
+				// DBConstant.ENTITY_WISDOM_DESCRIPTION,
+				// FilterOperator.EQUAL, searchParam);
 				Query q = new Query(DBConstant.KIND_WISDOM)
 						.setFilter(searchFilter);
 				PreparedQuery pq = mDS.prepare(q);
