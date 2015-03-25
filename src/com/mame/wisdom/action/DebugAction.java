@@ -21,14 +21,31 @@ public class DebugAction implements Action {
 		// Create dummy user data
 		UserDataFacade userDatafacade = new UserDataFacade();
 
-		if (userDatafacade.getUserData(1) == null) {
+		try {
+			if (userDatafacade.getUserData(1) == null) {
+				WDUserData data = new WDUserData(WConstant.NO_USER,
+						"Test twitter name1", "twitter token",
+						"twitterTokenSecret", "facebookName", "userName",
+						"password", null, TimeUtil.getCurrentDate(), 10);
+				userDatafacade.createNewUserData(data);
+
+			}
+		} catch (Exception e) {
 			WDUserData data = new WDUserData(WConstant.NO_USER,
 					"Test twitter name1", "twitter token",
 					"twitterTokenSecret", "facebookName", "userName",
 					"password", null, TimeUtil.getCurrentDate(), 10);
 			userDatafacade.createNewUserData(data);
-
 		}
+
+//		if (userDatafacade.getUserData(2) == null) {
+//			WDUserData data = new WDUserData(WConstant.NO_USER,
+//					"Test twitter name2", "twitter token2",
+//					"twitterTokenSecret2", "facebookName2", "userName2",
+//					"password2", null, TimeUtil.getCurrentDate(), 20);
+//			userDatafacade.createNewUserData(data);
+//
+//		}
 
 		return null;
 	}

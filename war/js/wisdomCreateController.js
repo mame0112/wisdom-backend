@@ -66,7 +66,7 @@ wisdomApp.controller('wisdomCreateController',
 			result.create_user_id = userData.params.userId;
 		} else {
 			//FIXME This is temporary solution for development.
-			result.create_user_id = 2;
+			result.create_user_id = 1;
 		}
 
 		result.updated_date = timeService.getCurrentTime();

@@ -93,51 +93,52 @@ public class UserStatusJsonBuilder extends JsonBuilder {
 	public void addResponseParam(Object... param) throws JSONBuilderException {
 		DbgUtil.showLog(TAG, "addResponseParam");
 
-		if (param == null) {
+		// param[0], which is user data is mandatory.
+		// On the other hand, param[1], which is user generated information is
+		// optional
+		if (param == null || param[0] == null) {
 			throw new JSONBuilderException("parameter is null");
 		}
-
-		if (param[0] == null) {
-			DbgUtil.showLog(TAG, "param[0] is null");
-		}
-
-		DbgUtil.showLog(TAG, "type: " + param[0].getClass());
 
 		if (!(param[0] instanceof WDUserData)) {
 			DbgUtil.showLog(TAG, "illegal param type for wduserdata");
 			throw new JSONBuilderException("illegal param type for wduserdata");
 		}
 
-		if (!(param[1] instanceof List<?>)) {
+		if (param[1] != null && (!(param[1] instanceof List<?>))) {
 			DbgUtil.showLog(TAG, "Illegal param type for List<>");
 			throw new JSONBuilderException("Illegal param type for List<>");
 		}
 
-		// WDUserData userData = (WDUserData) param[0];
-		List<WDWisdomData> wisdomData = (List<WDWisdomData>) param[0];
-
-		// long point = userData.getTotalPoint();
-
+		WDUserData userData = (WDUserData) param[0];
 		JSONObject paramObj = new JSONObject();
 
 		try {
 
-			JSONArray messageArray = new JSONArray();
+			long point = userData.getTotalPoint();
+			paramObj.put(JsonConstant.PARAM_USER_POINT, point);
 
-			// TODO Need to consider which item should be returned.
-			for (WDWisdomData wisdom : wisdomData) {
-				JSONObject message = new JSONObject();
-				message.put(JsonConstant.PARAM_WISDOM_TITLE, wisdom.getTitle());
-				message.put(JsonConstant.PARAM_WISDOM_THUMBNAIL,
-						wisdom.getThumbnakl());
-				message.put(JsonConstant.PARAM_WISDOM_TAG, wisdom.getTag());
-				message.put(JsonConstant.PARAM_WISDOM_TAG,
-						wisdom.getDescription());
-				messageArray.put(message);
+			// If user has already generated some information
+			if (param[1] != null) {
+
+				List<WDWisdomData> wisdomData = (List<WDWisdomData>) param[1];
+				JSONArray messageArray = new JSONArray();
+
+				// TODO Need to consider which item should be returned.
+				for (WDWisdomData wisdom : wisdomData) {
+					JSONObject message = new JSONObject();
+					message.put(JsonConstant.PARAM_WISDOM_TITLE,
+							wisdom.getTitle());
+					message.put(JsonConstant.PARAM_WISDOM_THUMBNAIL,
+							wisdom.getThumbnakl());
+					message.put(JsonConstant.PARAM_WISDOM_TAG, wisdom.getTag());
+					message.put(JsonConstant.PARAM_WISDOM_TAG,
+							wisdom.getDescription());
+					messageArray.put(message);
+				}
+				paramObj.put(JsonConstant.PARAM_WISDOM_MESSAGES, messageArray);
+
 			}
-
-			paramObj.put(JsonConstant.PARAM_WISDOM_MESSAGES, messageArray);
-			// paramObj.put(JsonConstant.PARAM_USER_POINT, point);
 
 			mRootObject.put(JsonConstant.PARAMS, paramObj);
 		} catch (JSONException e) {

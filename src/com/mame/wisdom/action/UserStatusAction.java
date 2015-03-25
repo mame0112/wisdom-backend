@@ -39,7 +39,6 @@ public class UserStatusAction implements Action {
 			int offset = object.getInt(JsonConstant.PARAM_CATEGORY_OFFSET);
 			int limit = object.getInt(JsonConstant.PARAM_CATEGORY_LIMIT);
 			if (userId != WConstant.NO_USER) {
-
 				UserDataFacade userDatafacade = new UserDataFacade();
 				WDUserData userData = userDatafacade.getUserData(userId);
 
@@ -49,8 +48,8 @@ public class UserStatusAction implements Action {
 				List<WDWisdomData> wisdoms = wisdomFacade.getUserGeneratedData(
 						userId, offset, limit);
 
-//				((UserStatusJsonBuilder) builder).addResponseParamExtra(
-//						userData, wisdoms);
+				// ((UserStatusJsonBuilder) builder).addResponseParamExtra(
+				// userData, wisdoms);
 				builder.addResponseParam(userData, wisdoms);
 			} else {
 				DbgUtil.showLog(TAG, "Illegal user Id -1");

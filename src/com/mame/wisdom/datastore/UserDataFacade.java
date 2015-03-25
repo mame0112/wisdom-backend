@@ -92,8 +92,8 @@ public class UserDataFacade {
 			return dao.getUserData(userId);
 		} catch (WisdomDatastoreException e) {
 			DbgUtil.showLog(TAG, "WisdomDatastoreException: " + e.getMessage());
+			throw new WisdomFacadeException(e.getMessage());
 		}
-		return null;
 	}
 
 	public List<WDUserData> getUserPointRankingList(int limit) {
