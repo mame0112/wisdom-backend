@@ -31,7 +31,7 @@ var wisdomApp = angular.module('WidsomApp', ['ngResource', 'ngCookies', 'ui.boot
 			templateUrl: 'view/userpage.html',
 			controller: 'UserDataController'
 		}).
-		state('category.wisdom',{
+		state('wisdom',{
 			url: '/detail/:wisdomId',
 			templateUrl: 'view/wisdom.html',
 			controller: 'wisdomDetailController'

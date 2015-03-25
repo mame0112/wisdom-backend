@@ -2,11 +2,11 @@
 <div class="title">{{today}}'s wisdom</div>
 	<ul class="media-list" ng-repeat="data in wisdoms">
 		<li class="media">
-			<a class="pull-left" ui-sref="category.wisdom({wisdomId: data.id})">
+			<a class="pull-left" ui-sref="wisdom({wisdomId: data.id})">
 	        <img src="image/64-64.png" alt="" class="media-object" />
     	    </a>
 		    <div class="media-body">
-		        <a ui-sref="category.wisdom({wisdomId: data.id})">
+		        <a ui-sref="wisdom({wisdomId: data.id})">
 		        	<h4 class="media-heading">{{data.title}}</h4>
 	        	</a>
 			<p>{{data.description}}</p>
