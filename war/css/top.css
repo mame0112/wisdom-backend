@@ -22,3 +22,14 @@
 
 }
 
+#sidebar{
+
+}
+
+#sidebar .parentItem{
+	border-style: none;
+}
+
+#sidebar .childItem{
+	color: #888888;
+}
