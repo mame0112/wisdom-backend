@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mame.wisdom.action.Action;
 import com.mame.wisdom.action.ActionFactory;
+import com.mame.wisdom.action.DebugAction;
 import com.mame.wisdom.action.InitializeAction;
+import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.exception.ActionException;
 import com.mame.wisdom.util.DbgUtil;
 
@@ -50,6 +52,16 @@ public class WisdomControllerServlet extends HttpServlet {
 		}
 
 		// TODO need to consider authentication (401)
+
+		// TODO Need to remove this part
+		if (WConstant.IS_LOCAL) {
+			DebugAction debugAction = new DebugAction();
+			try {
+				debugAction.execute(request, response);
+			} catch (Exception e) {
+				DbgUtil.showLog(TAG, "Exception: " + e.getMessage());
+			}
+		}
 
 		if (result != null) {
 			try {

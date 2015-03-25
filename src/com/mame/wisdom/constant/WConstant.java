@@ -4,6 +4,11 @@ public class WConstant {
 
 	public final static boolean IS_DEBUG = true;
 
+	/*
+	 * This should be true while developing local host.
+	 */
+	public final static boolean IS_LOCAL = true;
+
 	public final static long NO_USER = -1;
 
 	public final static long NO_WISDOM = -1;
