@@ -164,9 +164,8 @@ public class DefaultUserDAO implements UserDAO {
 		long totalPoint = data.getTotalPoint();
 
 		Key ancKey = DatastoreKeyGenerator.getAllUserDataKey();
-		Entity entity = new Entity(DBConstant.KIND_USER_DATA, ancKey);
+		Entity entity = new Entity(DBConstant.KIND_USER_DATA, userId, ancKey);
 
-		entity.setProperty(DBConstant.ENTITY_USER_ID, userId);
 		entity.setProperty(DBConstant.ENTITY_USER_NAME, userName);
 		entity.setProperty(DBConstant.ENTITY_USER_PASSWORD, password);
 		entity.setProperty(DBConstant.ENTITY_USER_TWITTER_NAME, twitter);
