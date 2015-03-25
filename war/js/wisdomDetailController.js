@@ -26,6 +26,13 @@ function($scope, log, wisdomAPIService, $stateParams, modeService, Constants, ti
  		}
  	};
 
+ 	$scope.isValidDateFormat = function(date){
+ 		if(date !== null && date !== undefined && date !== 0){
+ 			return true;
+ 		}
+ 		return false;
+	};
+
  	// $scope.wisdoms = null;
 
 	//Get target wisdom

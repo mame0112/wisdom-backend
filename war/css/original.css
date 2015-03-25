@@ -63,6 +63,11 @@ body {
 	background-color: #ffffff;
 }
 
+.wisdom .bodyarea .subtitle{
+	background-color: #ffffff;
+	margin-top: 2.0em;
+}
+
 .wisdom .date{
 	color: #888888;
 }
