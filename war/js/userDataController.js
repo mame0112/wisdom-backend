@@ -4,7 +4,8 @@ wisdomApp.controller('UserDataController',
  'userInfoAPIService',
  'log',
  'Constants',
- function($scope, $stateParams, userInfoAPIService, log, Constants){
+ 'timeFormatService',
+ function($scope, $stateParams, userInfoAPIService, log, Constants, timeFormatService){
 
  	console.log("UserDataController");
 
@@ -12,6 +13,15 @@ wisdomApp.controller('UserDataController',
  	// $scope.userId = $stateParams.userId;
  	$scope.userId = 1;
  	console.log("userId: " + $scope.userId);
+
+ 	//Point info that shall be shown on UI
+ 	$scope.point = 0;
+
+ 	//Message info that shall be shown on UI
+ 	$scope.messages = null;
+
+ 	//Set timeFormatService to $scope so that we can use it from UI part.
+ 	$scope.timeFormatService = timeFormatService;
 
  	var offset = 0;
  	var limit = 5;
@@ -35,6 +45,8 @@ wisdomApp.controller('UserDataController',
  		{
  			userInfoAPIService.status({servlet_params : param}, function(response){
  				log.d("response received");
+ 				$scope.point = response.params.point;
+ 				$scope.messages = response.params.messages;
  			});
  		}
  	};

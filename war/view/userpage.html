@@ -12,24 +12,25 @@
   <div class="col-sm-6 col-md-2">
       <div class="caption">
         <h3>Created</h3>
-        <p>BBBB</p>
+        <p>{{messages.length}} wisdoms</p>
       </div>
   </div>
   <div class="col-sm-6 col-md-2">
       <div class="caption">
         <h3>Like</h3>
-        <p>AAAAAA</p>
+        <p>0 (To be updated)</p>
       </div>
   </div>
   <div class="col-sm-6 col-md-2">
       <div class="caption">
         <h3>Point</h3>
-        <p>CCC</p>
+        <p>{{point}}</p>
       </div>
   </div>
 </div>
 <div class="row">
 <h2>Created</h2>
+<div ng-repeat="message in messages">
 	<div class="media">
 	  <div class="media-left">
 	    <a href="#">
@@ -37,21 +38,11 @@
 	    </a>
 	  </div>
 	  <div class="media-body">
-	    <h4 class="media-heading">Media heading</h4>
-	    General description / type / date
+	    <h4 class="media-heading">{{message.title}}</h4>
+	    {{message.description}} / {{message.tag}} / {{timeFormatService.getFormattedTime(message.updated_date)}}
 	  </div>
 	</div>
-	<div class="media">
-	  <div class="media-left">
-	    <a href="#">
-	      <img class="media-object" src="image/64-64.png" alt="...">
-	    </a>
-	  </div>
-	  <div class="media-body">
-	    <h4 class="media-heading">Media heading</h4>
-	    General description / type / date
-	  </div>
-	</div>
+</div>
 	 <button type="button" class="btn btn-default">See more</button>
 <h2>Like</h2>
 <div class="media">
@@ -79,7 +70,7 @@
 	 <button type="button" class="btn btn-default">See more</button>
 <h2>Point</h2>
 <div>
-	10pt
+	{{point}}pt
 </div>
 
 </div>

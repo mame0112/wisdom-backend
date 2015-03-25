@@ -132,8 +132,12 @@ public class UserStatusJsonBuilder extends JsonBuilder {
 					message.put(JsonConstant.PARAM_WISDOM_THUMBNAIL,
 							wisdom.getThumbnakl());
 					message.put(JsonConstant.PARAM_WISDOM_TAG, wisdom.getTag());
-					message.put(JsonConstant.PARAM_WISDOM_TAG,
+					message.put(JsonConstant.PARAM_WISDOM_DESCRIPTION,
 							wisdom.getDescription());
+					// TODO Need to return "Created date" (Not last updated
+					// date)
+					message.put(JsonConstant.PARAM_WISDOM_UPDATED_DATE,
+							wisdom.getLastUpdatedDate());
 					messageArray.put(message);
 				}
 				paramObj.put(JsonConstant.PARAM_WISDOM_MESSAGES, messageArray);
