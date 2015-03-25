@@ -49,17 +49,74 @@ public class UserStatusJsonBuilder extends JsonBuilder {
 
 	}
 
-	public void addResponseParamExtra(WDUserData userData,
-			List<WDWisdomData> wisdoms) throws JSONBuilderException {
-		DbgUtil.showLog(TAG, "addResponseParamExtra");
-		if (userData == null || wisdoms == null) {
+	// public void addResponseParamExtra(WDUserData userData,
+	// List<WDWisdomData> wisdoms) throws JSONBuilderException {
+	// DbgUtil.showLog(TAG, "addResponseParamExtra");
+	// if (userData == null || wisdoms == null) {
+	// throw new JSONBuilderException("parameter is null");
+	// }
+	//
+	// // WDUserData userData = (WDUserData) param[0];
+	// // List<WDWisdomData> wisdomData = (List<WDWisdomData>) param[0];
+	//
+	// long point = userData.getTotalPoint();
+	//
+	// JSONObject paramObj = new JSONObject();
+	//
+	// try {
+	//
+	// JSONArray messageArray = new JSONArray();
+	//
+	// // TODO Need to consider which item should be returned.
+	// for (WDWisdomData wisdom : wisdoms) {
+	// JSONObject message = new JSONObject();
+	// message.put(JsonConstant.PARAM_WISDOM_TITLE, wisdom.getTitle());
+	// message.put(JsonConstant.PARAM_WISDOM_THUMBNAIL,
+	// wisdom.getThumbnakl());
+	// message.put(JsonConstant.PARAM_WISDOM_TAG, wisdom.getTag());
+	// message.put(JsonConstant.PARAM_WISDOM_TAG,
+	// wisdom.getDescription());
+	// messageArray.put(message);
+	// }
+	//
+	// paramObj.put(JsonConstant.PARAM_WISDOM_MESSAGES, messageArray);
+	// // paramObj.put(JsonConstant.PARAM_USER_POINT, point);
+	//
+	// mRootObject.put(JsonConstant.PARAMS, paramObj);
+	// } catch (JSONException e) {
+	// DbgUtil.showLog(TAG, "JSONException: " + e.getMessage());
+	// throw new JSONBuilderException(e.getMessage());
+	// }
+	// }
+
+	@Override
+	public void addResponseParam(Object... param) throws JSONBuilderException {
+		DbgUtil.showLog(TAG, "addResponseParam");
+
+		if (param == null) {
 			throw new JSONBuilderException("parameter is null");
 		}
 
-		// WDUserData userData = (WDUserData) param[0];
-		// List<WDWisdomData> wisdomData = (List<WDWisdomData>) param[0];
+		if (param[0] == null) {
+			DbgUtil.showLog(TAG, "param[0] is null");
+		}
 
-		long point = userData.getTotalPoint();
+		DbgUtil.showLog(TAG, "type: " + param[0].getClass());
+
+		if (!(param[0] instanceof WDUserData)) {
+			DbgUtil.showLog(TAG, "illegal param type for wduserdata");
+			throw new JSONBuilderException("illegal param type for wduserdata");
+		}
+
+		if (!(param[1] instanceof List<?>)) {
+			DbgUtil.showLog(TAG, "Illegal param type for List<>");
+			throw new JSONBuilderException("Illegal param type for List<>");
+		}
+
+		// WDUserData userData = (WDUserData) param[0];
+		List<WDWisdomData> wisdomData = (List<WDWisdomData>) param[0];
+
+		// long point = userData.getTotalPoint();
 
 		JSONObject paramObj = new JSONObject();
 
@@ -68,7 +125,7 @@ public class UserStatusJsonBuilder extends JsonBuilder {
 			JSONArray messageArray = new JSONArray();
 
 			// TODO Need to consider which item should be returned.
-			for (WDWisdomData wisdom : wisdoms) {
+			for (WDWisdomData wisdom : wisdomData) {
 				JSONObject message = new JSONObject();
 				message.put(JsonConstant.PARAM_WISDOM_TITLE, wisdom.getTitle());
 				message.put(JsonConstant.PARAM_WISDOM_THUMBNAIL,
@@ -87,57 +144,6 @@ public class UserStatusJsonBuilder extends JsonBuilder {
 			DbgUtil.showLog(TAG, "JSONException: " + e.getMessage());
 			throw new JSONBuilderException(e.getMessage());
 		}
-	}
-
-	@Override
-	public void addResponseParam(Object... param) throws JSONBuilderException {
-		DbgUtil.showLog(TAG, "addResponseParam");
-
-		// if (param == null) {
-		// throw new JSONBuilderException("parameter is null");
-		// }
-		//
-		// if (!(param[0] instanceof List<?>)) {
-		// DbgUtil.showLog(TAG, "illegal param type for wduserdata");
-		// throw new JSONBuilderException("Illegal param type for List<>");
-		// }
-		//
-		// if (!(param[1] instanceof WDUserData)) {
-		// DbgUtil.showLog(TAG, "Illegal param type for WDUserData");
-		// throw new JSONBuilderException("Illegal param type for WDUserData");
-		// }
-		//
-		// // WDUserData userData = (WDUserData) param[0];
-		// List<WDWisdomData> wisdomData = (List<WDWisdomData>) param[0];
-		//
-		// // long point = userData.getTotalPoint();
-		//
-		// JSONObject paramObj = new JSONObject();
-		//
-		// try {
-		//
-		// JSONArray messageArray = new JSONArray();
-		//
-		// // TODO Need to consider which item should be returned.
-		// for (WDWisdomData wisdom : wisdomData) {
-		// JSONObject message = new JSONObject();
-		// message.put(JsonConstant.PARAM_WISDOM_TITLE, wisdom.getTitle());
-		// message.put(JsonConstant.PARAM_WISDOM_THUMBNAIL,
-		// wisdom.getThumbnakl());
-		// message.put(JsonConstant.PARAM_WISDOM_TAG, wisdom.getTag());
-		// message.put(JsonConstant.PARAM_WISDOM_TAG,
-		// wisdom.getDescription());
-		// messageArray.put(message);
-		// }
-		//
-		// paramObj.put(JsonConstant.PARAM_WISDOM_MESSAGES, messageArray);
-		// // paramObj.put(JsonConstant.PARAM_USER_POINT, point);
-		//
-		// mRootObject.put(JsonConstant.PARAMS, paramObj);
-		// } catch (JSONException e) {
-		// DbgUtil.showLog(TAG, "JSONException: " + e.getMessage());
-		// throw new JSONBuilderException(e.getMessage());
-		// }
 
 	}
 

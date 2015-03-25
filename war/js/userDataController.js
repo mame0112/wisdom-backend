@@ -7,7 +7,10 @@ wisdomApp.controller('UserDataController',
  function($scope, $stateParams, userInfoAPIService, log, Constants){
 
  	console.log("UserDataController");
- 	$scope.userId = $stateParams.userId;
+
+ 	//TODO Need to fix in the future.
+ 	// $scope.userId = $stateParams.userId;
+ 	$scope.userId = 2;
  	console.log("userId: " + $scope.userId);
 
  	var offset = 0;

@@ -28,6 +28,7 @@
 
 #sidebar .parentItem{
 	border-style: none;
+    background-color: #FF0000;
 }
 
 #sidebar .childItem{

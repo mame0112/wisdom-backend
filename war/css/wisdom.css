@@ -12,11 +12,21 @@
 	font-weight: bold;
 }
 
+#pickupDirective .media-heading{
+	word-wrap: break-word;
+}
+
+#pickupDirective ul li .media-body {
+	word-wrap: break-word;
+}
+
 #pickupDirective ul li .media-body p{
 	color: #888888;
 	font-size: 12px;
 	font-weight: thin;
+	word-wrap: break-word;
 }
+
 
 .wisdom {
 
