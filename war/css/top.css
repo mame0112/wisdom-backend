@@ -1,5 +1,5 @@
 .jumbotron {
-    margin-bottom: 0px;
+    margin-bottom: 20px;
     background-image: url(../image/heroshot.jpg);
     background-position: 0% 25%;
     background-size: cover;
@@ -7,3 +7,18 @@
     color: white;
     text-shadow: none;
 }
+
+.jumbotron .title{
+	float: left;
+}
+
+.jumbotron .subtitle{
+	clear:both;
+}
+
+
+.jumbotron .description{
+
+
+}
+
