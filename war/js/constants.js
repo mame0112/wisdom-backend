@@ -27,5 +27,9 @@ wisdomApp.constant(
 		PAGING: "paging",
 
 		NO_USER: -1,
+
+		TOASTER_SHORT: 3000,
+
+		TOASTER_LONG: 5000,
 	}
 );
