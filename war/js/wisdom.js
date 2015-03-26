@@ -1,5 +1,13 @@
-var wisdomApp = angular.module('WidsomApp', ['ngResource', 'ngCookies', 'ui.bootstrap', 'ui.router', 'angularFileUpload'])
+var wisdomApp = angular.module('WidsomApp', 
+	['ngResource', 
+	'ngCookies', 
+	'ui.bootstrap', 
+	'ui.router', 
+	'angularFileUpload', 
+	'ngAnimate',
+	'toaster'])
 .controller('WidsomController', ['$scope', 'Constants', 'log', function($scope, Constants, log){
+	
 }])
 
 .config(['$stateProvider', '$urlRouterProvider',

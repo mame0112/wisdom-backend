@@ -54,6 +54,13 @@ wisdomApp.directive('headerDirective', function(){
 	};
 })
 
+.directive('toasterDirective', function(){
+	return {
+		restrict: 'A',
+		templateUrl: 'toaster-directive.html'
+	};
+})
+
 .directive('messageControlDirective', function(){
 	return {
 		restrict: 'A',

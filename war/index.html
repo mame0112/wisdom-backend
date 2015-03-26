@@ -25,6 +25,15 @@
   <script src="lib/angular-file-upload-shim.min.js"></script>
   <script src="lib/angular-file-upload.min.js"></script> 
 
+  <!-- Libraries for toaster -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/0.4.9/toaster.min.css" rel="stylesheet" />
+  <script src="https://code.angularjs.org/1.2.0/angular-animate.min.js" ></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/0.4.9/toaster.min.js"></script>
+  <!--
+  <link href="css/toaster.min.css" rel="stylesheet" />
+  <script src="lib/angular-animate.min.js" ></script>
+  <script src="lib/toaster.min.js"></script>
+-->
 
 <!--  <script src="lib/angular-resource.min.js"></script> -->
   <script src="js/wisdom.js"></script>
@@ -49,6 +58,7 @@
   <script src="js/util/wisdomCreateSharedStateService.js"></script>
   <script src="js/util/timeService.js"></script>
   <script src="js/util/subCategoryLoaderService.js"></script>
+  <script src="js/util/toasterController.js"></script>
   <script src="js/wisdomCreateController.js"></script>
   <script src="js/debugController.js"></script>
   <script src="js/util/timeFormatService.js"></script>
@@ -79,6 +89,7 @@
 
 <div class="container">
   <div class="row">
+    <div toaster-directive></div>
     <div header-directive></div>
     <div breadcrumb-directive></div>
 <!--    <div ng-view></div> -->

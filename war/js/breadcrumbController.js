@@ -3,17 +3,17 @@ wisdomApp.controller('breadcrumbController', ['$scope', '$http', 'log', 'modeSer
 	// modeService.changeCurrentMode();
 
  	$scope.$on('mode_changed', function(event, param){
- 		log.d("breadcrumbController Mode changed: " + param);
+ 		// log.d("breadcrumbController Mode changed: " + param);
  	});
 
  	$scope.isBreadcrumbVisible = function (){
- 		log.d("modeService.getCurrentMode(): " + modeService.getCurrentMode());
+ 		// log.d("modeService.getCurrentMode(): " + modeService.getCurrentMode());
  		if(modeService.getCurrentMode() !== Constants.STATE.STATE_HOME_NO_LOGIN && modeService.getCurrentMode() !== Constants.STATE.STATE_HOME_LOGIN)
  		{
- 			log.d("true");
+ 			// log.d("true");
  			return true;
  		} else {
- 			log.d("false");
+ 			// log.d("false");
  			return false;
  		}
 

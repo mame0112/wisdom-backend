@@ -122,8 +122,14 @@ wisdomApp.controller('wisdomCreateController',
 		result.thumbnail = newValue;
 	});
 
-	$scope.$watch('files', function () {
-		result.thumbnail = $scope.files;
+	$scope.$watch('files', function (newValue, oldValue) {
+		log.d("file loaded");
+		$scope.upload($scope.files);
+		// if(newValue !== null && newValue !== undefined){
+			// result.thumbnail = newValue;
+			// $scope.files= newValue;
+		// }
+
         // $scope.upload($scope.files);
     });
 
@@ -154,7 +160,7 @@ wisdomApp.controller('wisdomCreateController',
 
 	$scope.uploadFile = function () {
 		log.d("uploadFile");
-		var file = $scope.files;
+		var file = $scope.files[0];
 		$upload.upload({
             url: '/controller/newwisdom',
             fields: {servlet_resp_id: 1, result: '@servlet_new_wisdom_param'},
@@ -172,8 +178,8 @@ wisdomApp.controller('wisdomCreateController',
         if (files && files.length) {
 			var file = files[0];
 			$upload.upload({
-                url: 'upload/url',
-                fields: {'username': $scope.username},
+            url: '/controller/newwisdom',
+            fields: {servlet_resp_id: 1, result: '@servlet_new_wisdom_param'},
                 file: file
             }).progress(function (evt) {
                 var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
