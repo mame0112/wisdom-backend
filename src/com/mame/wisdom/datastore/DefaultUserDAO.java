@@ -341,6 +341,7 @@ public class DefaultUserDAO implements UserDAO {
 				}
 			} else {
 				DbgUtil.showLog(TAG, "userranking memcache already exist");
+				return result;
 			}
 
 		} catch (IllegalArgumentException e) {

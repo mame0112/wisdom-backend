@@ -48,7 +48,7 @@ public class UserRankingMemcacheService implements WDMemcacheService {
 			syncCache.setErrorHandler(ErrorHandlers
 					.getConsistentLogAndContinue(Level.INFO));
 			try {
-				syncCache.put(MemcacheConstant.LATEST_WISDOMS,
+				syncCache.put(MemcacheConstant.USER_RAKING,
 						convertUserListToByteArray(data));
 			} catch (IllegalArgumentException e) {
 				DbgUtil.showLog(TAG,

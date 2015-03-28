@@ -51,14 +51,15 @@ public class UserRankingJsonBuilder extends JsonBuilder {
 
 	@Override
 	public void addResponseParam(Object... param) throws JSONBuilderException {
-		DbgUtil.showLog(TAG, "addResponseParam");
+		DbgUtil.showLog(TAG, "UserRankingJsonBuilder addResponseParam");
 
-		if (param == null) {
+		if (param == null || param[0] == null) {
 			throw new JSONBuilderException("param is null");
 		}
 
 		if (!(param[0] instanceof List<?>)) {
-			throw new JSONBuilderException("Illegal param type");
+			throw new JSONBuilderException(
+					"UserRankingJsonBuilder Illegal param type");
 		}
 
 		List<WDUserData> users = (List<WDUserData>) param[0];

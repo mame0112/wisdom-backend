@@ -1,8 +1,8 @@
 package com.mame.wisdom.data;
 
-import com.google.appengine.api.datastore.Blob;
+import java.io.Serializable;
 
-public class WDUserData {
+public class WDUserData implements Serializable {
 
 	private long mUserId = 0;
 

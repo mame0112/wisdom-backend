@@ -80,7 +80,7 @@ public class PopularWisdomMemcacheService implements WDMemcacheService {
 			// List<WDWisdomData> data = (List<WDWisdomData>) syncCache
 			// .get(MemcacheConstant.LATEST_WISDOMS);
 			byte[] param = (byte[]) syncCache
-					.get(MemcacheConstant.LATEST_WISDOMS);
+					.get(MemcacheConstant.POPULAR_WISDOMS);
 			List<WDWisdomData> result = convertByteArrayToWisdomList(param);
 
 			util.showTime("Popular wisdom getCache");
