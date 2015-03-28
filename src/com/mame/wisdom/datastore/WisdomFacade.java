@@ -61,7 +61,7 @@ public class WisdomFacade {
 		DAOFactory factory = DAOFactory.getDAOFactory();
 		try {
 			WisdomDAO wisdomDAO = factory.getWisdomDAO();
-			List<WDWisdomData> result = wisdomDAO.getLatestWisdoms(num);
+			return wisdomDAO.getLatestWisdoms(num);
 
 		} catch (WisdomDatastoreException e) {
 			DbgUtil.showLog(TAG, "WisdomDatastoreException: " + e.getMessage());

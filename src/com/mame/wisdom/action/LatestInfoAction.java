@@ -35,8 +35,8 @@ public class LatestInfoAction implements Action {
 			int offset = object.getInt(JsonConstant.PARAM_CATEGORY_OFFSET);
 
 			WisdomFacade facade = new WisdomFacade();
-			List<WDWisdomData> wisdoms = facade.getPopularWisdoms(offset,
-					WConstant.PUBLIC_WISDOM_NUM);
+			List<WDWisdomData> wisdoms = facade
+					.getLatestWisdoms(WConstant.PUBLIC_WISDOM_NUM);
 			builder.addResponseParam(wisdoms, offset);
 
 		} else {
@@ -49,5 +49,4 @@ public class LatestInfoAction implements Action {
 		return result;
 
 	}
-
 }
