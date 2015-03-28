@@ -23,13 +23,18 @@ public class DbgUtil {
 		}
 	}
 
-	public void showTime() {
+	public void showTime(String identifier) {
 
 		long now = TimeUtil.getCurrentDate();
 
 		long diff = now - mLastTime;
 		if (mLastTime != 0) {
-			DbgUtil.showLog(TAG, "time: " + diff);
+			if (identifier != null) {
+				DbgUtil.showLog(TAG, identifier + " time: " + diff);
+			} else {
+				DbgUtil.showLog(TAG, "time: " + diff);
+			}
+
 		}
 		mLastTime = now;
 	}

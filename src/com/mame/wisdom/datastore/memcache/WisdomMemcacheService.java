@@ -30,7 +30,7 @@ public class WisdomMemcacheService implements WDMemcacheService {
 		DbgUtil.showLog(TAG, "setCache");
 
 		DbgUtil util = new DbgUtil();
-		util.showTime();
+		util.showTime("setCache");
 
 		if (MemcacheConstant.USE_MEMCACHE) {
 			if (param == null) {
@@ -60,13 +60,16 @@ public class WisdomMemcacheService implements WDMemcacheService {
 
 		}
 
-		util.showTime();
+		util.showTime("setCache");
 
 	}
 
 	@Override
 	public Object getCache() throws MemcacheException {
 		DbgUtil.showLog(TAG, "getCache");
+
+		DbgUtil util = new DbgUtil();
+		util.showTime("getCache");
 
 		if (MemcacheConstant.USE_MEMCACHE) {
 			MemcacheService syncCache = MemcacheServiceFactory
@@ -80,8 +83,11 @@ public class WisdomMemcacheService implements WDMemcacheService {
 					.get(MemcacheConstant.LATEST_WISDOMS);
 			List<WDWisdomData> result = convertByteArrayToWisdomList(param);
 
+			util.showTime("getCache");
+
 			return result;
 		}
+
 		return null;
 
 	}
