@@ -21,9 +21,10 @@ import com.google.appengine.api.datastore.TransactionOptions;
 import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.data.WDSubCategoryData;
 import com.mame.wisdom.data.WDWisdomData;
+import com.mame.wisdom.datastore.memcache.PopularWisdomMemcacheService;
 import com.mame.wisdom.datastore.memcache.WDMemcacheManager;
 import com.mame.wisdom.datastore.memcache.WDMemcacheService;
-import com.mame.wisdom.datastore.memcache.WisdomMemcacheService;
+import com.mame.wisdom.datastore.memcache.LatestWisdomMemcacheService;
 import com.mame.wisdom.exception.WisdomDatastoreException;
 import com.mame.wisdom.util.DbgUtil;
 
@@ -40,7 +41,7 @@ public class DefaultWisdomDAO implements WisdomDAO {
 		DbgUtil.showLog(TAG, "getPopularWisdoms");
 
 		WDMemcacheManager memManager = WDMemcacheManager
-				.getInstance(new WisdomMemcacheService());
+				.getInstance(new PopularWisdomMemcacheService());
 		List<WDWisdomData> result = (List<WDWisdomData>) memManager.getCache();
 
 		// If memcache doesn't exist
@@ -65,7 +66,9 @@ public class DefaultWisdomDAO implements WisdomDAO {
 				result = helper.parseListEntityToWDWisdomData(entities);
 
 				// Set memcache
-				memManager.setCache(result);
+				if (result != null) {
+					memManager.setCache(result);
+				}
 
 				return result;
 
@@ -85,7 +88,7 @@ public class DefaultWisdomDAO implements WisdomDAO {
 		DbgUtil.showLog(TAG, "getLatestWisdoms");
 
 		WDMemcacheManager memManager = WDMemcacheManager
-				.getInstance(new WisdomMemcacheService());
+				.getInstance(new LatestWisdomMemcacheService());
 		List<WDWisdomData> result = (List<WDWisdomData>) memManager.getCache();
 
 		// If no memcache exist
@@ -108,7 +111,10 @@ public class DefaultWisdomDAO implements WisdomDAO {
 			result = helper.parseListEntityToWDWisdomData(entities);
 
 			// Set data to memcache
-			memManager.setCache(result);
+			if (result != null) {
+				memManager.setCache(result);
+			}
+
 		} else {
 			DbgUtil.showLog(TAG, "Memcache for getLatestWisdoms already exists");
 		}
@@ -556,7 +562,7 @@ public class DefaultWisdomDAO implements WisdomDAO {
 		DbgUtil.showLog(TAG, "refreshOldMemcacheData");
 
 		WDMemcacheManager memManager = WDMemcacheManager
-				.getInstance(new WisdomMemcacheService());
+				.getInstance(new LatestWisdomMemcacheService());
 		List<WDWisdomData> result = (List<WDWisdomData>) memManager.getCache();
 
 	}

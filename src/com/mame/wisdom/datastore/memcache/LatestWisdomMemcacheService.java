@@ -16,21 +16,21 @@ import com.mame.wisdom.data.WDWisdomData;
 import com.mame.wisdom.exception.MemcacheException;
 import com.mame.wisdom.util.DbgUtil;
 
-public class WisdomMemcacheService implements WDMemcacheService {
+public class LatestWisdomMemcacheService implements WDMemcacheService {
 
-	private final static String TAG = WisdomMemcacheService.class
+	private final static String TAG = LatestWisdomMemcacheService.class
 			.getSimpleName();
 
-	public WisdomMemcacheService() {
-		DbgUtil.showLog(TAG, "WisdomMemcacheService");
+	public LatestWisdomMemcacheService() {
+		DbgUtil.showLog(TAG, "LatestWisdomMemcacheService");
 	}
 
 	@Override
 	public void setCache(Object param) throws MemcacheException {
-		DbgUtil.showLog(TAG, "setCache");
+		DbgUtil.showLog(TAG, "Latest Wisdom setCache");
 
 		DbgUtil util = new DbgUtil();
-		util.showTime("setCache");
+		util.showTime("Latest Wisdom setCache");
 
 		if (MemcacheConstant.USE_MEMCACHE) {
 			if (param == null) {
@@ -60,16 +60,16 @@ public class WisdomMemcacheService implements WDMemcacheService {
 
 		}
 
-		util.showTime("setCache");
+		util.showTime("Latest Wisdom setCache");
 
 	}
 
 	@Override
 	public Object getCache() throws MemcacheException {
-		DbgUtil.showLog(TAG, "getCache");
+		DbgUtil.showLog(TAG, "Latest Wisdom getCache");
 
 		DbgUtil util = new DbgUtil();
-		util.showTime("getCache");
+		util.showTime("Latest Wisdom getCache");
 
 		if (MemcacheConstant.USE_MEMCACHE) {
 			MemcacheService syncCache = MemcacheServiceFactory
@@ -83,7 +83,7 @@ public class WisdomMemcacheService implements WDMemcacheService {
 					.get(MemcacheConstant.LATEST_WISDOMS);
 			List<WDWisdomData> result = convertByteArrayToWisdomList(param);
 
-			util.showTime("getCache");
+			util.showTime("Latest Wisdom getCache");
 
 			return result;
 		}

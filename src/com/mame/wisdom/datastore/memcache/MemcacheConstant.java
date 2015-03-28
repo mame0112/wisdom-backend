@@ -6,4 +6,6 @@ public class MemcacheConstant {
 	public final static boolean USE_MEMCACHE = true;
 
 	public final static String LATEST_WISDOMS = "latest_wisdom";
+	
+	public final static String POPULAR_WISDOMS = " popular_wisdom";
 }
