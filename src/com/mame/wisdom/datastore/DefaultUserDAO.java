@@ -18,6 +18,10 @@ import com.google.appengine.api.datastore.Transaction;
 import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.data.WDAllUserData;
 import com.mame.wisdom.data.WDUserData;
+import com.mame.wisdom.data.WDWisdomData;
+import com.mame.wisdom.datastore.memcache.PopularWisdomMemcacheService;
+import com.mame.wisdom.datastore.memcache.UserRankingMemcacheService;
+import com.mame.wisdom.datastore.memcache.WDMemcacheManager;
 import com.mame.wisdom.exception.WisdomDatastoreException;
 import com.mame.wisdom.util.DbgUtil;
 import com.google.appengine.api.datastore.Query.Filter;
@@ -165,7 +169,7 @@ public class DefaultUserDAO implements UserDAO {
 
 		Key ancKey = DatastoreKeyGenerator.getAllUserDataKey();
 		Entity entity = new Entity(DBConstant.KIND_USER_DATA, userId, ancKey);
-		
+
 		entity.setProperty(DBConstant.ENTITY_USER_ID, userId);
 		entity.setProperty(DBConstant.ENTITY_USER_NAME, userName);
 		entity.setProperty(DBConstant.ENTITY_USER_PASSWORD, password);
@@ -304,25 +308,44 @@ public class DefaultUserDAO implements UserDAO {
 			throws WisdomDatastoreException {
 		DbgUtil.showLog(TAG, "getHighestPointUserList");
 
-		Filter pointFilter = new FilterPredicate(
-				DBConstant.ENTITY_USER_TOTAL_POINT, FilterOperator.NOT_EQUAL, 0);
-
 		try {
-			Key key = DatastoreKeyGenerator.getAllUserDataKey();
-			Query query = new Query(DBConstant.KIND_USER_DATA, key).addSort(
-					DBConstant.ENTITY_USER_TOTAL_POINT,
-					SortDirection.DESCENDING);
-			query.setFilter(pointFilter);
-			PreparedQuery pQuery = mDS.prepare(query);
-			FetchOptions fetch = FetchOptions.Builder.withOffset(0)
-					.limit(limit);
-			List<Entity> entities = pQuery.asList(fetch);
 
-			if (entities != null) {
-				DbgUtil.showLog(TAG, "size: " + entities.size());
-				DefaultUserDAOHelper helper = new DefaultUserDAOHelper();
-				return helper.parseEntityListToUserDataList(entities);
+			WDMemcacheManager memManager = WDMemcacheManager
+					.getInstance(new UserRankingMemcacheService());
+			List<WDUserData> result = (List<WDUserData>) memManager.getCache();
+
+			if (result == null) {
+				DbgUtil.showLog(TAG, "userranking memcache doesn't exist");
+				Filter pointFilter = new FilterPredicate(
+						DBConstant.ENTITY_USER_TOTAL_POINT,
+						FilterOperator.NOT_EQUAL, 0);
+
+				Key key = DatastoreKeyGenerator.getAllUserDataKey();
+				Query query = new Query(DBConstant.KIND_USER_DATA, key)
+						.addSort(DBConstant.ENTITY_USER_TOTAL_POINT,
+								SortDirection.DESCENDING);
+				query.setFilter(pointFilter);
+				PreparedQuery pQuery = mDS.prepare(query);
+				FetchOptions fetch = FetchOptions.Builder.withOffset(0).limit(
+						limit);
+				List<Entity> entities = pQuery.asList(fetch);
+
+				if (entities != null) {
+					DbgUtil.showLog(TAG, "size: " + entities.size());
+					DefaultUserDAOHelper helper = new DefaultUserDAOHelper();
+					result = helper.parseEntityListToUserDataList(entities);
+
+					if (result != null) {
+						memManager.setCache(result);
+					}
+
+					return result;
+
+				}
+			} else {
+				DbgUtil.showLog(TAG, "userranking memcache already exist");
 			}
+
 		} catch (IllegalArgumentException e) {
 			DbgUtil.showLog(TAG, "IllegalArgumentException: " + e.getMessage());
 		} catch (IllegalStateException e) {
