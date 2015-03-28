@@ -11,14 +11,12 @@ public class DatastoreKeyGenerator {
 			.getSimpleName();
 
 	public static Key getAllUserDataKey() {
-		DbgUtil.showLog(TAG, "getAllUserDataKey");
 		Key ancKey = KeyFactory.createKey(DBConstant.KIND_ALL_USER,
 				DBConstant.ENTITY_TOTAL_USER_NUMBER);
 		return ancKey;
 	}
 
 	public static Key getUserDataKey(long userId) {
-		DbgUtil.showLog(TAG, "getUserDataKey");
 		Key ancKey = getAllUserDataKey();
 		Key key = KeyFactory.createKey(ancKey, DBConstant.KIND_USER_DATA,
 				userId);
@@ -27,7 +25,6 @@ public class DatastoreKeyGenerator {
 
 	public static Key getSubCategoryKey(String category, String subCategory)
 			throws WisdomDatastoreException {
-		DbgUtil.showLog(TAG, "getSubCategoryKey");
 
 		if (category == null || subCategory == null) {
 			DbgUtil.showLog(TAG, "category or subCategory identifier is null");
@@ -44,7 +41,6 @@ public class DatastoreKeyGenerator {
 
 	public static String getSubCategoryKeyName(String category,
 			String subCategory) throws WisdomDatastoreException {
-		DbgUtil.showLog(TAG, "getSubCategoryKeyName");
 
 		if (category == null || subCategory == null) {
 			DbgUtil.showLog(TAG, "category or subCategory identifier is null");
@@ -59,17 +55,9 @@ public class DatastoreKeyGenerator {
 
 	public static Key getWisdomKeyById(String category, String subCategory,
 			long wisdomId) throws WisdomDatastoreException {
-		DbgUtil.showLog(TAG, "getWisdomKey");
 		Key ancKey = getSubCategoryKey(category, subCategory);
 		Key key = KeyFactory
 				.createKey(ancKey, DBConstant.KIND_WISDOM, wisdomId);
 		return key;
 	}
-
-	// public static Key getWAllCategoryKey() {
-	// DbgUtil.showLog(TAG, "getSubcategoryKeyForAll");
-	// Key key = KeyFactory.createkey
-	// Key ancKey = getSubCategoryKey(category, subCategory);
-	// Key key = KeyFactory.createKey(ancKey, DBConstant.KIND_WISDOM);
-	// }
 }

@@ -29,6 +29,9 @@ public class WisdomMemcacheService implements WDMemcacheService {
 	public void setCache(Object param) throws MemcacheException {
 		DbgUtil.showLog(TAG, "setCache");
 
+		DbgUtil util = new DbgUtil();
+		util.showTime();
+
 		if (MemcacheConstant.USE_MEMCACHE) {
 			if (param == null) {
 				throw new MemcacheException("param is null");
@@ -56,6 +59,8 @@ public class WisdomMemcacheService implements WDMemcacheService {
 			}
 
 		}
+
+		util.showTime();
 
 	}
 
