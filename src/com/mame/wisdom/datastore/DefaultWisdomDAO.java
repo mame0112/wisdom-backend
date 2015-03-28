@@ -39,26 +39,43 @@ public class DefaultWisdomDAO implements WisdomDAO {
 			throws WisdomDatastoreException {
 		DbgUtil.showLog(TAG, "getPopularWisdoms");
 
-		Query q = new Query(DBConstant.KIND_WISDOM);
-		PreparedQuery pq = mDS.prepare(q);
-		for (Entity result : pq.asIterable()) {
-			DbgUtil.showLog(
-					TAG,
-					"result title:"
-							+ result.getProperty(DBConstant.ENTITY_WISDOM_TITLE));
-		}
+		WDMemcacheManager memManager = WDMemcacheManager
+				.getInstance(new WisdomMemcacheService());
+		List<WDWisdomData> result = (List<WDWisdomData>) memManager.getCache();
 
-		try {
-			FetchOptions fetch = FetchOptions.Builder.withOffset(offset).limit(
-					limit);
-			List<Entity> entities = pq.asList(fetch);
-			DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
+		// If memcache doesn't exist
+		if (result == null) {
+			DbgUtil.showLog(TAG, "memcache doesn't exist");
+			Query q = new Query(DBConstant.KIND_WISDOM);
+			PreparedQuery pq = mDS.prepare(q);
 
-			return helper.parseListEntityToWDWisdomData(entities);
+			for (Entity entity : pq.asIterable()) {
+				DbgUtil.showLog(
+						TAG,
+						"result title:"
+								+ entity.getProperty(DBConstant.ENTITY_WISDOM_TITLE));
+			}
 
-		} catch (IllegalStateException e) {
-			DbgUtil.showLog(TAG, "IllegalStateException: " + e.getMessage());
-			throw new WisdomDatastoreException(e.getMessage());
+			try {
+				FetchOptions fetch = FetchOptions.Builder.withOffset(offset)
+						.limit(limit);
+				List<Entity> entities = pq.asList(fetch);
+				DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
+
+				result = helper.parseListEntityToWDWisdomData(entities);
+
+				// Set memcache
+				memManager.setCache(result);
+
+				return result;
+
+			} catch (IllegalStateException e) {
+				DbgUtil.showLog(TAG, "IllegalStateException: " + e.getMessage());
+				throw new WisdomDatastoreException(e.getMessage());
+			}
+		} else {
+			DbgUtil.showLog(TAG, "memcache already exist");
+			return result;
 		}
 	}
 
@@ -73,6 +90,7 @@ public class DefaultWisdomDAO implements WisdomDAO {
 
 		// If no memcache exist
 		if (result == null) {
+			DbgUtil.showLog(TAG, "Memcache for getLatestWisdoms is null");
 			Query q = new Query(DBConstant.KIND_WISDOM);
 			PreparedQuery pq = mDS.prepare(q);
 			for (Entity e : pq.asIterable()) {
@@ -89,6 +107,10 @@ public class DefaultWisdomDAO implements WisdomDAO {
 
 			result = helper.parseListEntityToWDWisdomData(entities);
 
+			// Set data to memcache
+			memManager.setCache(result);
+		} else {
+			DbgUtil.showLog(TAG, "Memcache for getLatestWisdoms already exists");
 		}
 
 		return result;

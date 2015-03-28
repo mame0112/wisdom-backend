@@ -1,12 +1,13 @@
 package com.mame.wisdom.data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.google.appengine.api.datastore.Blob;
 import com.mame.wisdom.constant.WConstant;
 
-public class WDWisdomData {
+public class WDWisdomData implements Serializable {
 
 	private long mWisdomId = 0;
 

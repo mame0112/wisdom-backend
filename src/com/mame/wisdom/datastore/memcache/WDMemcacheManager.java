@@ -21,6 +21,7 @@ public class WDMemcacheManager {
 	}
 
 	public void setCache(Object param) {
+		DbgUtil.showLog(TAG, "setCache");
 		try {
 			mService.setCache(param);
 		} catch (MemcacheException e) {
@@ -29,6 +30,7 @@ public class WDMemcacheManager {
 	}
 
 	public Object getCache() {
+		DbgUtil.showLog(TAG, "getCache");
 		try {
 			return mService.getCache();
 		} catch (MemcacheException e) {

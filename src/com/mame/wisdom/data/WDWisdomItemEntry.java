@@ -1,7 +1,8 @@
 package com.mame.wisdom.data;
 
+import java.io.Serializable;
 
-public interface WDWisdomItemEntry {
+public interface WDWisdomItemEntry extends Serializable {
 
 	public long getItemId();
 
@@ -16,11 +17,11 @@ public interface WDWisdomItemEntry {
 	public int getTag();
 
 	public int getNumberOfLike();
-	
+
 	public long getLastUpdateUserId();
 
 	public String getLastUpdateUserName();
-	
+
 	public long getLastUpdateDate();
 
 }
