@@ -40,8 +40,8 @@ public class DefaultWisdomDAO implements WisdomDAO {
 			throws WisdomDatastoreException {
 		DbgUtil.showLog(TAG, "getPopularWisdoms");
 
-		WDMemcacheManager memManager = WDMemcacheManager
-				.getInstance(new PopularWisdomMemcacheService());
+		WDMemcacheManager memManager = new WDMemcacheManager(
+				(new PopularWisdomMemcacheService()));
 		List<WDWisdomData> result = (List<WDWisdomData>) memManager.getCache();
 
 		// If memcache doesn't exist
@@ -87,8 +87,8 @@ public class DefaultWisdomDAO implements WisdomDAO {
 			throws WisdomDatastoreException {
 		DbgUtil.showLog(TAG, "getLatestWisdoms");
 
-		WDMemcacheManager memManager = WDMemcacheManager
-				.getInstance(new LatestWisdomMemcacheService());
+		WDMemcacheManager memManager = new WDMemcacheManager(
+				(new LatestWisdomMemcacheService()));
 		List<WDWisdomData> result = (List<WDWisdomData>) memManager.getCache();
 
 		// If no memcache exist
@@ -561,8 +561,8 @@ public class DefaultWisdomDAO implements WisdomDAO {
 	public void refreshOldMemcacheData() throws WisdomDatastoreException {
 		DbgUtil.showLog(TAG, "refreshOldMemcacheData");
 
-		WDMemcacheManager memManager = WDMemcacheManager
-				.getInstance(new LatestWisdomMemcacheService());
+		WDMemcacheManager memManager = new WDMemcacheManager(
+				(new LatestWisdomMemcacheService()));
 		List<WDWisdomData> result = (List<WDWisdomData>) memManager.getCache();
 
 	}

@@ -7,18 +7,19 @@ public class WDMemcacheManager {
 
 	private final static String TAG = WDMemcacheManager.class.getSimpleName();
 
-	private static WDMemcacheService mService = null;
+	private WDMemcacheService mService = null;
 
-	private final static WDMemcacheManager mManager = new WDMemcacheManager();
+	//	private final static WDMemcacheManager mManager = new WDMemcacheManager();
 
-	private WDMemcacheManager() {
-		// Singletone
-	}
-
-	public static WDMemcacheManager getInstance(WDMemcacheService strategry) {
+	public WDMemcacheManager(WDMemcacheService strategry) {
 		mService = strategry;
-		return mManager;
 	}
+
+	// public static WDMemcacheManager getInstance(WDMemcacheService strategry)
+	// {
+	// mService = strategry;
+	// return mManager;
+	// }
 
 	public void setCache(Object param) {
 		DbgUtil.showLog(TAG, "setCache");

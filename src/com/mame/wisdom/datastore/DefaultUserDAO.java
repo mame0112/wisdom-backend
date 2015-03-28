@@ -3,7 +3,6 @@ package com.mame.wisdom.datastore;
 import java.util.ConcurrentModificationException;
 import java.util.List;
 
-import com.google.appengine.api.datastore.Blob;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -13,20 +12,18 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.PreparedQuery.TooManyResultsException;
 import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.Filter;
+import com.google.appengine.api.datastore.Query.FilterOperator;
+import com.google.appengine.api.datastore.Query.FilterPredicate;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.appengine.api.datastore.Transaction;
 import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.data.WDAllUserData;
 import com.mame.wisdom.data.WDUserData;
-import com.mame.wisdom.data.WDWisdomData;
-import com.mame.wisdom.datastore.memcache.PopularWisdomMemcacheService;
 import com.mame.wisdom.datastore.memcache.UserRankingMemcacheService;
 import com.mame.wisdom.datastore.memcache.WDMemcacheManager;
 import com.mame.wisdom.exception.WisdomDatastoreException;
 import com.mame.wisdom.util.DbgUtil;
-import com.google.appengine.api.datastore.Query.Filter;
-import com.google.appengine.api.datastore.Query.FilterOperator;
-import com.google.appengine.api.datastore.Query.FilterPredicate;
 
 public class DefaultUserDAO implements UserDAO {
 
@@ -310,8 +307,8 @@ public class DefaultUserDAO implements UserDAO {
 
 		try {
 
-			WDMemcacheManager memManager = WDMemcacheManager
-					.getInstance(new UserRankingMemcacheService());
+			WDMemcacheManager memManager = new WDMemcacheManager(
+					new UserRankingMemcacheService());
 			List<WDUserData> result = (List<WDUserData>) memManager.getCache();
 
 			if (result == null) {
@@ -354,5 +351,4 @@ public class DefaultUserDAO implements UserDAO {
 
 		return null;
 	}
-
 }
