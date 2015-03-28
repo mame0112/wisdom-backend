@@ -43,7 +43,7 @@ public class HighlightInfoAction implements Action {
 		}
 
 		String result = builder.getResultJson();
-		DbgUtil.showLog(TAG, "result:::::::::::::: " + result);
+		DbgUtil.showLog(TAG, "result: " + result);
 
 		return result;
 	}
