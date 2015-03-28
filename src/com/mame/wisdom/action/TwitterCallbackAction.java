@@ -1,5 +1,7 @@
 package com.mame.wisdom.action;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -10,6 +12,7 @@ import twitter4j.User;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 
+import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import com.mame.wisdom.data.WDUserData;
 import com.mame.wisdom.datastore.UserDataFacade;
 import com.mame.wisdom.twitter.TwitterConstant;
@@ -56,9 +59,20 @@ public class TwitterCallbackAction implements Action {
 			DbgUtil.showLog(TAG, "TwitterException: " + e.getMessage());
 		}
 
-		// String result = "{11}";
+		Cookie cookie1 = new Cookie("name", "Bule");
+		response.addCookie(cookie1);
 
 		response.sendRedirect(request.getContextPath() + "/");
+
+		// RequestDispatcher dispatch = request.getRequestDispatcher("/");
+		// dispatch.forward(request, response);
+
+		// String json = new Gson().toJson(CipherUtil.encryptArrayList(list,
+		// identifier));
+		// String json = new JSONObject().put("name", "test name").toString();
+		// response.setContentType("application/json");
+		// response.setCharacterEncoding("UTF-8");
+		// response.getWriter().write(json);
 
 		return null;
 	}

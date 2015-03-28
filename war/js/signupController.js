@@ -8,9 +8,17 @@ wisdomApp.controller('SignupController',
 	'Constants',
 	'modeService',
 	'userDataHolder',
- function($scope, $stateParams, log, $window, twitterAPIService, dataRetriveService, Constants, modeService, userDataHolder){
+	'$cookieStore',
+ function($scope, $stateParams, log, $window, twitterAPIService, dataRetriveService, Constants, modeService, userDataHolder, $cookieStore){
  	log.d("SignupController");
  	// log.d("userId: " + $scope.userId);
+
+ 	$scope.initialize = function()
+ 	{
+ 		log.d("initialize");
+		var name = $cookieStore.get('name');
+		log.d("name: " + name);
+ 	};
 
  	$scope.twitterSignup = function()
  	{

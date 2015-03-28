@@ -29,6 +29,16 @@ var wisdomApp = angular.module('WidsomApp',
 			templateUrl: 'view/signup.html',
 			controller: 'SignupController'
 		}).
+		state('privacypolicy', {
+			url: '/privacypolicy',
+			templateUrl: 'view/privacypolicy.html',
+			controller: 'PrivacyController'
+		}).
+		state('tos', {
+			url: '/tos',
+			templateUrl: 'view/tos.html',
+			controller: 'TosController'
+		}).
 		state('user', {
 			url: '/view',
 			templateUrl: 'view/userpage.html',
