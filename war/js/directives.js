@@ -68,6 +68,23 @@ wisdomApp.directive('headerDirective', function(){
 	};
 })
 
+// Directives for Wisdom page 
+.directive('wisdomContentDirective', function(){
+	return {
+		restrict: 'A',
+		templateUrl: 'directive/wisdom-content-directive.html'
+	};
+})
+
+.directive('wisdomInfoDirective', function(){
+	return {
+		restrict: 'A',
+		templateUrl: 'directive/wisdom-info-directive.html'
+	};
+})
+
+// Directive for debug
+
 .directive('debugDirective', function(){
 	return {
 		restrict: 'A',
