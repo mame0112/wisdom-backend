@@ -8,43 +8,43 @@ wisdomApp.controller('headerController',
  'dataRetriveService', 
  'searchAPIService',
  '$cookieStore',
- '$state',
- function($scope, $http, log, modeService, Constants, userDataHolder, dataRetriveService, searchAPIService, $cookieStore, $state){
+ // '$state',
+ function($scope, $http, log, modeService, Constants, userDataHolder, dataRetriveService, searchAPIService, $cookieStore){
  	log.d("headerController");
 
-	$scope.$state = $state;
+	// $scope.$state = $state;
 
-	$scope.isStateRoot = function ()
-	{
-		if($state.current.name !== "privacypolicy" && $state.current.name !== "tos" && $state.current.name !== "contact"){
-			return true;
-		}
-		return false;
-	};
+	// $scope.isStateRoot = function ()
+	// {
+	// 	if($state.current.name !== "privacypolicy" && $state.current.name !== "tos" && $state.current.name !== "contact"){
+	// 		return true;
+	// 	}
+	// 	return false;
+	// };
 
-	$scope.isStatePrivacyPolicy = function ()
-	{
-		if($state.current.name == Constants.VIEW_STATE.PRIVACY_POLICY){
-			return true;
-		}
-		return false;
-	};
+	// $scope.isStatePrivacyPolicy = function ()
+	// {
+	// 	if($state.current.name == Constants.VIEW_STATE.PRIVACY_POLICY){
+	// 		return true;
+	// 	}
+	// 	return false;
+	// };
 
-	$scope.isStateTos = function ()
-	{
-		if($state.current.name == Constants.VIEW_STATE.TOS){
-			return true;
-		}
-		return false;
-	};
+	// $scope.isStateTos = function ()
+	// {
+	// 	if($state.current.name == Constants.VIEW_STATE.TOS){
+	// 		return true;
+	// 	}
+	// 	return false;
+	// };
 
-	$scope.isStateContact = function ()
-	{
-		if($state.current.name == Constants.VIEW_STATE.CONTACT){
-			return true;
-		}
-		return false;
-	};
+	// $scope.isStateContact = function ()
+	// {
+	// 	if($state.current.name == Constants.VIEW_STATE.CONTACT){
+	// 		return true;
+	// 	}
+	// 	return false;
+	// };
 
  	$scope.onSigninOptionSelect = function (){
  		// log.d("onSigninOptionSelect");
