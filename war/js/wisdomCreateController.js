@@ -12,6 +12,7 @@ wisdomApp.controller('wisdomCreateController',
    'modeService',
    '$upload',
 	'$window',
+	'$rootScope',
     function(
     	$scope, 
     	log, 
@@ -24,7 +25,8 @@ wisdomApp.controller('wisdomCreateController',
     	subCategoryLoaderService, 
     	modeService, 
     	$upload,
-		$window
+		$window,
+		$rootScope
     	){
  	log.d("wisdomCreateController");
 
@@ -106,6 +108,8 @@ wisdomApp.controller('wisdomCreateController',
 			log.d("httpResponse: " + httpResponse);
 			log.d("status code: " + httpResponse.status);
 		});
+
+		$rootScope.$broadcast("show_toast", "Parameter....");
 	};
 
 	$scope.$watch('category', function(newValue, oldValue) {

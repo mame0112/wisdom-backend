@@ -4,6 +4,11 @@ wisdomApp.controller('toasterController',
 
  	log.d("toasterController");
 
+    $scope.$on('show_toast', function(event, param){
+        log.d("show toast received");
+        $scope.showSuccessToasterShort("test title", "test text");
+    });
+
     $scope.showSuccessToasterShort = function(title, text){
         toaster.pop('success', title, text, Constants.TOASTER_SHORT);
     };
