@@ -4,29 +4,49 @@
 
 #pickupDirective .title{
 	font-size: 18px;
-	font-weight: bold;
-}
-
-#pickupDirective .title{
-	font-size: 18px;
-	font-weight: bold;
-}
-
-#pickupDirective .media-heading{
+	font-weight: normal;
 	word-wrap: break-word;
+	white-space: nowrap;
+	max-width: 80%;
+	overflow: hidden;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
 }
 
-#pickupDirective ul li .media-body {
-	word-wrap: break-word;
-}
 
-#pickupDirective ul li .media-body p{
-	color: #888888;
-	font-size: 12px;
+#pickupDirective .contents{
+	margin-left:0px;
+	font-size: 14px;
 	font-weight: thin;
-	word-wrap: break-word;
 }
 
+#pickupDirective .list{
+	margin-left:0px;
+	padding-left: 0px;
+	list-style-type: none;	
+}
+
+#pickupDirective ul li{
+	margin-left:0px;
+	list-style-type: none;	
+}
+
+#pickupDirective .contents .image{
+	float: left;
+	padding-left: 8px;
+	padding-right: 8px;
+}
+
+#pickupDirective .contents p{
+	color: #888888;
+	white-space: nowrap;
+	max-width: 80%;
+	overflow: hidden;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+
+	word-wrap: break-word;
+}
 
 .wisdom {
 

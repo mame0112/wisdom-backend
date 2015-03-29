@@ -1,5 +1,23 @@
 <div id="pickupDirective" ng-controller="pickupController" ng-init="initialize()">
 <div class="title">{{today}}'s wisdom</div>
+<ul ng-repeat="data in wisdoms" class="list">
+	<li class="contents">
+	<div class="image">
+		<aui-sref="wisdom({wisdomId: data.id})">
+	    <img src="image/64-64.png" alt="" class="media-object" />
+	    </a>
+	</div>
+	<div class="content">
+		<a ui-sref="wisdom({wisdomId: data.id})">
+			<h4 class="title">{{data.title}}</h4>
+		</a>
+		<p>{{data.description}}</p>
+		<p>{{data.tag}}</p>
+	</div>
+	<hr class="border">
+	</li>
+</ul>
+<!--
 	<ul class="media-list" ng-repeat="data in wisdoms">
 		<li class="media">
 			<a class="pull-left" ui-sref="wisdom({wisdomId: data.id})">
@@ -14,4 +32,5 @@
 		    </div>
 		</li>
 	</ul>
+-->
 </div>
