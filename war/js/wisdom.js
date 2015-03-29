@@ -31,13 +31,11 @@ var wisdomApp = angular.module('WidsomApp',
 		}).
 		state('privacypolicy', {
 			url: '/privacypolicy',
-			templateUrl: 'view/privacypolicy.html',
-			controller: 'PrivacyController'
+			templateUrl: 'view/privacypolicy.html'
 		}).
 		state('tos', {
 			url: '/tos',
 			templateUrl: 'view/tos.html',
-			controller: 'TosController'
 		}).
 		state('user', {
 			url: '/view',

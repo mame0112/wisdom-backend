@@ -8,7 +8,8 @@ wisdomApp.controller('headerController',
  'dataRetriveService', 
  'searchAPIService',
  '$cookieStore',
- function($scope, $http, log, modeService, Constants, userDataHolder, dataRetriveService, searchAPIService, $cookieStore){
+ '$state',
+ function($scope, $http, log, modeService, Constants, userDataHolder, dataRetriveService, searchAPIService, $cookieStore, $state){
  	log.d("headerController");
 
  	$scope.onSigninOptionSelect = function (){
@@ -80,6 +81,7 @@ wisdomApp.controller('headerController',
 
  		var tmp = $cookieStore.get("name");
 		log.d("tmp: " + tmp);
+		log.d("current state: " + $state.$current);
  		// log.d("initialize");
  		var data =  userDataHolder.getUserData();
  		if(data !== null && data !== undefined){
