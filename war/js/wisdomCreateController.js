@@ -93,8 +93,14 @@ wisdomApp.controller('wisdomCreateController',
 		// });
 
 		// wisdomAPIService.newwisdom({servlet_new_wisdom_param : result});
-		newWisdomAPIService.newwisdom({servlet_new_wisdom_param : result});
-
+		newWisdomAPIService.newwisdom({servlet_new_wisdom_param : result},
+		 function(value, responseHeaders){
+			log.d("response received");
+			log.d("responseHeaders: " + responseHeaders);
+		 }, function (httpResponse) {
+			log.d("httpResponse: " + httpResponse);
+			log.d("status code: " + httpResponse.status);
+		});
 	};
 
 	$scope.$watch('category', function(newValue, oldValue) {
