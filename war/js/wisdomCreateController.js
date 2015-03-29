@@ -11,6 +11,7 @@ wisdomApp.controller('wisdomCreateController',
    'subCategoryLoaderService',
    'modeService',
    '$upload',
+	'$window',
     function(
     	$scope, 
     	log, 
@@ -22,7 +23,9 @@ wisdomApp.controller('wisdomCreateController',
     	timeService, 
     	subCategoryLoaderService, 
     	modeService, 
-    	$upload){
+    	$upload,
+		$window
+    	){
  	log.d("wisdomCreateController");
 
 	$scope.status = {
@@ -96,8 +99,10 @@ wisdomApp.controller('wisdomCreateController',
 		newWisdomAPIService.newwisdom({servlet_new_wisdom_param : result},
 		 function(value, responseHeaders){
 			log.d("response received");
-			log.d("responseHeaders: " + responseHeaders);
+			log.d("responseHeaders: " + headers());
+	 		// $window.location.href = '/';
 		 }, function (httpResponse) {
+		 	//Error case
 			log.d("httpResponse: " + httpResponse);
 			log.d("status code: " + httpResponse.status);
 		});

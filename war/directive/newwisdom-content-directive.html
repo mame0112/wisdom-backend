@@ -1,0 +1,61 @@
+<div ng-controller="wisdomCreateController" ng-init="initialize()">
+<form role="form">
+<div class="form-group">
+	<h3>Category</h3>
+	<div class="btn-group" dropdown>
+	<select ng-model="category" ng-options="c.name as c.name for c in categories" ng-change="getSubcategoryItems(category)">
+	   <option value="">Select category</option>
+	</select>
+   </div>
+</div>
+<div class="form-group">
+	<h3>Sub Category</h3>
+	<div class="btn-group" dropdown>
+	<select ng-model="subCategory" ng-options="s.name as s.name for s in subCategories">
+	   <option value="">Select sub category</option>
+	</select>
+   </div>
+</div>
+
+<div class="form-group">
+	<h3>input tag</h3>
+	<p>Input tag if necessary. (e.g. “Classic” or “Jazz” for “Music” category / “Piano” sub category)</p>
+	<input type="text" class="form-control" placeholder="Input tag" ng-model="tag">
+</div>
+
+<div class="form-group">
+	<h3>Thumbnail</h3>
+	<input type="file" name="thumbnail" value="select image">
+</div>
+
+<!-- -->
+<div class="form-group">
+ watching model:
+    <button class="button" ng-file-select ng-model="files">Upload using model $watch {{files}}</button>
+    <button class="button" ng-file-select ng-file-change="upload($files)">Upload on file change</button>
+    <button class="button" ng-click="uploadFile()">Upload</button>
+    Drop File:
+    <div ng-file-drop ng-model="files" class="drop-box" 
+        drag-over-class="dragover" ng-multiple="true" allow-dir="true"
+        accept=".jpg,.png,.pdf">Drop Images or PDFs files here</div>
+    <div ng-no-file-drop>File Drag/Drop is not supported for this browser</div>
+</div>
+<!-- -->
+
+<div class="form-group">
+	<h3>Title</h3>
+	<input type="text" class="form-control" placeholder="Input title" ng-model="title">
+</div>
+
+<div class="form-group">
+	<h3>Description</h3>
+	<input type="text" class="form-control" placeholder="Input description" ng-model="description">
+</div>
+
+<div message-control-directive></div>
+
+<div class="form-group">
+	<button type="submit" class="btn btn-default" ng-click="addNewWisdom()">Create new wisdom</button>
+</div>
+</form>
+</div>
