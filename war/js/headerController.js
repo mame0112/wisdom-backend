@@ -12,6 +12,40 @@ wisdomApp.controller('headerController',
  function($scope, $http, log, modeService, Constants, userDataHolder, dataRetriveService, searchAPIService, $cookieStore, $state){
  	log.d("headerController");
 
+	$scope.$state = $state;
+
+	$scope.isStateRoot = function ()
+	{
+		if($state.current.name !== "privacypolicy" && $state.current.name !== "tos" && $state.current.name !== "contact"){
+			return true;
+		}
+		return false;
+	};
+
+	$scope.isStatePrivacyPolicy = function ()
+	{
+		if($state.current.name == Constants.VIEW_STATE.PRIVACY_POLICY){
+			return true;
+		}
+		return false;
+	};
+
+	$scope.isStateTos = function ()
+	{
+		if($state.current.name == Constants.VIEW_STATE.TOS){
+			return true;
+		}
+		return false;
+	};
+
+	$scope.isStateContact = function ()
+	{
+		if($state.current.name == Constants.VIEW_STATE.CONTACT){
+			return true;
+		}
+		return false;
+	};
+
  	$scope.onSigninOptionSelect = function (){
  		// log.d("onSigninOptionSelect");
 		modeService.changeCurrentMode(Constants.STATE.STATE_SIGNIN_PAGE);
@@ -81,7 +115,8 @@ wisdomApp.controller('headerController',
 
  		var tmp = $cookieStore.get("name");
 		log.d("tmp: " + tmp);
-		log.d("current state: " + $state.$current);
+
+
  		// log.d("initialize");
  		var data =  userDataHolder.getUserData();
  		if(data !== null && data !== undefined){

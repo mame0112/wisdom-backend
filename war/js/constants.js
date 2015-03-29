@@ -31,5 +31,12 @@ wisdomApp.constant(
 		TOASTER_SHORT: 3000,
 
 		TOASTER_LONG: 5000,
+
+		VIEW_STATE: {
+			PRIVACY_POLICY: "privacypolicy",
+			TOS: "tos",
+			CONTACT: "contact"
+		}
+
 	}
 );

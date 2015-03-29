@@ -37,6 +37,10 @@ var wisdomApp = angular.module('WidsomApp',
 			url: '/tos',
 			templateUrl: 'view/tos.html',
 		}).
+		state('contact', {
+			url: '/contact',
+			templateUrl: 'view/contact.html',
+		}).
 		state('user', {
 			url: '/view',
 			templateUrl: 'view/userpage.html',

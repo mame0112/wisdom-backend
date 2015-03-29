@@ -14,10 +14,10 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Overview<span class="sr-only">(current)</span></a></li>
-        <li><a ng-href="#/privacypolicy">Privacy policy</a></li>
-        <li><a href="#/tos">Terms</a></li>
-        <li><a href="#">Contact</a></li>
+        <li ng-class="{active: isStateRoot()}"><a href="#">Overview<span class="sr-only">(current)</span></a></li>
+        <li ng-class="{active: isStatePrivacyPolicy()}"><a ng-href="#/privacypolicy">Privacy policy</a></li>
+        <li ng-class="{active: isStateTos()}"><a href="#/tos">Terms</a></li>
+        <li ng-class="{active: isStateContact()}"><a href="#/contact">Contact</a></li>
         <li><a href="http://mame0112.hatenablog.com/">Blog</a></li>
       </ul>
       <form class="navbar-form navbar-left" role="search">
