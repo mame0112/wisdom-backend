@@ -13,6 +13,7 @@ wisdomApp.controller('wisdomCreateController',
    '$upload',
 	'$window',
 	'$rootScope',
+	'toasterService',
     function(
     	$scope, 
     	log, 
@@ -26,7 +27,8 @@ wisdomApp.controller('wisdomCreateController',
     	modeService, 
     	$upload,
 		$window,
-		$rootScope
+		$rootScope,
+		toasterService
     	){
  	log.d("wisdomCreateController");
 
@@ -102,14 +104,16 @@ wisdomApp.controller('wisdomCreateController',
 		 function(value, responseHeaders){
 			log.d("response received");
 			log.d("responseHeaders: " + headers());
+			toasterService.howSuccessToasterShort("New wisdom", "Message successfully created!");
 	 		// $window.location.href = '/';
+
 		 }, function (httpResponse) {
 		 	//Error case
 			log.d("httpResponse: " + httpResponse);
 			log.d("status code: " + httpResponse.status);
+			toasterService.showErrorToasterShort("New wisdom", "Failed to create wisdom. Please try again");
 		});
 
-		$rootScope.$broadcast("show_toast", "Parameter....");
 	};
 
 	$scope.$watch('category', function(newValue, oldValue) {

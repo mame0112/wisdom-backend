@@ -6,10 +6,9 @@ wisdomApp.controller('toasterController',
 
     var isUpdated = false;
     var promise = null;
-    var lastTime = 0;
 
-    $scope.$on('show_toast', function(event, param){
-        log.d("show toast received");
+    // $scope.$on('show_toast', function(event, param){
+    //     log.d("show toast received: " + param);
         // if(isUpdated === false)
         // {
         //     isUpdated = true;
@@ -17,19 +16,24 @@ wisdomApp.controller('toasterController',
         //     $scope.showNoteToasterShort("test title", "test text");
         //     promise = $timeout(checkTime, 5000);
         // }
-        var now = timeService.getCurrentTime();
-        if(now - lastTime >= 1000)
-        {
-            // isUpdated = true;
-            log.d("Changed to true");
-            $scope.showNoteToasterShort("test title", "test text");
-            lastTime = now;
-            // promise = $timeout(checkTime, 5000);
-        }
+
+
+        // var now = timeService.getCurrentTime();
+        // log.d("now: " + now);
+        // log.d("lastTime: " + lastTime);
+        // if(now - lastTime >= 1000)
+        // {
+        //     lastTime = now;
+        //     // isUpdated = true;
+        //     log.d("Changed to true");
+        //     $scope.showNoteToasterShort("test title", "test text");
+            
+        //     // promise = $timeout(checkTime, 5000);
+        // }
 
 
         // $scope.showSuccessToasterShort("test title", "test text");
-    });
+    // });
 
     $scope.showSuccessToasterShort = function(title, text){
         toaster.pop('success', title, text, Constants.TOASTER_SHORT);
