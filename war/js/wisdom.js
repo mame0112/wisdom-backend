@@ -64,7 +64,6 @@ var wisdomApp = angular.module('WidsomApp',
 		state('newwisdom',{
 			url: '/wisdom',
 			templateUrl: 'view/newwisdom.html',
-			controller: 'wisdomCreateController'
 		});
 
 }]);
