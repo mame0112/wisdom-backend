@@ -1,8 +1,17 @@
-wisdomApp.controller('infobarController', ['$scope', '$http', 'log', 'modeService', 'apiService', 'highlightAPIService',
- function($scope, $http, log, modeService, apiService, highlightAPIService){
+wisdomApp.controller('infobarController',
+ ['$scope', 
+ '$http', 
+ 'log', 
+ 'modeService', 
+ 'apiService', 
+ 'highlightAPIService',
+ 'creativeColorGenerateService',
+ function($scope, $http, log, modeService, apiService, highlightAPIService, creativeColorGenerateService){
  	log.d("infobarController");
 
  	$scope.highlight = null;
+
+ 	$scope.colorGenerator = creativeColorGenerateService;
 
  	var offset = 0;
 

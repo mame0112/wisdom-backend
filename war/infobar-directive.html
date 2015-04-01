@@ -4,7 +4,9 @@
 		<li class="contents">
 		<div class="image">
 		    <a class="pull-left" ui-sref="wisdom({wisdomId:data.id})">
-		        <img src="image/64-64.png" alt="" class="media-object" />
+			<div class="thumbnail" ng-style="{'background': colorGenerator.generateColor(data.title)}">
+				<div class="text">{{data.title | capitalize}}</div>
+			</div>
 	        </a>
 		</div>
 	    <div class="content">

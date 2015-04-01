@@ -72,6 +72,22 @@
     word-wrap: break-word;
 }
 
+#pickupDirective .thumbnail {
+    width: 64px;
+    height: 64px;
+    background: #888888;
+    border-radius: 4px 4px 4px 4px;
+}
+
+#pickupDirective .thumbnail .text{
+    height: 100%;
+    width: 100%;
+    color: #FFFFFF;
+    font-size: 40px;
+    text-align:center;
+    vertical-align: middle;
+}
+
 
 #sidebar{
 
@@ -172,20 +188,19 @@
     text-overflow: ellipsis;
 }
 
-.square {
-    width: 64px;
-    height: 64px;
+#infobar .thumbnail {
+    width: 48px;
+    height: 48px;
     background: #888888;
-    border-radius: 4px 4px 4px 4px;
+    border-radius: 2px 2px 2px 2px;
 }
 
-.square .text{
+#infobar .thumbnail .text{
     height: 100%;
     width: 100%;
     color: #FFFFFF;
-    font-size: 40px;
+    font-size: 28px;
     text-align:center;
     vertical-align: middle;
-    padding-top: 4px;
-
 }
+
