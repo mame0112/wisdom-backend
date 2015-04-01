@@ -9,20 +9,18 @@ wisdomApp.factory('creativeColorGenerateService', ['log', 'ColorConstants',
 
 
  	function getBaseColor(first, second){
- 		log.d("getBaseColor: " + first + " / " + second);
  		var parentData = getParentDataset(first);
- 		log.d("parentData: " + parentData);
+ 		// log.d("parentData: " + parentData);
 
  		var child = getChildDataset(parentData, second);
- 		log.d("child: " + child);
- 		log.d("result: " + child.value);
+ 		// log.d("child: " + child);
+ 		// log.d("result: " + child.value);
 
  		return child.value;
 
  	}
 
  	function getParentDataset(input) {
- 		log.d("getParentDataset: " + input);
 
  		var result = null;
 
@@ -97,7 +95,7 @@ wisdomApp.factory('creativeColorGenerateService', ['log', 'ColorConstants',
  	}
 
  	function getChildDataset(childData, index){
- 		log.d("getChildDataset");
+ 		// log.d("getChildDataset");
 
  		return childData[index];
  	}
@@ -106,7 +104,7 @@ wisdomApp.factory('creativeColorGenerateService', ['log', 'ColorConstants',
  	return {
 
  		generateColor : function(input){
- 			log.d("generateColor");
+ 			// log.d("generateColor");
 
  			var result = null;
 

@@ -9,7 +9,9 @@
 		<div class="square" ng-style="{background: '#FF0000'}">
 		<div class="square" ng-style="creativeColorGenerateService.getThumbnailBackgroundColor(data.title)"></div>
 	    -->
-		<div class="square" ng-style="{'background': creativeColorGenerateService.generateColor(data.title)}"></div>
+		<div class="square" ng-style="{'background': creativeColorGenerateService.generateColor(data.title)}">
+			<div class="text">{{data.title | capitalize}}</div>
+			</div>
 	    </a>
 	</div>
 	<div class="content">

@@ -173,9 +173,19 @@
 }
 
 .square {
-    clear: both;
     width: 64px;
     height: 64px;
     background: #888888;
     border-radius: 4px 4px 4px 4px;
+}
+
+.square .text{
+    height: 100%;
+    width: 100%;
+    color: #FFFFFF;
+    font-size: 40px;
+    text-align:center;
+    vertical-align: middle;
+    padding-top: 4px;
+
 }
