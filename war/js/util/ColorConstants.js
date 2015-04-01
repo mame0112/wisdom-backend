@@ -1,5 +1,8 @@
 wisdomApp.constant(
 	"ColorConstants", {
+		UNKNOWN: [
+			{"value" : "#888888"}
+		],
 		RED: [
 			{"value" : "#e53935"},
 			{"value" : "#d32f2f"},
@@ -113,9 +116,6 @@ wisdomApp.constant(
 			{"value" : "#546E7A"},
 			{"value" : "#37474F"},
 			{"value" : "#263238"}
-		],
-		UNKNOWN: [
-			{"value" : "888888"}
 		]
 	}
 );

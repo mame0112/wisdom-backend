@@ -103,7 +103,7 @@ wisdomApp.controller('wisdomCreateController',
 		newWisdomAPIService.newwisdom({servlet_new_wisdom_param : result},
 		 function(value, responseHeaders){
 			log.d("response received");
-			log.d("responseHeaders: " + headers());
+			// log.d("responseHeaders: " + headers());
 			toasterService.howSuccessToasterShort("New wisdom", "Message successfully created!");
 	 		// $window.location.href = '/';
 

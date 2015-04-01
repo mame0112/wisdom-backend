@@ -173,8 +173,9 @@
 }
 
 .square {
-   width: 64px;
-   height: 64px;
-   background: black;
-   border-radius: 8px 8px 8px 8px;
+    clear: both;
+    width: 64px;
+    height: 64px;
+    background: #888888;
+    border-radius: 4px 4px 4px 4px;
 }

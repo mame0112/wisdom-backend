@@ -10,6 +10,8 @@ function($scope, log, latestAPIService, timeService, timeFormatService, creative
 
  	$scope.wisdoms = null;
 
+ 	$scope.creativeColorGenerateService = creativeColorGenerateService;
+
  	var offset = 0;
 
  	var param = {
@@ -20,8 +22,6 @@ function($scope, log, latestAPIService, timeService, timeFormatService, creative
  	{
  		var now = timeService.getCurrentTime();
  		$scope.today = timeFormatService.getFormattedToday(now);
-
- 		creativeColorGenerateService.generateColor("test");
 
  	};
 

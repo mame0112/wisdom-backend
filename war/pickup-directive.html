@@ -4,7 +4,12 @@
 	<li class="contents">
 	<div class="image">
 		<a ui-sref="wisdom({wisdomId: data.id})">
+		<!--
 	    <img src="image/64-64.png" alt="" class="media-object" />
+		<div class="square" ng-style="{background: '#FF0000'}">
+		<div class="square" ng-style="creativeColorGenerateService.getThumbnailBackgroundColor(data.title)"></div>
+	    -->
+		<div class="square" ng-style="{'background': creativeColorGenerateService.generateColor(data.title)}"></div>
 	    </a>
 	</div>
 	<div class="content">
