@@ -4,7 +4,8 @@ wisdomApp.controller('pickupController',
 'latestAPIService',
 'timeService',
 'timeFormatService',
-function($scope, log, latestAPIService, timeService, timeFormatService){
+'creativeColorGenerateService',
+function($scope, log, latestAPIService, timeService, timeFormatService, creativeColorGenerateService){
  	log.d("pickupController");
 
  	$scope.wisdoms = null;
@@ -19,6 +20,9 @@ function($scope, log, latestAPIService, timeService, timeFormatService){
  	{
  		var now = timeService.getCurrentTime();
  		$scope.today = timeFormatService.getFormattedToday(now);
+
+ 		creativeColorGenerateService.generateColor("test");
+
  	};
 
  	latestAPIService.latest({servlet_params : param}, function(response){
