@@ -108,22 +108,24 @@ wisdomApp.factory('creativeColorGenerateService', ['log', 'ColorConstants',
 
  			var result = null;
 
- 			if(input !== null) {
+ 			if(input !== null && input !== undefined) {
  				var first = 0;
  				var second = 0;
 
- 				switch(input.length){
+ 				var str = input.toString(10);
+
+ 				switch(str.length){
  					case 0:
 						result = getBaseColor(0, 0);
  					break;
  					case 1:
-	 					first = (input.charCodeAt(0) % COLOR_NUM);
+	 					first = (str.charCodeAt(0) % COLOR_NUM);
 	 					second = 0;
 	 					result = getBaseColor(first, second);
  					break;
  					default:
-	 					first = (input.charCodeAt(0) % COLOR_NUM);
-	 					second = (input.charCodeAt(1) % ITEM_LENGTH);
+	 					first = (str.charCodeAt(0) % COLOR_NUM);
+	 					second = (str.charCodeAt(1) % ITEM_LENGTH);
 	 					result = getBaseColor(first, second);
  					break;
  				}

@@ -5,7 +5,8 @@ wisdomApp.controller('UserDataController',
  'log',
  'Constants',
  'timeFormatService',
- function($scope, $stateParams, userInfoAPIService, log, Constants, timeFormatService){
+ 'creativeColorGenerateService',
+ function($scope, $stateParams, userInfoAPIService, log, Constants, timeFormatService, creativeColorGenerateService){
 
  	console.log("UserDataController");
 
@@ -23,6 +24,8 @@ wisdomApp.controller('UserDataController',
  	//Set timeFormatService to $scope so that we can use it from UI part.
  	$scope.timeFormatService = timeFormatService;
 
+ 	$scope.userColor = null;
+
  	var offset = 0;
  	var limit = 5;
 
@@ -37,6 +40,7 @@ wisdomApp.controller('UserDataController',
  	{
  		log.d("initialize");
  		$scope.loadUseData($scope.userId);
+ 		$scope.userColor = creativeColorGenerateService.generateColor($scope.userId);
  	};
 
  	$scope.loadUseData = function(userId)
