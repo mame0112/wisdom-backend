@@ -33,20 +33,24 @@
 </div>
 
 <div class="body">
-<h2>Created</h2>
-<div ng-repeat="message in messages">
-	<div class="media">
-	  <div class="media-left">
-	    <a href="#">
-	      <img class="media-object" src="image/64-64.png" alt="...">
-	    </a>
-	  </div>
-	  <div class="media-body">
-	    <h4 class="media-heading">{{message.title}}</h4>
-	    {{message.description}} / {{message.tag}} / {{timeFormatService.getFormattedTime(message.updated_date)}}
-	  </div>
+	<h2>Created</h2>
+	<div class="contents" ng-repeat="message in messages">
+		<div class="image">
+			<a ui-sref="#">
+				<div class="thumbnail" ng-style="{'background': colorGenerator.generateColor(message.title)}">
+				<div class="text">{{message.title | capitalize}}</div>
+				</div>
+			</a>
+		</div>
+		<div class="content">
+			<div class="title">{{message.title}}</div>
+			<p>{{message.description}}</p>
+			<p>{{message.tag}}</p>
+			<p>{{timeFormatService.getFormattedTime(message.updated_date)}}</p>
+		</div>
+		<hr>
 	</div>
-</div>
+
 	 <button type="button" class="btn btn-default">See more</button>
 <h2>Like</h2>
 <div class="media">

@@ -26,6 +26,9 @@ wisdomApp.controller('UserDataController',
 
  	$scope.userColor = null;
 
+ 	//Keep creative color generator to generate thumbnail color from UI
+ 	$scope.colorGenerator = creativeColorGenerateService;
+
  	var offset = 0;
  	var limit = 5;
 

@@ -45,12 +45,14 @@
 }
 
 #userpage .header .caption .title{
+	color: #888888;
 	font-size: 24px;
 	margin: 0 auto;
 	text-align: center;
 }
 
 #userpage .header .caption .value{
+	color: #888888;
 	font-size: 24px;
 	margin: 0 auto;
 	text-align: center;
@@ -59,6 +61,66 @@
 
 #userpage .body{
 	background-color: #ffffff;
+}
+
+#userpage .body .contents{
+
+}
+
+#userpage .body .contents .image{
+    float: left;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+#userpage .body .contents .image .thumbnail{
+    width: 48px;
+    height: 48px;
+    background: #888888;
+    border-radius: 2px 2px 2px 2px;
+}
+
+#userpage .body .contents .image .thumbnail .text{
+    height: 100%;
+    width: 100%;
+    color: #FFFFFF;
+    font-size: 28px;
+    text-align:center;
+    vertical-align: middle;
+}
+
+#userpage .body .contents .content{
+
+}
+
+#userpage .body .contents .content{
+    font-size: 16px;
+    color: #000000;
+
+    font-weight: normal;
+    word-wrap: break-word;
+    white-space: nowrap;
+    max-width: 80%;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+#userpage .body .contents .content .title{
+
+}
+
+#userpage .body .contents .content p{
+    font-size: 14px;
+    color: #888888;
+
+    font-weight: normal;
+    word-wrap: break-word;
+    white-space: nowrap;
+    max-width: 80%;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
 }
 
 /*
