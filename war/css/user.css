@@ -3,21 +3,62 @@
 }
 
 #userpage .header{
-	background-color: #eeeeee;
+	background-color: #efefef;
+	padding-left: 10px;
+	padding-bottom: 10px;
 }
 
-#userpage .header .thumbnail{
+#userpage .header .user{
+	height: 100px;
+	width: 400px;
+	padding-top: 10px;
+
+}
+
+#userpage .header .user .thumbnail{
 	border-radius: 50%;
 	height: 72px;
 	width: 72px;
 	background-color: #FF0000;
+	float: left;
+	margin-right: 10px;
 }
 
-#userpage .header .thumbnail .username{
+#userpage .header .user .thumbnail .initial{
 	color: #FFFFFF;
 	font-size: 48px;
     text-align:center;
     vertical-align: middle;
+}
+
+#userpage .header .user .username{
+	color: #666666;
+	font-size: 24px;
+	padding-left: 12px;
+	margin-left: 10px;
+	padding-top: 20px;
+	height: 100%;
+}
+
+#userpage .header .caption{
+	width: 100%;
+}
+
+#userpage .header .caption .title{
+	font-size: 24px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+#userpage .header .caption .value{
+	font-size: 24px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+
+#userpage .body{
+	background-color: #ffffff;
 }
 
 /*
