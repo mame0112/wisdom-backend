@@ -7,7 +7,8 @@ wisdomApp.controller('categoryController',
 	'$stateParams', 
 	'categoryAPIService',
 	'timeFormatService',
- function($scope, $http, log, modeService, Constants, $stateParams, categoryAPIService, timeFormatService){
+	'creativeColorGenerateService',
+ function($scope, $http, log, modeService, Constants, $stateParams, categoryAPIService, timeFormatService, creativeColorGenerateService){
  	log.d("categoryController");
 
  	var ACTIVE = "active";
@@ -25,6 +26,8 @@ wisdomApp.controller('categoryController',
 
 	$scope.subCategoryId = $stateParams.subCategoryId;
  	log.d("subCategoryName: " + $scope.subCategoryId);
+
+ 	$scope.creativeColorGenerate = creativeColorGenerateService;
 
  	var offset = 0;
  	var limit = 10;
