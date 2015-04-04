@@ -1,20 +1,26 @@
 <dib ng-controller="messageOperationController" ng-init="initialize()">
-	<div class="form-group">
+
+<div class="callout callout-success">
 	<div class="btn-group" role="group" aria-label="item selection">
 		<button type="button" class="btn btn-default" ng-click="showTitleField()">Title</button>
 		<button type="button" class="btn btn-default" ng-click="showDescriptionField()">Description</button>
 	</div>
+</div>
+
 
 	<!-- This part is for initial step (since saveArray is  0 at the beginning) -->
+<div class="callout callout-success">
 	<div class="form-group" ng-show="isInputtingNewMessageState()">
-		<h3 ng-show="messageState">input sub title</h3>
-		<h3 ng-show="!messageState">input sub description</h3>
+		<h4 ng-show="messageState">input sub title</h4>
+		<h4 ng-show="!messageState">input sub description</h4>
 		<input type="text" class="form-control" placeholder="Input something" ng-model="messageField" name="message" ng-minlength="10">
 		<button type="button" class="btn btn-default" ng-click="hideDefaultMessageInputArea()">Cancel</button>
 		<button type="button" class="btn btn-primary" ng-click="saveMessageTexts(messageField)">Save</button>
 		<span class="error" ng-show="newwisdom.message.$error.minlength">Required more than 10 characters</span>
 	</div>
+</div>
 
+<div class="callout callout-success">
 	<!-- This part is for already input information. -->
 	<div class="panel panel-default" ng-repeat="data in saveArray track by $index" ng-mouseenter="onMouseOver($index)" ng-mouseleave="onMouseLeave($index)">
 		<div class="btn-group" role="group" aria-label="Control selection" ng-show="isMessageModifyingState() == false">
@@ -33,5 +39,7 @@
 			<button type="button" class="btn btn-primary" ng-click="saveModifiedTexts(data, messageModifyField, $index)">Save</button>
 		</div>
 	</div>
+</div>
+
 </div>
 </dib>
