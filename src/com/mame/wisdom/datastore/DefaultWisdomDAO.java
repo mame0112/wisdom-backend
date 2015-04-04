@@ -495,8 +495,7 @@ public class DefaultWisdomDAO implements WisdomDAO {
 					result.add(data);
 				} catch (EntityNotFoundException e) {
 					DbgUtil.showLog(TAG,
-							"EntityNotFoundException: " + e.getMessage());
-					throw new WisdomDatastoreException(e.getMessage());
+							"EntityNotFoundException:: " + e.getMessage());
 				}
 			}
 
