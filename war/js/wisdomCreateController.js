@@ -124,15 +124,15 @@ wisdomApp.controller('wisdomCreateController',
 		result.subCategory = newValue;
 	});
 
-	$scope.$watch('title', function(newValue, oldValue) {
+	$scope.$watch('wisdom.title', function(newValue, oldValue) {
 		result.title = newValue;
 	});
 
-	$scope.$watch('description', function(newValue, oldValue) {
+	$scope.$watch('wisdom.description', function(newValue, oldValue) {
 		result.description = newValue;
 	});
 
-	$scope.$watch('tag', function(newValue, oldValue) {
+	$scope.$watch('wisdom.tag', function(newValue, oldValue) {
 		result.tag = newValue;
 	});
 
