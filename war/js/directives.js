@@ -68,6 +68,14 @@ wisdomApp.directive('headerDirective', function(){
 	};
 })
 
+//Directive for category view. This is for content part.
+.directive('categoryContentDirective', function(){
+	return {
+		restrict: 'A',
+		templateUrl: 'directive/category-content-directive.html'
+	};
+})
+
 // Directives for Wisdom page 
 .directive('wisdomContentDirective', function(){
 	return {
