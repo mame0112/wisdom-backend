@@ -67,6 +67,10 @@
     padding-right: 8px;
 }
 
+#pickupDirective .contents .content a{
+    color: #000000;
+}
+
 #pickupDirective .contents p{
     color: #888888;
     white-space: nowrap;
