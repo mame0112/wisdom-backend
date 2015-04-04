@@ -155,7 +155,7 @@ wisdomApp.controller('wisdomCreateController',
 	$scope.getSubcategoryItems = function(category)
 	{
 		log.d("getSubcategoryItems: " + category);
-		if(category !== null) {
+		if(category !== null && category !== undefined) {
 	 		subCategoryLoaderService.load(category).then(function(d){
 	 			log.d("d: " + d.data);
 	 			$scope.subCategories = d.data;
