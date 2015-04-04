@@ -4,7 +4,7 @@
 	<ul class="list" ng-repeat="data in wisdoms">
 		<li class="contents">
 			<div class="image">
-		    <a ui-sref="#/view/1">
+		    <a ui-sref="wisdom({wisdomId: data.id})">
 
 <!--		        <img src="image/64-64.png" alt="" class="media-object" /> -->
 				<div class="thumbnail" ng-style="{'background': creativeColorGenerate.generateColor(data.title)}">
