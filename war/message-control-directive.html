@@ -9,9 +9,10 @@
 	<div class="form-group" ng-show="isInputtingNewMessageState()">
 		<h3 ng-show="messageState">input sub title</h3>
 		<h3 ng-show="!messageState">input sub description</h3>
-		<input type="text" class="form-control" placeholder="Input something" ng-model="messageField">
+		<input type="text" class="form-control" placeholder="Input something" ng-model="messageField" name="message" ng-minlength="10">
 		<button type="button" class="btn btn-default" ng-click="hideDefaultMessageInputArea()">Cancel</button>
 		<button type="button" class="btn btn-primary" ng-click="saveMessageTexts(messageField)">Save</button>
+		<span class="error" ng-show="newwisdom.message.$error.minlength">Required more than 10 characters</span>
 	</div>
 
 	<!-- This part is for already input information. -->
