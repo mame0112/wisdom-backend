@@ -28,10 +28,11 @@
 	</div>
 
 	<div class="callout callout-success">
-	<h4>input tag</h4>
+	<h4>input tag
+		<span class="notice" ng-show="newwisdom.tag.$error.required">*</span>
+	</h4>
 		<p>Input tag if necessary. (e.g. “Classic” or “Jazz” for “Music” category / “Piano” sub category)</p>
 		<input type="text" class="form-control" placeholder="Input tag" name="tag" ng-model="wisdom.tag" required ng-minlength="2" ng-maxlength="10">
-		<span class="notice" ng-show="newwisdom.tag.$error.required">*</span>
 		<span class="error" ng-show="newwisdom.tag.$error.minlength">Required more than 2 characters</span>
 		<span class="error" ng-show="newwisdom.tag.$error.maxlength">Required less than 10 characters</span>
 	</div>
@@ -60,21 +61,24 @@
 	</div>
 
 	<div class="callout callout-success">
-		<h4>Title</h4>
+		<h4>Title
+			<span class="notice" ng-show="newwisdom.title.$error.required">*</span>
+		</h4>
 		<input type="text" class="form-control" placeholder="Input title" name="title" ng-model="wisdom.title" required ng-minlength="6">
-		<span class="notice" ng-show="newwisdom.title.$error.required">*</span>
 		<span class="error" ng-show="newwisdom.title.$error.minlength">Required more than 6 characters</span>
 	</div>
 
 	<div class="callout callout-success">
-		<h4>Description</h4>
+		<h4>Description
+			<span class="notice" ng-show="newwisdom.description.$error.required">*</span>
+		</h4>
 		<input type="text" class="form-control" placeholder="Input description" name="description" ng-model="wisdom.description" required ng-minlength="6">
-		<span class="notice" ng-show="newwisdom.description.$error.required">*</span>
 		<span class="error" ng-show="newwisdom.description.$error.minlength">Required more than 6 characters</span>
 	</div>
 </div>
 
 <div class="subTitle">Optional information</div>
+
 <div message-control-directive></div>
 
 <div class="form-group">

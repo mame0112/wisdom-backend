@@ -9,8 +9,8 @@
 
 
 	<!-- This part is for initial step (since saveArray is  0 at the beginning) -->
-<div class="callout callout-success">
-	<div class="form-group" ng-show="isInputtingNewMessageState()">
+<div class="callout callout-success" ng-show="isInputtingNewMessageState()">
+	<div class="form-group">
 		<h4 ng-show="messageState">input sub title</h4>
 		<h4 ng-show="!messageState">input sub description</h4>
 		<input type="text" class="form-control" placeholder="Input something" ng-model="messageField" name="message" ng-minlength="10">
@@ -20,7 +20,7 @@
 	</div>
 </div>
 
-<div class="callout callout-success">
+<div class="callout callout-success" ng-show="saveArray.length !== 0">
 	<!-- This part is for already input information. -->
 	<div class="panel panel-default" ng-repeat="data in saveArray track by $index" ng-mouseenter="onMouseOver($index)" ng-mouseleave="onMouseLeave($index)">
 		<div class="btn-group" role="group" aria-label="Control selection" ng-show="isMessageModifyingState() == false">
@@ -33,7 +33,7 @@
 		</div>
 		<div ng-class="findCssClassbyType(data)" ng-show="isOriginalMessageDisplayed(index)">{{data.entry}}</div>
 		<div class="form-group" ng-show="isModifyPanelVisible($index)">
-			<h3>Modify input text</h3>
+			<h4>Modify input text</h4>
 			<input type="text" class="form-control" placeholder="Input something" ng-model="messageModifyField">
 			<button type="button" class="btn btn-default" ng-click="hideMessageInputArea($index)">Cancel</button>
 			<button type="button" class="btn btn-primary" ng-click="saveModifiedTexts(data, messageModifyField, $index)">Save</button>
