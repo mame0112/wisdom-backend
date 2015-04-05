@@ -1,26 +1,29 @@
 <div ng-controller="wisdomDetailController" ng-init="initialize()" class="wisdom">
 	<div class="titlearea">
-		<div class="media">
-		  <div class="media-left">
-		    <a href="#">
-		      <img class="media-object" src="image/64-64.png" alt="...">
-		    </a>
+		  <div class="thumbnail">
+				<div class="image" ng-style="{'background': colorGenerater.generateColor(wisdom.title)}">
+					<div class="text">{{wisdom.title | capitalize}}</div>
+				</div>
+<!--		      <img class="bigimage" src="image/64-64.png" alt="..."> -->
 		  </div>
 		  <div class="media-body">
-		    <h1 class="title">{{wisdom.title}}</h4>
-			<h3 class="description">{{wisdom.description}}</h4>
-			<h2 class="tag">{{wisdom.tag}}</h3>
+		    <div class="title">{{wisdom.title}}</div>
+			<div class="description">{{wisdom.description}}</div>
+			<div class="tag">{{wisdom.tag}}</div>
 		  </div>
-		</div>
 	</div>
 
 	<div class="bodyarea">
 	<ul ng-repeat="entry in messages track by $index">
 		<li>
-			<blockquote class="subtitle" ng-show="{{entry.tag}} == 1">{{entry.message}}</blockquote>
+			<p ng-show="{{entry.tag}} == 1" class="subtitle">{{entry.message}}</p>
 			<p ng-show="{{entry.tag}} == 2">{{entry.message}}</p>
-			<p class="pull-right"><img src="image/like.jpg">{{entry.like_num}}</p>
-			<div class="date" ng-show="isValidDateFormat(entry.updated_date)">Last updated: {{formatTimeInfo(entry.updated_date)}}</div>
+			<div class="message">
+				<div class="update" ng-show="isValidDateFormat(entry.updated_date)">
+				Last updated: {{formatTimeInfo(entry.updated_date)}}
+				</div>
+				<div class="like" ng-show="{{entry.tag}} == 2">コメントにイイネ！する<img src="image/like.jpg">{{entry.like_num}}</div>
+			</div>
 		</li>
 	</ul>
 	</div>

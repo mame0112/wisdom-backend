@@ -11,14 +11,53 @@
 	background-color: #fcfcfc;
 }
 
+.wisdom .titlearea .thumbnail{
+	float: left;
+}
+
+.wisdom .titlearea .thumbnail .image {
+    width: 144px;
+    height: 144px;
+    background: #888888;
+    border-radius: 8px 8px 8px 8px;
+	position: relative;
+}
+
+.wisdom .titlearea .thumbnail .image .text{
+    height: 100%;
+    width: 100%;
+    color: #FFFFFF;
+    font-size: 48px;
+    text-align: center;
+	position: absolute;
+	top: 50%;
+	margin-top: -0.8em;
+    /*vertical-align: bottom;*/
+}
+
+
 .wisdom .titlearea .title{
 	color: #333333;
 	padding-top: 0px;
-	margin-top: -0.2em;
+	margin-top: 0.0em;
 }
 
 .wisdom .titlearea .description{
 	color: #333333;
+	font-size: 16px;
+	font-weight: normal;
+}
+
+.wisdom .titlearea .tag{
+	color: #333333;
+	font-size: 16px;
+	font-weight: normal;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #cfcfcf;
+	background-color: #eeeeee;
+	padding: 4px 6px 4px 6px;
+	border-radius: 2px;
 }
 
 .wisdom .bodyarea{
@@ -26,8 +65,27 @@
 }
 
 .wisdom .bodyarea .subtitle{
+	text-decoration: underline;
+	text-decoration-color: red;
 	background-color: #ffffff;
 	margin-top: 2.0em;
+}
+
+.wisdom .bodyarea .message{
+	clear: both;
+}
+
+.wisdom .bodyarea .message .update{
+	text-align: left;
+	float: left;
+}
+
+.wisdom .bodyarea .message .like{
+	text-align: right;
+}
+
+.wisdom .bodyarea .message .clear{
+	clear: both;
 }
 
 .wisdom .date{

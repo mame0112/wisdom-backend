@@ -6,13 +6,16 @@ wisdomApp.controller('wisdomDetailController',
 'modeService', 
 'Constants', 
 'timeFormatService',
-function($scope, log, wisdomAPIService, $stateParams, modeService, Constants, timeFormatService){
+'creativeColorGenerateService',
+function($scope, log, wisdomAPIService, $stateParams, modeService, Constants, timeFormatService, creativeColorGenerateService){
  	log.d("wisdomDetailController");
 
  	var wisdomId = $stateParams.wisdomId;
  	log.d("wisdomId: " + wisdomId);
 
  	$scope.noContent = null;
+
+ 	$scope.colorGenerater = creativeColorGenerateService;
 
  	$scope.initialize = function(){
  		log.d("wisdomDetailController initialize");

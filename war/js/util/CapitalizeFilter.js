@@ -1,9 +1,6 @@
-wisdomApp.filter('capitalize', function() {
+wisdomApp.filter('capitalize', ['log', function(log) {
 	return function(input) {
-
-	if (input !== null)
+	if (input !== null && input !== undefined)
 		return input.substring(0,1).toUpperCase();
-		// input = input.toLowerCase();
-		// return input.substring(0,1).toUpperCase()+input.substring(1);
 	};
-});
+}]);
