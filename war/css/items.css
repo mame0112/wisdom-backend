@@ -2,61 +2,13 @@
 
 }
 
-#items .title{
-    font-size: 18px;
-    font-weight: normal;
-    display: block;
-    display: -webkit-box;
-    max-width: 100%;
-    height: 38px;
-    margin: 0 auto;
-    line-height: 1;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-#items .description{
-    font-size: 16px;
-    font-weight: thin;
-    color:#888888;
-    padding-top: 10px;
-    display: block;
-    display: -webkit-box;
-    max-width: 100%;
-    height: 44px;
-    margin: 0 auto;
-    line-height: 1;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-#items .tag{
-    font-size: 16px;
-    font-weight: normal;
-    color:#888888;
-    padding-top: 10px;
-    display: block;
-    display: -webkit-box;
-    max-width: 100%;
-    height: 44px;
-    margin: 0 auto;
-    line-height: 1;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;   
-}
-
 
 #items .contents{
     margin-left:0px;
     font-size: 14px;
     font-weight: thin;
     clear: both;
+    overflow: hidden;
 }
 
 #items .list{
@@ -76,21 +28,6 @@
     padding-right: 8px;
 }
 
-#items .contents .content a{
-    color: #000000;
-}
-
-#items .contents p{
-    color: #888888;
-    white-space: nowrap;
-    max-width: 80%;
-    overflow: hidden;
-    -o-text-overflow: ellipsis;
-    text-overflow: ellipsis;
-
-    word-wrap: break-word;
-}
-
 #items .thumbnail {
     width: 64px;
     height: 64px;
@@ -99,6 +36,7 @@
 }
 
 #items .thumbnail .text{
+
     height: 100%;
     width: 100%;
     color: #FFFFFF;
@@ -107,27 +45,67 @@
     vertical-align: middle;
 }
 
-
-.parent {
-    width: 300px;
+#items .contents .content{
+  width: 120%;
 }
 
-.ellipsis {
-  white-space: nowrap;
-  text-overflow: ellipsis;
+#items .contents .content .title{
   overflow: hidden;
 }
 
-.block-ellipsis {
-  display: block;
-  display: -webkit-box;
-  max-width: 100%;
-  height: 43px;
-  margin: 0 auto;
-  font-size: 14px;
-  line-height: 1;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
+#items .contents .content .title p{
+    font-size: 18px;
+    font-weight: normal;
+
+    margin: 0;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+#items .contents .content .description{
+    overflow: hidden;
+}
+
+#items .contents .content .description p{
+    font-size: 16px;
+    font-weight: thin;
+    color:#888888;
+
+    margin: 0;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+#items .contents .content .tag{
+    font-size: 16px;
+    font-weight: normal;
+}
+
+#items .contents .content .tag p{
+    font-size: 16px;
+    font-weight: thin;
+    color:#888888;
+
+    margin: 0;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.mycontainer {
+  background: #eee;
   overflow: hidden;
-  text-overflow: ellipsis;
+  width: 300px;
+}
+
+.mycontainer p {
+    margin: 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
 }
