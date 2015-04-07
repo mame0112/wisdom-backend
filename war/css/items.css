@@ -5,12 +5,50 @@
 #items .title{
     font-size: 18px;
     font-weight: normal;
-    word-wrap: break-word;
-    white-space: nowrap;
-    max-width: 80%;
+    display: block;
+    display: -webkit-box;
+    max-width: 100%;
+    height: 38px;
+    margin: 0 auto;
+    line-height: 1;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     overflow: hidden;
-    -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
+}
+
+#items .description{
+    font-size: 16px;
+    font-weight: thin;
+    color:#888888;
+    padding-top: 10px;
+    display: block;
+    display: -webkit-box;
+    max-width: 100%;
+    height: 44px;
+    margin: 0 auto;
+    line-height: 1;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#items .tag{
+    font-size: 16px;
+    font-weight: normal;
+    color:#888888;
+    padding-top: 10px;
+    display: block;
+    display: -webkit-box;
+    max-width: 100%;
+    height: 44px;
+    margin: 0 auto;
+    line-height: 1;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;   
 }
 
 

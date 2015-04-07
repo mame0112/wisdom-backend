@@ -1,13 +1,3 @@
-<script>
-$(function() {
-    $('.textOverflowTest4').textOverflowEllipsis({
-        resize: true, // ウィンドウリサイズ時に追従するか
-        numOfCharactersToReduce : 1, // 高さ計算するときに削る文字数
-        suffix: '...' // 省略記号
-    });
-});
-</script>
-
 <div id="items" ng-controller="pickupController" ng-init="initialize()">
 <div class="title">{{today}}'s wisdom</div>
 <ul ng-repeat="data in wisdoms" class="list">
@@ -28,8 +18,8 @@ $(function() {
 		<a ui-sref="wisdom({wisdomId: data.id})">
 			<div class="title">{{data.title}}</div>
 		</a>
-		<p>{{data.description}}</p>
-		<p>{{data.tag}}</p>
+		<div class="description">{{data.description}}</div>
+		<div class="tag">{{data.tag}}</div>
 	</div>
 	<hr class="border">
 	</li>
@@ -51,16 +41,4 @@ $(function() {
 	</ul>
 -->
 
-</div>
-
-<div class="parent">
-    <h2>Single Line Ellipsis</h2>
-    <div class="ellipsis">
-        This is an example of an ellipsis. once we reach 300px of length then the text will be cut off.
-    </div>
-    <h2>Multiple Line Ellipsis</h2>
-    <div class="block-ellipsis">
-        This is an example of a multi-line ellipsis. We just set the number of lines we want to display before the ellipsis takes into effect and make some changes to the CSS and the ellipsis should take into effect once we reach the number of lines we want.
-        
-    </div>
 </div>
