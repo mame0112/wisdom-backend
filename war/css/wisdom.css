@@ -32,23 +32,25 @@
 	position: absolute;
 	top: 50%;
 	margin-top: -0.8em;
-    /*vertical-align: bottom;*/
 }
 
+.wisdom .titlearea .content{
+	text-indent: 10px;
 
-.wisdom .titlearea .title{
-	color: #333333;
-	padding-top: 0px;
-	margin-top: 0.0em;
 }
 
-.wisdom .titlearea .description{
+.wisdom .titlearea .content .title{
+	font-size: 38px;
+	color: #000000;
+}
+
+.wisdom .titlearea .content .description{
 	color: #333333;
 	font-size: 16px;
 	font-weight: normal;
 }
 
-.wisdom .titlearea .tag{
+.wisdom .titlearea .content .tag{
 	color: #333333;
 	font-size: 16px;
 	font-weight: normal;
@@ -59,6 +61,7 @@
 	padding: 4px 6px 4px 6px;
 	border-radius: 2px;
 }
+
 
 .wisdom .bodyarea{
 	background-color: #ffffff;
