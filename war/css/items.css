@@ -28,6 +28,10 @@
     padding-right: 8px;
 }
 
+#items .contents .image a:hover{
+    text-decoration: none;
+}
+
 #items .thumbnail {
     width: 64px;
     height: 64px;
@@ -62,6 +66,10 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+}
+
+#items .contents .content .title a{
+    color: #000000;
 }
 
 #items .contents .content .description{
