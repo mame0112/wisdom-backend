@@ -111,14 +111,26 @@
     background-color: #eeeeee;
 }
 
-#items .contents .content .viewnum{
-    color: #F57C00;
-    font-weight: bold;
 
-    text-align: right;
+#items .contents .content .viewinfo{
+    color: #888888;
     padding-right: 10px;
     padding-top: 6px;
+}
 
+#items .contents .content .viewinfo ul{
+    text-align: right;
+}
+
+#items .contents .content .viewinfo li{
+    display:inline-block; 
+    padding:0 1px;
+    zoom:1;
+}
+
+#items .contents .content .viewinfo .viewnum{
+    color: #F57C00;
+    font-weight: bold;
 }
 
 .mycontainer {
