@@ -1,6 +1,7 @@
 <div id="items" ng-controller="categoryController" ng-init="initialize()">
 <div ng-if="wisdomNum > 0">
-	{{categoryName}} / {{subCategoryName}} /{{wisdomNum}}
+	<div class="maintitle">Wisdom lists for {{categoryName}} > {{subCategoryName}} ({{start+1}} to {{end}} / total {{wisdomNum}} wisdoms)</div>
+	<hr class="title_divider">
 	<ul class="list" ng-repeat="data in wisdoms">
 		<li class="contents">
 			<div class="image">
@@ -14,10 +15,10 @@
 		    </div>
 		    <div class="content">
 				<div class="title">
-					{{data.tag}}
+					<p>{{data.tag}}</p>
 				</div>
-		        {{data.description}}
-		        {{timeFormatService.getFormattedTime(data.updated_date)}}
+				<div class="description">{{data.description}}</div>
+		        <div class="description"><p>{{timeFormatService.getFormattedTime(data.updated_date)}}</p></div>
 		    </div>
 		    <hr>
 		</li>

@@ -32,6 +32,9 @@ wisdomApp.controller('categoryController',
  	var offset = 0;
  	var limit = 10;
 
+ 	$scope.start = 0;
+ 	$scope.end = 0;
+
  	var param = {
  		"offset" : offset,
  		"limit" : limit,
@@ -79,6 +82,7 @@ wisdomApp.controller('categoryController',
 		log.d("currentPage: " + currentPage);
 
 		param.offset = currentPage * param.limit;
+		$scope.start = param.offset;
 
 	 	// Load categories
 	 	categoryAPIService.category({servlet_params : param}, function(response){
@@ -96,6 +100,15 @@ wisdomApp.controller('categoryController',
 	 		$scope.subCategoryName = params.subCategoryName;
 
 		 	$scope.totalItems = params.wisdomNum;
+
+			//If we don't reach to end
+			if($scope.wisdomNum >= $scope.start + param.limit){
+				$scope.end = $scope.start + param.limit;
+			} else {
+				//If we reach to end, end equals with total num
+				$scope.end = $scope.wisdomNum;
+			}
+
  		} else {
  			//Error handling
  		}
