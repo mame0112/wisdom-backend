@@ -1,0 +1,59 @@
+#overview{
+	background-color: #888888;
+}
+
+#overview .title{
+	color: #ffffff;
+	font-size: 28px;
+	padding-left: 20px;
+	padding-top: 20px;
+	padding-bottom: 10px;
+}
+
+#overview .message{
+	color: #ffffff;
+	font-size: 22px;
+	padding-left: 20px;
+	padding-top: 14px;
+}
+
+#overview .title_dark{
+	color: #333333;
+	font-size: 28px;
+	padding-left: 20px;
+	padding-top: 20px;
+	padding-bottom: 10px;
+}
+
+#overview .message_dark{
+	color: #333333;
+	font-size: 22px;
+	padding-left: 20px;
+	padding-top: 14px;
+}
+
+#overview .description1{
+	height: 600px;
+	background-color: #888888;
+	background-image: url(../image/heroshot04.jpg);
+}
+
+#overview .description2{
+	height: 600px;
+	background-color: #1E88E5;
+}
+
+#overview .description3{
+	height: 600px;
+	background-color: #FB8C00;
+}
+
+#overview .description4{
+	height: 600px;
+	background-color: #ffffff;
+}
+
+#overview .description5{
+	height: 600px;
+	background-color: #33691E;
+}
