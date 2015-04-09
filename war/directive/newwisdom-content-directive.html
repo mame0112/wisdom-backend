@@ -64,8 +64,9 @@
 		<h4>Title
 			<span class="notice" ng-show="newwisdom.title.$error.required">*</span>
 		</h4>
-		<input type="text" class="form-control" placeholder="Input title" name="title" ng-model="wisdom.title" required ng-minlength="6">
-		<span class="error" ng-show="newwisdom.title.$error.minlength">Required more than 6 characters</span>
+		<input type="text" class="form-control" placeholder="Input title" name="title" ng-model="wisdom.title" required ng-maxlength="{{titleMaxLength}}">
+		<p class="count">{{titleMaxLength - wisdom.title.length}}/{{titleMaxLength}}</p>
+		<span class="error" ng-show="newwisdom.title.$error.maxlength">Title must be less than {{titleMaxLength}} characters</span>
 	</div>
 
 	<div class="callout callout-success">

@@ -32,5 +32,7 @@ wisdomApp.constant(
 
 		TOASTER_LONG: 5000,
 
+		WISDOM_TITLE_COUNT: 50,
+
 	}
 );

@@ -40,6 +40,8 @@ wisdomApp.controller('wisdomCreateController',
 	$scope.categories = Constants.Category;
 	$scope.subCategories = null;
 
+	$scope.titleMaxLength = Constants.WISDOM_TITLE_COUNT;
+
 	var userData = null;
 
 	var category = null;

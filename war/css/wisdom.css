@@ -108,6 +108,11 @@
 	font-size: 18px;
 }
 
+#newwisdom .count{
+	color: #F4511E;
+	text-align: right;
+}
+
 #newwisdom .error{
 	color: #ff0000;
 	font-size: 12px;
