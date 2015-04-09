@@ -113,4 +113,18 @@
 	font-size: 12px;
 }
 
+#instruction {
+
+}
+
+#instruction .title {
+	font-weight: bold;
+}
+
+#instruction .message {
+	font-weight: normal;
+	color: #888888;
+	margin-bottom: 30px;
+}
+
 
