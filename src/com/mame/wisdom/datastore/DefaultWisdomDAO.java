@@ -11,8 +11,8 @@ import com.google.appengine.api.datastore.EntityNotFoundException;
 import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.PreparedQuery;
-import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.PreparedQuery.TooManyResultsException;
+import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.Filter;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.FilterPredicate;
@@ -21,10 +21,9 @@ import com.google.appengine.api.datastore.TransactionOptions;
 import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.data.WDSubCategoryData;
 import com.mame.wisdom.data.WDWisdomData;
+import com.mame.wisdom.datastore.memcache.LatestWisdomMemcacheService;
 import com.mame.wisdom.datastore.memcache.PopularWisdomMemcacheService;
 import com.mame.wisdom.datastore.memcache.WDMemcacheManager;
-import com.mame.wisdom.datastore.memcache.WDMemcacheService;
-import com.mame.wisdom.datastore.memcache.LatestWisdomMemcacheService;
 import com.mame.wisdom.exception.WisdomDatastoreException;
 import com.mame.wisdom.util.DbgUtil;
 
@@ -510,6 +509,7 @@ public class DefaultWisdomDAO implements WisdomDAO {
 			throws WisdomDatastoreException {
 		DbgUtil.showLog(TAG, "findWisdomById");
 
+		// TODO It seems that we can get wisdom by key (without doing query)
 		Filter searchFilter = new FilterPredicate(DBConstant.ENTITY_WISDOM_ID,
 				FilterOperator.EQUAL, wisdomId);
 		Query q = new Query(DBConstant.KIND_WISDOM).setFilter(searchFilter);
@@ -518,7 +518,20 @@ public class DefaultWisdomDAO implements WisdomDAO {
 			Entity entity = pq.asSingleEntity();
 			DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
 
-			return helper.parseEntityToWDWisdomData(entity);
+			WDWisdomData data = helper.parseEntityToWDWisdomData(entity);
+
+			// Increate view count
+			data.increaseViewCount();
+
+			// Get new view count and store it onto Datastroe
+			entity.setProperty(DBConstant.ENTITY_WISDOM_VIEWED_COUNT,
+					data.getViewCount());
+
+			// View count is not so critical information, then we don't update
+			// memcache for this timing.
+			mDS.put(entity);
+
+			return data;
 
 		} catch (TooManyResultsException e) {
 			DbgUtil.showLog(TAG, "TooManyResultsException: " + e.getMessage());

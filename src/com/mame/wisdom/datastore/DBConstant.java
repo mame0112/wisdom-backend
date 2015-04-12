@@ -73,6 +73,8 @@ public class DBConstant {
 
 	public final static String ENTITY_WISDOM_ITMES = "items";
 
+	public final static String ENTITY_WISDOM_VIEWED_COUNT = "count";
+
 	// Test fields
 	public final static String ENTITY_ID = "id";
 

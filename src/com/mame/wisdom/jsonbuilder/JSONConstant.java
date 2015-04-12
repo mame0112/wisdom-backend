@@ -86,6 +86,8 @@ public class JsonConstant {
 
 	public final static String PARAM_WISDOM_CREATE_USER_ID = "create_user_id";
 
+	public final static String PARAM_WISDOM_VIEW_COUNT = "count";
+	
 	public final static String PARAM_WISDOM_ENTRY_NAME = "entry";
 
 	public final static String PARAM_WISDOM_ITEM_ID = "id";

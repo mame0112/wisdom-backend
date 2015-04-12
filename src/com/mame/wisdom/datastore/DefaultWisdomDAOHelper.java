@@ -33,13 +33,29 @@ public class DefaultWisdomDAOHelper {
 			Blob thumbnail = (Blob) e
 					.getProperty(DBConstant.ENTITY_WISDOM_THUMBNAIL);
 
+			DbgUtil.showLog(TAG, "AAAA");
+
+			long viewCount = 0;
+
+			try {
+				viewCount = (Long) e
+						.getProperty(DBConstant.ENTITY_WISDOM_VIEWED_COUNT);
+			} catch (Exception ex) {
+				DbgUtil.showLog(TAG, "Exception: " + ex.getMessage());
+			}
+
+			DbgUtil.showLog(TAG, "BBBB");
+
 			String entryJson = (String) e
 					.getProperty(DBConstant.ENTITY_WISDOM_ITMES);
+
+			DbgUtil.showLog(TAG, "CCC");
 			List<WDWisdomItemEntry> items = JsonParseUtil
 					.createWisdomItemEntryListFromJson(entryJson);
 
 			WDWisdomData data = new WDWisdomData(wisdomId, title, description,
-					tag, createdUserId, lastUpdatedDate, thumbnail, items);
+					tag, createdUserId, lastUpdatedDate, thumbnail, items,
+					viewCount);
 			return data;
 		}
 
@@ -73,7 +89,7 @@ public class DefaultWisdomDAOHelper {
 			// Get entities belong to one wisdom
 			String itemsJSON = JsonParseUtil.parseWisdomItemEntitiesToJson(data
 					.getItems());
-			
+
 			entity.setProperty(DBConstant.ENTITY_WISDOM_ID, data.getWisdomId());
 			entity.setProperty(DBConstant.ENTITY_WISDOM_CREATED_USER_ID,
 					data.getCreatedUserId());
@@ -86,6 +102,8 @@ public class DefaultWisdomDAOHelper {
 			entity.setProperty(DBConstant.ENTITY_WISDOM_THUMBNAIL,
 					data.getThumbnakl());
 			entity.setProperty(DBConstant.ENTITY_WISDOM_TITLE, data.getTitle());
+			entity.setProperty(DBConstant.ENTITY_WISDOM_VIEWED_COUNT,
+					data.getViewCount());
 			return entity;
 		} else {
 			DbgUtil.showLog(TAG, "data or entity is null");

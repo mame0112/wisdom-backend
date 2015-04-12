@@ -58,7 +58,6 @@ var wisdomApp = angular.module('WidsomApp',
 		state('wisdom',{
 			url: '/detail/:wisdomId',
 			templateUrl: 'view/wisdom.html',
-			controller: 'wisdomDetailController'
 		}).
 		state('category',{
 			url: '/category/:categoryId/:subCategoryId',

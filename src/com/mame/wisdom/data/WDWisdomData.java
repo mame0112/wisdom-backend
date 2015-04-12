@@ -23,6 +23,8 @@ public class WDWisdomData implements Serializable {
 
 	private long mLastUpdatedDate = 0;
 
+	private long mViewCount = 0;
+
 	// TODO need to consider how we handle this.
 	private List<Integer> mItemOrder = new ArrayList<Integer>();
 
@@ -30,7 +32,7 @@ public class WDWisdomData implements Serializable {
 
 	public WDWisdomData(long id, String title, String description, String tag,
 			long createdUserId, long lastUpdatedDate, Blob thumbnail,
-			List<WDWisdomItemEntry> items) {
+			List<WDWisdomItemEntry> items, long viewCount) {
 		mWisdomId = id;
 		mTitle = title;
 		mDescription = description;
@@ -39,6 +41,7 @@ public class WDWisdomData implements Serializable {
 		mLastUpdatedDate = lastUpdatedDate;
 		mThumbnail = thumbnail;
 		mItems = items;
+		mViewCount = viewCount;
 	}
 
 	public long getWisdomId() {
@@ -75,6 +78,14 @@ public class WDWisdomData implements Serializable {
 
 	public List<WDWisdomItemEntry> getItems() {
 		return mItems;
+	}
+
+	public long getViewCount() {
+		return mViewCount;
+	}
+
+	public void increaseViewCount() {
+		mViewCount = mViewCount + 1;
 	}
 
 }

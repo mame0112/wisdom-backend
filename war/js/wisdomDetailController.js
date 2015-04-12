@@ -20,6 +20,27 @@ function($scope, log, wisdomAPIService, $stateParams, modeService, Constants, ti
  	$scope.initialize = function(){
  		log.d("wisdomDetailController initialize");
 		modeService.changeCurrentMode(Constants.STATE.STATE_WISDOM_PAGE);
+
+		//Get target wisdom
+	 	wisdomAPIService.wisdom({servlet_wisdom_id : wisdomId}, function(response){
+	 		log.d("response received");
+
+	 		//Set data under "params"
+	 		$scope.wisdom = response.params;
+	 		if($scope.wisdom !== null && $scope.wisdom !== undefined){
+	 			if($scope.wisdom.messages !== null && $scope.wisdom.messages !== undefined){
+		 			log.d("AAAA: " + $scope.wisdom.messages);
+			 		$scope.messages = JSON.parse(response.params.messages);
+	 			} else {
+					//Error handling 
+	 			}
+	 		} else {
+	 			//Error handling
+	 		}
+
+	 		// log.d("response:" + $scope.wisdom.messages);
+		});
+
  	};
 
  	$scope.formatTimeInfo = function(date){
@@ -35,27 +56,5 @@ function($scope, log, wisdomAPIService, $stateParams, modeService, Constants, ti
  		}
  		return false;
 	};
-
- 	// $scope.wisdoms = null;
-
-	//Get target wisdom
- 	wisdomAPIService.wisdom({servlet_wisdom_id : wisdomId}, function(response){
- 		log.d("response received");
-
- 		//Set data under "params"
- 		$scope.wisdom = response.params;
- 		if($scope.wisdom !== null && $scope.wisdom !== undefined){
- 			if($scope.wisdom.messages !== null && $scope.wisdom.messages !== undefined){
-	 			log.d("AAAA: " + $scope.wisdom.messages);
-		 		$scope.messages = JSON.parse(response.params.messages);
- 			} else {
-				//Error handling 
- 			}
- 		} else {
- 			//Error handling
- 		}
-
- 		// log.d("response:" + $scope.wisdom.messages);
-	});
 
 }]);
