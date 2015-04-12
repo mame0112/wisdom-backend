@@ -1,5 +1,11 @@
 <cronentries>
 	<cron>
+		<url>/_ah/sessioncleanup?clear</url>
+		<description>Clean _ah_Session up every day
+		</description>
+		<schedule>every 24 hours</schedule>
+	</cron>
+	<cron>
 		<url>/cron/latestInfo</url>
 		<description>Create latest information of the day every day
 		</description>
