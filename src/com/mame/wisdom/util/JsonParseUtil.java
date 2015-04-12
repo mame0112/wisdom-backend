@@ -219,6 +219,8 @@ public class JsonParseUtil {
 						wisdom.getLastUpdatedDate());
 				obj.put(JsonConstant.PARAM_WISDOM_CREATE_USER_ID,
 						wisdom.getCreatedUserId());
+				obj.put(JsonConstant.PARAM_WISDOM_VIEW_COUNT,
+						wisdom.getViewCount());
 				return obj;
 
 			} catch (JSONException e) {
