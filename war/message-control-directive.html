@@ -29,6 +29,8 @@
 			  <button type="button" class="btn btn-default" ng-click="deleteInputMessage(data)">Delete</button>
 			  <button type="button" class="btn btn-default" ng-click="moveUpMessagePosition(saveArray, $index)">Up</button>
 			  <button type="button" class="btn btn-default" ng-click="moveDownMessagePosition(saveArray, $index)">Down</button>
+			  <button type="button" class="btn btn-default" ng-click="moveMessageUpToTop(saveArray, $index)">Top</button>
+			  <button type="button" class="btn btn-default" ng-click="moveMessageDownToBottom(saveArray, $index)">Bottom</button>
 			</div>
 		</div>
 		<div ng-class="findCssClassbyType(data)" ng-show="isOriginalMessageDisplayed(index)">{{data.entry}}</div>

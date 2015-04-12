@@ -73,8 +73,9 @@
 		<h4>Description
 			<span class="notice" ng-show="newwisdom.description.$error.required">*</span>
 		</h4>
-		<input type="text" class="form-control" placeholder="Input description" name="description" ng-model="wisdom.description" required ng-minlength="6">
-		<span class="error" ng-show="newwisdom.description.$error.minlength">Required more than 6 characters</span>
+		<input type="text" class="form-control" placeholder="Input description" name="description" ng-model="wisdom.description" required ng-maxlength="{{descMaxLength}}">
+		<p class="count">{{descMaxLength - wisdom.description.length}}/{{descMaxLength}}</p>
+		<span class="error" ng-show="newwisdom.description.$error.maxlength">Required less than {{descMaxLength}} characters</span>
 	</div>
 </div>
 

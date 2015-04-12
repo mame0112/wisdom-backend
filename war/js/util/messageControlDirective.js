@@ -4,7 +4,8 @@ wisdomApp.controller('messageOperationController',
  'modeService',
  'createWisdomSharedStateService',
  'timeService',
- function($scope, log, modeService, createWisdomSharedStateService, timeService){
+ 'Constants',
+ function($scope, log, modeService, createWisdomSharedStateService, timeService, Constants){
  	log.d("messageOperationController");
 
  	var DISPLAY_TITLE = true;
@@ -17,6 +18,8 @@ wisdomApp.controller('messageOperationController',
  	var NEW_TEXT_INPUT = 1;
  	var TEXT_INPUT_DONE = 2;
  	var TEXT_MODIFY = 3;
+
+	$scope.subContentLength = Constants.WISDOM_TITLE_COUNT;
 
  	$scope.STATE = DEFAULT;
 
@@ -80,7 +83,7 @@ wisdomApp.controller('messageOperationController',
  	$scope.saveMessageTexts = function(input)
  	{
  		log.d("saveMessageTexts: " + input);
- 		if(input !== null){
+ 		if(input !== null && input !== undefined){
  			var type = input.type;
  			var str = null;
 
@@ -169,10 +172,8 @@ wisdomApp.controller('messageOperationController',
  		log.d("isDescription");
  		if(data.type === TYPE_TITLE)
  		{
-	 		log.d("This is title");
  			return "panel-heading";
  		} else if (data.type === TYPE_MESSAGE){
-	 		log.d("This is description");
  			return "panel-body";
  		} else {
  			log.d("Unknown type.");
@@ -256,12 +257,43 @@ wisdomApp.controller('messageOperationController',
 
  	$scope.moveDownMessagePosition= function(array, index)
  	{
- 		log.d("moveDownMessagePosition");
  		if(array !== null && array.length !== 0)
  		{
 			array.splice(index, 2, array[index+1], array[index]);
  		}
 
+ 	};
+
+ 	$scope.moveMessageUpToTop = function(array, index)
+ 	{
+ 		if(array !== null && array.length !== 0)
+ 		{
+ 			var targetItem = array[index];
+
+	 		//Remove item from array
+	 		array.splice(index, 1);
+
+	 		//Add item to top
+			array.splice(0, 0, targetItem);
+
+ 		}
+ 	};
+
+ 	$scope.moveMessageDownToBottom = function(array, index)
+ 	{
+ 		log.d("moveMessageDownToBottom");
+ 		if(array !== null && array.length !== 0)
+ 		{
+ 			var targetItem = array[index];
+
+	 		log.d("targetItem: " + targetItem);
+
+	 		//Remove item from array
+	 		array.splice(index, 1);
+
+	 		//Add item to top
+			array.splice(array.length, 0, targetItem);
+ 		}
  	};
 
  	$scope.hideDefaultMessageInputArea = function()
@@ -273,7 +305,6 @@ wisdomApp.controller('messageOperationController',
 
  	$scope.isModifyPanelVisible = function(index)
  	{
- 		log.d("isModifyPanelVisible");
 
  		if($scope.isMessageModifyingState() === true)
  		{
