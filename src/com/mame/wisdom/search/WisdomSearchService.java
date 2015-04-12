@@ -1,6 +1,8 @@
 package com.mame.wisdom.search;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.google.appengine.api.search.Document;
 import com.google.appengine.api.search.Field;
@@ -79,42 +81,33 @@ public class WisdomSearchService {
 		}
 	}
 
-	public String searchWisdomByParameter(String parameter) {
+	public List<Long> searchWisdomByParameter(String parameter) {
 		DbgUtil.showLog(TAG, "searchWisdomByParameter");
 		if (parameter == null) {
 			return null;
 		}
 
+		List<Long> result = new ArrayList<Long>();
+
 		Results<ScoredDocument> documents = INDEX.search(parameter);
 		// List<HtmlModel> models = new ArrayList<HtmlModel>();
 		for (ScoredDocument document : documents) {
 			// HtmlModel model = new HtmlModel();
-			String title = document.getOnlyField(
-					SearchConstants.KEY_SERACH_TITLE).getText();
-			DbgUtil.showLog(TAG, "title: " + title);
+
+			long id = Long.valueOf(document.getId());
+
+			// String title = document.getOnlyField(
+			// SearchConstants.KEY_SERACH_TITLE).getText();
+			DbgUtil.showLog(TAG, "id: " + id);
+			result.add(id);
+
 			// model.setFileName(document.getOnlyField("fileName").getText());
 			// model.setContent(document.getOnlyField("content").getHTML());
 			// models.add(model);
 		}
 
-		// try {
-		// String queryString = "product: piano AND price &lt; 5000";
-		// Results<ScoredDocument> results = getIndex().search(queryString);
-		//
-		// // Iterate over the documents in the results
-		// for (ScoredDocument document : results) {
-		// // handle results
-		// }
-		// } catch (SearchException e) {
-		// if (StatusCode.TRANSIENT_ERROR.equals(e.getOperationResult()
-		// .getCode())) {
-		// // retry
-		// }
-		// }
-
-		return null;
+		return result;
 	}
-
 	// public void createDocument() {
 	// Document.Builder builder = Document.newBuilder();
 	//

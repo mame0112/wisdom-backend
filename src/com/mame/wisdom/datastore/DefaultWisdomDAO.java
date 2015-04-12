@@ -91,10 +91,6 @@ public class DefaultWisdomDAO implements WisdomDAO {
 				(new LatestWisdomMemcacheService()));
 		List<WDWisdomData> result = (List<WDWisdomData>) memManager.getCache();
 
-		// TODO
-		WisdomSearchService service = new WisdomSearchService();
-		service.searchWisdomByParameter("少年");
-
 		// If no memcache exist
 		if (result == null) {
 			DbgUtil.showLog(TAG, "Memcache for getLatestWisdoms is null");
@@ -184,10 +180,6 @@ public class DefaultWisdomDAO implements WisdomDAO {
 			throw new WisdomDatastoreException("Illegal wisdom Id");
 		}
 
-		// TODO
-		WisdomSearchService service = new WisdomSearchService();
-		service.storeNewWisdom(wisdom);
-
 		TransactionOptions options = TransactionOptions.Builder.withXG(true);
 		Transaction tx = mDS.beginTransaction(options);
 
@@ -219,6 +211,12 @@ public class DefaultWisdomDAO implements WisdomDAO {
 				// with previous time
 				createOrUpdateWisdomEntity(wisdom, wisdomKey, newId);
 
+				wisdom.setWisdomId(newId);
+
+				// Store it onto Document
+				WisdomSearchService service = new WisdomSearchService();
+				service.storeNewWisdom(wisdom);
+
 				// Finish transaction with success
 				tx.commit();
 
@@ -239,6 +237,12 @@ public class DefaultWisdomDAO implements WisdomDAO {
 
 				// Create or update wisdom entity
 				createOrUpdateWisdomEntity(wisdom, wisdomKey, newId);
+
+				wisdom.setWisdomId(newId);
+
+				// Store it onto Document
+				WisdomSearchService service = new WisdomSearchService();
+				service.storeNewWisdom(wisdom);
 
 				// Finish transaction with success
 				tx.commit();
@@ -395,43 +399,38 @@ public class DefaultWisdomDAO implements WisdomDAO {
 		}
 
 		if (searchParam != null) {
-			try {
-				DbgUtil.showLog(TAG, "searchParam: " + searchParam);
-				// Need to check if this work
 
+			DbgUtil.showLog(TAG, "searchParam: " + searchParam);
+			// Need to check if this work
+
+			// TODO
+			WisdomSearchService service = new WisdomSearchService();
+			List<Long> ids = service.searchWisdomByParameter(searchParam);
+
+			List<WDWisdomData> result = new ArrayList<WDWisdomData>();
+
+			for (Long id : ids) {
 				Filter searchFilter = new FilterPredicate(
-						DBConstant.ENTITY_WISDOM_DESCRIPTION,
-						FilterOperator.IN, searchParam);
-				// Filter searchFilter = new FilterPredicate(
-				// DBConstant.ENTITY_WISDOM_DESCRIPTION,
-				// FilterOperator.EQUAL, searchParam);
+						DBConstant.ENTITY_WISDOM_ID, FilterOperator.EQUAL, id);
 				Query q = new Query(DBConstant.KIND_WISDOM)
 						.setFilter(searchFilter);
 				PreparedQuery pq = mDS.prepare(q);
-				for (Entity result : pq.asIterable()) {
-					DbgUtil.showLog(
-							TAG,
-							"result title:"
-									+ result.getProperty(DBConstant.ENTITY_WISDOM_TITLE));
-				}
-
-				FetchOptions fetch = FetchOptions.Builder.withOffset(offset)
-						.limit(limit);
-
-				List<Entity> entities = pq.asList(fetch);
-				if (entities != null) {
+				try {
+					Entity entity = pq.asSingleEntity();
 					DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
-					return helper.parseListEntityToWDWisdomData(entities);
+					WDWisdomData data = helper
+							.parseEntityToWDWisdomData(entity);
+					result.add(data);
+				} catch (TooManyResultsException e) {
+					DbgUtil.showLog(TAG,
+							"TooManyResultsException: " + e.getMessage());
+				} catch (IllegalStateException e) {
+					DbgUtil.showLog(TAG,
+							"IllegalStateException: " + e.getMessage());
 				}
-			} catch (IllegalStateException e) {
-				DbgUtil.showLog(TAG, "IllegalStateException: " + e.getMessage());
-				throw new WisdomDatastoreException(e.getMessage());
-			} catch (IllegalArgumentException e) {
-				DbgUtil.showLog(TAG,
-						"IllegalArgumentException: " + e.getMessage());
-				throw new WisdomDatastoreException(e.getMessage());
 			}
 
+			return result;
 		}
 
 		return null;
