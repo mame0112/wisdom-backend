@@ -25,6 +25,7 @@ import com.mame.wisdom.datastore.memcache.LatestWisdomMemcacheService;
 import com.mame.wisdom.datastore.memcache.PopularWisdomMemcacheService;
 import com.mame.wisdom.datastore.memcache.WDMemcacheManager;
 import com.mame.wisdom.exception.WisdomDatastoreException;
+import com.mame.wisdom.search.WisdomSearchService;
 import com.mame.wisdom.util.DbgUtil;
 
 public class DefaultWisdomDAO implements WisdomDAO {
@@ -89,6 +90,10 @@ public class DefaultWisdomDAO implements WisdomDAO {
 		WDMemcacheManager memManager = new WDMemcacheManager(
 				(new LatestWisdomMemcacheService()));
 		List<WDWisdomData> result = (List<WDWisdomData>) memManager.getCache();
+
+		// TODO
+		WisdomSearchService service = new WisdomSearchService();
+		service.searchWisdomByParameter("少年");
 
 		// If no memcache exist
 		if (result == null) {
@@ -178,6 +183,10 @@ public class DefaultWisdomDAO implements WisdomDAO {
 		if (wisdomId != WConstant.NO_WISDOM) {
 			throw new WisdomDatastoreException("Illegal wisdom Id");
 		}
+
+		// TODO
+		WisdomSearchService service = new WisdomSearchService();
+		service.storeNewWisdom(wisdom);
 
 		TransactionOptions options = TransactionOptions.Builder.withXG(true);
 		Transaction tx = mDS.beginTransaction(options);
