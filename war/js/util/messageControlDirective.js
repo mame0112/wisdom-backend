@@ -308,10 +308,8 @@ wisdomApp.controller('messageOperationController',
 
  		if($scope.isMessageModifyingState() === true)
  		{
- 			log.d("AAAAAAAA");
  			if($scope.modifyMessageCondition[index] === true)
  			{
-	 			log.d("BBBBBBBBBBBBB");
 	 			return true;
  			}
  		}

@@ -22,15 +22,15 @@
 
 <div class="callout callout-success" ng-show="saveArray.length !== 0">
 	<!-- This part is for already input information. -->
-	<div class="panel panel-default" ng-repeat="data in saveArray track by $index" ng-mouseenter="onMouseOver($index)" ng-mouseleave="onMouseLeave($index)">
-		<div class="btn-group" role="group" aria-label="Control selection" ng-show="isMessageModifyingState() == false">
-			<div ng-show="panelCondition[$index]">
-			  <button type="button" class="btn btn-default" ng-click="modifyInputMessage(data, $index)">Modify</button>
-			  <button type="button" class="btn btn-default" ng-click="deleteInputMessage(data)">Delete</button>
-			  <button type="button" class="btn btn-default" ng-click="moveUpMessagePosition(saveArray, $index)">Up</button>
-			  <button type="button" class="btn btn-default" ng-click="moveDownMessagePosition(saveArray, $index)">Down</button>
-			  <button type="button" class="btn btn-default" ng-click="moveMessageUpToTop(saveArray, $index)">Top</button>
-			  <button type="button" class="btn btn-default" ng-click="moveMessageDownToBottom(saveArray, $index)">Bottom</button>
+	<div ng-repeat="data in saveArray track by $index" ng-mouseenter="onMouseOver($index)" ng-mouseleave="onMouseLeave($index)">
+		<div aria-label="Control selection" >
+			<div ng-show="panelCondition[$index]" ng-show="isMessageModifyingState() == false" >
+			  <button type="button" class="btn btn-default btn-xs" ng-click="modifyInputMessage(data, $index)">Modify</button>
+			  <button type="button" class="btn btn-default btn-xs" ng-click="deleteInputMessage(data)">Delete</button>
+			  <button type="button" class="btn btn-default btn-xs" ng-click="moveUpMessagePosition(saveArray, $index)">Up</button>
+			  <button type="button" class="btn btn-default btn-xs" ng-click="moveDownMessagePosition(saveArray, $index)">Down</button>
+			  <button type="button" class="btn btn-default btn-xs" ng-click="moveMessageUpToTop(saveArray, $index)">Top</button>
+			  <button type="button" class="btn btn-default btn-xs" ng-click="moveMessageDownToBottom(saveArray, $index)">Bottom</button>
 			</div>
 		</div>
 		<div ng-class="findCssClassbyType(data)" ng-show="isOriginalMessageDisplayed(index)">{{data.entry}}</div>
