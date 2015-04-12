@@ -84,10 +84,10 @@
 <div message-control-directive></div>
 
 <div class="form-group">
-	<input type="checkbox" checked="checked"> Agree to <a ng-href="#/tos" target="_blank">Terms of service</a>
+	<input type="checkbox" checked="checked" ng-model="agreeToTos"> Agree to <a ng-href="#/tos" target="_blank">Terms of service</a>
 </div>
 <div class="form-group">
-	<button type="submit" class="btn btn-default" ng-click="addNewWisdom()">Create new wisdom</button>
+	<button type="submit" class="btn btn-primary" ng-click="addNewWisdom()" ng-disabled="!agreeToTos">Create new wisdom</button>
 </div>
 
 </form>
