@@ -8,8 +8,23 @@ wisdomApp.controller('headerController',
  'dataRetriveService', 
  'searchAPIService',
  '$cookieStore',
+ '$window',
+ '$location',
+ '$state',
  // '$state',
- function($scope, $http, log, modeService, Constants, userDataHolder, dataRetriveService, searchAPIService, $cookieStore){
+ function(
+ 	$scope, 
+ 	$http, 
+ 	log, 
+ 	modeService, 
+ 	Constants, 
+ 	userDataHolder, 
+ 	dataRetriveService, 
+ 	searchAPIService, 
+ 	$cookieStore, 
+ 	$window,
+ 	$location,
+ 	$state){
  	log.d("headerController");
 
 	// $scope.$state = $state;
@@ -131,7 +146,21 @@ wisdomApp.controller('headerController',
  		// log.d("searchWisdom");
  		if(data !== null && data !== undefined){
 	 		// log.d("input value: " + data);
-	 		searchAPIService.search({searchParam : data});
+	 		searchAPIService.search({searchParam : data}, function(response){
+	 			log.d("response received: " + response.params[0].title);
+	 			if(response !== null && response !== undefined){
+	 				// log.d("params: " + response);
+	 				// $scope.searchResult = response.params;
+	 				$scope.params = response.params[0];
+		 			$state.go("search", { params: JSON.stringify(response)});
+	 			} else {
+
+	 			}
+
+
+	 			// $location.path('/new').search('x=y');
+	 			// $window.location.href = '/tos';
+	 		});
  		}
  	};
 

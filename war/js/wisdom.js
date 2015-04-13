@@ -67,6 +67,11 @@ var wisdomApp = angular.module('WidsomApp',
 		state('newwisdom',{
 			url: '/wisdom',
 			templateUrl: 'view/newwisdom.html',
+		}).
+		state('search',{
+			url: '/search',
+			templateUrl: 'view/search.html',
+			controller: 'searchResultController'
 		});
 
 }]);

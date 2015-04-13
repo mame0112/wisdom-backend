@@ -42,6 +42,9 @@ public class SearchAction implements Action {
 			builder.addErrorMessage("parameter is null");
 		}
 
+		result = builder.getResultJson();
+		DbgUtil.showLog(TAG, "result: " + result);
+
 		return result;
 	}
 
