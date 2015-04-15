@@ -3,13 +3,13 @@ wisdomApp.controller('searchResultController',
  function($scope, log, $stateParams, searchAPIService){
 
 	// var originalParams = JSON.parse($scope.params);
-	$scope.params = $stateParams.result;
+	$scope.searchWord = $stateParams.result;
 
 	$scope.wisdoms = null;
 
-	if($scope.params !== null && $scope.params !== undefined){
+	if($scope.searchWord !== null && $scope.searchWord !== undefined){
 		// log.d("input value: " + data);
-		searchAPIService.search({searchParam : $scope.params}, function(response){
+		searchAPIService.search({searchParam : $scope.searchWord}, function(response){
 			log.d("response received: " + response.params[0].title);
 			if(response !== null && response !== undefined){
 

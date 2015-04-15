@@ -1,7 +1,39 @@
-<div ng-controller="searchResultController" ng-init="initialize()">
-Search result
-<ul>
-	<li ng-repeat="wisdom in wisdoms">{{wisdom.title}} / {{wisdom.message}}</li>
+<div ng-controller="searchResultController" ng-init="initialize()" id="items">
+<div ng-if="wisdoms == null">
+Loading...
+</div>
+<div class="maintitle">"{{searchWord}}" search result</div>
+<hr class="title_divider">
+<ul ng-repeat="data in wisdoms" class="list">
+	<li class="contents">
+	<div class="image">
+		<a ui-sref="wisdom({wisdomId: data.id})">
+		<!--
+	    <img src="image/64-64.png" alt="" class="media-object" />
+		<div class="square" ng-style="{background: '#FF0000'}">
+		<div class="square" ng-style="creativeColorGenerateService.getThumbnailBackgroundColor(data.title)"></div>
+	    -->
+		<div class="thumbnail" ng-style="{'background': creativeColorGenerateService.generateColor(data.title)}">
+			<div class="text">{{data.title | capitalize}}</div>
+		</div>
+	    </a>
+	</div>
+	<div class="content">
+	<!--
+		<div class="title"><p><a ui-sref="wisdom({wisdomId: data.id})">{{data.title}}</a></p></div>
+		-->
+		<div class="title"><a ui-sref="wisdom({wisdomId: data.id})"><p>{{data.title}}</p></a></div>
+		<div class="description"><p>{{data.description}}</p></div>
+		<div class="tag"><p>{{data.tag}}</p></div>
+		<div class="viewinfo">
+			<ul>
+				<li><div class="viewnum">{{data.count}}</div></li>
+				<li>view</li>
+			</ul>
+		</div>
+
+	</div>
+	<hr class="border">
+	</li>
 </ul>
-{{data}}
 </div>
