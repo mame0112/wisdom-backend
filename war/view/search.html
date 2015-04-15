@@ -1,3 +1,7 @@
 <div ng-controller="searchResultController" ng-init="initialize()">
 Search result
+<ul>
+	<li ng-repeat="wisdom in wisdoms">{{wisdom.title}} / {{wisdom.message}}</li>
+</ul>
+{{data}}
 </div>

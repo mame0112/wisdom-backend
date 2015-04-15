@@ -143,25 +143,31 @@ wisdomApp.controller('headerController',
  	};
 
  	$scope.searchWisdom = function(data) {
+
+ 		log.d("data: " + data);
+
+ 		$state.go('search', {result : data});
+
  		// log.d("searchWisdom");
- 		if(data !== null && data !== undefined){
-	 		// log.d("input value: " + data);
-	 		searchAPIService.search({searchParam : data}, function(response){
-	 			log.d("response received: " + response.params[0].title);
-	 			if(response !== null && response !== undefined){
-	 				// log.d("params: " + response);
-	 				// $scope.searchResult = response.params;
-	 				$scope.params = response.params[0];
-		 			$state.go("search", { params: JSON.stringify(response)});
-	 			} else {
+ 		// if(data !== null && data !== undefined){
+	 	// 	// log.d("input value: " + data);
+	 	// 	searchAPIService.search({searchParam : data}, function(response){
+	 	// 		log.d("response received: " + response.params[0].title);
+	 	// 		if(response !== null && response !== undefined){
+	 	// 			// log.d("params: " + response);
+	 	// 			// $scope.searchResult = response.params;
+	 	// 			// $scope.params = response.params[0];
+		 // 			// $state.go('search', { params: JSON.stringify(response)});
+		 // 			$state.go('search', {result : response});
+	 	// 		} else {
 
-	 			}
+	 	// 		}
 
 
-	 			// $location.path('/new').search('x=y');
-	 			// $window.location.href = '/tos';
-	 		});
- 		}
+	 	// 		// $location.path('/new').search('x=y');
+	 	// 		// $window.location.href = '/tos';
+	 	// 	});
+ 		// }
  	};
 
  	$scope.getTwitterName = function(data)
