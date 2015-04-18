@@ -1,5 +1,6 @@
 package com.mame.wisdom.jsonbuilder;
 
+import com.google.appengine.labs.repackaged.org.json.JSONArray;
 import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import com.mame.wisdom.exception.JSONBuilderException;
@@ -51,9 +52,19 @@ public class NewWisdomJsonBuilder extends JsonBuilder {
 			throw new JSONBuilderException("param is null");
 		}
 
-//		if (!(param instanceof WDWisdomData)) {
-//			throw new JSONBuilderException("Illegal param type");
-//		}
+		long wisdomId = (Long) param[0];
+
+		try {
+			JSONArray itemArray = new JSONArray();
+			JSONObject resultObject = new JSONObject();
+
+			resultObject.put(JsonConstant.PARAM_CATEGORY_WISDOM_ID, wisdomId);
+			itemArray.put(resultObject);
+
+			mRootObject.put(JsonConstant.PARAMS, itemArray);
+		} catch (JSONException e) {
+			DbgUtil.showLog(TAG, "JSONException: " + e.getMessage());
+		}
 
 	}
 

@@ -150,7 +150,8 @@ public class WisdomFacade {
 		return null;
 	}
 
-	public void createNewWisdom(String input) throws WisdomFacadeException {
+	public WDWisdomData createNewWisdom(String input)
+			throws WisdomFacadeException {
 		DbgUtil.showLog(TAG, "createNewWisdom");
 		if (input != null) {
 			WisdomDAO facade = new DefaultWisdomDAO();
@@ -159,15 +160,16 @@ public class WisdomFacade {
 			try {
 				WisdomDataStructure data = helper
 						.createWisdomDataFromInputString(input);
-				facade.addWisdom(data.getCategory(), data.getSubCategory(),
-						data.getWisdomData());
+				return facade.addWisdom(data.getCategory(),
+						data.getSubCategory(), data.getWisdomData());
 			} catch (WisdomDatastoreException e) {
 				DbgUtil.showLog(TAG,
 						"WisdomDatastoreException: " + e.getMessage());
 				throw new WisdomFacadeException(e.getMessage());
 			}
-
 		}
+
+		return null;
 	}
 
 	public WDSubCategoryData getCategoryContent(String category,

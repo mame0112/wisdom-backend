@@ -14,6 +14,7 @@ wisdomApp.controller('wisdomCreateController',
 	'$window',
 	'$rootScope',
 	'toasterService',
+	'$state',
     function(
     	$scope, 
     	log, 
@@ -28,7 +29,8 @@ wisdomApp.controller('wisdomCreateController',
     	$upload,
 		$window,
 		$rootScope,
-		toasterService
+		toasterService,
+		$state
     	){
  	log.d("wisdomCreateController");
 
@@ -107,9 +109,11 @@ wisdomApp.controller('wisdomCreateController',
 		newWisdomAPIService.newwisdom({servlet_new_wisdom_param : result},
 		 function(value, responseHeaders){
 			log.d("response received");
+			var wisdomId = value.params.param[0].wisdomId;
 			// log.d("responseHeaders: " + headers());
 			// toasterService.showSuccessToasterShort("New wisdom", "Message successfully created!");
 			toasterService.showSuccessToasterShort("New wisdom", "Message successfully created!");
+	 		$state.go('wisdom', {wisdomId : wisdomId});
 	 		// $window.location.href = '/';
 
 		 }, function (httpResponse) {

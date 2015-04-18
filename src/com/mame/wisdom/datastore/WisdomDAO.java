@@ -103,9 +103,10 @@ public interface WisdomDAO {
 	 * @param category
 	 * @param subCategory
 	 * @param wisdom
+	 * @return newly created wisdom.
 	 * @throws WisdomDatastoreException
 	 */
-	public void addWisdom(String category, String subCategory,
+	public WDWisdomData addWisdom(String category, String subCategory,
 			WDWisdomData wisdom) throws WisdomDatastoreException;
 
 	/**

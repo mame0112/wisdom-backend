@@ -161,7 +161,7 @@ public class DefaultWisdomDAO implements WisdomDAO {
 	}
 
 	@Override
-	public void addWisdom(String category, String subCategory,
+	public WDWisdomData addWisdom(String category, String subCategory,
 			WDWisdomData wisdom) throws WisdomDatastoreException {
 		DbgUtil.showLog(TAG, "addWisdom");
 
@@ -213,12 +213,14 @@ public class DefaultWisdomDAO implements WisdomDAO {
 
 				wisdom.setWisdomId(newId);
 
-				// Store it onto Document
-				WisdomSearchService service = new WisdomSearchService();
-				service.addValue(wisdom);
+				// TODO Store it onto Document
+//				WisdomSearchService service = new WisdomSearchService();
+//				service.addValue(wisdom);
 
 				// Finish transaction with success
 				tx.commit();
+				
+				return wisdom;
 
 			} else {
 				// If target sub category doesn't exist
@@ -246,6 +248,8 @@ public class DefaultWisdomDAO implements WisdomDAO {
 
 				// Finish transaction with success
 				tx.commit();
+				
+				return wisdom;
 
 			}
 		} catch (ConcurrentModificationException e) {

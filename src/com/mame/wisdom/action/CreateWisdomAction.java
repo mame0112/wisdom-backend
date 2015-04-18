@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.mame.wisdom.constant.WConstant;
+import com.mame.wisdom.data.WDWisdomData;
 import com.mame.wisdom.datastore.WisdomFacade;
 import com.mame.wisdom.exception.WisdomFacadeException;
 import com.mame.wisdom.jsonbuilder.JsonBuilder;
@@ -60,7 +61,15 @@ public class CreateWisdomAction implements Action {
 			DbgUtil.showLog(TAG, "params: " + params);
 			builder.addResponseId(Integer.valueOf(responseId));
 			try {
-				facade.createNewWisdom(params);
+				WDWisdomData newWisdom = facade.createNewWisdom(params);
+				//If wisdom is newly created
+				if(newWisdom != null){
+					builder.addResponseParam(newWisdom.getWisdomId());
+				} else {
+					//If new wisdom creation failed
+					builder.addResponseParam(WConstant.NO_WISDOM);
+				}
+
 			} catch (WisdomFacadeException e) {
 				DbgUtil.showLog(TAG, "WisdomFacadeException: " + e.getMessage());
 				builder.addErrorMessage(e.getMessage());
