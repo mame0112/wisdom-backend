@@ -1,5 +1,8 @@
 package com.mame.wisdom.search;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -38,13 +41,14 @@ public class WisdomSearchService {
 		}
 
 		JSONObject object = JsonParseUtil.parseWisdomDataToJsonObject(data);
+		DbgUtil.showLog(TAG, "object:" + object.toString());
 
 		if (object != null) {
 			DbgUtil.showLog(TAG, "object is not null");
 			// This "process" is a name that is defined in queue.xml
 			Queue queue = QueueFactory.getQueue(WORKER);
 			TaskOptions to = TaskOptions.Builder.withUrl("/" + WORKER).param(
-					SearchConstants.KEY, object.toString());
+					SearchConstants.KEY, data.toString());
 			queue.add(to.method(Method.POST));
 		}
 	}
@@ -64,5 +68,22 @@ public class WisdomSearchService {
 			return;
 		}
 	}
+
+	// private byte[] convertWisdomDataToByteArray(WDWisdomData data) {
+	//
+	// byte[] retObject = null;
+	// try {
+	// ByteArrayOutputStream byteos = new ByteArrayOutputStream();
+	// ObjectOutputStream objos = new ObjectOutputStream(byteos);
+	// objos.writeObject(data);
+	// objos.close();
+	// byteos.close();
+	// retObject = byteos.toByteArray();
+	// return retObject;
+	// } catch (IOException e) {
+	// DbgUtil.showLog(TAG, "IOException: " + e.getMessage());
+	// }
+	// return null;
+	// }
 
 }

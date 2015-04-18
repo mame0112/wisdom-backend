@@ -70,9 +70,9 @@ public class JsonParseUtil {
 		return null;
 	}
 
-	public static String parseWisdomItemEntitiesToJson(
+	public static JSONArray parseWisdomItemEntitiesToJsonArray(
 			List<WDWisdomItemEntry> items) {
-		DbgUtil.showLog(TAG, "parseWisdomItemEntitiesToJson");
+		DbgUtil.showLog(TAG, "parseWisdomItemEntitiesToJsonArray");
 
 		if (items != null) {
 			JSONArray rootArray = new JSONArray();
@@ -82,7 +82,7 @@ public class JsonParseUtil {
 				rootArray.put(object);
 			}
 
-			return rootArray.toString();
+			return rootArray;
 		}
 
 		return null;
@@ -144,8 +144,9 @@ public class JsonParseUtil {
 		if (wisdom != null) {
 			try {
 				JSONObject obj = new JSONObject();
-				obj.put(JsonConstant.PARAM_WISDOM_MESSAGES, JsonParseUtil
-						.parseWisdomItemEntitiesToJson(wisdom.getItems()));
+				obj.put(JsonConstant.PARAM_WISDOM_MESSAGES,
+						parseWisdomItemEntitiesToJsonArray(wisdom.getItems())
+								.toString());
 				obj.put(JsonConstant.PARAM_WISDOM_ID, wisdom.getWisdomId());
 
 				obj.put(JsonConstant.PARAM_WISDOM_TITLE, wisdom.getTitle());
@@ -170,7 +171,7 @@ public class JsonParseUtil {
 
 	public static WDWisdomData createWisdomDataFromJson(String jsonString) {
 
-		DbgUtil.showLog(TAG, "createWisdomDataFromJson");
+		DbgUtil.showLog(TAG, "createWisdomDataFromJson: " + jsonString);
 
 		if (jsonString != null) {
 

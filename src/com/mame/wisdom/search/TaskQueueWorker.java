@@ -40,8 +40,6 @@ public class TaskQueueWorker extends HttpServlet {
 			return;
 		}
 
-		DbgUtil.showLog(TAG, "json: " + value);
-
 		WDWisdomData data = JsonParseUtil.createWisdomDataFromJson(value);
 
 		// String key = request.getParameter("key");
@@ -50,8 +48,8 @@ public class TaskQueueWorker extends HttpServlet {
 		// In this case, we use wisdom Id as key.
 		String key = String.valueOf(data.getWisdomId());
 
-		String messages = JsonParseUtil.parseWisdomItemEntitiesToJson(data
-				.getItems());
+		String messages = JsonParseUtil.parseWisdomItemEntitiesToJsonArray(data
+				.getItems()).toString();
 
 		Document doc = Document
 				.newBuilder()

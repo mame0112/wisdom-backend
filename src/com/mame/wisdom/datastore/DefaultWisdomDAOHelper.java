@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.google.appengine.api.datastore.Blob;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.labs.repackaged.org.json.JSONArray;
 import com.mame.wisdom.data.WDWisdomData;
 import com.mame.wisdom.data.WDWisdomItemEntry;
 import com.mame.wisdom.util.DbgUtil;
@@ -87,15 +88,16 @@ public class DefaultWisdomDAOHelper {
 		if (data != null && entity != null) {
 
 			// Get entities belong to one wisdom
-			String itemsJSON = JsonParseUtil.parseWisdomItemEntitiesToJson(data
-					.getItems());
+			JSONArray itemsJSON = JsonParseUtil
+					.parseWisdomItemEntitiesToJsonArray(data.getItems());
 
 			entity.setProperty(DBConstant.ENTITY_WISDOM_ID, data.getWisdomId());
 			entity.setProperty(DBConstant.ENTITY_WISDOM_CREATED_USER_ID,
 					data.getCreatedUserId());
 			entity.setProperty(DBConstant.ENTITY_WISDOM_DESCRIPTION,
 					data.getDescription());
-			entity.setProperty(DBConstant.ENTITY_WISDOM_ITMES, itemsJSON);
+			entity.setProperty(DBConstant.ENTITY_WISDOM_ITMES,
+					itemsJSON.toString());
 			entity.setProperty(DBConstant.ENTITY_WISDOM_LAST_UPDATED_DATE,
 					data.getLastUpdatedDate());
 			entity.setProperty(DBConstant.ENTITY_WISDOM_TAG, data.getTag());
