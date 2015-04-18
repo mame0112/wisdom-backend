@@ -215,7 +215,7 @@ public class DefaultWisdomDAO implements WisdomDAO {
 
 				// Store it onto Document
 				WisdomSearchService service = new WisdomSearchService();
-				service.storeNewWisdom(wisdom);
+				service.addValue(wisdom);
 
 				// Finish transaction with success
 				tx.commit();
@@ -405,30 +405,30 @@ public class DefaultWisdomDAO implements WisdomDAO {
 
 			// TODO
 			WisdomSearchService service = new WisdomSearchService();
-			List<Long> ids = service.searchWisdomByParameter(searchParam);
+//			List<Long> ids = service.searchWisdomByParameter(searchParam);
 
 			List<WDWisdomData> result = new ArrayList<WDWisdomData>();
 
-			for (Long id : ids) {
-				Filter searchFilter = new FilterPredicate(
-						DBConstant.ENTITY_WISDOM_ID, FilterOperator.EQUAL, id);
-				Query q = new Query(DBConstant.KIND_WISDOM)
-						.setFilter(searchFilter);
-				PreparedQuery pq = mDS.prepare(q);
-				try {
-					Entity entity = pq.asSingleEntity();
-					DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
-					WDWisdomData data = helper
-							.parseEntityToWDWisdomData(entity);
-					result.add(data);
-				} catch (TooManyResultsException e) {
-					DbgUtil.showLog(TAG,
-							"TooManyResultsException: " + e.getMessage());
-				} catch (IllegalStateException e) {
-					DbgUtil.showLog(TAG,
-							"IllegalStateException: " + e.getMessage());
-				}
-			}
+//			for (Long id : ids) {
+//				Filter searchFilter = new FilterPredicate(
+//						DBConstant.ENTITY_WISDOM_ID, FilterOperator.EQUAL, id);
+//				Query q = new Query(DBConstant.KIND_WISDOM)
+//						.setFilter(searchFilter);
+//				PreparedQuery pq = mDS.prepare(q);
+//				try {
+//					Entity entity = pq.asSingleEntity();
+//					DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
+//					WDWisdomData data = helper
+//							.parseEntityToWDWisdomData(entity);
+//					result.add(data);
+//				} catch (TooManyResultsException e) {
+//					DbgUtil.showLog(TAG,
+//							"TooManyResultsException: " + e.getMessage());
+//				} catch (IllegalStateException e) {
+//					DbgUtil.showLog(TAG,
+//							"IllegalStateException: " + e.getMessage());
+//				}
+//			}
 
 			return result;
 		}

@@ -1,6 +1,8 @@
 package com.mame.wisdom.search;
 
 public class SearchConstants {
+	
+	final static String KEY ="key";
 
 	final static String KEY_SERACH_DESCRIPTION = "description";
 

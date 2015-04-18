@@ -3,6 +3,7 @@ package com.mame.wisdom.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.appengine.api.datastore.Blob;
 import com.google.appengine.labs.repackaged.org.json.JSONArray;
 import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
@@ -57,74 +58,10 @@ public class JsonParseUtil {
 		DbgUtil.showLog(TAG, "createWisdomItemEntryListFromJson");
 
 		if (originalJson != null) {
-			List<WDWisdomItemEntry> result = new ArrayList<WDWisdomItemEntry>();
-
+			JSONArray array;
 			try {
-
-				JSONArray array = new JSONArray(originalJson);
-
-				for (int i = 0; i < array.length(); i++) {
-
-					JSONObject obj = array.getJSONObject(i);
-					String message = obj
-							.getString(JsonConstant.PARAM_WISDOM_ITEM_MESSAGE);
-					DbgUtil.showLog(TAG, "message:" + message);
-					long id = obj.getLong(JsonConstant.PARAM_WISDOM_ITEM_ID);
-
-					long updateTime = 0;
-					try {
-						updateTime = obj
-								.getLong(JsonConstant.PARAM_WISDOM_UPDATED_DATE);
-					} catch (JSONException e) {
-						// Ignore since this is optional parameter.
-					}
-
-					long updateUserId = WConstant.NO_USER;
-					try {
-						updateUserId = obj
-								.getLong(JsonConstant.PARAM_WISDOM_ITEM_UPDATE_USER_ID);
-					} catch (JSONException e) {
-						// Ignore since this is optional parameter.
-					}
-
-					String updateUserName = null;
-
-					try {
-						updateUserName = obj
-								.getString(JsonConstant.PARAM_WISDOM_ITEM_UPDAtE_USER_NAME);
-					} catch (JSONException e) {
-						// Ignore since this is optional parameter.
-					}
-
-					int likeNum = 0;
-					try {
-						likeNum = obj
-								.getInt(JsonConstant.PARAM_WISDOM_ITEM_LIKE);
-					} catch (JSONException e) {
-						// Ignore since this is optional parameter.
-					}
-
-					int tag = obj.getInt(JsonConstant.PARAM_WISDOM_TAG);
-
-					WDWisdomItemEntry entry = null;
-
-					switch (tag) {
-					case WConstant.TAG_WISDOM_MESSAGE:
-						entry = new WDWisdomMessage(id, message, likeNum,
-								updateUserId, updateUserName, updateTime);
-						result.add(entry);
-						break;
-					case WConstant.TAG_WISDOM_TITLE:
-						entry = new WDWisdomTitle(id, message, likeNum,
-								updateUserId, updateUserName, updateTime);
-						result.add(entry);
-						break;
-					default:
-						DbgUtil.showLog(TAG, "Illegal tag id");
-						break;
-					}
-				}
-				return result;
+				array = new JSONArray(originalJson);
+				return createWisdomItemEntryListFromJson(array);
 			} catch (JSONException e) {
 				DbgUtil.showLog(TAG, "JSONException: " + e.getMessage());
 			}
@@ -207,7 +144,7 @@ public class JsonParseUtil {
 		if (wisdom != null) {
 			try {
 				JSONObject obj = new JSONObject();
-				obj.put(JsonConstant.PARAM_WISDOM_ITEM_MESSAGE, JsonParseUtil
+				obj.put(JsonConstant.PARAM_WISDOM_MESSAGES, JsonParseUtil
 						.parseWisdomItemEntitiesToJson(wisdom.getItems()));
 				obj.put(JsonConstant.PARAM_WISDOM_ID, wisdom.getWisdomId());
 
@@ -231,4 +168,113 @@ public class JsonParseUtil {
 		return null;
 	}
 
+	public static WDWisdomData createWisdomDataFromJson(String jsonString) {
+
+		DbgUtil.showLog(TAG, "createWisdomDataFromJson");
+
+		if (jsonString != null) {
+
+			try {
+				JSONObject rootObject = new JSONObject(jsonString);
+				int id = rootObject.getInt(JsonConstant.ID);
+				JSONArray messageArray = rootObject
+						.getJSONArray(JsonConstant.PARAM_WISDOM_MESSAGES);
+				List<WDWisdomItemEntry> messages = createWisdomItemEntryListFromJson(messageArray);
+				String title = rootObject
+						.getString(JsonConstant.PARAM_WISDOM_TITLE);
+				long updateDate = rootObject
+						.getLong(JsonConstant.PARAM_WISDOM_UPDATED_DATE);
+				int count = rootObject
+						.getInt(JsonConstant.PARAM_WISDOM_VIEW_COUNT);
+				String description = rootObject
+						.getString(JsonConstant.PARAM_WISDOM_DESCRIPTION);
+				String tag = rootObject
+						.getString(JsonConstant.PARAM_WISDOM_TAG);
+				long createUserId = rootObject
+						.getLong(JsonConstant.PARAM_WISDOM_CREATE_USER_ID);
+				return new WDWisdomData(id, title, description, tag,
+						createUserId, updateDate, null, messages, count);
+			} catch (JSONException e) {
+				DbgUtil.showLog(TAG, "JSONException: " + e.getMessage());
+			}
+
+			// List<WDWisdomItemEntry> createWisdomItemEntryListFromJson
+		}
+
+		return null;
+	}
+
+	private static List<WDWisdomItemEntry> createWisdomItemEntryListFromJson(
+			JSONArray array) {
+		DbgUtil.showLog(TAG, "createWisdomItemEntryListFromJson");
+		try {
+
+			List<WDWisdomItemEntry> result = new ArrayList<WDWisdomItemEntry>();
+
+			for (int i = 0; i < array.length(); i++) {
+
+				JSONObject obj = array.getJSONObject(i);
+				String message = obj
+						.getString(JsonConstant.PARAM_WISDOM_ITEM_MESSAGE);
+				DbgUtil.showLog(TAG, "message:" + message);
+				long id = obj.getLong(JsonConstant.PARAM_WISDOM_ITEM_ID);
+
+				long updateTime = 0;
+				try {
+					updateTime = obj
+							.getLong(JsonConstant.PARAM_WISDOM_UPDATED_DATE);
+				} catch (JSONException e) {
+					// Ignore since this is optional parameter.
+				}
+
+				long updateUserId = WConstant.NO_USER;
+				try {
+					updateUserId = obj
+							.getLong(JsonConstant.PARAM_WISDOM_ITEM_UPDATE_USER_ID);
+				} catch (JSONException e) {
+					// Ignore since this is optional parameter.
+				}
+
+				String updateUserName = null;
+
+				try {
+					updateUserName = obj
+							.getString(JsonConstant.PARAM_WISDOM_ITEM_UPDAtE_USER_NAME);
+				} catch (JSONException e) {
+					// Ignore since this is optional parameter.
+				}
+
+				int likeNum = 0;
+				try {
+					likeNum = obj.getInt(JsonConstant.PARAM_WISDOM_ITEM_LIKE);
+				} catch (JSONException e) {
+					// Ignore since this is optional parameter.
+				}
+
+				int tag = obj.getInt(JsonConstant.PARAM_WISDOM_TAG);
+
+				WDWisdomItemEntry entry = null;
+
+				switch (tag) {
+				case WConstant.TAG_WISDOM_MESSAGE:
+					entry = new WDWisdomMessage(id, message, likeNum,
+							updateUserId, updateUserName, updateTime);
+					result.add(entry);
+					break;
+				case WConstant.TAG_WISDOM_TITLE:
+					entry = new WDWisdomTitle(id, message, likeNum,
+							updateUserId, updateUserName, updateTime);
+					result.add(entry);
+					break;
+				default:
+					DbgUtil.showLog(TAG, "Illegal tag id");
+					break;
+				}
+			}
+			return result;
+		} catch (JSONException e) {
+			DbgUtil.showLog(TAG, "JSONException: " + e.getMessage());
+		}
+		return null;
+	}
 }

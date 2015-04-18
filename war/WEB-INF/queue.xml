@@ -1,0 +1,7 @@
+<queue-entries>
+  <queue>
+    <name>worker</name>
+    <rate>4/m</rate>
+    <bucket-size>4</bucket-size>
+  </queue>
+</queue-entries>
