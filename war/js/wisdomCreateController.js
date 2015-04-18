@@ -108,7 +108,8 @@ wisdomApp.controller('wisdomCreateController',
 		 function(value, responseHeaders){
 			log.d("response received");
 			// log.d("responseHeaders: " + headers());
-			toasterService.howSuccessToasterShort("New wisdom", "Message successfully created!");
+			// toasterService.showSuccessToasterShort("New wisdom", "Message successfully created!");
+			toasterService.showSuccessToasterShort("New wisdom", "Message successfully created!");
 	 		// $window.location.href = '/';
 
 		 }, function (httpResponse) {

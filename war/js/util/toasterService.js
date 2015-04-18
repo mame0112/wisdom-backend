@@ -3,9 +3,9 @@ wisdomApp.factory('toasterService', ['toaster', 'Constants', 'log',
 
  	return {
 
-	    howSuccessToasterShort : function(title, text)
+	    showSuccessToasterShort : function(title, text)
 	    {
-        	toaster.pop('success', this.title, this.text, Constants.TOASTER_SHORT);
+        	toaster.pop('success', title, text, Constants.TOASTER_SHORT);
 		},
 
     	showWaitToasterShort : function(title, text){
