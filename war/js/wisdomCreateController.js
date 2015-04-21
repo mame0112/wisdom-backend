@@ -99,22 +99,14 @@ wisdomApp.controller('wisdomCreateController',
 		result.messages = createWisdomSharedStateService.getSharedMessages();
 		log.d("result: " + "category: " + result.category + "subCategory: " + result.subCategory +  " tag: " + result.tag + " thumbnail: " + result.thumbnail + " title: " + result.title + " description: " + result.description + "messages: " + result.messages + " createUserId: " + result.create_user_id + " updated time: " + result.updated_date);
 
-		// var newWisdom = new wisdomAPIService();
-		// newWisdom.$newwisdom({servlet_resp_id: 1, param: '@servlet_new_wisdom_param'},
-		//  function(savedObject, handler){
-		// 	log.d("response received");
-		// });
-
 		// wisdomAPIService.newwisdom({servlet_new_wisdom_param : result});
 		newWisdomAPIService.newwisdom({servlet_new_wisdom_param : result},
 		 function(value, responseHeaders){
 			log.d("response received");
 			var wisdomId = value.params.param[0].wisdomId;
 			// log.d("responseHeaders: " + headers());
-			// toasterService.showSuccessToasterShort("New wisdom", "Message successfully created!");
 			toasterService.showSuccessToasterShort("New wisdom", "Message successfully created!");
 	 		$state.go('wisdom', {wisdomId : wisdomId});
-	 		// $window.location.href = '/';
 
 		 }, function (httpResponse) {
 		 	//Error case

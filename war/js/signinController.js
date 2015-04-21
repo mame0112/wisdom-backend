@@ -7,8 +7,12 @@ wisdomApp.controller('SigninController',
  'dataRetriveService',
  'Constants',
  '$window',
- function($scope, log, modeService, userDataHolder, twitterAPIService, dataRetriveService, Constants, $window){
+ '$cookies',
+ function($scope, log, modeService, userDataHolder, twitterAPIService, dataRetriveService, Constants, $window, $cookies){
  	log.d("SigninController");
+
+	var account = $cookies.name;
+	log.d("account: " + account);
 
  	$scope.twitterSignin = function()
  	{

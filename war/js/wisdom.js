@@ -5,7 +5,10 @@ var wisdomApp = angular.module('WidsomApp',
 	'ui.router', 
 	'angularFileUpload', 
 	'ngAnimate',
-	'toaster'])
+	'toaster',
+	'angulartics',
+	'angulartics.google.analytics',
+	])
 .controller('WidsomController', ['$scope', 'Constants', 'log', function($scope, Constants, log){
 	
 }])

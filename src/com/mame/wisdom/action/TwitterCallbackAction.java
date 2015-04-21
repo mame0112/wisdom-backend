@@ -62,7 +62,11 @@ public class TwitterCallbackAction implements Action {
 		Cookie cookie1 = new Cookie("name", "Bule");
 		response.addCookie(cookie1);
 
-		response.sendRedirect(request.getContextPath() + "/");
+		DbgUtil.showLog(TAG, "URL: " + request.getContextPath());
+		response.sendRedirect(request.getContextPath() + "/#/signin");
+
+		// JSONObject obj = new JSONObject();
+		// obj.put("name", "Bule");
 
 		// RequestDispatcher dispatch = request.getRequestDispatcher("/");
 		// dispatch.forward(request, response);

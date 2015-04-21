@@ -1,11 +1,16 @@
 package com.mame.wisdom.search;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import com.google.appengine.api.search.Document;
 import com.google.appengine.api.search.Field;
@@ -41,14 +46,17 @@ public class WisdomSearchService {
 		}
 
 		JSONObject object = JsonParseUtil.parseWisdomDataToJsonObject(data);
-		DbgUtil.showLog(TAG, "object:" + object.toString());
+		// DbgUtil.showLog(TAG, "object:" + object.toString());
 
 		if (object != null) {
 			DbgUtil.showLog(TAG, "object is not null");
 			// This "process" is a name that is defined in queue.xml
 			Queue queue = QueueFactory.getQueue(WORKER);
-			TaskOptions to = TaskOptions.Builder.withUrl("/" + WORKER).param(
-					SearchConstants.KEY, data.toString());
+			// TaskOptions to = TaskOptions.Builder.withUrl("/" + WORKER).param(
+			// SearchConstants.KEY, data.toString());
+			TaskOptions to = TaskOptions.Builder.withUrl("/" + WORKER)
+					.payload(object.toString())
+					.header("Content-type", "application/json");
 			queue.add(to.method(Method.POST));
 		}
 	}
