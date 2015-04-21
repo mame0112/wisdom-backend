@@ -24,7 +24,7 @@
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search" ng-model="searchParam">
         </div>
-        <button class="btn btn-default" ng-click="searchWisdom(searchParam)">Search</button>
+        <button class="btn btn-default" ng-click="searchWisdom(searchParam)" analytics-on="click" analytics-event="Search">Search</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
         <li><a ng-href="#/signin" ng-click="onSigninOptionSelect()" ng-show="isSigninVisible()">Sign in</a></li>
