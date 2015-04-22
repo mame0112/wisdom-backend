@@ -39,6 +39,12 @@
 
 	<div class="callout callout-success">
 		<h4>Thumbnail</h4>
+
+		<input type="file" file-model="myFile"/>
+		<button ng-click="uploadFile()">upload me</button>
+
+		<!-- -->
+
 		<div class="form-group">
 			<input type="file" name="thumbnail" value="select image">
 		</div>
@@ -48,7 +54,7 @@
 		<div class="form-group">
 		 watching model:
 		    <button class="button" ng-file-select ng-model="files">Upload using model $watch {{files}}</button>
-		    <button class="button" ng-file-select ng-file-change="upload($files)">Upload on file change</button>
+		    <button class="button" ng-file-select="upload($files)">Upload on file change</button>
 		    <button class="button" ng-click="uploadFile()">Upload</button>
 		    Drop File:
 		    <div ng-file-drop ng-model="files" class="drop-box" 
@@ -92,3 +98,28 @@
 
 </form>
 </div>
+
+
+
+<form ng-submit="uploadFile()" ng-controller="uploadCtrl">
+   <div class="row">
+         <div class="col-md-12">
+                  <input type="text" ng-model="model.fileDescription" />
+                  <input type="number" ng-model="model.rating" />
+                  <input type="checkbox" ng-model="model.isAGoodFile" />
+                  <input type="file" ng-file-select="onFileSelect($files)">
+                  <div class="progress" style="margin-top: 20px;">
+                    <div class="progress-bar" progress-bar="uploadProgress" role="progressbar">
+                      <span ng-bind="uploadProgress"></span>
+                      <span>%</span>
+                    </div>
+                  </div>
+
+                  <button button type="submit" class="btn btn-default btn-lg">
+                    <i class="fa fa-cloud-upload"></i>
+                    &nbsp;
+                    <span>Upload File</span>
+                  </button>
+                </div>
+              </div>
+            </form>
