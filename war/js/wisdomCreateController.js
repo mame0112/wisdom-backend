@@ -268,12 +268,17 @@ wisdomApp.controller('uploadCtrl', [
             $scope.uploadProgress = 0;
 
             $scope.uploadFile = function () {
+
+            	log.d("$scope.model: " + $scope.model);
+            	log.d("$scope.model.fileDescription: " + $scope.model.fileDescription);
+
                 var file = $scope.selectedFile[0];
                 $scope.upload = $upload.upload({
                     url: '/controller/newwisdom',
                     method: 'POST',
-                    data: angular.toJson($scope.model),
-                    file: file
+                    data: {data: $scope.model.fileDescription},
+                    // data: angular.toJson($scope.model.fileDescription),
+                    file: file,
                 }).progress(function (evt) {
                     $scope.uploadProgress = parseInt(100.0 * evt.loaded / evt.total, 10);
                 }).success(function (data) {

@@ -1,6 +1,7 @@
 package com.mame.wisdom.action;
 
 import java.io.InputStream;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -9,8 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.FileItemIterator;
 import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.fileupload.util.Streams;
 import org.apache.commons.io.IOUtils;
 
+import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.data.WDWisdomData;
 import com.mame.wisdom.datastore.WisdomFacade;
@@ -69,8 +72,10 @@ public class CreateWisdomAction implements Action {
 				if (item.isFormField()) {
 					DbgUtil.showLog(TAG,
 							"Got a form field: " + item.getFieldName());
-					byte[] bytes = IOUtils.toByteArray(stream);
-					DbgUtil.showLog(TAG, "bytes.length: " + bytes.length);
+					String value = Streams.asString(item.openStream());
+					JSONObject object = new JSONObject(value);
+					String param = object.getString("data");
+					DbgUtil.showLog(TAG, "param: " + param);
 				} else {
 					DbgUtil.showLog(TAG,
 							"Got an uploaded file: " + item.getFieldName()
@@ -78,22 +83,23 @@ public class CreateWisdomAction implements Action {
 					byte[] bytes = IOUtils.toByteArray(stream);
 					DbgUtil.showLog(TAG, "bytes.length: " + bytes.length);
 
-					// You now have the filename (item.getName() and the
-					// contents (which you can read from stream). Here we just
-					// print them back out to the servlet output stream, but you
-					// will probably want to do something more interesting (for
-					// example, wrap them in a Blob and commit them to the
-					// datastore).
-					// int len;
-					// byte[] buffer = new byte[8192];
-					// while ((len = stream.read(buffer, 0, buffer.length)) !=
-					// -1) {
-					// response.getOutputStream().write(buffer, 0, len);
-					// }
 				}
 			}
-		} catch (Exception ex) {
-			throw new ServletException(ex);
+		} catch (Exception e) {
+			DbgUtil.showLog(TAG, "Exception: " + e.getMessage());
+		}
+
+		String data = request.getParameter("data");
+		if (data != null) {
+			DbgUtil.showLog(TAG, "data: " + data);
+		} else {
+			DbgUtil.showLog(TAG, "data is null");
+		}
+
+		Enumeration names = request.getParameterNames();
+		while (names.hasMoreElements()) {
+			String name = (String) names.nextElement();
+			DbgUtil.showLog(TAG, "param name: " + name);
 		}
 
 		String responseId = request.getParameter(WConstant.SERVLET_RESP_ID);
