@@ -7,7 +7,8 @@ wisdomApp.controller('wisdomDetailController',
 'Constants', 
 'timeFormatService',
 'creativeColorGenerateService',
-function($scope, log, wisdomAPIService, $stateParams, modeService, Constants, timeFormatService, creativeColorGenerateService){
+'$sce',
+function($scope, log, wisdomAPIService, $stateParams, modeService, Constants, timeFormatService, creativeColorGenerateService, $sce){
  	log.d("wisdomDetailController");
 
  	var wisdomId = $stateParams.wisdomId;
@@ -29,7 +30,10 @@ function($scope, log, wisdomAPIService, $stateParams, modeService, Constants, ti
 	 		$scope.wisdom = response.params;
 	 		if($scope.wisdom !== null && $scope.wisdom !== undefined){
 	 			if($scope.wisdom.messages !== null && $scope.wisdom.messages !== undefined){
-		 			log.d("AAAA: " + $scope.wisdom.messages);
+	 				// var fileURL = URL.createObjectURL($scope.wisdom.thumbnail);
+	 				// $scope.content = $sce.trustAsResourceUrl(fileURL);
+		 			// log.d("AAAA1: " + $scope.wisdom.thumbnail);
+		 			// log.d("AAAA2: " + fileURL);
 			 		$scope.messages = JSON.parse(response.params.messages);
 	 			} else {
 					//Error handling 

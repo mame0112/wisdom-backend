@@ -38,26 +38,17 @@ public class TaskQueueWorker extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		DbgUtil.showLog(TAG, "doPost");
 
-		// String value = request.getParameter(SearchConstants.KEY);
-		String value = getPayload(request);
-		DbgUtil.showLog(TAG, "value: " + value);
-		// String body = getRequestBody(request);
-		// JSONObject json = new JSONObject(body);
+		String key = request.getParameter(SearchConstants.KEY);
+		String title = request.getParameter(SearchConstants.KEY_SERACH_TITLE);
+		String description = request
+				.getParameter(SearchConstants.KEY_SERACH_DESCRIPTION);
+		String tag = request.getParameter(SearchConstants.KEY_SERACH_TAG);
 
-		if (value == null) {
-			return;
-		}
+		DbgUtil.showLog(TAG, "key: " + key + " title: " + title + " desc: "
+				+ description + " tag: " + tag);
 
-		WDWisdomData data = JsonParseUtil.createWisdomDataFromJson(value);
-
-		// String key = request.getParameter("key");
-		// DbgUtil.showLog(TAG, "key: " + key);
-
-		// In this case, we use wisdom Id as key.
-		String key = String.valueOf(data.getWisdomId());
-
-		String messages = JsonParseUtil.parseWisdomItemEntitiesToJsonArray(
-				data.getItems()).toString();
+		String items = request.getParameter(SearchConstants.KEY_SERACH_ITEM);
+		DbgUtil.showLog(TAG, "item: " + items);
 
 		Document doc = Document
 				.newBuilder()
@@ -67,19 +58,19 @@ public class TaskQueueWorker extends HttpServlet {
 				.addField(
 						Field.newBuilder()
 								.setName(SearchConstants.KEY_SERACH_TITLE)
-								.setText(data.getTitle()))
+								.setText(title))
 				.addField(
 						Field.newBuilder()
 								.setName(SearchConstants.KEY_SERACH_DESCRIPTION)
-								.setText(data.getDescription()))
+								.setText(description))
 				.addField(
 						Field.newBuilder()
 								.setName(SearchConstants.KEY_SERACH_TAG)
-								.setText(data.getTag()))
+								.setText(tag))
 				.addField(
 						Field.newBuilder()
 								.setName(SearchConstants.KEY_SERACH_ITEM)
-								.setText(messages)).build();
+								.setText(items)).build();
 		try {
 			INDEX.put(doc);
 		} catch (PutException e) {

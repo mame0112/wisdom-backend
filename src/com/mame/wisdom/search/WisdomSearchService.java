@@ -1,32 +1,10 @@
 package com.mame.wisdom.search;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
-import com.google.appengine.api.search.Document;
-import com.google.appengine.api.search.Field;
-import com.google.appengine.api.search.Index;
-import com.google.appengine.api.search.IndexSpec;
-import com.google.appengine.api.search.PutException;
-import com.google.appengine.api.search.Results;
-import com.google.appengine.api.search.ScoredDocument;
-import com.google.appengine.api.search.SearchException;
-import com.google.appengine.api.search.SearchServiceFactory;
-import com.google.appengine.api.search.StatusCode;
 import com.google.appengine.api.taskqueue.Queue;
 import com.google.appengine.api.taskqueue.QueueFactory;
 import com.google.appengine.api.taskqueue.TaskOptions;
 import com.google.appengine.api.taskqueue.TaskOptions.Method;
-import com.google.appengine.labs.repackaged.org.json.JSONObject;
+import com.google.appengine.labs.repackaged.org.json.JSONArray;
 import com.mame.wisdom.data.WDWisdomData;
 import com.mame.wisdom.util.DbgUtil;
 import com.mame.wisdom.util.JsonParseUtil;
@@ -45,20 +23,31 @@ public class WisdomSearchService {
 			throw new IllegalArgumentException("parameter is null");
 		}
 
-		JSONObject object = JsonParseUtil.parseWisdomDataToJsonObject(data);
+		JSONArray array = JsonParseUtil.parseWisdomItemEntitiesToJsonArray(data
+				.getItems());
+		// JSONObject object = JsonParseUtil.parseWisdomDataToJsonObject(data);
 		// DbgUtil.showLog(TAG, "object:" + object.toString());
 
-		if (object != null) {
-			DbgUtil.showLog(TAG, "object is not null");
-			// This "process" is a name that is defined in queue.xml
-			Queue queue = QueueFactory.getQueue(WORKER);
-			// TaskOptions to = TaskOptions.Builder.withUrl("/" + WORKER).param(
-			// SearchConstants.KEY, data.toString());
-			TaskOptions to = TaskOptions.Builder.withUrl("/" + WORKER)
-					.payload(object.toString())
-					.header("Content-type", "application/json");
-			queue.add(to.method(Method.POST));
-		}
+		// if (object != null) {
+		DbgUtil.showLog(TAG, "object is not null");
+		// This "process" is a name that is defined in queue.xml
+		Queue queue = QueueFactory.getQueue(WORKER);
+		// TaskOptions to = TaskOptions.Builder.withUrl("/" + WORKER).param(
+		// SearchConstants.KEY, data.toString());
+		// TaskOptions to = TaskOptions.Builder.withUrl("/" + WORKER)
+		// .payload(object.toString())
+		// .header("Content-type", "application/json");
+		TaskOptions to = TaskOptions.Builder
+				.withUrl("/" + WORKER)
+				.param(SearchConstants.KEY, String.valueOf(data.getWisdomId()))
+				.param(SearchConstants.KEY_SERACH_DESCRIPTION,
+						String.valueOf(data.getDescription()))
+				.param(SearchConstants.KEY_SERACH_TAG, data.getTag())
+				.param(SearchConstants.KEY_SERACH_ITEM, array.toString())
+				.param(SearchConstants.KEY_SERACH_TITLE, data.getTitle());
+
+		queue.add(to.method(Method.POST));
+		// }
 	}
 
 	public void storeNewWisdom(WDWisdomData data) {
@@ -76,22 +65,5 @@ public class WisdomSearchService {
 			return;
 		}
 	}
-
-	// private byte[] convertWisdomDataToByteArray(WDWisdomData data) {
-	//
-	// byte[] retObject = null;
-	// try {
-	// ByteArrayOutputStream byteos = new ByteArrayOutputStream();
-	// ObjectOutputStream objos = new ObjectOutputStream(byteos);
-	// objos.writeObject(data);
-	// objos.close();
-	// byteos.close();
-	// retObject = byteos.toByteArray();
-	// return retObject;
-	// } catch (IOException e) {
-	// DbgUtil.showLog(TAG, "IOException: " + e.getMessage());
-	// }
-	// return null;
-	// }
 
 }

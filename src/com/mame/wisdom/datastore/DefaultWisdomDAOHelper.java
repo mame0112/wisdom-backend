@@ -102,7 +102,7 @@ public class DefaultWisdomDAOHelper {
 					data.getLastUpdatedDate());
 			entity.setProperty(DBConstant.ENTITY_WISDOM_TAG, data.getTag());
 			entity.setProperty(DBConstant.ENTITY_WISDOM_THUMBNAIL,
-					data.getThumbnakl());
+					data.getThumbnail());
 			entity.setProperty(DBConstant.ENTITY_WISDOM_TITLE, data.getTitle());
 			entity.setProperty(DBConstant.ENTITY_WISDOM_VIEWED_COUNT,
 					data.getViewCount());

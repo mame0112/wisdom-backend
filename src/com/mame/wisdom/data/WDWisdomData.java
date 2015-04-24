@@ -64,7 +64,7 @@ public class WDWisdomData implements Serializable {
 		return mTag;
 	}
 
-	public Blob getThumbnakl() {
+	public Blob getThumbnail() {
 		return mThumbnail;
 	}
 

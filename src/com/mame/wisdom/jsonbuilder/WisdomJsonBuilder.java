@@ -76,8 +76,9 @@ public class WisdomJsonBuilder extends JsonBuilder {
 					data.getLastUpdatedDate());
 			obj.put(JsonConstant.PARAM_WISDOM_CREATE_USER_ID,
 					data.getCreatedUserId());
-			obj.put(JsonConstant.PARAM_WISDOM_MESSAGES,
-					JsonParseUtil.parseWisdomItemEntitiesToJsonArray(content).toString());
+			obj.put(JsonConstant.PARAM_WISDOM_MESSAGES, JsonParseUtil
+					.parseWisdomItemEntitiesToJsonArray(content).toString());
+			obj.put(JsonConstant.PARAM_WISDOM_THUMBNAIL, data.getThumbnail());
 
 			mRootObject.put(JsonConstant.PARAMS, obj);
 

@@ -130,7 +130,7 @@ public class UserStatusJsonBuilder extends JsonBuilder {
 					message.put(JsonConstant.PARAM_WISDOM_TITLE,
 							wisdom.getTitle());
 					message.put(JsonConstant.PARAM_WISDOM_THUMBNAIL,
-							wisdom.getThumbnakl());
+							wisdom.getThumbnail());
 					message.put(JsonConstant.PARAM_WISDOM_TAG, wisdom.getTag());
 					message.put(JsonConstant.PARAM_WISDOM_DESCRIPTION,
 							wisdom.getDescription());

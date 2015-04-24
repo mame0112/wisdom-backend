@@ -214,8 +214,8 @@ public class DefaultWisdomDAO implements WisdomDAO {
 				wisdom.setWisdomId(newId);
 
 				// TODO Store it onto Document
-//				WisdomSearchService service = new WisdomSearchService();
-//				service.addValue(wisdom);
+				WisdomSearchService service = new WisdomSearchService();
+				service.addValue(wisdom);
 
 				// Finish transaction with success
 				tx.commit();
@@ -242,9 +242,9 @@ public class DefaultWisdomDAO implements WisdomDAO {
 
 				wisdom.setWisdomId(newId);
 
-				//TODO Store it onto Document
-//				WisdomSearchService service = new WisdomSearchService();
-//				service.addValue(wisdom);
+				// TODO Store it onto Document
+				WisdomSearchService service = new WisdomSearchService();
+				service.addValue(wisdom);
 
 				// Finish transaction with success
 				tx.commit();
@@ -409,7 +409,7 @@ public class DefaultWisdomDAO implements WisdomDAO {
 
 			// TODO
 			WisdomSearchService service = new WisdomSearchService();
-			// List<Long> ids = service.searchWisdomByParameter(searchParam);
+			List<Long> ids = service.searchWisdomByParameter(searchParam);
 
 			List<WDWisdomData> result = new ArrayList<WDWisdomData>();
 
