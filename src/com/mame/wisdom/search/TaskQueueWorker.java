@@ -21,17 +21,15 @@ import com.google.appengine.api.search.Results;
 import com.google.appengine.api.search.ScoredDocument;
 import com.google.appengine.api.search.SearchServiceFactory;
 import com.google.appengine.api.search.StatusCode;
-import com.google.appengine.labs.repackaged.org.json.JSONObject;
-import com.mame.wisdom.data.WDWisdomData;
+import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.util.DbgUtil;
-import com.mame.wisdom.util.JsonParseUtil;
 
 public class TaskQueueWorker extends HttpServlet {
 
 	private final static String TAG = TaskQueueWorker.class.getSimpleName();
 
 	private static final Index INDEX = SearchServiceFactory.getSearchService()
-			.getIndex(IndexSpec.newBuilder().setName("wisdom_search_db"));
+			.getIndex(IndexSpec.newBuilder().setName(WConstant.SEARCH_INDEX));
 
 	@Override
 	protected void doPost(HttpServletRequest request,
@@ -43,6 +41,10 @@ public class TaskQueueWorker extends HttpServlet {
 		String description = request
 				.getParameter(SearchConstants.KEY_SERACH_DESCRIPTION);
 		String tag = request.getParameter(SearchConstants.KEY_SERACH_TAG);
+		String category = request
+				.getParameter(SearchConstants.KEY_SEARCH_CATEGORY);
+		String subCategory = request
+				.getParameter(SearchConstants.KEY_SEARCH_SUB_CATEGORY);
 
 		DbgUtil.showLog(TAG, "key: " + key + " title: " + title + " desc: "
 				+ description + " tag: " + tag);
@@ -53,8 +55,6 @@ public class TaskQueueWorker extends HttpServlet {
 		Document doc = Document
 				.newBuilder()
 				.setId(key)
-				// Setting the document identifer is optional. If omitted, the
-				// search service will create an identifier.
 				.addField(
 						Field.newBuilder()
 								.setName(SearchConstants.KEY_SERACH_TITLE)
@@ -67,6 +67,15 @@ public class TaskQueueWorker extends HttpServlet {
 						Field.newBuilder()
 								.setName(SearchConstants.KEY_SERACH_TAG)
 								.setText(tag))
+				.addField(
+						Field.newBuilder()
+								.setName(SearchConstants.KEY_SEARCH_CATEGORY)
+								.setText(category))
+				.addField(
+						Field.newBuilder()
+								.setName(
+										SearchConstants.KEY_SEARCH_SUB_CATEGORY)
+								.setText(subCategory))
 				.addField(
 						Field.newBuilder()
 								.setName(SearchConstants.KEY_SERACH_ITEM)

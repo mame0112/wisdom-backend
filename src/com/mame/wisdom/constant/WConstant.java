@@ -76,4 +76,6 @@ public class WConstant {
 	 */
 	public final static int PUBLIC_WISDOM_NUM = 10;
 
+	public final static String SEARCH_INDEX = "wisdom_search_db";
+
 }

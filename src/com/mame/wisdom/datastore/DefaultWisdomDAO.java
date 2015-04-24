@@ -20,6 +20,7 @@ import com.google.appengine.api.datastore.Transaction;
 import com.google.appengine.api.datastore.TransactionOptions;
 import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.data.WDSubCategoryData;
+import com.mame.wisdom.data.WDSubCategoryKeyData;
 import com.mame.wisdom.data.WDWisdomData;
 import com.mame.wisdom.datastore.memcache.LatestWisdomMemcacheService;
 import com.mame.wisdom.datastore.memcache.PopularWisdomMemcacheService;
@@ -215,7 +216,7 @@ public class DefaultWisdomDAO implements WisdomDAO {
 
 				// TODO Store it onto Document
 				WisdomSearchService service = new WisdomSearchService();
-				service.addValue(wisdom);
+				service.addValue(wisdom, category, subCategory);
 
 				// Finish transaction with success
 				tx.commit();
@@ -244,7 +245,7 @@ public class DefaultWisdomDAO implements WisdomDAO {
 
 				// TODO Store it onto Document
 				WisdomSearchService service = new WisdomSearchService();
-				service.addValue(wisdom);
+				service.addValue(wisdom, category, subCategory);
 
 				// Finish transaction with success
 				tx.commit();
@@ -405,34 +406,39 @@ public class DefaultWisdomDAO implements WisdomDAO {
 		if (searchParam != null) {
 
 			DbgUtil.showLog(TAG, "searchParam: " + searchParam);
-			// Need to check if this work
 
-			// TODO
 			WisdomSearchService service = new WisdomSearchService();
-			List<Long> ids = service.searchWisdomByParameter(searchParam);
+			List<WDSubCategoryKeyData> wisdoms = service
+					.searchWisdomByParameter(searchParam);
 
 			List<WDWisdomData> result = new ArrayList<WDWisdomData>();
 
-			// for (Long id : ids) {
-			// Filter searchFilter = new FilterPredicate(
-			// DBConstant.ENTITY_WISDOM_ID, FilterOperator.EQUAL, id);
-			// Query q = new Query(DBConstant.KIND_WISDOM)
-			// .setFilter(searchFilter);
-			// PreparedQuery pq = mDS.prepare(q);
-			// try {
-			// Entity entity = pq.asSingleEntity();
-			// DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
-			// WDWisdomData data = helper
-			// .parseEntityToWDWisdomData(entity);
-			// result.add(data);
-			// } catch (TooManyResultsException e) {
-			// DbgUtil.showLog(TAG,
-			// "TooManyResultsException: " + e.getMessage());
-			// } catch (IllegalStateException e) {
-			// DbgUtil.showLog(TAG,
-			// "IllegalStateException: " + e.getMessage());
-			// }
-			// }
+			for (WDSubCategoryKeyData wisdom : wisdoms) {
+
+				try {
+					Key key = DatastoreKeyGenerator.getWisdomKeyById(
+							wisdom.getCategory(), wisdom.getSubCategory(),
+							wisdom.getWisdomId());
+
+					Entity entity = mDS.get(key);
+					DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
+
+					WDWisdomData data = helper
+							.parseEntityToWDWisdomData(entity);
+
+					result.add(data);
+
+				} catch (TooManyResultsException e) {
+					DbgUtil.showLog(TAG,
+							"TooManyResultsException: " + e.getMessage());
+				} catch (IllegalStateException e) {
+					DbgUtil.showLog(TAG,
+							"IllegalStateException: " + e.getMessage());
+				} catch (EntityNotFoundException e) {
+					DbgUtil.showLog(TAG,
+							"EntityNotFoundException: " + e.getMessage());
+				}
+			}
 
 			return result;
 		}
