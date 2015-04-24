@@ -1,11 +1,9 @@
 package com.mame.wisdom.search;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-import com.google.appengine.api.search.Cursor;
-import com.google.appengine.api.search.Field;
+import com.google.appengine.api.search.DeleteException;
 import com.google.appengine.api.search.Index;
 import com.google.appengine.api.search.IndexSpec;
 import com.google.appengine.api.search.Query;
@@ -102,6 +100,22 @@ public class WisdomSearchService {
 		}
 
 		return response;
+	}
+
+	public void deleteWisdom(String documentId) {
+
+		if (documentId == null) {
+			throw new IllegalArgumentException("parameter is null");
+		}
+
+		try {
+			INDEX.delete(documentId);
+		} catch (DeleteException e) {
+			DbgUtil.showLog(TAG, "DeleteException: " + e.getMessage());
+		} catch (IllegalArgumentException e) {
+			DbgUtil.showLog(TAG, "IllegalArgumentException: " + e.getMessage());
+		}
+
 	}
 
 	public void storeNewWisdom(WDWisdomData data) {
