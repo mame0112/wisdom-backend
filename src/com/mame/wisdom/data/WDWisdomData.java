@@ -88,4 +88,8 @@ public class WDWisdomData implements Serializable {
 		mViewCount = mViewCount + 1;
 	}
 
+	public void setThumbnail(Blob thumbnail) {
+		mThumbnail = thumbnail;
+	}
+
 }

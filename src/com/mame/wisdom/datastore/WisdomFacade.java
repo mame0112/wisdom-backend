@@ -161,6 +161,7 @@ public class WisdomFacade {
 			try {
 				WisdomDataStructure data = helper
 						.createWisdomDataFromInputString(input);
+				data.getWisdomData().setThumbnail(thumbnail);
 				return facade.addWisdom(data.getCategory(),
 						data.getSubCategory(), data.getWisdomData());
 			} catch (WisdomDatastoreException e) {

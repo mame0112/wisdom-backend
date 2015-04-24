@@ -115,7 +115,6 @@ public class CreateWisdomAction implements Action {
 			// TODO
 			// builder.addResponseId(Integer.valueOf(responseId));
 			try {
-				// TODO Need to store thumbnail data
 				WDWisdomData newWisdom = facade.createNewWisdom(params,
 						thumbnail);
 				// If wisdom is newly created
