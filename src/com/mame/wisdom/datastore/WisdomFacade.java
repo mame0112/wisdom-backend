@@ -3,6 +3,7 @@ package com.mame.wisdom.datastore;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.appengine.api.datastore.Blob;
 import com.google.appengine.labs.repackaged.org.json.JSONArray;
 import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.data.WDSubCategoryData;
@@ -150,7 +151,7 @@ public class WisdomFacade {
 		return null;
 	}
 
-	public WDWisdomData createNewWisdom(String input)
+	public WDWisdomData createNewWisdom(String input, Blob thumbnail)
 			throws WisdomFacadeException {
 		DbgUtil.showLog(TAG, "createNewWisdom");
 		if (input != null) {

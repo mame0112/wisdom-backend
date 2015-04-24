@@ -40,16 +40,14 @@
 	<div class="callout callout-success">
 		<h4>Thumbnail</h4>
 
-		<input type="file" file-model="myFile"/>
-		<button ng-click="uploadFile()">upload me</button>
-
-		<!-- -->
+		<div class="form-group">
+			<input type="file" ng-file-select="onFileSelect($files)">
+		</div>
+		<!--
 
 		<div class="form-group">
 			<input type="file" name="thumbnail" value="select image">
 		</div>
-
-		<!-- -->
 
 		<div class="form-group">
 		 watching model:
@@ -62,8 +60,7 @@
 		        accept=".jpg,.png,.pdf">Drop Images or PDFs files here</div>
 		    <div ng-no-file-drop>File Drag/Drop is not supported for this browser</div>
 		</div>
-
-		<!-- -->
+		-->
 	</div>
 
 	<div class="callout callout-success">

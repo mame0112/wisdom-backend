@@ -13,6 +13,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.fileupload.util.Streams;
 import org.apache.commons.io.IOUtils;
 
+import com.google.appengine.api.datastore.Blob;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.data.WDWisdomData;
@@ -20,6 +21,7 @@ import com.mame.wisdom.datastore.WisdomFacade;
 import com.mame.wisdom.exception.WisdomFacadeException;
 import com.mame.wisdom.jsonbuilder.JsonBuilder;
 import com.mame.wisdom.jsonbuilder.NewWisdomJsonBuilder;
+import com.mame.wisdom.util.DatastoreUtil;
 import com.mame.wisdom.util.DbgUtil;
 
 public class CreateWisdomAction implements Action {
@@ -60,6 +62,9 @@ public class CreateWisdomAction implements Action {
 			HttpServletResponse response) throws Exception {
 		DbgUtil.showLog(TAG, "CreateWisdomAction execute");
 
+		String params = null;
+		Blob thumbnail = null;
+
 		try {
 			ServletFileUpload upload = new ServletFileUpload();
 			response.setContentType("text/plain");
@@ -73,33 +78,20 @@ public class CreateWisdomAction implements Action {
 					DbgUtil.showLog(TAG,
 							"Got a form field: " + item.getFieldName());
 					String value = Streams.asString(item.openStream());
+					DbgUtil.showLog(TAG, "value: " + value);
 					JSONObject object = new JSONObject(value);
-					String param = object.getString("data");
-					DbgUtil.showLog(TAG, "param: " + param);
+					params = object.getString("data");
 				} else {
 					DbgUtil.showLog(TAG,
 							"Got an uploaded file: " + item.getFieldName()
 									+ ", name = " + item.getName());
-					byte[] bytes = IOUtils.toByteArray(stream);
-					DbgUtil.showLog(TAG, "bytes.length: " + bytes.length);
+					thumbnail = DatastoreUtil
+							.transcodeInputStreamToBlob(stream);
 
 				}
 			}
 		} catch (Exception e) {
 			DbgUtil.showLog(TAG, "Exception: " + e.getMessage());
-		}
-
-		String data = request.getParameter("data");
-		if (data != null) {
-			DbgUtil.showLog(TAG, "data: " + data);
-		} else {
-			DbgUtil.showLog(TAG, "data is null");
-		}
-
-		Enumeration names = request.getParameterNames();
-		while (names.hasMoreElements()) {
-			String name = (String) names.nextElement();
-			DbgUtil.showLog(TAG, "param name: " + name);
 		}
 
 		String responseId = request.getParameter(WConstant.SERVLET_RESP_ID);
@@ -110,18 +102,22 @@ public class CreateWisdomAction implements Action {
 			DbgUtil.showLog(TAG, "responseId is null");
 		}
 
-		String params = request.getParameter(WConstant.SERVLET_WISDOM_PARAM);
+		// String params = request.getParameter(WConstant.SERVLET_WISDOM_PARAM);
 
 		JsonBuilder builder = new NewWisdomJsonBuilder();
 		WisdomFacade facade = new WisdomFacade();
 
 		String result = null;
 
-		if (responseId != null && params != null) {
+		// TODO need to support for responseId
+		if (params != null) {
 			DbgUtil.showLog(TAG, "params: " + params);
-			builder.addResponseId(Integer.valueOf(responseId));
+			// TODO
+			// builder.addResponseId(Integer.valueOf(responseId));
 			try {
-				WDWisdomData newWisdom = facade.createNewWisdom(params);
+				// TODO Need to store thumbnail data
+				WDWisdomData newWisdom = facade.createNewWisdom(params,
+						thumbnail);
 				// If wisdom is newly created
 				if (newWisdom != null) {
 					builder.addResponseParam(newWisdom.getWisdomId());

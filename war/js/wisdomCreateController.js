@@ -15,7 +15,6 @@ wisdomApp.controller('wisdomCreateController',
 	'$rootScope',
 	'toasterService',
 	'$state',
-	'fileUpload',
     function(
     	$scope, 
     	log, 
@@ -31,8 +30,7 @@ wisdomApp.controller('wisdomCreateController',
 		$window,
 		$rootScope,
 		toasterService,
-		$state,
-		fileUpload
+		$state
     	){
  	log.d("wisdomCreateController");
 
@@ -101,21 +99,23 @@ wisdomApp.controller('wisdomCreateController',
 		result.messages = createWisdomSharedStateService.getSharedMessages();
 		log.d("result: " + "category: " + result.category + "subCategory: " + result.subCategory +  " tag: " + result.tag + " thumbnail: " + result.thumbnail + " title: " + result.title + " description: " + result.description + "messages: " + result.messages + " createUserId: " + result.create_user_id + " updated time: " + result.updated_date);
 
-		// wisdomAPIService.newwisdom({servlet_new_wisdom_param : result});
-		newWisdomAPIService.newwisdom({servlet_new_wisdom_param : result},
-		 function(value, responseHeaders){
-			log.d("response received");
-			var wisdomId = value.params.param[0].wisdomId;
-			// log.d("responseHeaders: " + headers());
-			toasterService.showSuccessToasterShort("New wisdom", "Message successfully created!");
-	 		$state.go('wisdom', {wisdomId : wisdomId});
+		$scope.uploadFile();
 
-		 }, function (httpResponse) {
-		 	//Error case
-			log.d("httpResponse: " + httpResponse);
-			log.d("status code: " + httpResponse.status);
-			toasterService.showErrorToasterShort("New wisdom", "Failed to create wisdom. Please try again");
-		});
+		// wisdomAPIService.newwisdom({servlet_new_wisdom_param : result});
+		// newWisdomAPIService.newwisdom({servlet_new_wisdom_param : result},
+		//  function(value, responseHeaders){
+		// 	log.d("response received");
+		// 	var wisdomId = value.params.param[0].wisdomId;
+		// 	// log.d("responseHeaders: " + headers());
+		// 	toasterService.showSuccessToasterShort("New wisdom", "Message successfully created!");
+	 // 		$state.go('wisdom', {wisdomId : wisdomId});
+
+		//  }, function (httpResponse) {
+		//  	//Error case
+		// 	log.d("httpResponse: " + httpResponse);
+		// 	log.d("status code: " + httpResponse.status);
+		// 	toasterService.showErrorToasterShort("New wisdom", "Failed to create wisdom. Please try again");
+		// });
 
 	};
 
@@ -146,7 +146,7 @@ wisdomApp.controller('wisdomCreateController',
 
 	$scope.$watch('files', function (newValue, oldValue) {
 		log.d("file loaded");
-		$scope.upload($scope.files);
+		// $scope.upload($scope.files);
 		// if(newValue !== null && newValue !== undefined){
 			// result.thumbnail = newValue;
 			// $scope.files= newValue;
@@ -180,82 +180,111 @@ wisdomApp.controller('wisdomCreateController',
 		}
 	};
 
-	$scope.uploadFile = function () {
-		log.d("uploadFile");
-		var file = $scope.files[0];
-		$upload.upload({
+
+    $scope.model = {};
+    $scope.selectedFile = [];
+    $scope.uploadProgress = 0;
+
+    $scope.uploadFile = function () {
+
+    	log.d("$scope.model: " + $scope.model);
+    	log.d("$scope.model.fileDescription: " + $scope.model.fileDescription);
+
+        var file = $scope.selectedFile[0];
+        $scope.upload = $upload.upload({
             url: '/controller/newwisdom',
-            fields: {servlet_resp_id: 1, result: '@servlet_new_wisdom_param'},
-            // fields: {'username': $scope.username},
-            file: file
+            method: 'POST',
+            data: {data: result},
+            // data: angular.toJson($scope.model.fileDescription),
+            file: file,
         }).progress(function (evt) {
-            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-            console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
-        }).success(function (data, status, headers, config) {
-                console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
-        });
-    };
-
-	$scope.upload = function (files) {
-        if (files && files.length) {
-			var file = files[0];
-			$upload.upload({
-            url: '/controller/newwisdom',
-            fields: {servlet_resp_id: 1, result: '@servlet_new_wisdom_param'},
-                file: file
-            }).progress(function (evt) {
-                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
-            }).success(function (data, status, headers, config) {
-                    console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
-            });
-        }
-    };
-
-	$scope.uploadFile = function(){
-        var file = $scope.myFile;
-        console.log('file is ' + JSON.stringify(file));
-        var uploadUrl = "/controller/newwisdom";
-        fileUpload.uploadFileToUrl(file, uploadUrl);
-    };
-
-}]);
-
-wisdomApp.directive('fileModel', ['$parse', function ($parse) {
-    return {
-        restrict: 'A',
-        link: function(scope, element, attrs) {
-            var model = $parse(attrs.fileModel);
-            var modelSetter = model.assign;
-            
-            element.bind('change', function(){
-                scope.$apply(function(){
-                    modelSetter(scope, element[0].files[0]);
-                });
-            });
-        }
-    };
-}]);
-
-wisdomApp.service('fileUpload', ['$http', 'log', function ($http, log) {
-
-    this.uploadFileToUrl = function(file, uploadUrl){
-        var fd = new FormData();
-       fd.append('file', file);
-//        fd.append('servlet_resp_id', 1);
-	    // fd.append('servlet_new_wisdom_param', "test");
-        $http.post(uploadUrl, fd, {
-            transformRequest: angular.identity,
-            headers: {'Content-Type': undefined}
-        })
-        .success(function(){
+            $scope.uploadProgress = parseInt(100.0 * evt.loaded / evt.total, 10);
+        }).success(function (data) {
         	log.d("success");
-        })
-        .error(function(){
-        	log.d("error");
         });
     };
+
+    $scope.onFileSelect = function ($files) {
+        $scope.uploadProgress = 0;
+        $scope.selectedFile = $files;
+    };
+
+	// $scope.uploadFile = function () {
+	// 	log.d("uploadFile");
+	// 	var file = $scope.files[0];
+	// 	$upload.upload({
+ //            url: '/controller/newwisdom',
+ //            fields: {servlet_resp_id: 1, result: '@servlet_new_wisdom_param'},
+ //            // fields: {'username': $scope.username},
+ //            file: file
+ //        }).progress(function (evt) {
+ //            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+ //            console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+ //        }).success(function (data, status, headers, config) {
+ //                console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
+ //        });
+ //    };
+
+	// $scope.upload = function (files) {
+ //        if (files && files.length) {
+	// 		var file = files[0];
+	// 		$upload.upload({
+ //            url: '/controller/newwisdom',
+ //            fields: {servlet_resp_id: 1, result: '@servlet_new_wisdom_param'},
+ //                file: file
+ //            }).progress(function (evt) {
+ //                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+ //                console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+ //            }).success(function (data, status, headers, config) {
+ //                    console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
+ //            });
+ //        }
+ //    };
+
+	// $scope.uploadFile = function(){
+ //        var file = $scope.myFile;
+ //        console.log('file is ' + JSON.stringify(file));
+ //        var uploadUrl = "/controller/newwisdom";
+ //        fileUpload.uploadFileToUrl(file, uploadUrl);
+    // };
+
 }]);
+
+// wisdomApp.directive('fileModel', ['$parse', function ($parse) {
+//     return {
+//         restrict: 'A',
+//         link: function(scope, element, attrs) {
+//             var model = $parse(attrs.fileModel);
+//             var modelSetter = model.assign;
+            
+//             element.bind('change', function(){
+//                 scope.$apply(function(){
+//                     modelSetter(scope, element[0].files[0]);
+//                 });
+//             });
+//         }
+//     };
+// }]);
+
+// wisdomApp.service('fileUpload', ['$http', 'log', function ($http, log) {
+
+//     this.uploadFileToUrl = function(file, uploadUrl){
+//         var fd = new FormData();
+//        fd.append('file', file);
+// //        fd.append('servlet_resp_id', 1);
+// 	    // fd.append('servlet_new_wisdom_param', "test");
+//         $http.post(uploadUrl, fd, {
+//             transformRequest: angular.identity,
+//             headers: {'Content-Type': undefined}
+//         })
+//         .success(function(){
+//         	log.d("success");
+//         })
+//         .error(function(){
+//         	log.d("error");
+//         });
+//     };
+// }]);
 
 
 wisdomApp.controller('uploadCtrl', [

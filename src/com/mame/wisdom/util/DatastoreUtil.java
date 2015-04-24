@@ -1,6 +1,11 @@
 package com.mame.wisdom.util;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+
+import org.apache.commons.fileupload.util.Streams;
 
 import com.google.appengine.api.datastore.Blob;
 
@@ -20,6 +25,23 @@ public class DatastoreUtil {
 			}
 		}
 		return null;
+	}
+
+	public static Blob transcodeInputStreamToBlob(InputStream stream) {
+		if (stream == null) {
+			throw new IllegalArgumentException("Inputstream is null");
+		}
+
+		ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+		try {
+			Streams.copy(stream, bytes, true);
+			return new Blob(bytes.toByteArray());
+		} catch (IOException e) {
+			DbgUtil.showLog(TAG, "IOException: " + e.getMessage());
+		}
+
+		return null;
+
 	}
 
 	public static String transcodeBlob2String(Blob origin) {

@@ -54,14 +54,14 @@ public class WisdomControllerServlet extends HttpServlet {
 		// TODO need to consider authentication (401)
 
 		// TODO Need to remove this part
-		if (WConstant.IS_LOCAL) {
-			DebugAction debugAction = new DebugAction();
-			try {
-				debugAction.execute(request, response);
-			} catch (Exception e) {
-				DbgUtil.showLog(TAG, "Exception: " + e.getMessage());
-			}
-		}
+//		if (WConstant.IS_LOCAL) {
+//			DebugAction debugAction = new DebugAction();
+//			try {
+//				debugAction.execute(request, response);
+//			} catch (Exception e) {
+//				DbgUtil.showLog(TAG, "Exception: " + e.getMessage());
+//			}
+//		}
 
 		if (result != null) {
 			try {
