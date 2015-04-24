@@ -77,7 +77,9 @@ public class CreateWisdomAction implements Action {
 				if (item.isFormField()) {
 					DbgUtil.showLog(TAG,
 							"Got a form field: " + item.getFieldName());
-					String value = Streams.asString(item.openStream());
+					String value = Streams.asString(stream, "iso-8859-1");
+					value = new String(value.getBytes("iso-8859-1"), "utf-8");
+					// String value = Streams.asString(item.openStream());
 					DbgUtil.showLog(TAG, "value: " + value);
 					JSONObject object = new JSONObject(value);
 					params = object.getString("data");
