@@ -30,8 +30,6 @@ public class WisdomSearchService {
 	private static final Index INDEX = SearchServiceFactory.getSearchService()
 			.getIndex(IndexSpec.newBuilder().setName(WConstant.SEARCH_INDEX));
 
-	// private final static String ENQUEUE = "process";
-
 	private final static String WORKER = "worker";
 
 	public void addValue(WDWisdomData data, String category, String subCategory) {
