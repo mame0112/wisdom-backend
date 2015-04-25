@@ -9,10 +9,9 @@ import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.data.WDWisdomData;
 import com.mame.wisdom.datastore.WisdomFacade;
+import com.mame.wisdom.jsonbuilder.JsonBuilder;
 import com.mame.wisdom.jsonbuilder.JsonConstant;
 import com.mame.wisdom.jsonbuilder.PublicWisdomJsonBuilder;
-import com.mame.wisdom.jsonbuilder.JsonBuilder;
-import com.mame.wisdom.search.WisdomSearchService;
 import com.mame.wisdom.util.DbgUtil;
 
 public class LatestInfoAction implements Action {

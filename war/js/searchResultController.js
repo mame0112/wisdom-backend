@@ -10,19 +10,25 @@ wisdomApp.controller('searchResultController',
 	if($scope.searchWord !== null && $scope.searchWord !== undefined){
 		// log.d("input value: " + data);
 		searchAPIService.search({searchParam : $scope.searchWord}, function(response){
-			log.d("response received: " + response.params[0].title);
-			if(response !== null && response !== undefined){
+			if(response.params.length !== 0){
+				log.d("response received: " + response.params[0].title);
+				if(response !== null && response !== undefined){
 
-				$scope.wisdoms = response.params;
-				// $scope.searchResult = response.params;
-				// $scope.params = response.params[0].title;
-				log.d("params:: " + response.params[0].title);
-				// log.d("id: " + response.id);
-				// log.d("id: " + response.version);
- 			// $state.go('search', { params: JSON.stringify(response)});
+					$scope.wisdoms = response.params;
+					// $scope.searchResult = response.params;
+					// $scope.params = response.params[0].title;
+					log.d("params:: " + response.params[0].title);
+					// log.d("id: " + response.id);
+					// log.d("id: " + response.version);
+	 			// $state.go('search', { params: JSON.stringify(response)});
+				} else {
+
+				}
 			} else {
-
+				log.d("no result found");
+				//No result fount.
 			}
+
 
 
 			// $location.path('/new').search('x=y');

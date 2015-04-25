@@ -42,18 +42,10 @@ public class WisdomSearchService {
 
 		JSONArray array = JsonParseUtil.parseWisdomItemEntitiesToJsonArray(data
 				.getItems());
-		// JSONObject object = JsonParseUtil.parseWisdomDataToJsonObject(data);
-		// DbgUtil.showLog(TAG, "object:" + object.toString());
 
-		// if (object != null) {
 		DbgUtil.showLog(TAG, "object is not null");
 		// This "process" is a name that is defined in queue.xml
 		Queue queue = QueueFactory.getQueue(WORKER);
-		// TaskOptions to = TaskOptions.Builder.withUrl("/" + WORKER).param(
-		// SearchConstants.KEY, data.toString());
-		// TaskOptions to = TaskOptions.Builder.withUrl("/" + WORKER)
-		// .payload(object.toString())
-		// .header("Content-type", "application/json");
 		TaskOptions to = TaskOptions.Builder
 				.withUrl("/" + WORKER)
 				.param(SearchConstants.KEY, String.valueOf(data.getWisdomId()))
@@ -66,7 +58,7 @@ public class WisdomSearchService {
 				.param(SearchConstants.KEY_SERACH_TITLE, data.getTitle());
 
 		queue.add(to.method(Method.POST));
-		// }
+
 	}
 
 	public List<WDSubCategoryKeyData> searchWisdomByParameter(String parameter) {
@@ -81,6 +73,7 @@ public class WisdomSearchService {
 			for (ScoredDocument document : results) {
 
 				String docId = document.getId();
+				DbgUtil.showLog(TAG, "docId: " + docId);
 				String category = document.getOnlyField(
 						SearchConstants.KEY_SEARCH_CATEGORY).getText();
 				String subCategory = document.getOnlyField(
@@ -102,7 +95,33 @@ public class WisdomSearchService {
 		return response;
 	}
 
-	public void deleteWisdom(String documentId) {
+	/**
+	 * Delete all documents And this is debug method.
+	 */
+	private void deleteAllSearchDocuments() {
+		DbgUtil.showLog(TAG, "getAllDocumentId");
+
+		try {
+			Results<ScoredDocument> results = INDEX.search("");
+			for (ScoredDocument document : results) {
+
+				String docId = document.getId();
+				DbgUtil.showLog(TAG, "docId: " + docId);
+				deleteWisdom(docId);
+			}
+		} catch (SearchException e) {
+			DbgUtil.showLog(TAG, "SearchException: " + e.getMessage());
+		} catch (IllegalArgumentException e) {
+			DbgUtil.showLog(TAG, "IllegalArgumentException: " + e.getMessage());
+		} catch (SearchQueryException e) {
+			DbgUtil.showLog(TAG, "SearchQueryException: " + e.getMessage());
+		}
+
+	}
+
+	private void deleteWisdom(String documentId) {
+
+		DbgUtil.showLog(TAG, "deleteWisdom");
 
 		if (documentId == null) {
 			throw new IllegalArgumentException("parameter is null");
@@ -114,15 +133,6 @@ public class WisdomSearchService {
 			DbgUtil.showLog(TAG, "DeleteException: " + e.getMessage());
 		} catch (IllegalArgumentException e) {
 			DbgUtil.showLog(TAG, "IllegalArgumentException: " + e.getMessage());
-		}
-
-	}
-
-	public void storeNewWisdom(WDWisdomData data) {
-
-		DbgUtil.showLog(TAG, "storeNewWisdom");
-		if (data == null) {
-			return;
 		}
 
 	}
