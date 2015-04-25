@@ -87,7 +87,7 @@ public class JsonConstant {
 	public final static String PARAM_WISDOM_CREATE_USER_ID = "create_user_id";
 
 	public final static String PARAM_WISDOM_VIEW_COUNT = "count";
-	
+
 	public final static String PARAM_WISDOM_ENTRY_NAME = "entry";
 
 	public final static String PARAM_WISDOM_ITEM_ID = "id";
@@ -101,5 +101,16 @@ public class JsonConstant {
 	public final static String PARAM_WISDOM_ITEM_UPDATE_USER_ID = "update_userid";
 
 	public final static String PARAM_WISDOM_ITEM_UPDAtE_USER_NAME = "update_username";
+
+	/**
+	 * Json fields for Contact
+	 */
+	public final static String PARAM_CONTACT_NAME = "name";
+
+	public final static String PARAM_CONTACT_EMAIL = "email";
+
+	public final static String PARAM_CONTACT_MESSAGE = "message";
+
+	public final static String PARAM_CONTACT_RESULT = "result";
 
 }

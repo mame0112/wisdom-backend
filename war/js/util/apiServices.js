@@ -140,5 +140,16 @@ wisdomApp.factory('apiService', ['$resource', 'log',
             account: {method: 'GET', isArray: false},
         });
     }
+])
+
+.factory('contactAPIService', ['$resource', 'log',
+ function($resource, log) {
+    return $resource('/controller/contact',
+         {servlet_resp_id: 1},
+         { 
+            //Search widoms by given keyword
+            mail: {method: 'GET', isArray: false},
+        });
+    }
 ]);
 

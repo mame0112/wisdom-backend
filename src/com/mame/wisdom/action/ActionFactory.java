@@ -90,7 +90,11 @@ public class ActionFactory {
 		// Callback action by twitter
 		mAction.put(ActionConstants.GET + ActionConstants.KEY_TWITTER_CALLBACK,
 				new TwitterCallbackAction());
-
+		
+		// Callback action by twitter
+		mAction.put(ActionConstants.GET + ActionConstants.KEY_CONTACT,
+				new ContactAction());
+		
 		// Debug action
 		mAction.put(ActionConstants.GET + ActionConstants.KEY_DEBUG,
 				new DebugAction());

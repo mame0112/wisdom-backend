@@ -33,6 +33,8 @@ public class ActionConstants {
 	public final static String KEY_TWITTER_SIGNUP = "/twitterSignup";
 
 	public final static String KEY_TWITTER_CALLBACK = "/twitterCallback";
+	
+	public final static String KEY_CONTACT = "/contact";
 
 	public final static String KEY_DEBUG = "/debug";
 
