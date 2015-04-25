@@ -1,6 +1,6 @@
 wisdomApp.controller('searchResultController',
- ['$scope', 'log', '$stateParams',  'searchAPIService',
- function($scope, log, $stateParams, searchAPIService){
+ ['$scope', 'log', '$stateParams',  'searchAPIService', 'creativeColorGenerateService',
+ function($scope, log, $stateParams, searchAPIService, creativeColorGenerateService){
 
 	// var originalParams = JSON.parse($scope.params);
 	$scope.searchWord = $stateParams.result;
@@ -8,6 +8,8 @@ wisdomApp.controller('searchResultController',
 	$scope.wisdoms = null;
 
 	$scope.wisdomNum = -1;
+
+	$scope.creativeColorGenerateService = creativeColorGenerateService;
 
 	if($scope.searchWord !== null && $scope.searchWord !== undefined){
 		// log.d("input value: " + data);
