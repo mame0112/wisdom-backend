@@ -106,6 +106,20 @@ wisdomApp.directive('headerDirective', function(){
 	};
 })
 
+.directive('contactContentDirective', function(){
+	return {
+		restrict: 'A',
+		templateUrl: 'directive/contact-content-directive.html'
+	};
+})
+
+.directive('contactNoteDirective', function(){
+	return {
+		restrict: 'A',
+		templateUrl: 'directive/contact-note-directive.html'
+	};
+})
+
 // Directive for debug
 .directive('debugDirective', function(){
 	return {
