@@ -201,6 +201,7 @@ wisdomApp.controller('wisdomCreateController',
             $scope.uploadProgress = parseInt(100.0 * evt.loaded / evt.total, 10);
         }).success(function (data) {
         	log.d("success");
+        	toasterService.showSuccessToasterShort("New wisdom", "Message successfully created!");
         });
     };
 

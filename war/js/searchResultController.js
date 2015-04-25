@@ -7,6 +7,8 @@ wisdomApp.controller('searchResultController',
 
 	$scope.wisdoms = null;
 
+	$scope.wisdomNum = -1;
+
 	if($scope.searchWord !== null && $scope.searchWord !== undefined){
 		// log.d("input value: " + data);
 		searchAPIService.search({searchParam : $scope.searchWord}, function(response){
@@ -17,22 +19,18 @@ wisdomApp.controller('searchResultController',
 					$scope.wisdoms = response.params;
 					// $scope.searchResult = response.params;
 					// $scope.params = response.params[0].title;
-					log.d("params:: " + response.params[0].title);
-					// log.d("id: " + response.id);
-					// log.d("id: " + response.version);
+					// log.d("params:: " + response.params[0].title);
+					$scope.wisdomNum = response.params.length;
+					log.d("length:: " + $scope.wisdomNum);
 	 			// $state.go('search', { params: JSON.stringify(response)});
 				} else {
-
+					$scope.wisdomNum = 0;
 				}
 			} else {
 				log.d("no result found");
 				//No result fount.
+				$scope.wisdomNum = 0;
 			}
-
-
-
-			// $location.path('/new').search('x=y');
-			// $window.location.href = '/tos';
 		});
 	}
 
@@ -41,12 +39,7 @@ wisdomApp.controller('searchResultController',
 
  	$scope.initialize = function()
  	{
- 		// log.d("initialize");
- 		// var params = $scope.params;
- 		// log.d("title: " + params[0].title);
- 		// if($scope.params !== null && $scope.params !== undefined){
- 		// 	log.d("params: " + params.params[0].updated_date);
-	 	// }
+
  	};
 
  }]);

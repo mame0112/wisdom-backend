@@ -1,9 +1,7 @@
 package com.mame.wisdom.action;
 
 import java.io.InputStream;
-import java.util.Enumeration;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,7 +9,6 @@ import org.apache.commons.fileupload.FileItemIterator;
 import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.fileupload.util.Streams;
-import org.apache.commons.io.IOUtils;
 
 import com.google.appengine.api.datastore.Blob;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
