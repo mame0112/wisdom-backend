@@ -120,6 +120,20 @@ wisdomApp.directive('headerDirective', function(){
 	};
 })
 
+.directive('signupContentDirective', function(){
+	return {
+		restrict: 'A',
+		templateUrl: 'directive/signup-content-directive.html'
+	};
+})
+
+.directive('signupNoteDirective', function(){
+	return {
+		restrict: 'A',
+		templateUrl: 'directive/signup-note-directive.html'
+	};
+})
+
 // Directive for debug
 .directive('debugDirective', function(){
 	return {
