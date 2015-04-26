@@ -3,7 +3,7 @@ wisdomApp.controller('contactController',
 'log', 
 'contactAPIService',
 'toasterService',
-function($scope, log, contactAPIService, timeService, timeFormatService, creativeColorGenerateService, toasterService){
+function($scope, log, contactAPIService, toasterService){
  	log.d("contactController");
 
  	var name = null;
@@ -18,7 +18,6 @@ function($scope, log, contactAPIService, timeService, timeFormatService, creativ
 
  	$scope.initialize = function()
  	{
- 		toasterService.showSuccessToasterShort("Contact", "Message successfully sent!");
  		log.d("initialize");
  	};
 
@@ -31,10 +30,10 @@ function($scope, log, contactAPIService, timeService, timeFormatService, creativ
 	 		log.d("latest received");
 
 	 		if(response !== null && response !== undefined){
-				toasterService.showSuccessToasterShort("Contact", "Message successfully sent!");
+				toasterService.showSuccessToasterLong("Contact", "Message successfully sent!");
 	 		} else {
 	 			//Error handling
-				toasterService.showSuccessToasterShort("Contact", "Failed to send message. Please try again");
+				toasterService.showErrorToasterLong("Contact", "Failed to send message. Please try again");
 	 		}
 
 	 	});
