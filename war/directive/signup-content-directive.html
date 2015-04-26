@@ -29,7 +29,7 @@
           <span class="notice" ng-show="signup.password.$error.required">*</span>
           <p class="note">(From 6 to 16 characters)</p>
         </div>
-      <input type="text" class="form-control" placeholder="Input your password" name="password" ng-model="password" required required ng-minlength="6" ng-maxlength="16" ng-pattern="/^[a-zA-Z0-9]+$/">
+      <input type="password" class="form-control" placeholder="Input your password" name="password" ng-model="password" required required ng-minlength="6" ng-maxlength="16" ng-pattern="/^[a-zA-Z0-9]+$/">
       <span class="notice" ng-show="signup.password.$error.minlength">Must be more than 6 characters</span>
       <span class="notice" ng-show="signup.password.$error.maxlength">Must be less than 16 characters</span>
       <span class="notice" ng-show="signup.password.$error.pattern">Illegal password type. It must be [0 - 9] and [a - Z], [A - Z]</span>
@@ -45,7 +45,7 @@
 
 
       <div class="item">
-        <button type="submit" class="btn btn-primary" name="submit" ng-model="submit" ng-click="createAccount()">Sign up</button>
+        <button type="submit" class="btn btn-primary" name="submit" ng-model="submit" ng-disabled="(name.length == 0)" ng-click="createAccount()">Sign up</button>
       </div>
     </form>
   </div>

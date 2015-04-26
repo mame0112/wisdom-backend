@@ -128,29 +128,34 @@ wisdomApp.controller('SignupController',
 	{
 		log.d("createAccount");
 
-		if(params.name !== null && params.password !== null && params.mailAddress !== null){
+		if((params.name !== null && params.password !== null && params.mailAddress !== null) &&
+		 (params.name !== undefined && params.password !== undefined && params.mailAddress !== undefined))
+		{
+			if(params.name.length >= 6 && params.name.length <= 16) {
+			 	userNameAPIService.useraccount({servlet_params : params}, function(response){
+			 		log.d("User account response received");
 
-		 	userNameAPIService.useraccount({servlet_params : params}, function(response){
-		 		log.d("User account response received");
-
-		 		if(response !== null && response !== undefined){
-		 			if(response.params.length !== 0)
-		 			{
-				 		$scope.param = response.params[0];
-				 		log.d("userId: " + $scope.param.userId);
-						toasterService.showSuccessToasterShort("Signup", "Account successfully created!");
-						//TODO Need to log in
-						$state.go('/');
-		 			} else {
+			 		if(response !== null && response !== undefined){
+			 			if(response.params.length !== 0)
+			 			{
+					 		$scope.param = response.params[0];
+					 		log.d("userId: " + $scope.param.userId);
+							toasterService.showSuccessToasterShort("Signup", "Account successfully created!");
+							//TODO Need to log in
+							$state.go('/');
+			 			} else {
+				 			log.d("response is null or undefined");
+							toasterService.showErrorToasterLong("Signup", "Something went wrong. Please try again later");
+			 			}
+			 		} else {
 			 			log.d("response is null or undefined");
 						toasterService.showErrorToasterLong("Signup", "Something went wrong. Please try again later");
-		 			}
-		 		} else {
-		 			log.d("response is null or undefined");
-					toasterService.showErrorToasterLong("Signup", "Something went wrong. Please try again later");
-		 		}
-		 		// $scope.wisdoms = response.params;
-		 	});
+			 		}
+			 		// $scope.wisdoms = response.params;
+			 	});
+			} else {
+				log.d("illegal user name");
+			}
 
 		} else {
 			log.d("Some input filed is not filled out yet");
