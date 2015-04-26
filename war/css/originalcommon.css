@@ -24,3 +24,47 @@ body {
 	color: #ffffff;
 	padding-left: 1.0em;
 }
+
+#contact {
+
+}
+
+#contact .overview{
+	color: #888888;
+	font-size: 16px;
+}
+
+#contact .item{
+	color: #333333;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-size: 16px;
+}
+
+#contact .item .notice{
+	color: #ff0000;
+}
+
+#contact .note {
+
+}
+
+#contact .note .title{
+	font-size: 18px;
+	font-weight: bold;
+	color: #888888;
+}
+
+#contact .note .subtitle{
+	color: #5cb85c;
+	font-size: 16px;
+	margin-top: 20px;
+	margin-bottom: 0em;
+	padding: 0px;
+}
+
+#contact .note .description{
+	color: #666666;
+	font-size: 16px;
+	padding: 0px;
+}
