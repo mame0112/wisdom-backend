@@ -38,4 +38,14 @@ public interface UserDAO {
 	public List<WDUserData> getHighestPointUserList(int limit)
 			throws WisdomDatastoreException;
 
+	/**
+	 * Get user id for user name
+	 * 
+	 * @param userName
+	 * @return userId for given user name.. otherwise -1 (No user id).
+	 * @throws WisdomDatastoreException
+	 */
+	public long findUserIdByUserName(String userName)
+			throws WisdomDatastoreException;
+
 }

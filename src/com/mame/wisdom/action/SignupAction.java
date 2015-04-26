@@ -47,7 +47,7 @@ public class SignupAction implements Action {
 			long currentTime = TimeUtil.getCurrentDate();
 			WDUserData data = new WDUserData(WConstant.NO_USER, twitterName,
 					twitterToken, twitterTokenSecret, facebookName, userName,
-					password, thubmnail, currentTime, 0);
+					password, thubmnail, currentTime, 0, null);
 
 			UserDAO userDAO = new DefaultUserDAO();
 			try {

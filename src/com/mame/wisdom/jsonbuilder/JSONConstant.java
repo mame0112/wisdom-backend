@@ -113,4 +113,13 @@ public class JsonConstant {
 
 	public final static String PARAM_CONTACT_RESULT = "result";
 
+	/**
+	 * Json fields for User account
+	 */
+	public final static String PARAM_ACCOUNT_USER_NAME = "name";
+
+	public final static String PARAM_ACCOUNT_PASSWORD = "password";
+
+	public final static String PARAM_ACCOUNT_MAIL_ADDRESS = "mailAddress";
+
 }

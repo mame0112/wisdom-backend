@@ -42,6 +42,8 @@ public class DBConstant {
 	public final static String ENTITY_USER_LAST_LOGIN = "user_last_login";
 
 	public final static String ENTITY_USER_TOTAL_POINT = "user_total_point";
+	
+	public final static String ENTITY_USER_MAIL_ADDRESS = "user_mailaddress";
 
 	/**
 	 * Entity fields for Category data

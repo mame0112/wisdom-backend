@@ -77,6 +77,10 @@ public class ActionFactory {
 		// Search API
 		mAction.put(ActionConstants.GET + ActionConstants.KEY_SEARCH,
 				new SearchAction());
+		
+		// Sign up API by User name and password
+		mAction.put(ActionConstants.GET + ActionConstants.KEY_USER_ACCOUNT,
+				new UserAccountAction());
 
 		// Twitter API
 		// Sign in with Twitter

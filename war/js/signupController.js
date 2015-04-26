@@ -9,9 +9,32 @@ wisdomApp.controller('SignupController',
 	'modeService',
 	'userDataHolder',
 	'$cookieStore',
- function($scope, $stateParams, log, $window, twitterAPIService, dataRetriveService, Constants, modeService, userDataHolder, $cookieStore){
+	'userNameAPIService',
+	'toasterService',
+ function(
+ 	$scope, 
+ 	$stateParams, 
+ 	log, 
+ 	$window, 
+ 	twitterAPIService, 
+ 	dataRetriveService, 
+ 	Constants, modeService, 
+ 	userDataHolder, 
+ 	$cookieStore, 
+ 	userNameAPIService,
+ 	toasterService){
  	log.d("SignupController");
  	// log.d("userId: " + $scope.userId);
+
+ 	var userName = null;
+ 	var password = null;
+ 	var mailAddress = null;
+
+ 	var params = {
+ 		"name":userName,
+ 		"password":password,
+ 		"mailAddress":mailAddress
+ 	};
 
  	$scope.initialize = function()
  	{
@@ -85,6 +108,43 @@ wisdomApp.controller('SignupController',
 		FB.getLoginStatus(function(response) {
 			statusChangeCallback(response);
 		});
+	};
+
+	$scope.$watch('name', function(newValue, oldValue) {
+		params.name = newValue;
+	});
+
+	$scope.$watch('password', function(newValue, oldValue) {
+		params.password = newValue;
+	});
+
+	$scope.$watch('email', function(newValue, oldValue) {
+		params.mailAddress = newValue;
+	});
+
+	$scope.createAccount = function()
+	{
+		log.d("createAccount");
+
+		if(params.name !== null && params.password !== null && params.mailAddress !== null){
+
+			log.d("username: " + params.name);
+			log.d("password: " + params.password);
+			log.d("mailAddress: " + params.mailAddress);
+
+		 	userNameAPIService.useraccount({servlet_params : params}, function(response){
+		 		log.d("User account response received");
+
+		 		$scope.response = response;
+
+		 		// $scope.wisdoms = response.params;
+		 	});
+
+		} else {
+			log.d("Some input filed is not filled out yet");
+			toasterService.showErrorToasterLong("Signup", "Please check if you fill out user name, password and mail address field correctly");
+		}
+
 	};
 
 }]);

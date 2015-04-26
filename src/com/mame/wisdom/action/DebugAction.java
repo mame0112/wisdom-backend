@@ -28,7 +28,7 @@ public class DebugAction implements Action {
 							"Test twitter name" + i, "twitter token" + i,
 							"twitterTokenSecret" + i, "facebookName" + i,
 							"userName" + i, "password" + i, null,
-							TimeUtil.getCurrentDate(), i * 10);
+							TimeUtil.getCurrentDate(), i * 10, null);
 					userDatafacade.createNewUserData(data);
 
 				}
@@ -38,7 +38,7 @@ public class DebugAction implements Action {
 						"Test twitter name" + i, "twitter token" + i,
 						"twitterTokenSecret" + i, "facebookName" + i,
 						"userName" + i, "password" + i, null,
-						TimeUtil.getCurrentDate(), i * 10);
+						TimeUtil.getCurrentDate(), i * 10, null);
 				userDatafacade.createNewUserData(data);
 			}
 		}

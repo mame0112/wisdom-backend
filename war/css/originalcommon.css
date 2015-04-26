@@ -68,3 +68,60 @@ body {
 	font-size: 16px;
 	padding: 0px;
 }
+
+#signup {
+
+}
+
+#signup .content{
+}
+
+#signup .content .title{
+	font-size: 20px;
+	color: #333333;	
+}
+
+#signup .content .subtitle{
+	font-size: 16px;
+	color: #666666;
+}
+
+#signup .content .item{
+	height: 80px;
+	margin-top: 10px;
+}
+
+#signup .content .snsitem{
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+#signup .content .item .subtitle{
+
+}
+
+#signup .content .item .note{
+	color: #888888;
+	font-size: 12px;
+	display: inline;
+}
+
+#signup .content .item .notice{
+	color: #ff0000;
+	display: inline;
+}
+
+#signup .content .description{
+	font-size: 16px;
+	color: #666666;
+}
+
+#signup .note .title{
+	font-size: 20px;
+	color: #333333;
+}
+
+#signup .note .description{
+	font-size: 16px;
+	color: #666666;
+}

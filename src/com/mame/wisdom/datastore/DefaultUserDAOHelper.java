@@ -50,10 +50,12 @@ public class DefaultUserDAOHelper {
 					.getProperty(DBConstant.ENTITY_USER_LAST_LOGIN);
 			long totalPoint = (Long) entity
 					.getProperty(DBConstant.ENTITY_USER_TOTAL_POINT);
+			String mailAddress = (String) entity
+					.getProperty(DBConstant.ENTITY_USER_MAIL_ADDRESS);
 
 			WDUserData data = new WDUserData(WConstant.NO_USER, twitterName,
 					twitterToken, twitterTokenSecret, facebookName, userName,
-					password, thumbnail, lastLogin, totalPoint);
+					password, thumbnail, lastLogin, totalPoint, mailAddress);
 
 			return data;
 		} else {

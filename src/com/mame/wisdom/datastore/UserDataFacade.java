@@ -25,7 +25,6 @@ public class UserDataFacade {
 		DAOFactory factory = DAOFactory.getDAOFactory();
 		UserDAO userDAO = factory.getUserDAO();
 
-		// TODO
 		userDAO.storeNewUserData(data);
 
 		return false;
@@ -69,7 +68,7 @@ public class UserDataFacade {
 
 			WDUserData data = new WDUserData(WConstant.NO_USER, twitterName,
 					token, tokenSecret, null, null, null, profileImageURL,
-					current, 0);
+					current, 0, null);
 			userDAO.storeNewUserData(data);
 			return data;
 		} else {
@@ -110,4 +109,23 @@ public class UserDataFacade {
 		return null;
 	}
 
+	public long findUserIdByUserName(String userName)
+			throws WisdomFacadeException {
+
+		if (userName == null) {
+			throw new WisdomFacadeException("userName is null");
+		}
+
+		long userId = WConstant.NO_USER;
+
+		DAOFactory factory = DAOFactory.getDAOFactory();
+		try {
+			UserDAO dao = factory.getUserDAO();
+			userId = dao.findUserIdByUserName(userName);
+		} catch (WisdomDatastoreException e) {
+			DbgUtil.showLog(TAG, "WisdomDatastoreException: " + e.getMessage());
+		}
+
+		return userId;
+	}
 }

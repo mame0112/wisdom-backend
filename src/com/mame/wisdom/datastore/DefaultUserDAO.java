@@ -163,6 +163,7 @@ public class DefaultUserDAO implements UserDAO {
 		String thumbnail = data.getThumbnail();
 		long lastLogin = data.getLastLoginDate();
 		long totalPoint = data.getTotalPoint();
+		String mailAddress = data.getMailAddress();
 
 		Key ancKey = DatastoreKeyGenerator.getAllUserDataKey();
 		Entity entity = new Entity(DBConstant.KIND_USER_DATA, userId, ancKey);
@@ -178,6 +179,7 @@ public class DefaultUserDAO implements UserDAO {
 		entity.setProperty(DBConstant.ENTITY_USER_THUMBNAIL, thumbnail);
 		entity.setProperty(DBConstant.ENTITY_USER_TOTAL_POINT, totalPoint);
 		entity.setProperty(DBConstant.ENTITY_USER_LAST_LOGIN, lastLogin);
+		entity.setProperty(DBConstant.ENTITY_USER_MAIL_ADDRESS, mailAddress);
 
 		mDS.put(entity);
 
@@ -268,6 +270,11 @@ public class DefaultUserDAO implements UserDAO {
 						data.getUsername());
 			}
 
+			if (data.getMailAddress() != null) {
+				entity.setProperty(DBConstant.ENTITY_USER_MAIL_ADDRESS,
+						data.getMailAddress());
+			}
+
 			mDS.put(entity);
 
 		} catch (EntityNotFoundException e) {
@@ -351,5 +358,41 @@ public class DefaultUserDAO implements UserDAO {
 		}
 
 		return null;
+	}
+
+	@Override
+	public long findUserIdByUserName(String userName)
+			throws WisdomDatastoreException {
+		DbgUtil.showLog(TAG, "findUserIdByUserName");
+
+		long userId = WConstant.NO_USER;
+
+		if (userName == null) {
+			throw new WisdomDatastoreException("user name is null");
+		}
+
+		// Twitter name filter
+		Filter userNameFilter = new FilterPredicate(
+				DBConstant.ENTITY_USER_NAME, FilterOperator.EQUAL, userName);
+
+		try {
+			Key key = DatastoreKeyGenerator.getAllUserDataKey();
+			Query query = new Query(DBConstant.KIND_USER_DATA, key);
+			query.setFilter(userNameFilter);
+			PreparedQuery pQuery = mDS.prepare(query);
+			Entity entity = pQuery.asSingleEntity();
+			if (entity != null) {
+				DbgUtil.showLog(TAG, "Entity is not null");
+				userId = (long) entity.getProperty(DBConstant.ENTITY_USER_ID);
+			}
+		} catch (TooManyResultsException e) {
+			DbgUtil.showLog(TAG, "TooManyResultsException: " + e.getMessage());
+		} catch (IllegalStateException e) {
+			DbgUtil.showLog(TAG, "IllegalStateException: " + e.getMessage());
+		}
+
+		DbgUtil.showLog(TAG, "userId: " + userId);
+
+		return userId;
 	}
 }

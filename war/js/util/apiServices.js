@@ -142,6 +142,17 @@ wisdomApp.factory('apiService', ['$resource', 'log',
     }
 ])
 
+.factory('userNameAPIService', ['$resource', 'log',
+ function($resource, log) {
+    return $resource('/controller/useraccount',
+         {servlet_resp_id: 1},
+         { 
+            //Search widoms by given keyword
+            useraccount: {method: 'GET', isArray: false},
+        });
+    }
+])
+
 .factory('contactAPIService', ['$resource', 'log',
  function($resource, log) {
     return $resource('/controller/contact',
