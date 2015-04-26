@@ -11,6 +11,7 @@ wisdomApp.controller('SignupController',
 	'$cookieStore',
 	'userNameAPIService',
 	'toasterService',
+	'$state',
  function(
  	$scope, 
  	$stateParams, 
@@ -22,7 +23,8 @@ wisdomApp.controller('SignupController',
  	userDataHolder, 
  	$cookieStore, 
  	userNameAPIService,
- 	toasterService){
+ 	toasterService,
+ 	$state){
  	log.d("SignupController");
  	// log.d("userId: " + $scope.userId);
 
@@ -128,15 +130,25 @@ wisdomApp.controller('SignupController',
 
 		if(params.name !== null && params.password !== null && params.mailAddress !== null){
 
-			log.d("username: " + params.name);
-			log.d("password: " + params.password);
-			log.d("mailAddress: " + params.mailAddress);
-
 		 	userNameAPIService.useraccount({servlet_params : params}, function(response){
 		 		log.d("User account response received");
 
-		 		$scope.response = response;
-
+		 		if(response !== null && response !== undefined){
+		 			if(response.params.length !== 0)
+		 			{
+				 		$scope.param = response.params[0];
+				 		log.d("userId: " + $scope.param.userId);
+						toasterService.showSuccessToasterShort("Signup", "Account successfully created!");
+						//TODO Need to log in
+						$state.go('/');
+		 			} else {
+			 			log.d("response is null or undefined");
+						toasterService.showErrorToasterLong("Signup", "Something went wrong. Please try again later");
+		 			}
+		 		} else {
+		 			log.d("response is null or undefined");
+					toasterService.showErrorToasterLong("Signup", "Something went wrong. Please try again later");
+		 		}
 		 		// $scope.wisdoms = response.params;
 		 	});
 
