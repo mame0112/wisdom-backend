@@ -3,7 +3,8 @@ wisdomApp.controller('contactController',
 'log', 
 'contactAPIService',
 'toasterService',
-function($scope, log, contactAPIService, toasterService){
+'$state',
+function($scope, log, contactAPIService, toasterService, $state){
  	log.d("contactController");
 
  	var name = null;
@@ -31,6 +32,7 @@ function($scope, log, contactAPIService, toasterService){
 
 	 		if(response !== null && response !== undefined){
 				toasterService.showSuccessToasterLong("Contact", "Message successfully sent!");
+				$state.go('/');
 	 		} else {
 	 			//Error handling
 				toasterService.showErrorToasterLong("Contact", "Failed to send message. Please try again");
