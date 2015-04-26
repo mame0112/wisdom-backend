@@ -27,40 +27,6 @@ wisdomApp.controller('headerController',
  	$state){
  	log.d("headerController");
 
-	// $scope.$state = $state;
-
-	// $scope.isStateRoot = function ()
-	// {
-	// 	if($state.current.name !== "privacypolicy" && $state.current.name !== "tos" && $state.current.name !== "contact"){
-	// 		return true;
-	// 	}
-	// 	return false;
-	// };
-
-	// $scope.isStatePrivacyPolicy = function ()
-	// {
-	// 	if($state.current.name == Constants.VIEW_STATE.PRIVACY_POLICY){
-	// 		return true;
-	// 	}
-	// 	return false;
-	// };
-
-	// $scope.isStateTos = function ()
-	// {
-	// 	if($state.current.name == Constants.VIEW_STATE.TOS){
-	// 		return true;
-	// 	}
-	// 	return false;
-	// };
-
-	// $scope.isStateContact = function ()
-	// {
-	// 	if($state.current.name == Constants.VIEW_STATE.CONTACT){
-	// 		return true;
-	// 	}
-	// 	return false;
-	// };
-
  	$scope.onSigninOptionSelect = function (){
  		// log.d("onSigninOptionSelect");
 		modeService.changeCurrentMode(Constants.STATE.STATE_SIGNIN_PAGE);
@@ -145,6 +111,8 @@ wisdomApp.controller('headerController',
  	$scope.searchWisdom = function(data) {
 
  		log.d("data: " + data);
+
+ 		$scope.searchParam = "";
 
  		$state.go('search', {result : data});
 
