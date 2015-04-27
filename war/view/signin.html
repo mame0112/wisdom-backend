@@ -1,22 +1,12 @@
-<div ng-controller="SigninController">
-<form role="form">
-  <div class="form-group">
-    <label for="exampleInputEmail1">Mail address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Mail address">
+<div>
+  <div class="col-md-8">
+    <div signin-content-directive></div>
   </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="password">
+  <div class="col-md-4">
+    <div signin-note-directive></div>
   </div>
-  <div class="checkbox">
-    <label>
-      <input type="checkbox"> Keep Sign in state
-    </label>
-  </div>
-  <button type="submit" class="btn btn-default" ng-click="twitterSignin()">Sign in with Twitter</button>
-  <button type="Sign up with Twitter" class="btn btn-default">Sign up with Twitter</button>
-</form>
 </div>
+
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

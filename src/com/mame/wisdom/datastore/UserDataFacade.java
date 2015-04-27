@@ -109,23 +109,22 @@ public class UserDataFacade {
 		return null;
 	}
 
-	public long findUserIdByUserName(String userName)
+	public WDUserData getUserDataByUserName(String userName)
 			throws WisdomFacadeException {
 
 		if (userName == null) {
-			throw new WisdomFacadeException("userName is null");
+			throw new WisdomFacadeException("parameter is null");
 		}
 
-		long userId = WConstant.NO_USER;
-
 		DAOFactory factory = DAOFactory.getDAOFactory();
+
 		try {
 			UserDAO dao = factory.getUserDAO();
-			userId = dao.findUserIdByUserName(userName);
+			return dao.getUserIdByUserName(userName);
 		} catch (WisdomDatastoreException e) {
 			DbgUtil.showLog(TAG, "WisdomDatastoreException: " + e.getMessage());
 		}
 
-		return userId;
+		return null;
 	}
 }

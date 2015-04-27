@@ -81,6 +81,8 @@ public class ActionFactory {
 		// Sign up API by User name and password
 		mAction.put(ActionConstants.GET + ActionConstants.KEY_USER_ACCOUNT,
 				new UserAccountAction());
+		mAction.put(ActionConstants.GET + ActionConstants.KEY_USER_ACCOUNT_LOGIN,
+				new UserAccountLoginAction());
 
 		// Twitter API
 		// Sign in with Twitter

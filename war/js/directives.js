@@ -134,6 +134,20 @@ wisdomApp.directive('headerDirective', function(){
 	};
 })
 
+.directive('signinContentDirective', function(){
+	return {
+		restrict: 'A',
+		templateUrl: 'directive/signin-content-directive.html'
+	};
+})
+
+.directive('signinNoteDirective', function(){
+	return {
+		restrict: 'A',
+		templateUrl: 'directive/signin-note-directive.html'
+	};
+})
+
 // Directive for debug
 .directive('debugDirective', function(){
 	return {

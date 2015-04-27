@@ -361,17 +361,14 @@ public class DefaultUserDAO implements UserDAO {
 	}
 
 	@Override
-	public long findUserIdByUserName(String userName)
+	public WDUserData getUserIdByUserName(String userName)
 			throws WisdomDatastoreException {
-		DbgUtil.showLog(TAG, "findUserIdByUserName");
-
-		long userId = WConstant.NO_USER;
+		DbgUtil.showLog(TAG, "getUserIdByUserName");
 
 		if (userName == null) {
-			throw new WisdomDatastoreException("user name is null");
+			throw new IllegalArgumentException("userName is null");
 		}
 
-		// Twitter name filter
 		Filter userNameFilter = new FilterPredicate(
 				DBConstant.ENTITY_USER_NAME, FilterOperator.EQUAL, userName);
 
@@ -383,7 +380,8 @@ public class DefaultUserDAO implements UserDAO {
 			Entity entity = pQuery.asSingleEntity();
 			if (entity != null) {
 				DbgUtil.showLog(TAG, "Entity is not null");
-				userId = (long) entity.getProperty(DBConstant.ENTITY_USER_ID);
+				DefaultUserDAOHelper helper = new DefaultUserDAOHelper();
+				return helper.constructUserDataFromEntity(entity);
 			}
 		} catch (TooManyResultsException e) {
 			DbgUtil.showLog(TAG, "TooManyResultsException: " + e.getMessage());
@@ -391,8 +389,6 @@ public class DefaultUserDAO implements UserDAO {
 			DbgUtil.showLog(TAG, "IllegalStateException: " + e.getMessage());
 		}
 
-		DbgUtil.showLog(TAG, "userId: " + userId);
-
-		return userId;
+		return null;
 	}
 }

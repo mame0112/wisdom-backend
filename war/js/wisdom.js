@@ -25,7 +25,6 @@ var wisdomApp = angular.module('WidsomApp',
 		state('signin', {
 			url: '/signin',
 			templateUrl: 'view/signin.html',
-			controller: 'SigninController'
 		}).
 		state('signup', {
 			url: '/signup',

@@ -39,13 +39,13 @@ public interface UserDAO {
 			throws WisdomDatastoreException;
 
 	/**
-	 * Get user id for user name
+	 * Get WDUserData by user name
 	 * 
 	 * @param userName
-	 * @return userId for given user name.. otherwise -1 (No user id).
+	 * @return
 	 * @throws WisdomDatastoreException
 	 */
-	public long findUserIdByUserName(String userName)
+	public WDUserData getUserIdByUserName(String userName)
 			throws WisdomDatastoreException;
 
 }

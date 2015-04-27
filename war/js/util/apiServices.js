@@ -153,6 +153,17 @@ wisdomApp.factory('apiService', ['$resource', 'log',
     }
 ])
 
+.factory('userLoginAPIService', ['$resource', 'log',
+ function($resource, log) {
+    return $resource('/controller/userlogin',
+         {servlet_resp_id: 1},
+         { 
+            //Search widoms by given keyword
+            login: {method: 'GET', isArray: false},
+        });
+    }
+])
+
 .factory('contactAPIService', ['$resource', 'log',
  function($resource, log) {
     return $resource('/controller/contact',

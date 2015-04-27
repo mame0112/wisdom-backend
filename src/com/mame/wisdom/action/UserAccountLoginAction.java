@@ -10,21 +10,22 @@ import com.mame.wisdom.data.WDUserData;
 import com.mame.wisdom.data.WDUserDataBuilder;
 import com.mame.wisdom.datastore.UserDataFacade;
 import com.mame.wisdom.jsonbuilder.JsonConstant;
-import com.mame.wisdom.jsonbuilder.UserAccountJsonBuilder;
+import com.mame.wisdom.jsonbuilder.UserLoginJsonBuilder;
 import com.mame.wisdom.util.DbgUtil;
 
-public class UserAccountAction implements Action {
+public class UserAccountLoginAction implements Action {
 
-	private final static String TAG = UserAccountAction.class.getSimpleName();
+	private final static String TAG = UserAccountLoginAction.class
+			.getSimpleName();
 
 	private final static int NUM_OF_WISDOM = 10;
 
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		DbgUtil.showLog(TAG, "UserAccountAction execute");
+		DbgUtil.showLog(TAG, "UserAccountLoginAction execute");
 
-		UserAccountJsonBuilder builder = new UserAccountJsonBuilder();
+		UserLoginJsonBuilder builder = new UserLoginJsonBuilder();
 
 		String responseId = request.getParameter(WConstant.SERVLET_RESP_ID);
 		String param = request.getParameter(WConstant.SERVLET_PARAMS);
@@ -38,32 +39,25 @@ public class UserAccountAction implements Action {
 						.getString(JsonConstant.PARAM_ACCOUNT_USER_NAME);
 				String password = object
 						.getString(JsonConstant.PARAM_ACCOUNT_PASSWORD);
-				String mailAddress = object
-						.getString(JsonConstant.PARAM_ACCOUNT_MAIL_ADDRESS);
-				if (userName != null && password != null && mailAddress != null) {
+				if (userName != null && password != null) {
 					DbgUtil.showLog(TAG, "userName: " + userName
-							+ " password: " + password + " mailAddress: "
-							+ mailAddress);
+							+ " password: " + password);
 					UserDataFacade facade = new UserDataFacade();
-					WDUserData data = facade.getUserDataByUserName(userName);
+					WDUserData userData = facade
+							.getUserDataByUserName(userName);
 
-					// If given user name is not occupied by another user
-					if (data == null) {
-						WDUserDataBuilder dataBuilder = WDUserDataBuilder
-								.createFrom(null);
-						dataBuilder.setUserId(WConstant.NO_USER)
-								.setUsername(userName).setPassword(password)
-								.setMailAddress(mailAddress);
-						facade.createNewUserData(dataBuilder
-								.getConstructedData());
-						builder.addResponseParam(dataBuilder
-								.getConstructedData().getUserId());
+					if (userData != null) {
+						// If password is correct
+						if (password.equals(userData.getPassword())) {
+							builder.addResponseParam(userData.getUserId());
+						} else {
+							// Wrong user
+							builder.addResponseParam(WConstant.NO_USER);
+						}
 					} else {
-						// If given user name is already occupied by another
-						// user
+						// Wrong user
 						builder.addResponseParam(WConstant.NO_USER);
 					}
-
 				} else {
 					builder.addErrorMessage("Illegal argument. user name, password or mail address is null");
 				}
@@ -82,4 +76,5 @@ public class UserAccountAction implements Action {
 
 		return result;
 	}
+
 }

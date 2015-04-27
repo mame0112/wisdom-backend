@@ -53,9 +53,9 @@ public class DefaultUserDAOHelper {
 			String mailAddress = (String) entity
 					.getProperty(DBConstant.ENTITY_USER_MAIL_ADDRESS);
 
-			WDUserData data = new WDUserData(WConstant.NO_USER, twitterName,
-					twitterToken, twitterTokenSecret, facebookName, userName,
-					password, thumbnail, lastLogin, totalPoint, mailAddress);
+			WDUserData data = new WDUserData(userId, twitterName, twitterToken,
+					twitterTokenSecret, facebookName, userName, password,
+					thumbnail, lastLogin, totalPoint, mailAddress);
 
 			return data;
 		} else {
