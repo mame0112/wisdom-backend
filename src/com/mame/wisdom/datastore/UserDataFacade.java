@@ -2,7 +2,6 @@ package com.mame.wisdom.datastore;
 
 import java.util.List;
 
-import com.google.appengine.api.datastore.Blob;
 import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.data.WDUserData;
 import com.mame.wisdom.exception.WisdomDatastoreException;
@@ -126,5 +125,32 @@ public class UserDataFacade {
 		}
 
 		return null;
+	}
+
+	/**
+	 * Update user point according to given parameter.
+	 * 
+	 * @param userId
+	 * @param updatePoint
+	 * @return newly updated user point.
+	 */
+	public long updateUserPoint(long userId, int updatePoint) {
+		DbgUtil.showLog(TAG, "updateUserPoint");
+
+		if (userId == WConstant.NO_USER || updatePoint < 0) {
+			throw new IllegalArgumentException("Illegal parameter");
+		}
+
+		DAOFactory factory = DAOFactory.getDAOFactory();
+
+		try {
+			UserDAO dao = factory.getUserDAO();
+			return dao.updateUserPoint(userId, updatePoint);
+
+		} catch (WisdomDatastoreException e) {
+			DbgUtil.showLog(TAG, "WisdomDatastoreException: " + e.getMessage());
+		}
+
+		return updatePoint;
 	}
 }

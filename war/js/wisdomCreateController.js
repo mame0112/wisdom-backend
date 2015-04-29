@@ -91,7 +91,7 @@ wisdomApp.controller('wisdomCreateController',
 			result.create_user_id = userData.params.userId;
 		} else {
 			//FIXME This is temporary solution for development.
-			result.create_user_id = 1;
+			result.create_user_id = 2;
 		}
 
 		result.updated_date = timeService.getCurrentTime();
@@ -201,7 +201,19 @@ wisdomApp.controller('wisdomCreateController',
             $scope.uploadProgress = parseInt(100.0 * evt.loaded / evt.total, 10);
         }).success(function (data) {
         	log.d("success");
-        	toasterService.showSuccessToasterShort("New wisdom", "Message successfully created!");
+        	if(data !== null && data !== undefined){
+        		if(data.params.length !== 0){
+        			var param = data.params[0];
+	        		log.d("wisdomId: " + param.wisdomId);
+	        		log.d("point: " + param.point);
+		        	toasterService.showSuccessToasterLong("New wisdom", "New wisdom is successfully created. Your point is now " + param.point );
+        		} else {
+		        	toasterService.showErrorToasterShort("New wisdom", "Failed to create new wisdom. Please try again");
+        		}
+        	} else {
+            	log.d("illegal response");
+	        	toasterService.showErrorToasterShort("New wisdom", "Failed to create new wisdom");
+        	}
         });
     };
 
@@ -307,12 +319,14 @@ wisdomApp.controller('uploadCtrl', [
                     url: '/controller/newwisdom',
                     method: 'POST',
                     data: {data: $scope.model.fileDescription},
+  					transformRequest: angular.identity,
+		            headers: {'Content-Type': undefined},
                     // data: angular.toJson($scope.model.fileDescription),
                     file: file,
                 }).progress(function (evt) {
                     $scope.uploadProgress = parseInt(100.0 * evt.loaded / evt.total, 10);
                 }).success(function (data) {
-                	log.d("success");
+
                 });
             };
 

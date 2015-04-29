@@ -153,33 +153,8 @@ public class DefaultUserDAO implements UserDAO {
 
 	private void addNewUserData(WDUserData data) {
 		DbgUtil.showLog(TAG, "addNewUserData");
-		long userId = data.getUserId();
-		String userName = data.getUsername();
-		String password = data.getPassword();
-		String twitter = data.getTwitterName();
-		String twitterToken = data.getTwitterToken();
-		String twitterTokenSecret = data.getTwitterTokenSecret();
-		String facebook = data.getFacebookName();
-		String thumbnail = data.getThumbnail();
-		long lastLogin = data.getLastLoginDate();
-		long totalPoint = data.getTotalPoint();
-		String mailAddress = data.getMailAddress();
 
-		Key ancKey = DatastoreKeyGenerator.getAllUserDataKey();
-		Entity entity = new Entity(DBConstant.KIND_USER_DATA, userId, ancKey);
-
-		entity.setProperty(DBConstant.ENTITY_USER_ID, userId);
-		entity.setProperty(DBConstant.ENTITY_USER_NAME, userName);
-		entity.setProperty(DBConstant.ENTITY_USER_PASSWORD, password);
-		entity.setProperty(DBConstant.ENTITY_USER_TWITTER_NAME, twitter);
-		entity.setProperty(DBConstant.ENTITY_USER_TWITTER_TOKEN, twitterToken);
-		entity.setProperty(DBConstant.ENTITY_USER_TWITTER_TOKEN_SECRET,
-				twitterTokenSecret);
-		entity.setProperty(DBConstant.ENTITY_USER_FACEBOOK_NAME, facebook);
-		entity.setProperty(DBConstant.ENTITY_USER_THUMBNAIL, thumbnail);
-		entity.setProperty(DBConstant.ENTITY_USER_TOTAL_POINT, totalPoint);
-		entity.setProperty(DBConstant.ENTITY_USER_LAST_LOGIN, lastLogin);
-		entity.setProperty(DBConstant.ENTITY_USER_MAIL_ADDRESS, mailAddress);
+		Entity entity = DefaultUserDAOHelper.createEntityFromUserData(data);
 
 		mDS.put(entity);
 
@@ -215,7 +190,7 @@ public class DefaultUserDAO implements UserDAO {
 	public void updateUserData(WDUserData data) throws WisdomDatastoreException {
 		DbgUtil.showLog(TAG, "updateUserData");
 
-		if (data != null) {
+		if (data == null) {
 			throw new WisdomDatastoreException("Parameter user data is null");
 		}
 
@@ -390,5 +365,41 @@ public class DefaultUserDAO implements UserDAO {
 		}
 
 		return null;
+	}
+
+	@Override
+	public long updateUserPoint(long userId, long updatePoint)
+			throws WisdomDatastoreException {
+		DbgUtil.showLog(TAG, "updateUserPoint: " + userId);
+
+		if (userId == WConstant.NO_USER || updatePoint < 0) {
+			throw new IllegalArgumentException("Illegal parameter");
+		}
+
+		Key key = DatastoreKeyGenerator.getUserDataKey(userId);
+		try {
+			Entity entity = mDS.get(key);
+			DefaultUserDAOHelper helper = new DefaultUserDAOHelper();
+			WDUserData data = helper.constructUserDataFromEntity(entity);
+			long totalPoint = data.getTotalPoint();
+			long newPoint = totalPoint + updatePoint;
+			DbgUtil.showLog(TAG, "newPoint: " + newPoint);
+			data.setTotalPoint(newPoint);
+
+			Entity newEntity = DefaultUserDAOHelper
+					.createEntityFromUserData(data);
+			if (newEntity != null) {
+				mDS.put(newEntity);
+			} else {
+				DbgUtil.showLog(TAG, "newEntity is null");
+			}
+
+			return newPoint;
+
+		} catch (EntityNotFoundException e) {
+			DbgUtil.showLog(TAG, "EntityNotFoundException: " + e.getMessage());
+		}
+
+		return updatePoint;
 	}
 }

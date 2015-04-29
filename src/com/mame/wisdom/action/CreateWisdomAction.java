@@ -11,15 +11,19 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.fileupload.util.Streams;
 
 import com.google.appengine.api.datastore.Blob;
+import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.data.WDWisdomData;
+import com.mame.wisdom.datastore.UserDataFacade;
 import com.mame.wisdom.datastore.WisdomFacade;
 import com.mame.wisdom.exception.WisdomFacadeException;
 import com.mame.wisdom.jsonbuilder.JsonBuilder;
+import com.mame.wisdom.jsonbuilder.JsonConstant;
 import com.mame.wisdom.jsonbuilder.NewWisdomJsonBuilder;
 import com.mame.wisdom.util.DatastoreUtil;
 import com.mame.wisdom.util.DbgUtil;
+import com.mame.wisdom.util.UserPointOption;
 
 public class CreateWisdomAction implements Action {
 
@@ -87,8 +91,31 @@ public class CreateWisdomAction implements Action {
 					thumbnail = DatastoreUtil
 							.transcodeInputStreamToBlob(stream);
 
+					// BlobstoreService blobstoreService =
+					// BlobstoreServiceFactory
+					// .getBlobstoreService();
+					// BlobKey blobKey = blobstoreService
+					// .createGsBlobKey("/gs/bucket/object");
+					// DbgUtil.showLog(TAG, "blobkey: " +
+					// blobKey.getKeyString());
+					// response.sendRedirect("/serve?blob-key="
+					// + blobKey.getKeyString());
+
+					// BlobstoreService blobstoreService =
+					// BlobstoreServiceFactory
+					// .getBlobstoreService();
+					// String uploadUrl = blobstoreService
+					// .createUploadUrl("/uploadUrl");
+
 				}
 			}
+
+			// BlobstoreService blobstoreService = BlobstoreServiceFactory
+			// .getBlobstoreService();
+			// String uploadUrl =
+			// blobstoreService.createUploadUrl("/uploadUrl");
+			// response.sendRedirect("/upload");
+
 		} catch (Exception e) {
 			DbgUtil.showLog(TAG, "Exception: " + e.getMessage());
 		}
@@ -118,7 +145,22 @@ public class CreateWisdomAction implements Action {
 						thumbnail);
 				// If wisdom is newly created
 				if (newWisdom != null) {
-					builder.addResponseParam(newWisdom.getWisdomId());
+
+					long userId = extractUserIdFromInputString(params);
+
+					// Update user point
+					// TODO This should be in transaction.
+					UserDataFacade userFacade = new UserDataFacade();
+
+					// Update user point
+					long updatedPoint = userFacade
+							.updateUserPoint(
+									userId,
+									UserPointOption
+											.getPoint(UserPointOption.POINT_CREATE_WISDOM));
+
+					builder.addResponseParam(newWisdom.getWisdomId(),
+							updatedPoint);
 				} else {
 					// If new wisdom creation failed
 					builder.addResponseParam(WConstant.NO_WISDOM);
@@ -138,5 +180,23 @@ public class CreateWisdomAction implements Action {
 		DbgUtil.showLog(TAG, "result: " + result);
 
 		return result;
+	}
+
+	private long extractUserIdFromInputString(String input) {
+
+		if (input != null) {
+			JSONObject rootObject;
+			try {
+				rootObject = new JSONObject(input);
+				return rootObject
+						.getLong(JsonConstant.PARAM_WISDOM_CREATE_USER_ID);
+			} catch (JSONException e) {
+				DbgUtil.showLog(TAG, "JSONException: " + e.getMessage());
+			}
+
+		}
+
+		return WConstant.NO_USER;
+
 	}
 }

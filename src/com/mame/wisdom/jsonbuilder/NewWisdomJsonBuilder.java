@@ -53,12 +53,16 @@ public class NewWisdomJsonBuilder extends JsonBuilder {
 		}
 
 		long wisdomId = (Long) param[0];
+		long updatedPoint = (Long) param[1];
+		DbgUtil.showLog(TAG, "wisdomId: " + wisdomId + " updatedPoint: "
+				+ updatedPoint);
 
 		try {
 			JSONArray itemArray = new JSONArray();
 			JSONObject resultObject = new JSONObject();
 
 			resultObject.put(JsonConstant.PARAM_CATEGORY_WISDOM_ID, wisdomId);
+			resultObject.put(JsonConstant.PARAM_USER_POINT, updatedPoint);
 			itemArray.put(resultObject);
 
 			mRootObject.put(JsonConstant.PARAMS, itemArray);

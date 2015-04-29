@@ -36,7 +36,7 @@
 		<servlet-name>cronServlet</servlet-name>
 		<url-pattern>/cron/*</url-pattern>
 	</servlet-mapping>
-	
+
 	<!-- Task queue -->
 	<servlet>
 		<servlet-name>worker</servlet-name>
@@ -48,17 +48,18 @@
 		<url-pattern>/worker</url-pattern>
 	</servlet-mapping>
 
-	<!--
 	<servlet>
-		<servlet-name>process</servlet-name>
-		<servlet-class>com.mame.wisdom.datastore.taskqueue.Enqueue</servlet-class>
+		<servlet-name>Serve</servlet-name>
+		<servlet-class>com.mame.wisdom.datastore.blobstore.WisdomBlobstore</servlet-class>
 	</servlet>
-
 	<servlet-mapping>
-		<servlet-name>process</servlet-name>
-		<url-pattern>/process</url-pattern>
+		<servlet-name>Serve</servlet-name>
+		<url-pattern>/serve</url-pattern>
 	</servlet-mapping>
--->
+
+	<!-- <servlet> <servlet-name>process</servlet-name> <servlet-class>com.mame.wisdom.datastore.taskqueue.Enqueue</servlet-class> 
+		</servlet> <servlet-mapping> <servlet-name>process</servlet-name> <url-pattern>/process</url-pattern> 
+		</servlet-mapping> -->
 	<!-- Clean up _ah_session -->
 	<servlet-mapping>
 		<servlet-name>_ah_sessioncleanup</servlet-name>
