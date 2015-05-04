@@ -1,6 +1,6 @@
 wisdomApp.controller('searchResultController',
- ['$scope', 'log', '$stateParams',  'searchAPIService', 'creativeColorGenerateService',
- function($scope, log, $stateParams, searchAPIService, creativeColorGenerateService){
+ ['$scope', 'log', '$stateParams',  'searchAPIService', 'creativeColorGenerateService', 'ngProgress',
+ function($scope, log, $stateParams, searchAPIService, creativeColorGenerateService, ngProgress){
 
 	// var originalParams = JSON.parse($scope.params);
 	$scope.searchWord = $stateParams.result;
@@ -11,7 +11,13 @@ wisdomApp.controller('searchResultController',
 
 	$scope.creativeColorGenerateService = creativeColorGenerateService;
 
+	//TODO to  be used when performance is bad
+	// ngProgress.start();
+
 	if($scope.searchWord !== null && $scope.searchWord !== undefined){
+
+		// ngProgress.complete();
+
 		// log.d("input value: " + data);
 		searchAPIService.search({searchParam : $scope.searchWord}, function(response){
 			if(response.params.length !== 0){

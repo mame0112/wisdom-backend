@@ -8,6 +8,7 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.data.WDUserData;
+import com.mame.wisdom.data.WDUserStatusData;
 import com.mame.wisdom.util.DbgUtil;
 
 public class DefaultUserDAOHelper {
@@ -29,42 +30,99 @@ public class DefaultUserDAOHelper {
 		return null;
 	}
 
-	public WDUserData constructUserDataFromEntity(Entity entity) {
+	public List<WDUserStatusData> parseEntityListToUserStatusDataList(
+			List<Entity> entities) {
+		DbgUtil.showLog(TAG, "parseEntityListToUserStatusDataList");
+
+		if (entities != null) {
+			List<WDUserStatusData> result = new ArrayList<WDUserStatusData>();
+			for (Entity e : entities) {
+				result.add(constructUserStatusDataFromEntity(e));
+			}
+			return result;
+		}
+
+		return null;
+	}
+
+	public static WDUserData constructUserDataFromEntity(Entity entity) {
 		DbgUtil.showLog(TAG, "constructUserDataFromEntity");
 
 		if (entity != null) {
-			long userId = (Long) entity.getProperty(DBConstant.ENTITY_USER_ID);
-			String twitterName = (String) entity
-					.getProperty(DBConstant.ENTITY_USER_TWITTER_NAME);
-			String twitterToken = (String) entity
-					.getProperty(DBConstant.ENTITY_USER_TWITTER_TOKEN);
-			String twitterTokenSecret = (String) entity
-					.getProperty(DBConstant.ENTITY_USER_TWITTER_TOKEN_SECRET);
-			String facebookName = (String) entity
-					.getProperty(DBConstant.ENTITY_USER_FACEBOOK_NAME);
-			String userName = (String) entity
-					.getProperty(DBConstant.ENTITY_USER_NAME);
-			String password = (String) entity
-					.getProperty(DBConstant.ENTITY_USER_PASSWORD);
-			String thumbnail = (String) entity
-					.getProperty(DBConstant.ENTITY_USER_THUMBNAIL);
-			long lastLogin = (Long) entity
-					.getProperty(DBConstant.ENTITY_USER_LAST_LOGIN);
-			long totalPoint = (Long) entity
-					.getProperty(DBConstant.ENTITY_USER_TOTAL_POINT);
-			String mailAddress = (String) entity
-					.getProperty(DBConstant.ENTITY_USER_MAIL_ADDRESS);
+			try {
+				long userId = (Long) entity
+						.getProperty(DBConstant.ENTITY_USER_ID);
+				String twitterName = (String) entity
+						.getProperty(DBConstant.ENTITY_USER_TWITTER_NAME);
+				String twitterToken = (String) entity
+						.getProperty(DBConstant.ENTITY_USER_TWITTER_TOKEN);
+				String twitterTokenSecret = (String) entity
+						.getProperty(DBConstant.ENTITY_USER_TWITTER_TOKEN_SECRET);
+				String facebookName = (String) entity
+						.getProperty(DBConstant.ENTITY_USER_FACEBOOK_NAME);
+				String userName = (String) entity
+						.getProperty(DBConstant.ENTITY_USER_NAME);
+				String password = (String) entity
+						.getProperty(DBConstant.ENTITY_USER_PASSWORD);
+				String thumbnail = (String) entity
+						.getProperty(DBConstant.ENTITY_USER_THUMBNAIL);
+				long lastLogin = (Long) entity
+						.getProperty(DBConstant.ENTITY_USER_LAST_LOGIN);
+				String mailAddress = (String) entity
+						.getProperty(DBConstant.ENTITY_USER_MAIL_ADDRESS);
+				WDUserData data = new WDUserData(userId, twitterName,
+						twitterToken, twitterTokenSecret, facebookName,
+						userName, password, thumbnail, mailAddress, lastLogin);
+				return data;
+			} catch (Exception e) {
+				DbgUtil.showLog(TAG, "Exception: " + e.getMessage());
+			}
 
-			WDUserData data = new WDUserData(userId, twitterName, twitterToken,
-					twitterTokenSecret, facebookName, userName, password,
-					thumbnail, lastLogin, totalPoint, mailAddress);
-
-			return data;
 		} else {
 			DbgUtil.showLog(TAG, "Entity is null");
-			return null;
 		}
+		return null;
 
+	}
+
+	@SuppressWarnings("unchecked")
+	public WDUserStatusData constructUserStatusDataFromEntity(Entity entity) {
+		DbgUtil.showLog(TAG, "constructUserStatusDataFromEntity");
+
+		if (entity != null) {
+			long userId = entity.getKey().getId();
+			long totalPoint = (Long) entity
+					.getProperty(DBConstant.ENTITY_STATUS_TOTAL_POINT);
+			List<Long> createdWisdoms = (List<Long>) entity
+					.getProperty(DBConstant.ENTITY_STATUS_CREATED_WISDOM);
+			List<Long> likedWisdoms = (List<Long>) entity
+					.getProperty(DBConstant.ENTITY_STATUS_LIKED_WISDOM);
+			return new WDUserStatusData(userId, totalPoint, createdWisdoms,
+					likedWisdoms);
+		}
+		return null;
+	}
+
+	public static Entity createEntityFromUserStatusData(WDUserStatusData data) {
+		DbgUtil.showLog(TAG, "createEntityFromUserStatusData");
+		if (data != null) {
+			Key ancKey = DatastoreKeyGenerator.getAllUserDataKey();
+			Entity entity = new Entity(DBConstant.KIND_USER_STATUS,
+					data.getUserId(), ancKey);
+
+			long totalPoint = data.getTotalPoint();
+			List<Long> createdWisdoms = data.getCreatedWisdomIds();
+			List<Long> likedWisdoms = data.getLikedWisdomIds();
+
+			entity.setProperty(DBConstant.ENTITY_STATUS_TOTAL_POINT, totalPoint);
+			entity.setProperty(DBConstant.ENTITY_STATUS_CREATED_WISDOM,
+					createdWisdoms);
+			entity.setProperty(DBConstant.ENTITY_STATUS_LIKED_WISDOM,
+					likedWisdoms);
+
+			return entity;
+		}
+		return null;
 	}
 
 	public static Entity createEntityFromUserData(WDUserData data) {
@@ -78,7 +136,7 @@ public class DefaultUserDAOHelper {
 			String facebook = data.getFacebookName();
 			String thumbnail = data.getThumbnail();
 			long lastLogin = data.getLastLoginDate();
-			long totalPoint = data.getTotalPoint();
+
 			String mailAddress = data.getMailAddress();
 
 			Key ancKey = DatastoreKeyGenerator.getAllUserDataKey();
@@ -95,7 +153,6 @@ public class DefaultUserDAOHelper {
 					twitterTokenSecret);
 			entity.setProperty(DBConstant.ENTITY_USER_FACEBOOK_NAME, facebook);
 			entity.setProperty(DBConstant.ENTITY_USER_THUMBNAIL, thumbnail);
-			entity.setProperty(DBConstant.ENTITY_USER_TOTAL_POINT, totalPoint);
 			entity.setProperty(DBConstant.ENTITY_USER_LAST_LOGIN, lastLogin);
 			entity.setProperty(DBConstant.ENTITY_USER_MAIL_ADDRESS, mailAddress);
 

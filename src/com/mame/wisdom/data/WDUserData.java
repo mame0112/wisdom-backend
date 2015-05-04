@@ -24,12 +24,13 @@ public class WDUserData implements Serializable {
 
 	private long mLastLoginDate = 0;
 
-	private long mTotalPoint = 0;
+	//
+	// private long mTotalPoint = 0;
 
 	public WDUserData(long userId, String twitterName, String twitterToken,
 			String twitterTokenSecret, String facebookName, String userName,
-			String password, String thumbnail, long lastLogin, long totalPoint,
-			String mailAddress) {
+			String password, String thumbnail, String mailAddress,
+			long lastLogin) {
 		mUserId = userId;
 		mTwitterName = twitterName;
 		mTwitterToken = twitterToken;
@@ -39,7 +40,7 @@ public class WDUserData implements Serializable {
 		mPassword = password;
 		mThumbnail = thumbnail;
 		mLastLoginDate = lastLogin;
-		mTotalPoint = totalPoint;
+		// mTotalPoint = totalPoint;
 		mMailAddress = mailAddress;
 	}
 
@@ -61,8 +62,8 @@ public class WDUserData implements Serializable {
 		mUserName = data.getUsername();
 		mPassword = data.getPassword();
 		mThumbnail = data.getThumbnail();
-		mLastLoginDate = data.getLastLoginDate();
-		mTotalPoint = data.getTotalPoint();
+		// mLastLoginDate = data.getLastLoginDate();
+		// mTotalPoint = data.getTotalPoint();
 
 	}
 
@@ -106,9 +107,9 @@ public class WDUserData implements Serializable {
 		return mLastLoginDate;
 	}
 
-	public long getTotalPoint() {
-		return mTotalPoint;
-	}
+	// public long getTotalPoint() {
+	// return mTotalPoint;
+	// }
 
 	public String getMailAddress() {
 		return mMailAddress;
@@ -146,9 +147,9 @@ public class WDUserData implements Serializable {
 		mLastLoginDate = loginDate;
 	}
 
-	public void setTotalPoint(long point) {
-		mTotalPoint = point;
-	}
+	// public void setTotalPoint(long point) {
+	// mTotalPoint = point;
+	// }
 
 	public void setMailAddress(String mailAddress) {
 		mMailAddress = mailAddress;

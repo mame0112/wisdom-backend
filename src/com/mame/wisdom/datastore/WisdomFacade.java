@@ -11,6 +11,7 @@ import com.mame.wisdom.data.WDWisdomData;
 import com.mame.wisdom.data.WisdomDataStructure;
 import com.mame.wisdom.exception.WisdomDatastoreException;
 import com.mame.wisdom.exception.WisdomFacadeException;
+import com.mame.wisdom.search.WisdomSearchService;
 import com.mame.wisdom.util.DbgUtil;
 
 public class WisdomFacade {
@@ -63,8 +64,7 @@ public class WisdomFacade {
 		return null;
 	}
 
-	public List<WDWisdomData> getWisdomByIds(String category,
-			String subCategory, List<Long> wisdomIds)
+	public List<WDWisdomData> getWisdomByIds(List<Long> wisdomIds)
 			throws WisdomFacadeException {
 		DbgUtil.showLog(TAG, "getWisdomByIds");
 
@@ -75,8 +75,7 @@ public class WisdomFacade {
 		DAOFactory factory = DAOFactory.getDAOFactory();
 		try {
 			WisdomDAO dao = factory.getWisdomDAO();
-			List<WDWisdomData> result = dao.getWisdomsByIds(category,
-					subCategory, wisdomIds);
+			List<WDWisdomData> result = dao.getWisdomsByIds(wisdomIds);
 			return result;
 		} catch (WisdomDatastoreException e) {
 			DbgUtil.showLog(TAG, "WisdomDatastoreException: " + e.getMessage());
@@ -194,9 +193,9 @@ public class WisdomFacade {
 		return null;
 	}
 
-	public List<WDWisdomData> getUserGeneratedData(long userId, int offset,
+	public List<WDWisdomData> getUserCreatedData(long userId, int offset,
 			int limit) throws WisdomFacadeException {
-		DbgUtil.showLog(TAG, "getUserGeneratedData");
+		DbgUtil.showLog(TAG, "getUserCreatedData");
 
 		if (userId == WConstant.NO_USER) {
 			throw new WisdomFacadeException("Illegal userId parameter");
@@ -215,4 +214,29 @@ public class WisdomFacade {
 
 	}
 
+	public boolean updateWisdom(WDWisdomData data) {
+		DbgUtil.showLog(TAG, "updateWisdom");
+
+		if (data == null) {
+			throw new IllegalArgumentException("parameter is null");
+		}
+
+		if (data.getWisdomId() == WConstant.NO_WISDOM) {
+			throw new IllegalArgumentException("Illegal wisdom id");
+		}
+
+		try {
+
+			WisdomSearchService service = new WisdomSearchService();
+			service.addValue(data);
+
+			DAOFactory factory = DAOFactory.getDAOFactory();
+			WisdomDAO dao = factory.getWisdomDAO();
+			return dao.updateWisdom(data);
+		} catch (WisdomDatastoreException e) {
+			DbgUtil.showLog(TAG, "WisdomDatastoreException: " + e.getMessage());
+		}
+
+		return false;
+	}
 }

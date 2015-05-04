@@ -23,7 +23,7 @@ public class WDUserDataBuilder {
 			userData = new WDUserData(data);
 		} else {
 			userData = new WDUserData(WConstant.NO_USER, null, null, null,
-					null, null, null, null, 0L, 0L, null);
+					null, null, null, null, null, 0);
 		}
 
 		WDUserDataBuilder builder = new WDUserDataBuilder(userData);
@@ -76,10 +76,10 @@ public class WDUserDataBuilder {
 		return this;
 	}
 
-	public WDUserDataBuilder setTotalPoint(long point) {
-		mUserData.setTotalPoint(point);
-		return this;
-	}
+	// public WDUserDataBuilder setTotalPoint(long point) {
+	// mUserData.setTotalPoint(point);
+	// return this;
+	// }
 
 	public WDUserDataBuilder setMailAddress(String mailAddress) {
 		mUserData.setMailAddress(mailAddress);

@@ -62,8 +62,9 @@ wisdomApp.controller('SigninController',
 		 		log.d("API response received");
 		 		if(response !== null && response !== undefined){
 		 			if(response.params.length !== 0){
-				 		$scope.param = response.params[0];
+				 		$scope.param = response.params;
 				 		log.d("userId: " + $scope.param.userId);
+				 		userDataHolder.setUserData($scope.param);
 						toasterService.showSuccessToasterShort("Signup", "Successfully signed in");
 						//TODO Need to log in
 						$state.go('/');

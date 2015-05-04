@@ -68,17 +68,22 @@ public class UserRankingJsonBuilder extends JsonBuilder {
 			JSONArray array = new JSONArray();
 
 			for (WDUserData user : users) {
+				DbgUtil.showLog(TAG, "AAAAA");
+				DbgUtil.showLog(TAG, "username: " + user.getUsername());
 				JSONObject obj = new JSONObject();
 
 				String name = null;
 
 				if (user.getTwitterName() != null) {
+					DbgUtil.showLog(TAG, "Twitter");
 					name = user.getTwitterName();
 				} else {
 					if (user.getFacebookName() != null) {
+						DbgUtil.showLog(TAG, "facebook");
 						name = user.getFacebookName();
 					} else {
 						if (user.getUsername() != null) {
+							DbgUtil.showLog(TAG, "usernmae");
 							name = user.getUsername();
 						}
 					}
@@ -86,8 +91,11 @@ public class UserRankingJsonBuilder extends JsonBuilder {
 
 				// If no name available, we should not return it
 				if (name != null) {
+					DbgUtil.showLog(TAG, "name: " + name);
 					obj.put(JsonConstant.PARAM_USER_NAME, name);
-					obj.put(JsonConstant.PARAM_USER_POINT, user.getTotalPoint());
+					// TODO
+					// obj.put(JsonConstant.PARAM_USER_POINT,
+					// user.getTotalPoint());
 					obj.put(JsonConstant.PARAM_USER_ID, user.getUserId());
 					obj.put(JsonConstant.PARAM_USER_THUMBNAIL,
 							user.getThumbnail());

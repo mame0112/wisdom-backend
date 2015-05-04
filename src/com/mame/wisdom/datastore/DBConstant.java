@@ -6,8 +6,14 @@ public class DBConstant {
 	 * Datastore kinds
 	 */
 	public final static String KIND_ALL_USER = "kind_all_user";
+	
+	public final static String KIND_ALL_WISDOM = "kind_all_wisdom";
 
+	// User's not to be changed information. (e.g. mail address)
 	public final static String KIND_USER_DATA = "kind_user_data";
+
+	// User's to be changed information. (e.g. point)
+	public final static String KIND_USER_STATUS = "kind_user_status";
 
 	public final static String KIND_SUB_CATEGORY = "kind_sub_category";
 
@@ -19,6 +25,12 @@ public class DBConstant {
 	 * Entity fields for all user data
 	 */
 	public final static String ENTITY_TOTAL_USER_NUMBER = "total_user_number";
+	
+	
+	/**
+	 * Entity fields for all wisdom data
+	 */
+	public final static String ENTITY_TOTAL_WISDOM_NUMBER = "total_wisdom_number";
 
 	/**
 	 * Entity fields for User data
@@ -41,9 +53,16 @@ public class DBConstant {
 
 	public final static String ENTITY_USER_LAST_LOGIN = "user_last_login";
 
-	public final static String ENTITY_USER_TOTAL_POINT = "user_total_point";
-	
 	public final static String ENTITY_USER_MAIL_ADDRESS = "user_mailaddress";
+
+	/**
+	 * Entity fields for user status data
+	 */
+	public final static String ENTITY_STATUS_TOTAL_POINT = "Status_total_point";
+
+	public final static String ENTITY_STATUS_CREATED_WISDOM = "Status_created_wisdom";
+
+	public final static String ENTITY_STATUS_LIKED_WISDOM = "Status_liked_wisdom";
 
 	/**
 	 * Entity fields for Category data

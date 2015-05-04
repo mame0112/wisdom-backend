@@ -12,6 +12,7 @@ import com.mame.wisdom.datastore.WisdomFacade;
 import com.mame.wisdom.jsonbuilder.JsonBuilder;
 import com.mame.wisdom.jsonbuilder.JsonConstant;
 import com.mame.wisdom.jsonbuilder.PublicWisdomJsonBuilder;
+import com.mame.wisdom.search.WisdomSearchService;
 import com.mame.wisdom.util.DbgUtil;
 
 public class LatestInfoAction implements Action {
@@ -27,6 +28,9 @@ public class LatestInfoAction implements Action {
 		String param = request.getParameter(WConstant.SERVLET_PARAMS);
 
 		JsonBuilder builder = new PublicWisdomJsonBuilder();
+		
+//		WisdomSearchService s = new WisdomSearchService();
+//		s.deleteAllSearchDocuments();
 
 		if (responseId != null && param != null) {
 			builder.addResponseId(Integer.valueOf(responseId));

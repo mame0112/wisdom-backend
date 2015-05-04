@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.data.WDUserData;
+import com.mame.wisdom.data.WDUserStatusData;
 import com.mame.wisdom.datastore.UserDAO;
 import com.mame.wisdom.datastore.UserDataFacade;
 import com.mame.wisdom.jsonbuilder.JsonConstant;
@@ -37,7 +38,9 @@ public class UserPointRankingAction implements Action {
 					.getInt(JsonConstant.PARAM_USER_RANKING_NUM);
 			DbgUtil.showLog(TAG, "limit: " + limit);
 
-			List<WDUserData> users = facade.getUserPointRankingList(limit);
+			// Get highest scores with user status data
+			List<WDUserData> users = facade
+					.getUserPointRankingList(limit);
 
 			builder.addResponseParam(users);
 		} else {

@@ -1,4 +1,6 @@
-wisdomApp.service('userDataHolder', ['$cookieStore', 'log', function($cookieStore, log){
+wisdomApp.service('userDataHolder',
+ ['$cookieStore', 'log', 'Constants', 
+  function($cookieStore, log, Constants){
 
     return {
         setUserData : function(data){
@@ -24,6 +26,29 @@ wisdomApp.service('userDataHolder', ['$cookieStore', 'log', function($cookieStor
             // log.d("data:" + data);
 
             return data;
+        },
+
+        getUserName : function(){
+            if($cookieStore.get("userData") !== null && $cookieStore.get("userData") !== undefined)
+            {
+                return $cookieStore.get("userData").username;
+            }
+        },
+
+        getUserId : function(){
+            if($cookieStore.get("userData") !== null && $cookieStore.get("userData") !== undefined) {
+                if($cookieStore.get("userData").userId !== null && $cookieStore.get("userData").userId !== undefined){
+                    log.d("userid:: " + $cookieStore.get("userData").userId);
+                    return $cookieStore.get("userData").userId;
+                }
+            }
+
+            return Constants.NO_USER;
+        },
+
+        removeUserData : function()
+        {
+            $cookieStore.remove("userData");
         }
     };
 }]);

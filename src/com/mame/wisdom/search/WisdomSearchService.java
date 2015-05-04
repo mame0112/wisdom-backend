@@ -32,7 +32,9 @@ public class WisdomSearchService {
 
 	private final static String WORKER = "worker";
 
-	public void addValue(WDWisdomData data, String category, String subCategory) {
+	// public void addValue(WDWisdomData data, String category, String
+	// subCategory) {
+	public void addValue(WDWisdomData data) {
 		DbgUtil.showLog(TAG, "addValue");
 		if (data == null) {
 			throw new IllegalArgumentException("parameter is null");
@@ -50,8 +52,8 @@ public class WisdomSearchService {
 				.param(SearchConstants.KEY_SERACH_DESCRIPTION,
 						String.valueOf(data.getDescription()))
 				.param(SearchConstants.KEY_SERACH_TAG, data.getTag())
-				.param(SearchConstants.KEY_SEARCH_CATEGORY, category)
-				.param(SearchConstants.KEY_SEARCH_SUB_CATEGORY, subCategory)
+				// .param(SearchConstants.KEY_SEARCH_CATEGORY, category)
+				// .param(SearchConstants.KEY_SEARCH_SUB_CATEGORY, subCategory)
 				.param(SearchConstants.KEY_SERACH_ITEM, array.toString())
 				.param(SearchConstants.KEY_SERACH_TITLE, data.getTitle());
 
@@ -96,7 +98,7 @@ public class WisdomSearchService {
 	/**
 	 * Delete all documents And this is debug method.
 	 */
-	private void deleteAllSearchDocuments() {
+	public void deleteAllSearchDocuments() {
 		DbgUtil.showLog(TAG, "getAllDocumentId");
 
 		try {

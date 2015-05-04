@@ -87,6 +87,18 @@ wisdomApp.factory('apiService', ['$resource', 'log',
     }
 ])
 
+.factory('modifyWisdomAPIService', ['$resource', 'log',
+ function($resource, log) {
+    return $resource('/controller/modifywisdom:param',
+         {servlet_resp_id: 1, param: '@servlet_params'},
+         { 
+            //Create new wisdom
+            modifywisdom: {method: 'GET', isArray: false},
+        });
+    }
+])
+
+
 .factory('categoryAPIService', ['$resource', 'log',
  function($resource, log) {
     return $resource('/controller/category:param',
@@ -174,4 +186,3 @@ wisdomApp.factory('apiService', ['$resource', 'log',
         });
     }
 ]);
-

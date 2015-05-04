@@ -14,6 +14,8 @@ public class ActionFactory {
 
 	private final static Map<String, Action> mAction = new HashMap<String, Action>();
 
+	private final static Map<String, Action> mPutAction = new HashMap<String, Action>();
+
 	static {
 		DbgUtil.showLog(TAG, "static initializer");
 		// Dummy APIs. To be removed.
@@ -62,10 +64,6 @@ public class ActionFactory {
 		mAction.put(ActionConstants.POST + ActionConstants.KEY_NEW_WISDOM,
 				new CreateWisdomAction());
 
-		// Update wisdom
-		mAction.put(ActionConstants.PUT + ActionConstants.KEY_WISDOM,
-				new UpdateWisdomAction());
-
 		// Highlight information API
 		mAction.put(ActionConstants.GET + ActionConstants.KEY_HIGHLIGHT,
 				new HighlightInfoAction());
@@ -77,11 +75,12 @@ public class ActionFactory {
 		// Search API
 		mAction.put(ActionConstants.GET + ActionConstants.KEY_SEARCH,
 				new SearchAction());
-		
+
 		// Sign up API by User name and password
 		mAction.put(ActionConstants.GET + ActionConstants.KEY_USER_ACCOUNT,
 				new UserAccountAction());
-		mAction.put(ActionConstants.GET + ActionConstants.KEY_USER_ACCOUNT_LOGIN,
+		mAction.put(ActionConstants.GET
+				+ ActionConstants.KEY_USER_ACCOUNT_LOGIN,
 				new UserAccountLoginAction());
 
 		// Twitter API
@@ -96,14 +95,18 @@ public class ActionFactory {
 		// Callback action by twitter
 		mAction.put(ActionConstants.GET + ActionConstants.KEY_TWITTER_CALLBACK,
 				new TwitterCallbackAction());
-		
+
 		// Callback action by twitter
 		mAction.put(ActionConstants.GET + ActionConstants.KEY_CONTACT,
 				new ContactAction());
-		
+
 		// Debug action
 		mAction.put(ActionConstants.GET + ActionConstants.KEY_DEBUG,
 				new DebugAction());
+
+		// Update wisdom
+		mAction.put(ActionConstants.GET + ActionConstants.KEY_MODIFY_WISDOM,
+				new UpdateWisdomAction());
 
 	}
 
@@ -126,4 +129,16 @@ public class ActionFactory {
 		return mAction.get(method + path);
 
 	}
+
+	// private static Action getPutAction(HttpServletRequest request)
+	// throws ActionException {
+	// String method = request.getMethod();
+	//
+	// if (method == null) {
+	// throw new ActionException("method is null");
+	// }
+	//
+	// DbgUtil.showLog(TAG, "getPutAction: " + method);
+	// return mAction.get(method);
+	// }
 }

@@ -2,6 +2,206 @@
 
 }
 
+#userpage .sidebar{
+	width: 100%;
+	background-color: #efefef;
+	padding-top: 10px;
+	padding-bottom: 20px;
+}
+
+#userpage .sidebar .header{
+	width: 56%;
+	margin: 0 auto;
+}
+
+#userpage .sidebar .header .thumbnail{
+	border-radius: 50%;
+	height: 144px;
+	width: 144px;
+	float: center;
+	margin-right: 10px;
+}
+
+#userpage .sidebar .header .thumbnail .initial{
+	color: #FFFFFF;
+	font-size: 72px;
+    text-align:center;
+    vertical-align: middle;
+}
+
+
+#userpage .sidebar .username{
+	clear: both;
+	color: #000000;
+	font-size: 24px;
+	text-align: center;
+	height: 100%;
+	padding-top: 0px;
+	padding-bottom: 10px;
+}
+
+#userpage .sidebar .status{	
+	width: 50%;
+	margin: 0 auto;
+}
+
+#userpage .sidebar .status .title{
+	float: left;
+	margin-right: 20px;
+}
+
+#userpage .sidebar .status .count{
+	margin-right: auto;
+}
+
+#userpage .category{
+
+}
+
+#userpage .category .title{
+	font-size: 14px;
+}
+
+#userpage .category .contents .content .title{
+	font-size: 18px;
+	overflow: hidden;
+}
+
+#userpage .category .contents .content .title p{
+    font-size: 14px;
+    font-weight: normal;
+
+    margin: 0;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+#userpage .category .contents .content .description{
+    overflow: hidden;
+}
+
+#userpage .category .contents .content .description p{
+    font-size: 14px;
+    font-weight: thin;
+    color:#888888;
+
+    margin: 0;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+
+    margin-top: 6px;
+}
+
+#userpage .category .contents .content .tag{
+    overflow: hidden;
+    float: left;
+}
+
+#userpage .category .contents .content .tag p{
+    font-size: 14px;
+    font-weight: thin;
+    color:#888888;
+
+    margin: 0;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+
+    border-style: solid;
+    border-width: 1px;
+    padding-left: 6px;
+    padding-right: 14px;
+
+    margin-top: 6px;
+
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+
+    background-color: #eeeeee;
+}
+
+#userpage .category .contents .content .date{
+    overflow: hidden;
+}
+
+#userpage .category .contents .content .date p{
+    font-size: 14px;
+    font-weight: thin;
+    color:#888888;
+
+    margin: 0;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+
+    margin-top: 6px;
+}
+
+#userpage .category .headDivider{
+	padding-top: 0px;
+	margin-top: 0px;
+	border-width: 2px;
+}
+
+#userpage .category .contents{
+
+}
+
+#userpage .category .contents .image{
+    float: left;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+#userpage .category .contents .image .thumbnail{
+    width: 48px;
+    height: 48px;
+    background: #888888;
+    border-radius: 2px 2px 2px 2px;
+}
+
+#userpage .category .contents .image .thumbnail .text{
+    height: 100%;
+    width: 100%;
+    color: #FFFFFF;
+    font-size: 28px;
+    text-align:center;
+    vertical-align: middle;
+}
+
+#userpage .category .note{
+	text-align: center;
+}
+
+#userpage .category .contents .content{
+
+}
+
+#userpage .category .contents .content .title{
+
+}
+
+#userpage .category .contents .content p{
+    font-size: 14px;
+    color: #888888;
+
+    font-weight: normal;
+    word-wrap: break-word;
+    white-space: nowrap;
+    max-width: 80%;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+
+
 #userpage .header{
 	background-color: #efefef;
 	padding-left: 10px;

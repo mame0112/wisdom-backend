@@ -4,6 +4,10 @@ import java.util.List;
 
 import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.data.WDUserData;
+import com.mame.wisdom.data.WDUserDataBuilder;
+import com.mame.wisdom.data.WDUserStatusData;
+import com.mame.wisdom.datastore.memcache.UserRankingMemcacheService;
+import com.mame.wisdom.datastore.memcache.WDMemcacheManager;
 import com.mame.wisdom.exception.WisdomDatastoreException;
 import com.mame.wisdom.exception.WisdomFacadeException;
 import com.mame.wisdom.util.DbgUtil;
@@ -65,9 +69,15 @@ public class UserDataFacade {
 			DbgUtil.showLog(TAG, "Current data is null");
 			long current = TimeUtil.getCurrentDate();
 
-			WDUserData data = new WDUserData(WConstant.NO_USER, twitterName,
-					token, tokenSecret, null, null, null, profileImageURL,
-					current, 0, null);
+			WDUserData data = WDUserDataBuilder.createFrom(null)
+					.setUserId(userId).setTwitterName(twitterName)
+					.setTwitterToken(token).setTwitterTokenSecret(tokenSecret)
+					.setThumbnail(profileImageURL).setLastLoginDate(current)
+					.getConstructedData();
+
+			// WDUserData data = new WDUserData(WConstant.NO_USER, twitterName,
+			// token, tokenSecret, null, null, null, profileImageURL,
+			// current, 0, null);
 			userDAO.storeNewUserData(data);
 			return data;
 		} else {
@@ -78,7 +88,7 @@ public class UserDataFacade {
 	}
 
 	public WDUserData getUserData(long userId) throws WisdomFacadeException {
-		DbgUtil.showLog(TAG, "getUserStatus");
+		DbgUtil.showLog(TAG, "getUserData");
 
 		if (userId == WConstant.NO_USER) {
 			throw new WisdomFacadeException("Illegal userId, -1");
@@ -94,15 +104,58 @@ public class UserDataFacade {
 		}
 	}
 
-	public List<WDUserData> getUserPointRankingList(int limit) {
-		DbgUtil.showLog(TAG, "getUserPointRankingList");
+	public WDUserStatusData getUserStatusData(long userId)
+			throws WisdomFacadeException {
+		DbgUtil.showLog(TAG, "getUserStatusData");
+
+		if (userId == WConstant.NO_USER) {
+			throw new WisdomFacadeException("Illegal userId");
+		}
 
 		DAOFactory factory = DAOFactory.getDAOFactory();
 		try {
 			UserDAO dao = factory.getUserDAO();
-			return dao.getHighestPointUserList(limit);
+			return dao.getUserStatusData(userId);
 		} catch (WisdomDatastoreException e) {
 			DbgUtil.showLog(TAG, "WisdomDatastoreException: " + e.getMessage());
+			throw new WisdomFacadeException(e.getMessage());
+		}
+	}
+
+	public List<WDUserData> getUserPointRankingList(int limit) {
+		DbgUtil.showLog(TAG, "getUserPointRankingList");
+
+		WDMemcacheManager memManager = new WDMemcacheManager(
+				new UserRankingMemcacheService());
+		List<WDUserData> result = (List<WDUserData>) memManager.getCache();
+
+		// If no cache exists
+		if (result == null) {
+			DAOFactory factory = DAOFactory.getDAOFactory();
+			try {
+				UserDAO dao = factory.getUserDAO();
+				List<WDUserStatusData> status = dao
+						.getHighestPointUserList(limit);
+				result = dao.getUserDataList(status);
+
+				if (result != null) {
+					memManager.setCache(result);
+				}
+
+				return result;
+			} catch (WisdomDatastoreException e) {
+				DbgUtil.showLog(TAG,
+						"WisdomDatastoreException: " + e.getMessage());
+			} catch (IllegalArgumentException e) {
+				DbgUtil.showLog(TAG,
+						"IllegalArgumentException: " + e.getMessage());
+			} catch (IllegalStateException e) {
+				DbgUtil.showLog(TAG, "IllegalStateException: " + e.getMessage());
+			}
+
+		} else {
+			DbgUtil.showLog(TAG, "userranking memcache already exist");
+			return result;
 		}
 
 		return null;
@@ -134,23 +187,45 @@ public class UserDataFacade {
 	 * @param updatePoint
 	 * @return newly updated user point.
 	 */
-	public long updateUserPoint(long userId, int updatePoint) {
-		DbgUtil.showLog(TAG, "updateUserPoint");
+	// public long updateUserPoint(long userId, int updatePoint) {
+	// DbgUtil.showLog(TAG, "updateUserPoint");
+	//
+	// if (userId == WConstant.NO_USER || updatePoint < 0) {
+	// throw new IllegalArgumentException("Illegal parameter");
+	// }
+	//
+	// DAOFactory factory = DAOFactory.getDAOFactory();
+	//
+	// try {
+	// UserDAO dao = factory.getUserDAO();
+	// return dao.updateUserPoint(userId, updatePoint);
+	//
+	// } catch (WisdomDatastoreException e) {
+	// DbgUtil.showLog(TAG, "WisdomDatastoreException: " + e.getMessage());
+	// }
+	//
+	// return updatePoint;
+	// }
 
-		if (userId == WConstant.NO_USER || updatePoint < 0) {
-			throw new IllegalArgumentException("Illegal parameter");
+	public long updateUserStatus(long userId, long updatePoint,
+			long createdWisdomId, long likedWisdomId) {
+		DbgUtil.showLog(TAG, "updateUserstatus");
+
+		if (userId == WConstant.NO_USER) {
+			throw new IllegalArgumentException("Illgal parameter");
 		}
 
-		DAOFactory factory = DAOFactory.getDAOFactory();
-
 		try {
+			DAOFactory factory = DAOFactory.getDAOFactory();
 			UserDAO dao = factory.getUserDAO();
-			return dao.updateUserPoint(userId, updatePoint);
 
+			return dao.updateUserStatus(userId, updatePoint, createdWisdomId,
+					likedWisdomId);
 		} catch (WisdomDatastoreException e) {
 			DbgUtil.showLog(TAG, "WisdomDatastoreException: " + e.getMessage());
 		}
 
 		return updatePoint;
+
 	}
 }

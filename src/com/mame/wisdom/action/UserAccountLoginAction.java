@@ -9,6 +9,7 @@ import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.data.WDUserData;
 import com.mame.wisdom.data.WDUserDataBuilder;
 import com.mame.wisdom.datastore.UserDataFacade;
+import com.mame.wisdom.jsonbuilder.JsonBuilder;
 import com.mame.wisdom.jsonbuilder.JsonConstant;
 import com.mame.wisdom.jsonbuilder.UserLoginJsonBuilder;
 import com.mame.wisdom.util.DbgUtil;
@@ -25,7 +26,7 @@ public class UserAccountLoginAction implements Action {
 			HttpServletResponse response) throws Exception {
 		DbgUtil.showLog(TAG, "UserAccountLoginAction execute");
 
-		UserLoginJsonBuilder builder = new UserLoginJsonBuilder();
+		JsonBuilder builder = new UserLoginJsonBuilder();
 
 		String responseId = request.getParameter(WConstant.SERVLET_RESP_ID);
 		String param = request.getParameter(WConstant.SERVLET_PARAMS);
@@ -49,7 +50,7 @@ public class UserAccountLoginAction implements Action {
 					if (userData != null) {
 						// If password is correct
 						if (password.equals(userData.getPassword())) {
-							builder.addResponseParam(userData.getUserId());
+							builder.addResponseParam(userData);
 						} else {
 							// Wrong user
 							builder.addResponseParam(WConstant.NO_USER);

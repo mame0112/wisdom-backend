@@ -1,7 +1,9 @@
 package com.mame.wisdom.action;
 
 import com.mame.wisdom.datastore.DefaultUserDAO;
+import com.mame.wisdom.datastore.DefaultWisdomDAO;
 import com.mame.wisdom.datastore.UserDAO;
+import com.mame.wisdom.datastore.WisdomDAO;
 import com.mame.wisdom.util.DbgUtil;
 
 public class InitializeAction {
@@ -15,6 +17,9 @@ public class InitializeAction {
 
 		UserDAO userDAO = new DefaultUserDAO();
 		userDAO.createAllUserDataIfNecessary();
+
+		WisdomDAO wisdomDAO = new DefaultWisdomDAO();
+		wisdomDAO.createAllWisdomDataIfNecessary();
 
 	}
 

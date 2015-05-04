@@ -8,6 +8,8 @@ import com.mame.wisdom.exception.WisdomDatastoreException;
 
 public interface WisdomDAO {
 
+	public void createAllWisdomDataIfNecessary();
+
 	/**
 	 * Get content information that belongs to selected category/subcategory
 	 * 
@@ -71,8 +73,7 @@ public interface WisdomDAO {
 	 * @return
 	 * @throws WisdomDatastoreException
 	 */
-	public List<WDWisdomData> getWisdomsByIds(String categoryName,
-			String subCategoryName, List<Long> wisdomIds)
+	public List<WDWisdomData> getWisdomsByIds(List<Long> wisdomIds)
 			throws WisdomDatastoreException;
 
 	/**
@@ -119,6 +120,18 @@ public interface WisdomDAO {
 	 */
 	public void updateWisdom(String category, String subCategory,
 			WDWisdomData wisdom) throws WisdomDatastoreException;
+
+	/**
+	 * Update wisdom by given wisdom data. Developer should avoid to use this
+	 * function as much as possible and it would be good to use another
+	 * "updateWisdsom" function since it is much better performance.
+	 * 
+	 * @return true is update is successed. Otherwise false
+	 * @param wisdom
+	 * @throws WisdomDatastoreException
+	 */
+	public boolean updateWisdom(WDWisdomData wisdom)
+			throws WisdomDatastoreException;
 
 	/**
 	 * Get wisdoms those are liked by user.

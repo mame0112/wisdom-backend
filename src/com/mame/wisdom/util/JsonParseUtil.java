@@ -9,6 +9,7 @@ import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.data.WDUserData;
+import com.mame.wisdom.data.WDUserStatusData;
 import com.mame.wisdom.data.WDWisdomData;
 import com.mame.wisdom.data.WDWisdomItemEntry;
 import com.mame.wisdom.data.WDWisdomMessage;
@@ -32,7 +33,6 @@ public class JsonParseUtil {
 				result.put(JsonConstant.PARAM_USER_PASSWORD, data.getPassword());
 				result.put(JsonConstant.PARAM_USER_THUMBNAIL,
 						data.getThumbnail());
-				result.put(JsonConstant.PARAM_USER_POINT, data.getTotalPoint());
 				result.put(JsonConstant.PARAM_USER_TWITTER_NAME,
 						data.getTwitterName());
 				result.put(JsonConstant.PARAM_USER_TWITTER_TOKEN,
@@ -53,15 +53,37 @@ public class JsonParseUtil {
 		return null;
 	}
 
-	public static List<WDWisdomItemEntry> createWisdomItemEntryListFromJson(
+	// public static JSONObject createJsonObjectFromUserStatus(
+	// WDUserStatusData data) {
+	// DbgUtil.showLog(TAG, "createJsonObjectFromUserStatus");
+	//
+	// JSONObject result = new JSONObject();
+	//
+	// if (data != null) {
+	// try {
+	// result.put(JsonConstant.PARAM_USER_POINT, data.getTotalPoint());
+	// result.put(JsonConstant.PARAM_USER_ID, data.getUserId());
+	//
+	// return result;
+	//
+	// } catch (JSONException e) {
+	// DbgUtil.showLog(TAG, "JSONException: " + e.getMessage());
+	// }
+	//
+	// }
+	//
+	// return null;
+	// }
+
+	public static List<WDWisdomItemEntry> createWisdomItemEntryListFromJsonString(
 			String originalJson) {
-		DbgUtil.showLog(TAG, "createWisdomItemEntryListFromJson");
+		DbgUtil.showLog(TAG, "createWisdomItemEntryListFromJsonString");
 
 		if (originalJson != null) {
 			JSONArray array;
 			try {
 				array = new JSONArray(originalJson);
-				return createWisdomItemEntryListFromJson(array);
+				return createWisdomItemEntryListFromJsonArray(array);
 			} catch (JSONException e) {
 				DbgUtil.showLog(TAG, "JSONException: " + e.getMessage());
 			}
@@ -180,7 +202,7 @@ public class JsonParseUtil {
 				int id = rootObject.getInt(JsonConstant.ID);
 				JSONArray messageArray = rootObject
 						.getJSONArray(JsonConstant.PARAM_WISDOM_MESSAGES);
-				List<WDWisdomItemEntry> messages = createWisdomItemEntryListFromJson(messageArray);
+				List<WDWisdomItemEntry> messages = createWisdomItemEntryListFromJsonArray(messageArray);
 				String title = rootObject
 						.getString(JsonConstant.PARAM_WISDOM_TITLE);
 				long updateDate = rootObject
@@ -205,9 +227,9 @@ public class JsonParseUtil {
 		return null;
 	}
 
-	private static List<WDWisdomItemEntry> createWisdomItemEntryListFromJson(
+	private static List<WDWisdomItemEntry> createWisdomItemEntryListFromJsonArray(
 			JSONArray array) {
-		DbgUtil.showLog(TAG, "createWisdomItemEntryListFromJson");
+		DbgUtil.showLog(TAG, "createWisdomItemEntryListFromJsonArray");
 		try {
 
 			List<WDWisdomItemEntry> result = new ArrayList<WDWisdomItemEntry>();

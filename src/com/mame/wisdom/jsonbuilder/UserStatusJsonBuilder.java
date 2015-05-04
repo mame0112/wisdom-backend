@@ -9,6 +9,7 @@ import com.mame.wisdom.data.WDUserData;
 import com.mame.wisdom.data.WDWisdomData;
 import com.mame.wisdom.exception.JSONBuilderException;
 import com.mame.wisdom.util.DbgUtil;
+import com.mame.wisdom.util.JsonParseUtil;
 
 public class UserStatusJsonBuilder extends JsonBuilder {
 
@@ -94,55 +95,86 @@ public class UserStatusJsonBuilder extends JsonBuilder {
 		DbgUtil.showLog(TAG, "addResponseParam");
 
 		// param[0], which is user data is mandatory.
-		// On the other hand, param[1], which is user generated information is
+		// On the other hand, param[1] and param[2] which is user generated
+		// information is
 		// optional
 		if (param == null || param[0] == null) {
 			throw new JSONBuilderException("parameter is null");
 		}
 
-		if (!(param[0] instanceof WDUserData)) {
-			DbgUtil.showLog(TAG, "illegal param type for wduserdata");
-			throw new JSONBuilderException("illegal param type for wduserdata");
+		if (!(param[0] instanceof Long)) {
+			DbgUtil.showLog(TAG, "illegal param type for param[0]");
+			throw new JSONBuilderException("illegal param type for param[0]");
 		}
 
-		if (param[1] != null && (!(param[1] instanceof List<?>))) {
-			DbgUtil.showLog(TAG, "Illegal param type for List<>");
-			throw new JSONBuilderException("Illegal param type for List<>");
-		}
+		long totalPoint = (long) param[0];
 
-		WDUserData userData = (WDUserData) param[0];
 		JSONObject paramObj = new JSONObject();
 
 		try {
+			paramObj.put(JsonConstant.PARAM_USER_POINT, totalPoint);
 
-			long point = userData.getTotalPoint();
-			paramObj.put(JsonConstant.PARAM_USER_POINT, point);
-
-			// If user has already generated some information
 			if (param[1] != null) {
-
-				List<WDWisdomData> wisdomData = (List<WDWisdomData>) param[1];
-				JSONArray messageArray = new JSONArray();
-
-				// TODO Need to consider which item should be returned.
-				for (WDWisdomData wisdom : wisdomData) {
-					JSONObject message = new JSONObject();
-					message.put(JsonConstant.PARAM_WISDOM_TITLE,
-							wisdom.getTitle());
-					message.put(JsonConstant.PARAM_WISDOM_THUMBNAIL,
-							wisdom.getThumbnail());
-					message.put(JsonConstant.PARAM_WISDOM_TAG, wisdom.getTag());
-					message.put(JsonConstant.PARAM_WISDOM_DESCRIPTION,
-							wisdom.getDescription());
-					// TODO Need to return "Created date" (Not last updated
-					// date)
-					message.put(JsonConstant.PARAM_WISDOM_UPDATED_DATE,
-							wisdom.getLastUpdatedDate());
-					messageArray.put(message);
+				if (!(param[1] instanceof List<?>)) {
+					DbgUtil.showLog(TAG, "illegal param type for param[1]");
+					throw new JSONBuilderException(
+							"illegal param type for param[1]");
 				}
-				paramObj.put(JsonConstant.PARAM_WISDOM_MESSAGES, messageArray);
+
+				List<WDWisdomData> createdWisdoms = (List<WDWisdomData>) param[1];
+
+				JSONArray createdArray = JsonParseUtil
+						.parseWisdomListToJsonArray(createdWisdoms);
+				paramObj.put(JsonConstant.PARAM_USER_CREATED_WISDOM,
+						createdArray);
 
 			}
+
+			if (param[2] != null) {
+				if (!(param[2] instanceof List<?>)) {
+					DbgUtil.showLog(TAG, "Illegal param type for param[2]");
+					throw new JSONBuilderException(
+							"Illegal param type for param[2]");
+				}
+
+				List<WDWisdomData> likedWisdoms = (List<WDWisdomData>) param[2];
+
+				JSONArray likeedArray = JsonParseUtil
+						.parseWisdomListToJsonArray(likedWisdoms);
+				paramObj.put(JsonConstant.PARAM_USER_CREATED_WISDOM,
+						likeedArray);
+
+			}
+
+			// paramObj.put(JsonConstant.PARAM_USER_LIKED_WISDOM, totalPoint);
+
+			// // If user has already generated some information
+			// if (param[1] != null) {
+			//
+			// List<WDWisdomData> wisdomData = (List<WDWisdomData>) param[1];
+			// JSONArray messageArray = new JSONArray();
+			//
+			// // TODO Need to consider which item should be returned.
+			// for (WDWisdomData wisdom : wisdomData) {
+			// JSONObject message = new JSONObject();
+			// message.put(JsonConstant.PARAM_WISDOM_TITLE,
+			// wisdom.getTitle());
+			// message.put(JsonConstant.PARAM_WISDOM_THUMBNAIL,
+			// wisdom.getThumbnail());
+			// message.put(JsonConstant.PARAM_WISDOM_TAG, wisdom.getTag());
+			// message.put(JsonConstant.PARAM_WISDOM_DESCRIPTION,
+			// wisdom.getDescription());
+			// // TODO Need to return "Created date" (Not last updated
+			// // date)
+			// message.put(JsonConstant.PARAM_WISDOM_UPDATED_DATE,
+			// wisdom.getLastUpdatedDate());
+			// messageArray.put(message);
+			// }
+			// paramObj.put(JsonConstant.PARAM_WISDOM_MESSAGES, messageArray);
+			//
+			// } else {
+			// DbgUtil.showLog(TAG, "wisdomData is null");
+			// }
 
 			mRootObject.put(JsonConstant.PARAMS, paramObj);
 		} catch (JSONException e) {

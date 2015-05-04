@@ -3,6 +3,7 @@ package com.mame.wisdom.datastore;
 import java.util.List;
 
 import com.mame.wisdom.data.WDUserData;
+import com.mame.wisdom.data.WDUserStatusData;
 import com.mame.wisdom.exception.WisdomDatastoreException;
 
 public interface UserDAO {
@@ -27,17 +28,21 @@ public interface UserDAO {
 	 */
 	public WDUserData getUserData(long userId) throws WisdomDatastoreException;
 
+	public WDUserStatusData getUserStatusData(long userId)
+			throws WisdomDatastoreException;
+
 	public void updateUserData(WDUserData data) throws WisdomDatastoreException;
 
 	/**
-	 * Update user point
+	 * Update user status
 	 * 
 	 * @param userId
 	 * @param updatePoint
 	 * @return updated userpoint
 	 * @throws WisdomDatastoreException
 	 */
-	public long updateUserPoint(long userId, long updatePoint)
+	public long updateUserStatus(long userId, long updatePoint,
+			long createdWisdomId, long likedWisdomId)
 			throws WisdomDatastoreException;
 
 	/**
@@ -46,7 +51,7 @@ public interface UserDAO {
 	 * @param limit
 	 * @throws WisdomDatastoreException
 	 */
-	public List<WDUserData> getHighestPointUserList(int limit)
+	public List<WDUserStatusData> getHighestPointUserList(int limit)
 			throws WisdomDatastoreException;
 
 	/**
@@ -57,6 +62,9 @@ public interface UserDAO {
 	 * @throws WisdomDatastoreException
 	 */
 	public WDUserData getUserIdByUserName(String userName)
+			throws WisdomDatastoreException;
+
+	public List<WDUserData> getUserDataList(List<WDUserStatusData> data)
 			throws WisdomDatastoreException;
 
 }

@@ -34,6 +34,10 @@ public class JsonConstant {
 
 	public final static String PARAM_USER_POINT = "point";
 
+	public final static String PARAM_USER_CREATED_WISDOM = "created";
+
+	public final static String PARAM_USER_LIKED_WISDOM = "likeed";
+
 	public final static String PARAM_USER_LAST_LOGIN = "logindate";
 
 	// This shall be used for the number of users for ranking

@@ -46,6 +46,8 @@ public class TwitterCreateAccountAction implements Action {
 		} catch (IOException e) {
 			DbgUtil.showLog(TAG, "IOException: " + e.getMessage());
 		}
+		
+		DbgUtil.showLog(TAG, "After twitter redirect");
 
 		return null;
 	}

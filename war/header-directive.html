@@ -1,23 +1,21 @@
-<nav class="navbar navbar-default" ng-controller="headerController" ng-init="initialize()">
+<nav class="navbar navbar-default" ng-controller="headerController" role="navigation">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <button type="button" class="navbar-toggle" ng-click="navbarCollapsed = !navbarCollapsed">
         <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+        <span class="icon-bar">AA</span>
+        <span class="icon-bar">BB</span>
+        <span class="icon-bar">XX</span>
       </button>
       <a class="navbar-brand" ng-href="#/">chienowa</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <div class="collapse navbar-collapse" collapse="navbarCollapsed">
       <ul class="nav navbar-nav">
-        <li><a ng-href="#/overview">Overview</a></li>
-        <li><a ng-href="#/privacypolicy">Privacy policy</a></li>
-        <li><a ng-href="#/tos">Terms</a></li>
-        <li><a ng-href="#/contact">Contact</a></li>
+        <li><a ui-sref="overview">Overview</a></li>
+        <li><a ui-sref="contact">Contact</a></li>
         <li><a href="http://mame0112.hatenablog.com/">Blog</a></li>
       </ul>
       <form class="navbar-form navbar-left" role="search">
@@ -27,26 +25,34 @@
         <button class="btn btn-default" ng-click="searchWisdom(searchParam)" analytics-on="click" analytics-event="Search">Search</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a ng-href="#/signin" ng-click="onSigninOptionSelect()" ng-show="isSigninVisible()">Sign in</a></li>
-        <li><a ng-href="#/signup" ng-click="onSignupOptionSelect()" ng-show="isSignupVisible()">Sign up</a></li>
-        <li><a ng-href="#/wisdom" ng-click="onSigninOptionSelect()" ng-show="isCreatePageVisible()">Create page</a></li>
-        <li><a ng-href="#/view/{{getUserId(userData)}}" ng-click="onUserInfoSelect()" ng-show="isUserInfoVisible()"><img ng-src="{{getThumbnail(userData)}}"></a></li>
-        <li class="dropdown">
+        <li><a ui-sref="newwisdom" ng-click="onCreatePageSelect()">Create page</a></li>
+        <li><a ui-sref="signin" ng-click="onSigninOptionSelect()" ng-show="isSigninVisible()">Sign in</a></li>
+        <li><a ui-sref="signup" ng-click="onSignupOptionSelect()" ng-show="isSignupVisible()">Sign up</a></li>
+        <li><a ui-sref="user.detail({userId: getUserId()})">{{getUserName()}}</a></li>
+        <li><a ui-sref="#/view/{{getUserId(userData)}}" ng-click="onUserInfoSelect()" ng-show="isUserInfoVisible()"><img ng-src="{{getThumbnail(userData)}}"></a>
+        </li>
+        <!--
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" ng-show="isNotificationVisible()">Notification <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="#">Action</a></li>
             <li><a href="#">Another action</a></li>
             <li><a href="#">Something else here</a></li>
             <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
+            <li><a href="#">Separated link</a></li>\
             <li class="divider"></li>
             <li><a href="#">One more separated link</a></li>
           </ul>
+        -->
+        <li class="dropdown" dropdown on-toggle="toggled(open)" ng-show="isNotificationVisible()">
+          <a href class="dropdown-toggle" dropdown-toggle>
+            Notification
+          </a>
+          <ul class="dropdown-menu">
+            <li><a ui-sref="/" ng-click="signout()">Sign out</a></li>
+            <li><a href>BBB</a></li>
+          </ul>
         </li>
-
-<!--        <li><a ng-href="#/view" ng-click="onNotificationSelect()" ng-show="isNotificationVisible()">Notification</a></li>
--->
       </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+    </div>
+    </div>
 </nav>

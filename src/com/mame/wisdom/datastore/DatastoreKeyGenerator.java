@@ -23,6 +23,13 @@ public class DatastoreKeyGenerator {
 		return key;
 	}
 
+	public static Key getUserStatusKey(long userId) {
+		Key ancKey = getAllUserDataKey();
+		Key key = KeyFactory.createKey(ancKey, DBConstant.KIND_USER_STATUS,
+				userId);
+		return key;
+	}
+
 	public static Key getSubCategoryKey(String category, String subCategory)
 			throws WisdomDatastoreException {
 
@@ -53,11 +60,25 @@ public class DatastoreKeyGenerator {
 		return identifier;
 	}
 
-	public static Key getWisdomKeyById(String category, String subCategory,
-			long wisdomId) throws WisdomDatastoreException {
-		Key ancKey = getSubCategoryKey(category, subCategory);
+	public static Key getAllWisdomDataKey() {
+		Key ancKey = KeyFactory.createKey(DBConstant.KIND_ALL_WISDOM,
+				DBConstant.ENTITY_TOTAL_WISDOM_NUMBER);
+		return ancKey;
+	}
+
+	public static Key getWisdomKeyById(long wisdomId)
+			throws WisdomDatastoreException {
+		Key ancKey = getAllWisdomDataKey();
 		Key key = KeyFactory
 				.createKey(ancKey, DBConstant.KIND_WISDOM, wisdomId);
 		return key;
 	}
+
+	// public static Key getWisdomKeyById(String category, String subCategory,
+	// long wisdomId) throws WisdomDatastoreException {
+	// Key ancKey = getSubCategoryKey(category, subCategory);
+	// Key key = KeyFactory
+	// .createKey(ancKey, DBConstant.KIND_WISDOM, wisdomId);
+	// return key;
+	// }
 }

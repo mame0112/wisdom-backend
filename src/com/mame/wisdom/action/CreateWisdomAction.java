@@ -154,10 +154,12 @@ public class CreateWisdomAction implements Action {
 
 					// Update user point
 					long updatedPoint = userFacade
-							.updateUserPoint(
+							.updateUserStatus(
 									userId,
 									UserPointOption
-											.getPoint(UserPointOption.POINT_CREATE_WISDOM));
+											.getPoint(UserPointOption.POINT_CREATE_WISDOM),
+									newWisdom.getWisdomId(),
+									WConstant.NO_WISDOM);
 
 					builder.addResponseParam(newWisdom.getWisdomId(),
 							updatedPoint);

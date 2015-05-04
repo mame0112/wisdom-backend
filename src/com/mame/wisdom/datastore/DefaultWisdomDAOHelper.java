@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.google.appengine.api.datastore.Blob;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.Text;
 import com.google.appengine.labs.repackaged.org.json.JSONArray;
 import com.mame.wisdom.data.WDWisdomData;
 import com.mame.wisdom.data.WDWisdomItemEntry;
@@ -47,12 +48,12 @@ public class DefaultWisdomDAOHelper {
 
 			DbgUtil.showLog(TAG, "BBBB");
 
-			String entryJson = (String) e
-					.getProperty(DBConstant.ENTITY_WISDOM_ITMES);
+			String entryJson = ((Text) e
+					.getProperty(DBConstant.ENTITY_WISDOM_ITMES)).getValue();
 
 			DbgUtil.showLog(TAG, "CCC");
 			List<WDWisdomItemEntry> items = JsonParseUtil
-					.createWisdomItemEntryListFromJson(entryJson);
+					.createWisdomItemEntryListFromJsonString(entryJson);
 
 			WDWisdomData data = new WDWisdomData(wisdomId, title, description,
 					tag, createdUserId, lastUpdatedDate, thumbnail, items,
@@ -96,8 +97,10 @@ public class DefaultWisdomDAOHelper {
 					data.getCreatedUserId());
 			entity.setProperty(DBConstant.ENTITY_WISDOM_DESCRIPTION,
 					data.getDescription());
-			entity.setProperty(DBConstant.ENTITY_WISDOM_ITMES,
-					itemsJSON.toString());
+			// entity.setProperty(DBConstant.ENTITY_WISDOM_ITMES,
+			// itemsJSON.toString());
+			entity.setProperty(DBConstant.ENTITY_WISDOM_ITMES, new Text(
+					itemsJSON.toString()));
 			entity.setProperty(DBConstant.ENTITY_WISDOM_LAST_UPDATED_DATE,
 					data.getLastUpdatedDate());
 			entity.setProperty(DBConstant.ENTITY_WISDOM_TAG, data.getTag());

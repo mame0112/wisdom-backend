@@ -6,25 +6,31 @@ wisdomApp.controller('UserDataController',
  'Constants',
  'timeFormatService',
  'creativeColorGenerateService',
- function($scope, $stateParams, userInfoAPIService, log, Constants, timeFormatService, creativeColorGenerateService){
+ 'userDataHolder',
+ function($scope, $stateParams, userInfoAPIService, log, Constants, timeFormatService, creativeColorGenerateService, userDataHolder){
 
  	console.log("UserDataController");
 
  	//TODO Need to fix in the future.
- 	// $scope.userId = $stateParams.userId;
- 	$scope.userId = 1;
+ 	$scope.userId = $stateParams.userId;
+ 	// $scope.userId = 1;
  	console.log("userId: " + $scope.userId);
 
  	//Point info that shall be shown on UI
  	$scope.point = 0;
 
- 	//Message info that shall be shown on UI
- 	$scope.messages = null;
+ 	//Created wisdom that shall be shown on UI
+ 	$scope.creates = null;
+
+ 	//Liked wisdom that shall be shown on UI
+ 	$scope.likes = null;
 
  	//Set timeFormatService to $scope so that we can use it from UI part.
  	$scope.timeFormatService = timeFormatService;
 
  	$scope.userColor = null;
+
+ 	$scope.userName = userDataHolder.getUserName();
 
  	//Keep creative color generator to generate thumbnail color from UI
  	$scope.colorGenerator = creativeColorGenerateService;
@@ -53,7 +59,8 @@ wisdomApp.controller('UserDataController',
  			userInfoAPIService.status({servlet_params : param}, function(response){
  				log.d("response received");
  				$scope.point = response.params.point;
- 				$scope.messages = response.params.messages;
+ 				$scope.creates = response.params.created;
+ 				$scope.likes = response.params.liked;
  			});
  		}
  	};

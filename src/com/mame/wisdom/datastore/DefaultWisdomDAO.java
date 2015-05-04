@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.List;
 
+import com.google.appengine.api.datastore.DatastoreFailureException;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -16,6 +17,7 @@ import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.Filter;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.FilterPredicate;
+import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.appengine.api.datastore.Transaction;
 import com.google.appengine.api.datastore.TransactionOptions;
 import com.mame.wisdom.constant.WConstant;
@@ -37,6 +39,27 @@ public class DefaultWisdomDAO implements WisdomDAO {
 			.getDatastoreService();
 
 	@Override
+	public void createAllWisdomDataIfNecessary() {
+		DbgUtil.showLog(TAG, "createAllWisdomDataIfNecessary");
+		Key key = DatastoreKeyGenerator.getAllWisdomDataKey();
+		try {
+			Entity entity = mDS.get(key);
+			long num = (Long) entity
+					.getProperty(DBConstant.ENTITY_TOTAL_WISDOM_NUMBER);
+			DbgUtil.showLog(TAG, "total wisdom Number: " + num);
+			if (num == -1) {
+				entity.setProperty(DBConstant.ENTITY_TOTAL_WISDOM_NUMBER, 0);
+				mDS.put(entity);
+			}
+		} catch (EntityNotFoundException e) {
+			DbgUtil.showLog(TAG, "EntityNotFoundException: " + e.getMessage());
+			Entity entity = new Entity(key);
+			entity.setProperty(DBConstant.ENTITY_TOTAL_WISDOM_NUMBER, 0);
+			mDS.put(entity);
+		}
+	}
+
+	@Override
 	public List<WDWisdomData> getPopularWisdoms(int offset, int limit)
 			throws WisdomDatastoreException {
 		DbgUtil.showLog(TAG, "getPopularWisdoms");
@@ -48,35 +71,93 @@ public class DefaultWisdomDAO implements WisdomDAO {
 		// If memcache doesn't exist
 		if (result == null) {
 			DbgUtil.showLog(TAG, "memcache doesn't exist");
-			Query q = new Query(DBConstant.KIND_WISDOM);
-			PreparedQuery pq = mDS.prepare(q);
 
-			for (Entity entity : pq.asIterable()) {
-				DbgUtil.showLog(
-						TAG,
-						"result title:"
-								+ entity.getProperty(DBConstant.ENTITY_WISDOM_TITLE));
-			}
+			// First, count the number of wisdom
+			Key allWisdomKey = DatastoreKeyGenerator.getAllWisdomDataKey();
+			Entity allWisdomEntity;
+
+			long divideNum = 1;
 
 			try {
-				FetchOptions fetch = FetchOptions.Builder.withOffset(offset)
-						.limit(limit);
-				List<Entity> entities = pq.asList(fetch);
-				DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
-
-				result = helper.parseListEntityToWDWisdomData(entities);
-
-				// Set memcache
-				if (result != null) {
-					memManager.setCache(result);
-				}
-
-				return result;
-
-			} catch (IllegalStateException e) {
-				DbgUtil.showLog(TAG, "IllegalStateException: " + e.getMessage());
-				throw new WisdomDatastoreException(e.getMessage());
+				allWisdomEntity = mDS.get(allWisdomKey);
+				long totalWisdomNum = (long) allWisdomEntity
+						.getProperty(DBConstant.ENTITY_TOTAL_WISDOM_NUMBER);
+				divideNum = (long) (totalWisdomNum / WConstant.HIGHLIGHT_WISDOM_NUM);
+				DbgUtil.showLog(TAG, "divideNum: " + divideNum);
+			} catch (EntityNotFoundException e1) {
+				DbgUtil.showLog(TAG,
+						"EntityNotFoundException: " + e1.getMessage());
 			}
+
+			List<Entity> entities = new ArrayList<Entity>();
+
+			for (int i = 0; i < WConstant.HIGHLIGHT_WISDOM_NUM; i++) {
+				try {
+					long targetWisdomId = i * divideNum;
+					Key wisdomKey = DatastoreKeyGenerator
+							.getWisdomKeyById(targetWisdomId);
+					Entity wisdomEntity = mDS.get(wisdomKey);
+					DbgUtil.showLog(
+							TAG,
+							"result title:"
+									+ wisdomEntity
+											.getProperty(DBConstant.ENTITY_WISDOM_TITLE));
+					entities.add(wisdomEntity);
+
+				} catch (EntityNotFoundException e) {
+					DbgUtil.showLog(TAG,
+							"EntityNotFoundException: " + e.getMessage());
+				} catch (IllegalArgumentException e) {
+					DbgUtil.showLog(TAG,
+							"IllegalArgumentException: " + e.getMessage());
+				} catch (DatastoreFailureException e) {
+					DbgUtil.showLog(TAG,
+							"DatastoreFailureException: " + e.getMessage());
+				}
+			}
+
+			DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
+			result = helper.parseListEntityToWDWisdomData(entities);
+
+			// Set memcache
+			if (result != null) {
+				memManager.setCache(result);
+			}
+
+			return result;
+
+			// Query q = new Query(DBConstant.KIND_WISDOM);
+			// PreparedQuery pq = mDS.prepare(q);
+
+			// Filter popularFilter = new FilterPredicate(
+			// DBConstant.ENTITY_WISDOM_LAST_UPDATED_DATE,
+			// FilterOperator.EQUAL, wisdomId);
+
+			// for (Entity entity : pq.asIterable()) {
+			// DbgUtil.showLog(
+			// TAG,
+			// "result title:"
+			// + entity.getProperty(DBConstant.ENTITY_WISDOM_TITLE));
+			// }
+			//
+			// try {
+			// FetchOptions fetch = FetchOptions.Builder.withOffset(offset)
+			// .limit(limit);
+			// List<Entity> entities = pq.asList(fetch);
+			// DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
+			// result = helper.parseListEntityToWDWisdomData(entities);
+			//
+			// // Set memcache
+			// if (result != null) {
+			// memManager.setCache(result);
+			// }
+			//
+			// return result;
+			//
+			// } catch (IllegalStateException e) {
+			// DbgUtil.showLog(TAG, "IllegalStateException: " + e.getMessage());
+			// throw new WisdomDatastoreException(e.getMessage());
+			// }
 		} else {
 			DbgUtil.showLog(TAG, "memcache already exist");
 			return result;
@@ -95,16 +176,19 @@ public class DefaultWisdomDAO implements WisdomDAO {
 		// If no memcache exist
 		if (result == null) {
 			DbgUtil.showLog(TAG, "Memcache for getLatestWisdoms is null");
-			Query q = new Query(DBConstant.KIND_WISDOM);
+			Query q = new Query(DBConstant.KIND_WISDOM).addSort(
+					DBConstant.ENTITY_WISDOM_LAST_UPDATED_DATE,
+					SortDirection.DESCENDING);
 			PreparedQuery pq = mDS.prepare(q);
-			for (Entity e : pq.asIterable()) {
-				DbgUtil.showLog(
-						TAG,
-						"result title:"
-								+ e.getProperty(DBConstant.ENTITY_WISDOM_TITLE));
-			}
+			// for (Entity e : pq.asIterable()) {
+			// DbgUtil.showLog(
+			// TAG,
+			// "result title:"
+			// + e.getProperty(DBConstant.ENTITY_WISDOM_TITLE));
+			// }
 
-			FetchOptions fetch = FetchOptions.Builder.withOffset(0).limit(10);
+			FetchOptions fetch = FetchOptions.Builder.withOffset(0).limit(
+					WConstant.HIGHLIGHT_WISDOM_NUM);
 			List<Entity> entities = pq.asList(fetch);
 
 			DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
@@ -151,8 +235,7 @@ public class DefaultWisdomDAO implements WisdomDAO {
 			long wisdomId) throws WisdomDatastoreException {
 		DbgUtil.showLog(TAG, "getWisdom");
 
-		Key key = DatastoreKeyGenerator.getWisdomKeyById(category, subCategory,
-				wisdomId);
+		Key key = DatastoreKeyGenerator.getWisdomKeyById(wisdomId);
 		Query query = new Query(DBConstant.KIND_WISDOM, key);
 		PreparedQuery pQuery = mDS.prepare(query);
 		Entity entity = pQuery.asSingleEntity();
@@ -204,8 +287,7 @@ public class DefaultWisdomDAO implements WisdomDAO {
 				// Put sub category entity
 				mDS.put(entity);
 
-				Key wisdomKey = DatastoreKeyGenerator.getWisdomKeyById(
-						category, subCategory, newId);
+				Key wisdomKey = DatastoreKeyGenerator.getWisdomKeyById(newId);
 
 				// Create or update wisdom entity
 				// TODO We have to consider if we try to input same tag name
@@ -214,9 +296,8 @@ public class DefaultWisdomDAO implements WisdomDAO {
 
 				wisdom.setWisdomId(newId);
 
-				// TODO Store it onto Document
 				WisdomSearchService service = new WisdomSearchService();
-				service.addValue(wisdom, category, subCategory);
+				service.addValue(wisdom);
 
 				// Finish transaction with success
 				tx.commit();
@@ -235,17 +316,15 @@ public class DefaultWisdomDAO implements WisdomDAO {
 						keyName);
 				mDS.put(subCategoryEntity);
 
-				Key wisdomKey = DatastoreKeyGenerator.getWisdomKeyById(
-						category, subCategory, newId);
+				Key wisdomKey = DatastoreKeyGenerator.getWisdomKeyById(newId);
 
 				// Create or update wisdom entity
 				createOrUpdateWisdomEntity(wisdom, wisdomKey, newId);
 
 				wisdom.setWisdomId(newId);
 
-				// TODO Store it onto Document
 				WisdomSearchService service = new WisdomSearchService();
-				service.addValue(wisdom, category, subCategory);
+				service.addValue(wisdom);
 
 				// Finish transaction with success
 				tx.commit();
@@ -300,6 +379,21 @@ public class DefaultWisdomDAO implements WisdomDAO {
 		wisdom.setWisdomId(newId);
 
 		DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
+
+		// Update total wisdom num
+		Key allKey = DatastoreKeyGenerator.getAllWisdomDataKey();
+		Entity totalWisdomEntity;
+		try {
+			totalWisdomEntity = mDS.get(allKey);
+			long totalNum = (long) totalWisdomEntity
+					.getProperty(DBConstant.ENTITY_TOTAL_WISDOM_NUMBER);
+			totalNum = totalNum + 1;
+			totalWisdomEntity.setProperty(
+					DBConstant.ENTITY_TOTAL_WISDOM_NUMBER, totalNum);
+			mDS.put(totalWisdomEntity);
+		} catch (EntityNotFoundException e) {
+			DbgUtil.showLog(TAG, "No all wisdom kind");
+		}
 
 		// If target wisdomEntity already exist
 		if (wisdomEntity != null) {
@@ -374,8 +468,7 @@ public class DefaultWisdomDAO implements WisdomDAO {
 			throw new WisdomDatastoreException("Illegal wisdomId");
 		}
 
-		Key key = DatastoreKeyGenerator.getWisdomKeyById(category, subCategory,
-				wisdomId);
+		Key key = DatastoreKeyGenerator.getWisdomKeyById(wisdomId);
 		try {
 			Entity entity = mDS.get(key);
 			if (entity != null) {
@@ -391,6 +484,44 @@ public class DefaultWisdomDAO implements WisdomDAO {
 			DbgUtil.showLog(TAG, "EntityNotFoundException: " + e.getMessage());
 			// TODO need to consider if data for target wisdomId doesn't exist.
 		}
+	}
+
+	@Override
+	public boolean updateWisdom(WDWisdomData wisdom)
+			throws WisdomDatastoreException {
+		DbgUtil.showLog(TAG, "updateWisdom");
+
+		if (wisdom == null) {
+			throw new WisdomDatastoreException("parameter is null");
+		}
+
+		long wisdomId = wisdom.getWisdomId();
+
+		if (wisdomId == WConstant.NO_WISDOM) {
+			throw new WisdomDatastoreException("Illegal wisdom id");
+		}
+
+		try {
+			Filter searchFilter = new FilterPredicate(
+					DBConstant.ENTITY_WISDOM_ID, FilterOperator.EQUAL, wisdomId);
+			Query q = new Query(DBConstant.KIND_WISDOM).setFilter(searchFilter);
+			PreparedQuery pq = mDS.prepare(q);
+			Entity entity = pq.asSingleEntity();
+			DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
+			entity = helper.parseWisdomDataToEntity(wisdom, entity);
+
+			if (entity != null) {
+				mDS.put(entity);
+				return true;
+			}
+		} catch (TooManyResultsException e) {
+			DbgUtil.showLog(TAG, "TooManyResultsException: " + e.getMessage());
+		} catch (IllegalStateException e) {
+			DbgUtil.showLog(TAG, "IllegalStateException: " + e.getMessage());
+		}
+
+		return false;
+
 	}
 
 	@Override
@@ -416,9 +547,8 @@ public class DefaultWisdomDAO implements WisdomDAO {
 			for (WDSubCategoryKeyData wisdom : wisdoms) {
 
 				try {
-					Key key = DatastoreKeyGenerator.getWisdomKeyById(
-							wisdom.getCategory(), wisdom.getSubCategory(),
-							wisdom.getWisdomId());
+					Key key = DatastoreKeyGenerator.getWisdomKeyById(wisdom
+							.getWisdomId());
 
 					Entity entity = mDS.get(key);
 					DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
@@ -487,14 +617,12 @@ public class DefaultWisdomDAO implements WisdomDAO {
 	}
 
 	@Override
-	public List<WDWisdomData> getWisdomsByIds(String category,
-			String subCategory, List<Long> wisdomIds)
+	public List<WDWisdomData> getWisdomsByIds(List<Long> wisdomIds)
 			throws WisdomDatastoreException {
 		DbgUtil.showLog(TAG, "getWisdomsByIds");
 
-		if (category == null || subCategory == null) {
-			throw new WisdomDatastoreException(
-					"category or subCategory name is null");
+		if (wisdomIds == null) {
+			throw new WisdomDatastoreException("Parameter is null");
 		}
 
 		if (wisdomIds != null) {
@@ -503,8 +631,7 @@ public class DefaultWisdomDAO implements WisdomDAO {
 			DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
 
 			for (long wisdomId : wisdomIds) {
-				Key key = DatastoreKeyGenerator.getWisdomKeyById(category,
-						subCategory, wisdomId);
+				Key key = DatastoreKeyGenerator.getWisdomKeyById(wisdomId);
 				try {
 					Entity entity = mDS.get(key);
 					WDWisdomData data = helper
@@ -565,25 +692,40 @@ public class DefaultWisdomDAO implements WisdomDAO {
 			int limit) throws WisdomDatastoreException {
 		DbgUtil.showLog(TAG, "getUserLikedWisdoms");
 
-		Filter searchFilter = new FilterPredicate(
-				DBConstant.ENTITY_WISDOM_CREATED_USER_ID, FilterOperator.EQUAL,
-				userId);
-		Query q = new Query(DBConstant.KIND_WISDOM).setFilter(searchFilter);
-		PreparedQuery pq = mDS.prepare(q);
-
+		Key key = DatastoreKeyGenerator.getUserStatusKey(userId);
 		try {
-			FetchOptions fetch = FetchOptions.Builder.withOffset(offset).limit(
-					limit);
-			List<Entity> wisdoms = pq.asList(fetch);
-			DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
+			Entity entity = mDS.get(key);
+			List<Long> likedWisdomIds = (List<Long>) entity
+					.getProperty(DBConstant.ENTITY_STATUS_LIKED_WISDOM);
 
-			return helper.parseListEntityToWDWisdomData(wisdoms);
+			// TODO
+			// DatastoreKeyGenerator.get
 
-		} catch (IllegalStateException e) {
-			DbgUtil.showLog(TAG, "IllegalStateException: " + e.getMessage());
-			throw new WisdomDatastoreException("IllegalStateException: "
-					+ e.getMessage());
+		} catch (EntityNotFoundException e) {
+			DbgUtil.showLog(TAG, "EntityNotFoundException: " + e.getMessage());
 		}
+
+		return null;
+
+		// Filter searchFilter = new FilterPredicate(
+		// DBConstant.ENTITY_WISDOM_CREATED_USER_ID, FilterOperator.EQUAL,
+		// userId);
+		// Query q = new Query(DBConstant.KIND_WISDOM).setFilter(searchFilter);
+		// PreparedQuery pq = mDS.prepare(q);
+		//
+		// try {
+		// FetchOptions fetch = FetchOptions.Builder.withOffset(offset).limit(
+		// limit);
+		// List<Entity> wisdoms = pq.asList(fetch);
+		// DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
+		//
+		// return helper.parseListEntityToWDWisdomData(wisdoms);
+		//
+		// } catch (IllegalStateException e) {
+		// DbgUtil.showLog(TAG, "IllegalStateException: " + e.getMessage());
+		// throw new WisdomDatastoreException("IllegalStateException: "
+		// + e.getMessage());
+		// }
 
 	}
 

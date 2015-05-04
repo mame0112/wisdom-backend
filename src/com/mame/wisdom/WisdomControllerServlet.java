@@ -26,6 +26,16 @@ public class WisdomControllerServlet extends HttpServlet {
 	}
 
 	@Override
+	public void doPut(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			Action action = ActionFactory.getAction(request);
+		} catch (ActionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response) {
 		DbgUtil.showLog(TAG, "service:" + request.getPathInfo());
 		String result = null;
@@ -54,14 +64,14 @@ public class WisdomControllerServlet extends HttpServlet {
 		// TODO need to consider authentication (401)
 
 		// TODO Need to remove this part
-//		if (WConstant.IS_LOCAL) {
-//			DebugAction debugAction = new DebugAction();
-//			try {
-//				debugAction.execute(request, response);
-//			} catch (Exception e) {
-//				DbgUtil.showLog(TAG, "Exception: " + e.getMessage());
-//			}
-//		}
+		// if (WConstant.IS_LOCAL) {
+		// DebugAction debugAction = new DebugAction();
+		// try {
+		// debugAction.execute(request, response);
+		// } catch (Exception e) {
+		// DbgUtil.showLog(TAG, "Exception: " + e.getMessage());
+		// }
+		// }
 
 		if (result != null) {
 			try {
@@ -75,6 +85,10 @@ public class WisdomControllerServlet extends HttpServlet {
 		} else {
 			response.setStatus(500);
 		}
+
+	}
+
+	private void errorHandling(HttpServletResponse response) {
 
 	}
 }

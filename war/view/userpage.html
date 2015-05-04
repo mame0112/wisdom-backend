@@ -1,4 +1,88 @@
 <div ng-controller="UserDataController" ng-init="initialize()" id="userpage">
+<div class="col-md-4">
+	<div class="sidebar">
+		<div class="header">
+			<div class="thumbnail" ng-style="{'background': userColor}">
+				<div class="initial">{{userName | capitalize}}</div>
+			</div>
+		</div>
+
+		<div class="username">
+		{{userName}}
+		</div>
+		<div class="status">
+			<p class="title">Created</p>
+			<p class="count">{{creates.length}}</p>
+		</div>
+		<div class="status">
+			<p class="title">Like</p>
+			<p class="count">0 (TBU)</p>
+		</div>
+		<div class="status">
+			<p class="title">Point</p>
+			<p class="count">{{point}}</p>
+		</div>
+	</div>
+</div>
+
+<div class="col-md-4">
+	<div class="category">
+
+		<p class="title">Created</p>
+		<hr class="headDivider">
+		<div class="note" ng-if="!!creates.length == 0">
+			No created wisdom
+		</div>
+		<div class="contents" ng-repeat="message in creates">
+			<div class="image">
+				<a ui-sref="wisdom({wisdomId: message.id})">
+					<div class="thumbnail" ng-style="{'background': colorGenerator.generateColor(message.title)}">
+					<div class="text">{{message.title | capitalize}}</div>
+					</div>
+				</a>
+			</div>
+			<div class="content">
+				<div class="title"><p>{{message.title}}</p></div>
+				<div class="description"><p>{{message.description}}</p></div>
+				<div class="tag"><p>{{message.tag}}</p></div>
+				<div class="date"><p>{{timeFormatService.getFormattedTime(message.updated_date)}}</p></div>
+			</div>
+			<hr>
+		</div>
+	</div>
+</div>
+
+<div class="col-md-4">
+	<div class="category">
+
+		<p class="title">Liked</p>
+		<hr class="headDivider">
+		<div class="note" ng-if="!!likes.length == 0">
+			No liked wisdom
+		</div>
+		<div class="contents" ng-repeat="message in likes">
+			<div class="image">
+				<a ui-sref="wisdom({wisdomId: message.id})">
+					<div class="thumbnail" ng-style="{'background': colorGenerator.generateColor(message.title)}">
+					<div class="text">{{message.title | capitalize}}</div>
+					</div>
+				</a>
+			</div>
+			<div class="content">
+				<div class="title">{{message.title}}</div>
+				<p>{{message.description}}</p>
+				<p>{{message.tag}}</p>
+				<p>{{timeFormatService.getFormattedTime(message.updated_date)}}</p>
+			</div>
+			<hr>
+		</div>
+	</div>
+</div>
+
+</div>
+
+<!--
+<div ng-controller="UserDataController" ng-init="initialize()" id="userpage">
 <div class="header">
 	<div class="row">
 	  <div class="col-sm-6 col-md-4">
@@ -83,6 +167,8 @@
 
 </div>
 </div>
+
+-->
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

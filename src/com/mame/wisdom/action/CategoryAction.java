@@ -70,8 +70,7 @@ public class CategoryAction implements Action {
 					}
 
 					// Then, get wisdoms belong to this category
-					List<WDWisdomData> wisdoms = facade.getWisdomByIds(
-							category, subCategory, input);
+					List<WDWisdomData> wisdoms = facade.getWisdomByIds(input);
 					try {
 						builder.addResponseParam(categoryData, wisdoms, offset,
 								count);

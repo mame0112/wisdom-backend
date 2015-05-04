@@ -1,0 +1,35 @@
+<div ng-controller="wisdomModifyController" class="wisdom">
+	<div class="titlearea">
+		  <div class="thumbnail">
+				<div class="image" ng-style="{'background': colorGenerater.generateColor(wisdom.title)}">
+					<div class="text">{{wisdom.title | capitalize}}</div>
+				</div>
+		  </div>
+		  <embed ng-src="{{content}}" style="width:200px;height:200px;"></embed>
+		  <div class="content">
+		  title
+		  <input type="text" class="form-control" placeholder="Input title" name="title" value="{{wisdom.title}}" ng-model="wisdom.title" required ng-minlength="2" ng-maxlength="10">
+		  tag
+		  <input type="text" class="form-control" placeholder="Input tag" name="tag" value="{{wisdom.tag}}" ng-model="wisdom.tag" required ng-minlength="2" ng-maxlength="10">
+		  description
+		  <input type="text" class="form-control" placeholder="Input description" name="description" value="{{wisdom.description}}" ng-model="wisdom.description" required ng-minlength="2">
+		  </div>
+	</div>
+
+	<div class="bodyarea">
+	<ul ng-repeat="entry in messages track by $index">
+		<li>
+			<p ng-show="{{entry.tag}} == 1" class="subtitle">{{entry.message}}</p>
+			<p ng-show="{{entry.tag}} == 2">{{entry.message}}</p>
+			<div class="message">
+				<div class="update" ng-show="isValidDateFormat(entry.updated_date)">
+				Last updated: {{formatTimeInfo(entry.updated_date)}}
+				</div>
+				<div class="like" ng-show="{{entry.tag}} == 2">コメントにイイネ！する<img src="image/like.jpg">{{entry.like_num}}</div>
+			</div>
+		</li>
+	</ul>
+
+	<button type="submit" class="btn btn-primary" name="modify" ng-model="modify" ng-click="cancelModification()">Cancel</button>
+	<button type="submit" class="btn btn-primary" name="modify" ng-model="modify" ng-click="saveModification()">Save</button>
+</div>

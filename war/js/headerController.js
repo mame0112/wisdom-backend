@@ -11,7 +11,7 @@ wisdomApp.controller('headerController',
  '$window',
  '$location',
  '$state',
- // '$state',
+'toasterService',
  function(
  	$scope, 
  	$http, 
@@ -24,8 +24,28 @@ wisdomApp.controller('headerController',
  	$cookieStore, 
  	$window,
  	$location,
- 	$state){
+ 	$state,
+ 	toasterService){
+
  	log.d("headerController");
+
+ 	$scope.navbarCollapsed = true;
+
+ 	$scope.userId = Constants.NO_USER;
+
+	log.d("header directive initialize");
+	$scope.userId = userDataHolder.getUserId();
+	log.d("userId: " + $scope.userId);
+
+	$scope.toggled = function(open) {
+		log.d('Dropdown is now: ', open);
+	};
+
+	$scope.onCreatePageSelect = function(){
+		if(userDataHolder.getUserData() === null || userDataHolder.getUserData() === undefined){
+			$state.go('signin');
+		}
+	};
 
  	$scope.onSigninOptionSelect = function (){
  		// log.d("onSigninOptionSelect");
@@ -83,14 +103,14 @@ wisdomApp.controller('headerController',
  		return false;
  	};
 
-  	$scope.isCreatePageVisible = function (){
- 		// log.d("isCreatePageVisible");
- 		var data = userDataHolder.getUserData();
- 		if(data !== null && data !== undefined){
- 			return true;
- 		}
- 		return false;
- 	};
+  // 	$scope.isCreatePageVisible = function (){
+ 	// 	// log.d("isCreatePageVisible");
+ 	// 	var data = userDataHolder.getUserData();
+ 	// 	if(data !== null && data !== undefined){
+ 	// 		return true;
+ 	// 	}
+ 	// 	return false;
+ 	// };
 
  	$scope.initialize = function() {
 
@@ -138,47 +158,69 @@ wisdomApp.controller('headerController',
  		// }
  	};
 
- 	$scope.getTwitterName = function(data)
+ 	$scope.getUserName = function()
  	{
- 		// log.d("getTwitterName");
- 		return dataRetriveService.getTwitterName(data);
+ 		return userDataHolder.getUserName();
+ 		// if(userDataHolder.getUserName() !== null && userDataHolder.getUserData() !== undefined){
+	 	// 	log.d("userName " + userDataHolder.getUserData().userId);
+	 	// 	return userDataHolder.getUserData().userName;
+ 		// }
  	};
 
- 	$scope.getPoint = function(data)
+ 	$scope.getUserId = function()
  	{
- 		// log.d("getPoint");
- 		return dataRetriveService.getPoint(data);
+ 		return userDataHolder.getUserId();
  	};
 
- 	$scope.getTwitterTokenSecret = function(data)
+ 	$scope.signout = function()
  	{
- 		// log.d("getTwitterTokenSecret");
- 		return dataRetriveService.getTwitterTokenSecret(data);
+ 		userDataHolder.removeUserData();
+	 	$scope.userId = Constants.NO_USER;
+ 		$state.go('/');
+		toasterService.showSuccessToasterShort("Sign out", "Successfully signed out");
  	};
 
- 	 $scope.getThumbnail = function(data)
- 	{
- 		// log.d("getThumbnail: " + dataRetriveService.getThumbnail(data));
- 		return dataRetriveService.getThumbnail(data);
- 	};
+ 	// $scope.getTwitterName = function(data)
+ 	// {
+ 	// 	// log.d("getTwitterName");
+ 	// 	return dataRetriveService.getTwitterName(data);
+ 	// };
 
-  	 $scope.getLogindate = function(data)
- 	{
- 		// log.d("getLogindate");
- 		return dataRetriveService.getLogindate(data);
- 	};
+ 	// $scope.getPoint = function(data)
+ 	// {
+ 	// 	// log.d("getPoint");
+ 	// 	return dataRetriveService.getPoint(data);
+ 	// };
 
-  	 $scope.getUserId = function(data)
- 	{
- 		// log.d("getUserId");
- 		return dataRetriveService.getUserId(data);
- 	};
+ 	// $scope.getTwitterTokenSecret = function(data)
+ 	// {
+ 	// 	// log.d("getTwitterTokenSecret");
+ 	// 	return dataRetriveService.getTwitterTokenSecret(data);
+ 	// };
 
-   	 $scope.getTwitterToken = function(data)
- 	{
- 		// log.d("getTwitterToken");
- 		return dataRetriveService.getTwitterToken(data);
- 	};
+ 	//  $scope.getThumbnail = function(data)
+ 	// {
+ 	// 	// log.d("getThumbnail: " + dataRetriveService.getThumbnail(data));
+ 	// 	return dataRetriveService.getThumbnail(data);
+ 	// };
+
+  // 	 $scope.getLogindate = function(data)
+ 	// {
+ 	// 	// log.d("getLogindate");
+ 	// 	return dataRetriveService.getLogindate(data);
+ 	// };
+
+  // 	 $scope.getUserId = function(data)
+ 	// {
+ 	// 	// log.d("getUserId");
+ 	// 	return dataRetriveService.getUserId(data);
+ 	// };
+
+  //  	 $scope.getTwitterToken = function(data)
+ 	// {
+ 	// 	// log.d("getTwitterToken");
+ 	// 	return dataRetriveService.getTwitterToken(data);
+ 	// };
 
 
 }]);

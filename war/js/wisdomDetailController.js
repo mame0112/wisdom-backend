@@ -8,7 +8,8 @@ wisdomApp.controller('wisdomDetailController',
 'timeFormatService',
 'creativeColorGenerateService',
 '$sce',
-function($scope, log, wisdomAPIService, $stateParams, modeService, Constants, timeFormatService, creativeColorGenerateService, $sce){
+'$state',
+function($scope, log, wisdomAPIService, $stateParams, modeService, Constants, timeFormatService, creativeColorGenerateService, $sce, $state){
  	log.d("wisdomDetailController");
 
  	var wisdomId = $stateParams.wisdomId;
@@ -27,13 +28,14 @@ function($scope, log, wisdomAPIService, $stateParams, modeService, Constants, ti
 	 		log.d("response received");
 
 	 		//Set data under "params"
+	 		// $scope.wisdom = response.params;
 	 		$scope.wisdom = response.params;
+	 		
+
 	 		if($scope.wisdom !== null && $scope.wisdom !== undefined){
 	 			if($scope.wisdom.messages !== null && $scope.wisdom.messages !== undefined){
 	 				// var fileURL = URL.createObjectURL($scope.wisdom.thumbnail);
 	 				// $scope.content = $sce.trustAsResourceUrl(fileURL);
-		 			// log.d("AAAA1: " + $scope.wisdom.thumbnail);
-		 			// log.d("AAAA2: " + fileURL);
 			 		$scope.messages = JSON.parse(response.params.messages);
 	 			} else {
 					//Error handling 
@@ -60,5 +62,14 @@ function($scope, log, wisdomAPIService, $stateParams, modeService, Constants, ti
  		}
  		return false;
 	};
+
+	$scope.modifyWisdom = function() 
+	{
+		log.d("modifyWisdom");
+		var param = angular.toJson($scope.wisdom, false);
+		// $state.go('modifywisdom', {wisdom : $scope.wisdom);
+		// $state.go('modifywisdom', {currentWisdom : $scope.wisdom});
+		$state.go('modifywisdom', {currentWisdom : param});
+	}
 
 }]);

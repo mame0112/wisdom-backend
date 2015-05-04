@@ -8,6 +8,7 @@ var wisdomApp = angular.module('WidsomApp',
 	'toaster',
 	'angulartics',
 	'angulartics.google.analytics',
+	'ngProgress'
 	])
 .controller('WidsomController', ['$scope', 'Constants', 'log', function($scope, Constants, log){
 	
@@ -50,7 +51,6 @@ var wisdomApp = angular.module('WidsomApp',
 		state('user', {
 			url: '/view',
 			templateUrl: 'view/userpage.html',
-			controller: 'UserDataController'
 		}).
 		state('user.detail',{
 			url: '/view/:userId',
@@ -69,6 +69,10 @@ var wisdomApp = angular.module('WidsomApp',
 		state('newwisdom',{
 			url: '/wisdom',
 			templateUrl: 'view/newwisdom.html',
+		}).
+		state('modifywisdom',{
+			url: '/modify/:currentWisdom',
+			templateUrl: 'view/modifywisdom.html',
 		}).
 		state('search',{
 			url: '/search:result',

@@ -17,6 +17,11 @@ public class WConstant {
 
 	public final static int TAG_WISDOM_MESSAGE = 2;
 
+	/**
+	 * The number of wisdoms to show highlight and pickup
+	 */
+	public final static int HIGHLIGHT_WISDOM_NUM = 10;
+
 	// Arguments to be used on Servlet
 	/**
 	 * Generic field

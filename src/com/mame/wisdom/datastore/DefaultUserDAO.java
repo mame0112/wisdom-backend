@@ -1,8 +1,10 @@
 package com.mame.wisdom.datastore;
 
+import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.List;
 
+import com.google.appengine.api.datastore.DatastoreFailureException;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -20,6 +22,7 @@ import com.google.appengine.api.datastore.Transaction;
 import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.data.WDAllUserData;
 import com.mame.wisdom.data.WDUserData;
+import com.mame.wisdom.data.WDUserStatusData;
 import com.mame.wisdom.datastore.memcache.UserRankingMemcacheService;
 import com.mame.wisdom.datastore.memcache.WDMemcacheManager;
 import com.mame.wisdom.exception.WisdomDatastoreException;
@@ -137,6 +140,9 @@ public class DefaultUserDAO implements UserDAO {
 			// store target user data
 			addNewUserData(data);
 
+			// store new user status data
+			addNewUserStatusData(data.getUserId());
+
 			tx.commit();
 
 			// Return new User id
@@ -156,6 +162,19 @@ public class DefaultUserDAO implements UserDAO {
 
 		Entity entity = DefaultUserDAOHelper.createEntityFromUserData(data);
 
+		mDS.put(entity);
+
+	}
+
+	private void addNewUserStatusData(long userId) {
+		if (userId == WConstant.NO_USER) {
+			throw new IllegalArgumentException("Illegal user id");
+		}
+
+		WDUserStatusData data = new WDUserStatusData(userId, 0,
+				new ArrayList<Long>(), new ArrayList<Long>());
+		Entity entity = DefaultUserDAOHelper
+				.createEntityFromUserStatusData(data);
 		mDS.put(entity);
 
 	}
@@ -220,10 +239,10 @@ public class DefaultUserDAO implements UserDAO {
 						data.getThumbnail());
 			}
 
-			if (data.getTotalPoint() != 0) {
-				entity.setProperty(DBConstant.ENTITY_USER_TOTAL_POINT,
-						data.getTotalPoint());
-			}
+			// if (data.getTotalPoint() != 0) {
+			// entity.setProperty(DBConstant.ENTITY_USER_TOTAL_POINT,
+			// data.getTotalPoint());
+			// }
 
 			if (data.getTwitterName() != null) {
 				entity.setProperty(DBConstant.ENTITY_USER_TWITTER_NAME,
@@ -270,8 +289,7 @@ public class DefaultUserDAO implements UserDAO {
 		if (userKey != null) {
 			try {
 				Entity entity = mDS.get(userKey);
-				DefaultUserDAOHelper helper = new DefaultUserDAOHelper();
-				return helper.constructUserDataFromEntity(entity);
+				return DefaultUserDAOHelper.constructUserDataFromEntity(entity);
 			} catch (EntityNotFoundException e) {
 				DbgUtil.showLog(TAG,
 						"EntityNotFoundException: " + e.getMessage());
@@ -283,53 +301,27 @@ public class DefaultUserDAO implements UserDAO {
 	}
 
 	@Override
-	public List<WDUserData> getHighestPointUserList(int limit)
+	public List<WDUserStatusData> getHighestPointUserList(int limit)
 			throws WisdomDatastoreException {
 		DbgUtil.showLog(TAG, "getHighestPointUserList");
 
-		try {
+		Filter pointFilter = new FilterPredicate(
+				DBConstant.ENTITY_STATUS_TOTAL_POINT, FilterOperator.NOT_EQUAL,
+				0);
 
-			WDMemcacheManager memManager = new WDMemcacheManager(
-					new UserRankingMemcacheService());
-			List<WDUserData> result = (List<WDUserData>) memManager.getCache();
+		Key key = DatastoreKeyGenerator.getAllUserDataKey();
+		Query query = new Query(DBConstant.KIND_USER_STATUS, key).addSort(
+				DBConstant.ENTITY_STATUS_TOTAL_POINT, SortDirection.DESCENDING);
+		query.setFilter(pointFilter);
+		PreparedQuery pQuery = mDS.prepare(query);
+		FetchOptions fetch = FetchOptions.Builder.withOffset(0).limit(limit);
+		List<Entity> entities = pQuery.asList(fetch);
 
-			if (result == null) {
-				DbgUtil.showLog(TAG, "userranking memcache doesn't exist");
-				Filter pointFilter = new FilterPredicate(
-						DBConstant.ENTITY_USER_TOTAL_POINT,
-						FilterOperator.NOT_EQUAL, 0);
+		if (entities != null) {
+			DbgUtil.showLog(TAG, "size: " + entities.size());
+			DefaultUserDAOHelper helper = new DefaultUserDAOHelper();
+			return helper.parseEntityListToUserStatusDataList(entities);
 
-				Key key = DatastoreKeyGenerator.getAllUserDataKey();
-				Query query = new Query(DBConstant.KIND_USER_DATA, key)
-						.addSort(DBConstant.ENTITY_USER_TOTAL_POINT,
-								SortDirection.DESCENDING);
-				query.setFilter(pointFilter);
-				PreparedQuery pQuery = mDS.prepare(query);
-				FetchOptions fetch = FetchOptions.Builder.withOffset(0).limit(
-						limit);
-				List<Entity> entities = pQuery.asList(fetch);
-
-				if (entities != null) {
-					DbgUtil.showLog(TAG, "size: " + entities.size());
-					DefaultUserDAOHelper helper = new DefaultUserDAOHelper();
-					result = helper.parseEntityListToUserDataList(entities);
-
-					if (result != null) {
-						memManager.setCache(result);
-					}
-
-					return result;
-
-				}
-			} else {
-				DbgUtil.showLog(TAG, "userranking memcache already exist");
-				return result;
-			}
-
-		} catch (IllegalArgumentException e) {
-			DbgUtil.showLog(TAG, "IllegalArgumentException: " + e.getMessage());
-		} catch (IllegalStateException e) {
-			DbgUtil.showLog(TAG, "IllegalStateException: " + e.getMessage());
 		}
 
 		return null;
@@ -368,26 +360,47 @@ public class DefaultUserDAO implements UserDAO {
 	}
 
 	@Override
-	public long updateUserPoint(long userId, long updatePoint)
+	public long updateUserStatus(long userId, long updatePoint,
+			long createdWisdomId, long likedWisdomId)
 			throws WisdomDatastoreException {
-		DbgUtil.showLog(TAG, "updateUserPoint: " + userId);
+		DbgUtil.showLog(TAG, "updateUserPoint: " + userId + " / " + updatePoint
+				+ " / " + createdWisdomId + " / " + likedWisdomId);
 
 		if (userId == WConstant.NO_USER || updatePoint < 0) {
 			throw new IllegalArgumentException("Illegal parameter");
 		}
 
-		Key key = DatastoreKeyGenerator.getUserDataKey(userId);
+		Key key = DatastoreKeyGenerator.getUserStatusKey(userId);
 		try {
 			Entity entity = mDS.get(key);
 			DefaultUserDAOHelper helper = new DefaultUserDAOHelper();
-			WDUserData data = helper.constructUserDataFromEntity(entity);
+			WDUserStatusData data = helper
+					.constructUserStatusDataFromEntity(entity);
 			long totalPoint = data.getTotalPoint();
 			long newPoint = totalPoint + updatePoint;
 			DbgUtil.showLog(TAG, "newPoint: " + newPoint);
 			data.setTotalPoint(newPoint);
 
+			DbgUtil.showLog(TAG, "AA");
+
+			if (createdWisdomId != WConstant.NO_WISDOM) {
+				DbgUtil.showLog(TAG, "BB");
+
+				data.addCreatedWisdomId(createdWisdomId);
+			}
+
+			DbgUtil.showLog(TAG, "CC");
+
+			if (likedWisdomId != WConstant.NO_WISDOM) {
+
+				DbgUtil.showLog(TAG, "DD");
+				data.addLikedWisdomId(likedWisdomId);
+			}
+
+			DbgUtil.showLog(TAG, "EE");
+
 			Entity newEntity = DefaultUserDAOHelper
-					.createEntityFromUserData(data);
+					.createEntityFromUserStatusData(data);
 			if (newEntity != null) {
 				mDS.put(newEntity);
 			} else {
@@ -401,5 +414,66 @@ public class DefaultUserDAO implements UserDAO {
 		}
 
 		return updatePoint;
+	}
+
+	@Override
+	public List<WDUserData> getUserDataList(List<WDUserStatusData> params)
+			throws WisdomDatastoreException {
+		DbgUtil.showLog(TAG, "getUserDataList");
+
+		if (params != null) {
+
+			List<WDUserData> result = new ArrayList<WDUserData>();
+
+			for (WDUserStatusData status : params) {
+				Key key = DatastoreKeyGenerator.getUserStatusKey(status
+						.getUserId());
+				Entity e;
+				try {
+					e = mDS.get(key);
+					result.add(DefaultUserDAOHelper
+							.constructUserDataFromEntity(e));
+				} catch (EntityNotFoundException e1) {
+					DbgUtil.showLog(TAG,
+							"EntityNotFoundException: " + e1.getMessage());
+				} catch (IllegalArgumentException e1) {
+					DbgUtil.showLog(TAG,
+							"IllegalArgumentException: " + e1.getMessage());
+				} catch (DatastoreFailureException e1) {
+					DbgUtil.showLog(TAG,
+							"DatastoreFailureException: " + e1.getMessage());
+				}
+
+			}
+
+			return result;
+
+		}
+
+		return null;
+
+	}
+
+	@Override
+	public WDUserStatusData getUserStatusData(long userId)
+			throws WisdomDatastoreException {
+		DbgUtil.showLog(TAG, "getUserStatusData");
+
+		if (userId == WConstant.NO_USER) {
+			throw new WisdomDatastoreException("Illegal userid");
+		}
+
+		Key key = DatastoreKeyGenerator.getUserStatusKey(userId);
+		Entity entity;
+		try {
+			entity = mDS.get(key);
+			DefaultUserDAOHelper helper = new DefaultUserDAOHelper();
+			return helper.constructUserStatusDataFromEntity(entity);
+		} catch (EntityNotFoundException e) {
+			DbgUtil.showLog(TAG, "EntityNotFoundException: " + e.getMessage());
+		}
+
+		return null;
+
 	}
 }

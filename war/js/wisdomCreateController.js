@@ -75,6 +75,11 @@ wisdomApp.controller('wisdomCreateController',
 		//Mode change
 		modeService.changeCurrentMode(Constants.STATE.STATE_WISDOM_CREATE_PAGE);
 
+		//Just in case, we should have this check.
+		if(userDataHolder.getUserData() === null || userDataHolder.getUserData() === undefined){
+			$state.go('signin');
+		}
+
 		// userData =  userDataHolder.getUserData();
 		// log.d("userId: " + userData.params.userId);
 		// result.createUserId = userData.params.userId;
@@ -87,8 +92,8 @@ wisdomApp.controller('wisdomCreateController',
 		userData =  userDataHolder.getUserData();
 		log.d("userData: " + userData);
 		if(userData !== null && userData !== undefined){
-			log.d("userId: " + userData.params.userId);
-			result.create_user_id = userData.params.userId;
+			log.d("userId: " + userData.userId);
+			result.create_user_id = userData.userId;
 		} else {
 			//FIXME This is temporary solution for development.
 			result.create_user_id = 2;

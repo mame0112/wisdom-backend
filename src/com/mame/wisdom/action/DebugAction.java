@@ -23,23 +23,23 @@ public class DebugAction implements Action {
 		for (int i = 1; i < 15; i++) {
 			try {
 
-				if (userDatafacade.getUserData(i) == null) {
-					WDUserData data = new WDUserData(WConstant.NO_USER,
-							"Test twitter name" + i, "twitter token" + i,
-							"twitterTokenSecret" + i, "facebookName" + i,
-							"userName" + i, "password" + i, null,
-							TimeUtil.getCurrentDate(), i * 10, null);
-					userDatafacade.createNewUserData(data);
-
-				}
+//				if (userDatafacade.getUserData(i) == null) {
+//					WDUserData data = new WDUserData(WConstant.NO_USER,
+//							"Test twitter name" + i, "twitter token" + i,
+//							"twitterTokenSecret" + i, "facebookName" + i,
+//							"userName" + i, "password" + i, null,
+//							TimeUtil.getCurrentDate(), i * 10, null);
+//					userDatafacade.createNewUserData(data);
+//
+//				}
 
 			} catch (Exception e) {
-				WDUserData data = new WDUserData(WConstant.NO_USER,
-						"Test twitter name" + i, "twitter token" + i,
-						"twitterTokenSecret" + i, "facebookName" + i,
-						"userName" + i, "password" + i, null,
-						TimeUtil.getCurrentDate(), i * 10, null);
-				userDatafacade.createNewUserData(data);
+				// WDUserData data = new WDUserData(WConstant.NO_USER,
+				// "Test twitter name" + i, "twitter token" + i,
+				// "twitterTokenSecret" + i, "facebookName" + i,
+				// "userName" + i, "password" + i, null,
+				// TimeUtil.getCurrentDate(), i * 10, null);
+				// userDatafacade.createNewUserData(data);
 			}
 		}
 		// if (userDatafacade.getUserData(2) == null) {

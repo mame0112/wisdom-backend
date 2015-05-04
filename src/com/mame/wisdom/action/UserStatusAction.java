@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.data.WDUserData;
+import com.mame.wisdom.data.WDUserStatusData;
 import com.mame.wisdom.data.WDWisdomData;
 import com.mame.wisdom.datastore.UserDataFacade;
 import com.mame.wisdom.datastore.WisdomFacade;
@@ -40,17 +41,37 @@ public class UserStatusAction implements Action {
 			int limit = object.getInt(JsonConstant.PARAM_CATEGORY_LIMIT);
 			if (userId != WConstant.NO_USER) {
 				UserDataFacade userDatafacade = new UserDataFacade();
-				WDUserData userData = userDatafacade.getUserData(userId);
+				WDUserStatusData statusData = userDatafacade
+						.getUserStatusData(userId);
+
+				if (statusData != null) {
+					WisdomFacade wisdomFacade = new WisdomFacade();
+
+					// Get created wisdom
+					// TODO Need to implement offset and limit
+					List<WDWisdomData> createdWisdoms = wisdomFacade
+							.getWisdomByIds(statusData.getCreatedWisdomIds());
+
+					// Get liked wisdom
+					// TODO Need to implement offset and limit
+					List<WDWisdomData> likedWisdoms = wisdomFacade
+							.getWisdomByIds(statusData.getLikedWisdomIds());
+
+					builder.addResponseParam(statusData.getTotalPoint(),
+							createdWisdoms, likedWisdoms);
+
+				} else {
+					// No status data
+					builder.addResponseParam(statusData.getTotalPoint(), null,
+							null);
+				}
 
 				// Get wisdoms created by user.
 				// TODO In the future, we should get "Liked" data
-				WisdomFacade wisdomFacade = new WisdomFacade();
-				List<WDWisdomData> wisdoms = wisdomFacade.getUserGeneratedData(
-						userId, offset, limit);
 
 				// ((UserStatusJsonBuilder) builder).addResponseParamExtra(
 				// userData, wisdoms);
-				builder.addResponseParam(userData, wisdoms);
+
 			} else {
 				DbgUtil.showLog(TAG, "Illegal user Id -1");
 				builder.addErrorMessage("Illegal user Id -1");

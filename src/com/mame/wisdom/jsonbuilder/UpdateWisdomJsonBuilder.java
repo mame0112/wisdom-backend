@@ -1,5 +1,6 @@
 package com.mame.wisdom.jsonbuilder;
 
+import com.google.appengine.labs.repackaged.org.json.JSONArray;
 import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import com.mame.wisdom.exception.JSONBuilderException;
@@ -47,7 +48,33 @@ public class UpdateWisdomJsonBuilder extends JsonBuilder {
 	@Override
 	public void addResponseParam(Object... param) throws JSONBuilderException {
 		DbgUtil.showLog(TAG, "addResponseParam");
-		//TODO
+
+		if (param == null) {
+			throw new IllegalArgumentException("param is null");
+		}
+
+		if (!(param[0] instanceof Long)) {
+			throw new IllegalArgumentException("Illegal param type");
+		}
+
+		if (!(param[1] instanceof Long)) {
+			throw new IllegalArgumentException("Illegal param type");
+		}
+
+		try {
+			long wisdomId = (Long) param[0];
+			long point = (Long) param[1];
+			JSONArray array = new JSONArray();
+			JSONObject resultObject = new JSONObject();
+			resultObject.put(JsonConstant.PARAM_WISDOM_ID, wisdomId);
+			resultObject.put(JsonConstant.PARAM_USER_POINT, point);
+
+			array.put(resultObject);
+
+			mRootObject.put(JsonConstant.PARAMS, array);
+		} catch (JSONException e) {
+			DbgUtil.showLog(TAG, "JSONException: " + e.getMessage());
+		}
 
 	}
 
