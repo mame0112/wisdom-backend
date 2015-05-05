@@ -112,6 +112,13 @@ body {
 	display: inline;
 }
 
+#signup .content .item .additional{
+	margin-top: 14px;
+}
+
+#signup .content .item .additional a{
+}
+
 #signup .content .description{
 	font-size: 16px;
 	color: #666666;
@@ -123,6 +130,9 @@ body {
 }
 
 #signup .note .description{
-	font-size: 16px;
+	font-size: 14px;
 	color: #666666;
+	margin-bottom: 20px;
 }
+
+
