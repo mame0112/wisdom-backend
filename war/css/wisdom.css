@@ -95,6 +95,16 @@
 	color: #888888;
 }
 
+.wisdom .accountSelector{
+	margin-top: 20px;
+	width: 100%;
+}
+
+.wisdom .accountSelector .buttons{
+	margin-top: 20px;
+	text-align: center;
+}
+
 #newwisdom{
 
 }

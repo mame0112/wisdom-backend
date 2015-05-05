@@ -9,7 +9,18 @@ wisdomApp.controller('wisdomDetailController',
 'creativeColorGenerateService',
 '$sce',
 '$state',
-function($scope, log, wisdomAPIService, $stateParams, modeService, Constants, timeFormatService, creativeColorGenerateService, $sce, $state){
+'userDataHolder',
+function($scope, 
+	log, 
+	wisdomAPIService, 
+	$stateParams, 
+	modeService, 
+	Constants, 
+	timeFormatService, 
+	creativeColorGenerateService, 
+	$sce, 
+	$state, 
+	userDataHolder){
  	log.d("wisdomDetailController");
 
  	var wisdomId = $stateParams.wisdomId;
@@ -70,6 +81,23 @@ function($scope, log, wisdomAPIService, $stateParams, modeService, Constants, ti
 		// $state.go('modifywisdom', {wisdom : $scope.wisdom);
 		// $state.go('modifywisdom', {currentWisdom : $scope.wisdom});
 		$state.go('modifywisdom', {currentWisdom : param});
-	}
+	};
+
+	$scope.isSignedIn = function()
+	{
+		var userData = userDataHolder.getUserData();
+		if(userData !== null && userData !== undefined){
+			return true;
+		} else {
+			return false;
+		}
+
+	};
+
+	$scope.createAccount = function()
+	{
+		log.d("createAccount");
+		$state.go('signup');
+	};
 
 }]);

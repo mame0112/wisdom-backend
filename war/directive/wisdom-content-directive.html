@@ -15,22 +15,27 @@
 	</div>
 
 	<div class="bodyarea">
-	<ul ng-repeat="entry in messages track by $index">
-		<li>
-			<p ng-show="{{entry.tag}} == 1" class="subtitle">{{entry.message}}</p>
-			<p ng-show="{{entry.tag}} == 2">{{entry.message}}</p>
-			<div class="message">
-				<div class="update" ng-show="isValidDateFormat(entry.updated_date)">
-				Last updated: {{formatTimeInfo(entry.updated_date)}}
+		<ul ng-repeat="entry in messages track by $index">
+			<li>
+				<p ng-show="{{entry.tag}} == 1" class="subtitle">{{entry.message}}</p>
+				<p ng-show="{{entry.tag}} == 2">{{entry.message}}</p>
+				<div class="message">
+					<div class="update" ng-show="isValidDateFormat(entry.updated_date)">
+					Last updated: {{formatTimeInfo(entry.updated_date)}}
+					</div>
+					<div class="like" ng-show="{{entry.tag}} == 2">コメントにイイネ！する<img src="image/like.jpg">{{entry.like_num}}</div>
 				</div>
-				<div class="like" ng-show="{{entry.tag}} == 2">コメントにイイネ！する<img src="image/like.jpg">{{entry.like_num}}</div>
-			</div>
-		</li>
-	</ul>
-
-
-	<button type="submit" class="btn btn-primary" name="modify" ng-model="modify" ng-click="modifyWisdom()">Modify wisdom</button>
-
+			</li>
+		</ul>
 	</div>
-
+	<div class="accountSelector">
+		<hr>
+		How about join in 'chienowa' and spread your wisdom to beginners?
+		<div class="buttons">
+			<button type="submit" class="btn btn-primary" name="modify" ng-model="modify" ng-click="modifyWisdom()" ng-show="isSignedIn() == true">Modify wisdom</button>
+			<div ng-show="isSignedIn() == false">
+				<button type="submit" class="btn btn-primary" name="modify" ng-model="modify" ng-click="createAccount()">Create account</button> or <a ui-sref="signin">Sign in</a>
+			</div>
+		</div>
+	</div>
 </div>
