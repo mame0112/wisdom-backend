@@ -12,6 +12,33 @@ wisdomApp.directive('headerDirective', function(){
 	};
 })
 
+.directive('titleDirective', ['$rootScope', '$timeout', 
+	function($rootScope, $timeout){
+	return {
+		restrict: 'AEC',
+		link: function(scope, element) {
+
+			var listener = function(event, toState) {
+
+				var serviceName = 'chienowa[チエノワ]';
+				var title = null;
+
+				if (toState.data && toState.data.pageTitle) {
+					title = toState.data.pageTitle + ' | ' + serviceName;
+				} else {
+					title = serviceName;
+				}
+
+				$timeout(function() {
+					element.text(title);
+				}, 0, false);
+			};
+
+			$rootScope.$on('$stateChangeSuccess', listener);
+		}
+	};
+}])
+
 .directive('heroshotDirective', function(){
 	return {
 		restrict: 'A',
