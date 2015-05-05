@@ -12,7 +12,15 @@
 		    <div class="title">{{wisdom.title}}</div>
 			<div class="description">{{wisdom.description}}</div>
 			<div class="tag"><p>{{wisdom.tag}}</p></div>
-			<div class="viewcount">{{wisdom.count}} views</div>
+			<div class="status">
+				<div class="updateDate">Last updated: {{formatTimeInfo(wisdom.updated_date)}}</div>
+				<div class="viewinfo">
+					<ul>
+						<li><div class="viewnum">{{wisdom.count}}</div></li>
+						<li>view</li>
+					</ul>
+				</div>
+			</div>
 		  </div>
 	</div>
 
