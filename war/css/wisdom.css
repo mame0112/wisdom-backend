@@ -97,6 +97,7 @@
 }
 
 .wisdom .titlearea .content .updateDate {
+	color: #666666;
     overflow: hidden;
     float: left;
 }
@@ -143,11 +144,13 @@
 }
 
 .wisdom .bodyarea .message .update{
+	color: #888888;
 	text-align: left;
 	float: left;
 }
 
 .wisdom .bodyarea .message .like{
+	color: #888888;
 	text-align: right;
 }
 
