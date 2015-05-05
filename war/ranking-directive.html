@@ -1,5 +1,6 @@
 <div id="ranking" ng-controller="rankingController" ng-init="initialize()">
-<div class="title">{{today}}'s ranking</div>
+<div class="maintitle">{{today}}'s ranking</div>
+<hr class="title_divider">
 <div class="media" ng-repeat="score in scores">
   <div class="media-left">
 	  <img class="media-object" src="../image/prize1.jpg" alt="..." ng-if="$index == 0">
