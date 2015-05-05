@@ -68,10 +68,9 @@
 				</a>
 			</div>
 			<div class="content">
-				<div class="title">{{message.title}}</div>
-				<p>{{message.description}}</p>
-				<p>{{message.tag}}</p>
-				<p>{{timeFormatService.getFormattedTime(message.updated_date)}}</p>
+				<div class="title"><p><a ui-sref="wisdom({wisdomId: message.id})">{{message.title}}</a></p></div>
+				<div class="description"><p>{{message.description}}</p></div>
+				<div class="tag"><p>{{message.tag}}</p></div>
 			</div>
 			<hr>
 		</div>
