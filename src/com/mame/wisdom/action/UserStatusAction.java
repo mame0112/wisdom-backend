@@ -45,6 +45,12 @@ public class UserStatusAction implements Action {
 						.getUserStatusData(userId);
 
 				if (statusData != null) {
+
+					List<Long> tmp = statusData.getCreatedWisdomIds();
+					for (long l : tmp) {
+						DbgUtil.showLog(TAG, "l:: " + l);
+					}
+
 					WisdomFacade wisdomFacade = new WisdomFacade();
 
 					// Get created wisdom

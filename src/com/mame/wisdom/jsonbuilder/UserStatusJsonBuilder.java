@@ -141,8 +141,7 @@ public class UserStatusJsonBuilder extends JsonBuilder {
 
 				JSONArray likeedArray = JsonParseUtil
 						.parseWisdomListToJsonArray(likedWisdoms);
-				paramObj.put(JsonConstant.PARAM_USER_CREATED_WISDOM,
-						likeedArray);
+				paramObj.put(JsonConstant.PARAM_USER_LIKED_WISDOM, likeedArray);
 
 			}
 

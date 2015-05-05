@@ -38,7 +38,6 @@ wisdomApp.service('userDataHolder',
         getUserId : function(){
             if($cookieStore.get("userData") !== null && $cookieStore.get("userData") !== undefined) {
                 if($cookieStore.get("userData").userId !== null && $cookieStore.get("userData").userId !== undefined){
-                    log.d("userid:: " + $cookieStore.get("userData").userId);
                     return $cookieStore.get("userData").userId;
                 }
             }

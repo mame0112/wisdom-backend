@@ -426,7 +426,7 @@ public class DefaultUserDAO implements UserDAO {
 			List<WDUserData> result = new ArrayList<WDUserData>();
 
 			for (WDUserStatusData status : params) {
-				Key key = DatastoreKeyGenerator.getUserStatusKey(status
+				Key key = DatastoreKeyGenerator.getUserDataKey(status
 						.getUserId());
 				Entity e;
 				try {

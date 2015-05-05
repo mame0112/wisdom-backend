@@ -22,7 +22,7 @@ function($scope, log, userRankingAPIService, timeService, timeFormatService){
  	};
 
  	userRankingAPIService.status({servlet_params : param}, function(response){
- 		log.d("latest received");
+ 		log.d("user ranking received");
 
  		$scope.response = response;
 

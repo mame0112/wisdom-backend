@@ -68,8 +68,6 @@ public class UserRankingJsonBuilder extends JsonBuilder {
 			JSONArray array = new JSONArray();
 
 			for (WDUserData user : users) {
-				DbgUtil.showLog(TAG, "AAAAA");
-				DbgUtil.showLog(TAG, "username: " + user.getUsername());
 				JSONObject obj = new JSONObject();
 
 				String name = null;
@@ -91,7 +89,6 @@ public class UserRankingJsonBuilder extends JsonBuilder {
 
 				// If no name available, we should not return it
 				if (name != null) {
-					DbgUtil.showLog(TAG, "name: " + name);
 					obj.put(JsonConstant.PARAM_USER_NAME, name);
 					// TODO
 					// obj.put(JsonConstant.PARAM_USER_POINT,
