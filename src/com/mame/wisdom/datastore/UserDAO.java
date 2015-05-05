@@ -1,6 +1,7 @@
 package com.mame.wisdom.datastore;
 
 import java.util.List;
+import java.util.Map;
 
 import com.mame.wisdom.data.WDUserData;
 import com.mame.wisdom.data.WDUserStatusData;
@@ -64,7 +65,7 @@ public interface UserDAO {
 	public WDUserData getUserIdByUserName(String userName)
 			throws WisdomDatastoreException;
 
-	public List<WDUserData> getUserDataList(List<WDUserStatusData> data)
+	public Map<Long, WDUserData> getUserDataList(List<WDUserStatusData> data)
 			throws WisdomDatastoreException;
 
 }

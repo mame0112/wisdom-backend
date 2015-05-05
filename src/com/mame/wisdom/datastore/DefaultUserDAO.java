@@ -2,7 +2,9 @@ package com.mame.wisdom.datastore;
 
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.google.appengine.api.datastore.DatastoreFailureException;
 import com.google.appengine.api.datastore.DatastoreService;
@@ -417,13 +419,13 @@ public class DefaultUserDAO implements UserDAO {
 	}
 
 	@Override
-	public List<WDUserData> getUserDataList(List<WDUserStatusData> params)
+	public Map<Long, WDUserData> getUserDataList(List<WDUserStatusData> params)
 			throws WisdomDatastoreException {
 		DbgUtil.showLog(TAG, "getUserDataList");
 
 		if (params != null) {
 
-			List<WDUserData> result = new ArrayList<WDUserData>();
+			Map<Long, WDUserData> result = new HashMap<Long, WDUserData>();
 
 			for (WDUserStatusData status : params) {
 				Key key = DatastoreKeyGenerator.getUserDataKey(status
@@ -431,8 +433,8 @@ public class DefaultUserDAO implements UserDAO {
 				Entity e;
 				try {
 					e = mDS.get(key);
-					result.add(DefaultUserDAOHelper
-							.constructUserDataFromEntity(e));
+					result.put(status.getUserId(),
+							DefaultUserDAOHelper.constructUserDataFromEntity(e));
 				} catch (EntityNotFoundException e1) {
 					DbgUtil.showLog(TAG,
 							"EntityNotFoundException: " + e1.getMessage());

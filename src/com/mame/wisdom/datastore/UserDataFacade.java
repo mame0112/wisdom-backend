@@ -1,8 +1,11 @@
 package com.mame.wisdom.datastore;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.mame.wisdom.constant.WConstant;
+import com.mame.wisdom.data.WDHighlighPointUserData;
 import com.mame.wisdom.data.WDUserData;
 import com.mame.wisdom.data.WDUserDataBuilder;
 import com.mame.wisdom.data.WDUserStatusData;
@@ -122,12 +125,13 @@ public class UserDataFacade {
 		}
 	}
 
-	public List<WDUserData> getUserPointRankingList(int limit) {
+	public List<WDHighlighPointUserData> getUserPointRankingList(int limit) {
 		DbgUtil.showLog(TAG, "getUserPointRankingList");
 
 		WDMemcacheManager memManager = new WDMemcacheManager(
 				new UserRankingMemcacheService());
-		List<WDUserData> result = (List<WDUserData>) memManager.getCache();
+		List<WDHighlighPointUserData> result = (List<WDHighlighPointUserData>) memManager
+				.getCache();
 
 		// If no cache exists
 		if (result == null) {
@@ -136,7 +140,8 @@ public class UserDataFacade {
 				UserDAO dao = factory.getUserDAO();
 				List<WDUserStatusData> status = dao
 						.getHighestPointUserList(limit);
-				result = dao.getUserDataList(status);
+				Map<Long, WDUserData> userData = dao.getUserDataList(status);
+				result = createHighlightData(status, userData);
 
 				if (result != null) {
 					memManager.setCache(result);
@@ -155,6 +160,29 @@ public class UserDataFacade {
 
 		} else {
 			DbgUtil.showLog(TAG, "userranking memcache already exist");
+			return result;
+		}
+
+		return null;
+	}
+
+	private List<WDHighlighPointUserData> createHighlightData(
+			List<WDUserStatusData> status, Map<Long, WDUserData> userData) {
+		DbgUtil.showLog(TAG, "createHighlightData");
+
+		if (status != null && userData != null) {
+
+			List<WDHighlighPointUserData> result = new ArrayList<WDHighlighPointUserData>();
+
+			for (WDUserStatusData data : status) {
+				long userId = data.getUserId();
+				WDUserData uData = userData.get(userId);
+
+				WDHighlighPointUserData hData = new WDHighlighPointUserData(
+						userId, uData.getUsername(), data.getTotalPoint());
+				result.add(hData);
+			}
+
 			return result;
 		}
 

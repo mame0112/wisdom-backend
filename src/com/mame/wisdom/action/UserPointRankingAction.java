@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import com.mame.wisdom.constant.WConstant;
+import com.mame.wisdom.data.WDHighlighPointUserData;
 import com.mame.wisdom.data.WDUserData;
 import com.mame.wisdom.data.WDUserStatusData;
 import com.mame.wisdom.datastore.UserDAO;
@@ -39,7 +40,7 @@ public class UserPointRankingAction implements Action {
 			DbgUtil.showLog(TAG, "limit: " + limit);
 
 			// Get highest scores with user status data
-			List<WDUserData> users = facade
+			List<WDHighlighPointUserData> users = facade
 					.getUserPointRankingList(limit);
 
 			builder.addResponseParam(users);

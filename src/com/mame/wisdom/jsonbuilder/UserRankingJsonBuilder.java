@@ -5,6 +5,7 @@ import java.util.List;
 import com.google.appengine.labs.repackaged.org.json.JSONArray;
 import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
+import com.mame.wisdom.data.WDHighlighPointUserData;
 import com.mame.wisdom.data.WDUserData;
 import com.mame.wisdom.exception.JSONBuilderException;
 import com.mame.wisdom.util.DbgUtil;
@@ -62,40 +63,38 @@ public class UserRankingJsonBuilder extends JsonBuilder {
 					"UserRankingJsonBuilder Illegal param type");
 		}
 
-		List<WDUserData> users = (List<WDUserData>) param[0];
+		List<WDHighlighPointUserData> users = (List<WDHighlighPointUserData>) param[0];
 
 		try {
 			JSONArray array = new JSONArray();
 
-			for (WDUserData user : users) {
+			for (WDHighlighPointUserData user : users) {
 				JSONObject obj = new JSONObject();
 
-				String name = null;
+				String name = user.getUserName();
 
-				if (user.getTwitterName() != null) {
-					DbgUtil.showLog(TAG, "Twitter");
-					name = user.getTwitterName();
-				} else {
-					if (user.getFacebookName() != null) {
-						DbgUtil.showLog(TAG, "facebook");
-						name = user.getFacebookName();
-					} else {
-						if (user.getUsername() != null) {
-							DbgUtil.showLog(TAG, "usernmae");
-							name = user.getUsername();
-						}
-					}
-				}
+				// if (user.getTwitterName() != null) {
+				// DbgUtil.showLog(TAG, "Twitter");
+				// name = user.getTwitterName();
+				// } else {
+				// if (user.getFacebookName() != null) {
+				// DbgUtil.showLog(TAG, "facebook");
+				// name = user.getFacebookName();
+				// } else {
+				// if (user.getUsername() != null) {
+				// DbgUtil.showLog(TAG, "usernmae");
+				// name = user.getUsername();
+				// }
+				// }
+				// }
 
 				// If no name available, we should not return it
 				if (name != null) {
 					obj.put(JsonConstant.PARAM_USER_NAME, name);
-					// TODO
-					// obj.put(JsonConstant.PARAM_USER_POINT,
-					// user.getTotalPoint());
+					obj.put(JsonConstant.PARAM_USER_POINT, user.getPoint());
 					obj.put(JsonConstant.PARAM_USER_ID, user.getUserId());
-					obj.put(JsonConstant.PARAM_USER_THUMBNAIL,
-							user.getThumbnail());
+					// obj.put(JsonConstant.PARAM_USER_THUMBNAIL,
+					// user.getThumbnail());
 					array.put(obj);
 				}
 
