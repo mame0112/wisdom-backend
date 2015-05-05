@@ -8,11 +8,15 @@
 }
 
 .wisdom .titlearea{
-	background-color: #fcfcfc;
+	background-color: #f0f0f0;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 .wisdom .titlearea .thumbnail{
 	float: left;
+	margin-right: 10px;
+	margin-top: 10px;
 }
 
 .wisdom .titlearea .thumbnail .image {
@@ -21,6 +25,7 @@
     background: #888888;
     border-radius: 8px 8px 8px 8px;
 	position: relative;
+	margin: -4px;
 }
 
 .wisdom .titlearea .thumbnail .image .text{
@@ -35,12 +40,10 @@
 }
 
 .wisdom .titlearea .content{
-	text-indent: 10px;
-
 }
 
 .wisdom .titlearea .content .title{
-	font-size: 38px;
+	font-size: 32px;
 	color: #000000;
 }
 
@@ -51,7 +54,9 @@
 }
 
 .wisdom .titlearea .content .tag{
-	color: #333333;
+    overflow: hidden;
+    float: left;
+/*	color: #333333;
 	font-size: 16px;
 	font-weight: normal;
 	border-style: solid;
@@ -59,18 +64,51 @@
 	border-color: #cfcfcf;
 	background-color: #eeeeee;
 	padding: 4px 6px 4px 6px;
-	border-radius: 2px;
+	border-radius: 2px;*/
 }
 
+.wisdom .titlearea .content .tag p{
+    font-size: 14px;
+    font-weight: thin;
+    color:#888888;
+
+    margin: 0;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+
+    border-style: solid;
+    border-width: 1px;
+    padding-left: 6px;
+    padding-right: 6px;
+
+    margin-top: 6px;
+
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+
+    background-color: #eeeeee;
+}
+
+.wisdom .titlearea .content .viewcount {
+	clear: both;
+}
+
+.wisdom .bodyarea ul {
+	width: 100%;
+	margin-left: 0px;
+	padding-left: 0px;
+}
 
 .wisdom .bodyarea{
-	background-color: #ffffff;
+	padding-left: 10px;
 }
 
 .wisdom .bodyarea .subtitle{
+	width: 100%;
 	text-decoration: underline;
 	text-decoration-color: red;
-	background-color: #ffffff;
 	margin-top: 2.0em;
 }
 
