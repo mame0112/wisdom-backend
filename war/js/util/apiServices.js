@@ -185,4 +185,15 @@ wisdomApp.factory('apiService', ['$resource', 'log',
             mail: {method: 'GET', isArray: false},
         });
     }
+])
+
+.factory('wisdomMessageLikeAPIService', ['$resource', 'log',
+ function($resource, log) {
+    return $resource('/controller/messagelike',
+         {servlet_resp_id: 1},
+         { 
+            //Search widoms by given keyword
+            like: {method: 'GET', isArray: false},
+        });
+    }
 ]);

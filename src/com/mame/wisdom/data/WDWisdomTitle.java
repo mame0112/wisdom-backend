@@ -62,6 +62,11 @@ public class WDWisdomTitle implements WDWisdomItemEntry {
 
 	@Override
 	public void setItemId(long id) {
-		mItemId = id;		
+		mItemId = id;
+	}
+
+	@Override
+	public void setItemLikeNum(int newLikeNum) {
+		mNumOfLiked = newLikeNum;
 	}
 }

@@ -85,8 +85,8 @@ public interface WisdomDAO {
 	 * @return
 	 * @throws WisdomDatastoreException
 	 */
-	public WDWisdomData getWisdom(String category, String subCategory,
-			long wisdomId) throws WisdomDatastoreException;
+	public WDWisdomData getWisdom(long wisdomId)
+			throws WisdomDatastoreException;
 
 	/**
 	 * Find wisdom by given ID (without category and sub category informaton)

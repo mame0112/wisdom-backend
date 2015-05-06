@@ -85,19 +85,17 @@ public class WisdomFacade {
 
 	}
 
-	public WDWisdomData getWisdomById(String category, String subCategory,
-			long wisdomId) throws WisdomFacadeException {
+	public WDWisdomData getWisdomById(long wisdomId)
+			throws WisdomFacadeException {
 		DbgUtil.showLog(TAG, "getWisdomById");
-		if (category == null || subCategory == null
-				|| wisdomId == WConstant.NO_WISDOM) {
+		if (wisdomId == WConstant.NO_WISDOM) {
 			throw new WisdomFacadeException("illegal parameter");
 		}
 
 		DAOFactory factory = DAOFactory.getDAOFactory();
 		try {
 			WisdomDAO dao = factory.getWisdomDAO();
-			WDWisdomData result = dao
-					.getWisdom(category, subCategory, wisdomId);
+			WDWisdomData result = dao.getWisdom(wisdomId);
 			return result;
 		} catch (WisdomDatastoreException e) {
 			DbgUtil.showLog(TAG, "WisdomDatastoreException: " + e.getMessage());
@@ -256,6 +254,44 @@ public class WisdomFacade {
 			DAOFactory factory = DAOFactory.getDAOFactory();
 			WisdomDAO dao = factory.getWisdomDAO();
 			return dao.updateWisdom(data);
+		} catch (WisdomDatastoreException e) {
+			DbgUtil.showLog(TAG, "WisdomDatastoreException: " + e.getMessage());
+		}
+
+		return false;
+	}
+
+	public boolean updateMessageLikeNum(long wisdomId, long itemId) {
+		DbgUtil.showLog(TAG, "updateMessageLikeNum");
+
+		if (wisdomId == WConstant.NO_WISDOM || itemId == WConstant.NO_WISDOM) {
+			throw new IllegalArgumentException("Illegal parameter");
+		}
+
+		try {
+			DAOFactory factory = DAOFactory.getDAOFactory();
+			WisdomDAO dao = factory.getWisdomDAO();
+			WDWisdomData data = dao.getWisdom(wisdomId);
+			List<WDWisdomItemEntry> items = data.getItems();
+
+			boolean isUpdated = false;
+
+			for (WDWisdomItemEntry entry : items) {
+				if (entry.getItemId() == itemId) {
+					int likeNum = entry.getNumberOfLike();
+					likeNum = likeNum + 1;
+					entry.setItemLikeNum(likeNum);
+					isUpdated = true;
+					break;
+				}
+			}
+
+			if (isUpdated) {
+				dao.updateWisdom(data);
+			}
+
+			return true;
+
 		} catch (WisdomDatastoreException e) {
 			DbgUtil.showLog(TAG, "WisdomDatastoreException: " + e.getMessage());
 		}

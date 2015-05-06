@@ -66,4 +66,9 @@ public class WDWisdomMessage implements WDWisdomItemEntry {
 		mItemId = id;
 	}
 
+	@Override
+	public void setItemLikeNum(int newLikeNum) {
+		mNumOfLiked = newLikeNum;
+	}
+
 }

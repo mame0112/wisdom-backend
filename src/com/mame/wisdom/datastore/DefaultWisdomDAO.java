@@ -231,8 +231,8 @@ public class DefaultWisdomDAO implements WisdomDAO {
 	}
 
 	@Override
-	public WDWisdomData getWisdom(String category, String subCategory,
-			long wisdomId) throws WisdomDatastoreException {
+	public WDWisdomData getWisdom(long wisdomId)
+			throws WisdomDatastoreException {
 		DbgUtil.showLog(TAG, "getWisdom");
 
 		Key key = DatastoreKeyGenerator.getWisdomKeyById(wisdomId);

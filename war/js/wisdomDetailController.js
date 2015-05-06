@@ -10,6 +10,7 @@ wisdomApp.controller('wisdomDetailController',
 '$sce',
 '$state',
 'userDataHolder',
+'wisdomMessageLikeAPIService',
 function($scope, 
 	log, 
 	wisdomAPIService, 
@@ -20,7 +21,8 @@ function($scope,
 	creativeColorGenerateService, 
 	$sce, 
 	$state, 
-	userDataHolder){
+	userDataHolder,
+	wisdomMessageLikeAPIService){
  	log.d("wisdomDetailController");
 
  	var wisdomId = $stateParams.wisdomId;
@@ -29,6 +31,10 @@ function($scope,
  	$scope.noContent = null;
 
  	$scope.colorGenerater = creativeColorGenerateService;
+
+ 	// Variable to identify if the user already select "Like"
+ 	// (We should prevent the user to continuous "Like" press)
+ 	var isLiked = [];
 
  	$scope.initialize = function(){
  		log.d("wisdomDetailController initialize");
@@ -45,9 +51,16 @@ function($scope,
 
 	 		if($scope.wisdom !== null && $scope.wisdom !== undefined){
 	 			if($scope.wisdom.messages !== null && $scope.wisdom.messages !== undefined){
+
 	 				// var fileURL = URL.createObjectURL($scope.wisdom.thumbnail);
 	 				// $scope.content = $sce.trustAsResourceUrl(fileURL);
 			 		$scope.messages = JSON.parse(response.params.messages);
+
+	 				for(var i=0; i< $scope.messages.length; i++){
+	 					log.d("item " + i + " is false" );
+	 					isLiked[i] = false;
+	 				}
+
 	 			} else {
 					//Error handling 
 	 			}
@@ -96,8 +109,32 @@ function($scope,
 
 	$scope.createAccount = function()
 	{
-		log.d("createAccount");
 		$state.go('signup');
+	};
+
+	$scope.likeButtonPress = function(index)
+	{
+
+		var messageId = index;
+
+		var param = {
+			'id': wisdomId,
+			'itemId': messageId
+		};
+
+		//If the user hasn't selected liked yet
+		if(isLiked[index] === false){
+			isLiked[index] = true;
+
+			$scope.messages[index].like_num += 1;
+			wisdomMessageLikeAPIService.like({servlet_params : param}, function(response){
+		 		log.d("response received");
+		 		if(response !== null){
+
+		 		}
+	 		});
+		}
+
 	};
 
 }]);

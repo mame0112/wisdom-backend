@@ -108,6 +108,9 @@ public class ActionFactory {
 		mAction.put(ActionConstants.GET + ActionConstants.KEY_MODIFY_WISDOM,
 				new UpdateWisdomAction());
 
+		mAction.put(ActionConstants.GET + ActionConstants.KEY_MESSAGE_LIKE,
+				new MessageLikeAction());
+
 	}
 
 	private ActionFactory() {

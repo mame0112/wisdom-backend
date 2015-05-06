@@ -41,6 +41,8 @@ public class ActionConstants {
 	public final static String KEY_USER_ACCOUNT_LOGIN = "/userlogin";
 	
 	public final static String KEY_CONTACT = "/contact";
+	
+	public final static String KEY_MESSAGE_LIKE = "/messagelike";
 
 	public final static String KEY_DEBUG = "/debug";
 

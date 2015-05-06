@@ -94,7 +94,7 @@ public class JsonConstant {
 
 	public final static String PARAM_WISDOM_ENTRY_NAME = "entry";
 
-	public final static String PARAM_WISDOM_ITEM_ID = "id";
+	public final static String PARAM_WISDOM_ITEM_ID = "itemId";
 
 	public final static String PARAM_WISDOM_ITEM_TYPE = "type";
 
