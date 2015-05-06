@@ -11,7 +11,9 @@
 
 #userpage .sidebar .header{
 	width: 56%;
-	margin: 0 auto;
+	margin: 20px auto;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
 }
 
 #userpage .sidebar .header .thumbnail{
@@ -32,11 +34,10 @@
 #userpage .sidebar .username{
 	clear: both;
 	color: #000000;
-	font-size: 24px;
+	font-size: 32px;
+    font-weight: 200;
 	text-align: center;
-	height: 100%;
-	padding-top: 0px;
-	padding-bottom: 10px;
+	padding-bottom: 14px;
 }
 
 #userpage .sidebar .status{	
@@ -46,11 +47,10 @@
 
 #userpage .sidebar .status .title{
 	float: left;
-	margin-right: 20px;
 }
 
 #userpage .sidebar .status .count{
-	margin-right: auto;
+    text-align: right;
 }
 
 #userpage .category{
@@ -156,8 +156,8 @@
 }
 
 #userpage .category .headDivider{
-	padding: 0px;
-	margin: 0px;
+    padding-top: 0px;
+    margin-top: 0px;
 	border-width: 2px;
 }
 
