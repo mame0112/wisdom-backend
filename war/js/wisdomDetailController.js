@@ -57,7 +57,6 @@ function($scope,
 			 		$scope.messages = JSON.parse(response.params.messages);
 
 	 				for(var i=0; i< $scope.messages.length; i++){
-	 					log.d("item " + i + " is false" );
 	 					isLiked[i] = false;
 	 				}
 
@@ -128,10 +127,7 @@ function($scope,
 
 			$scope.messages[index].like_num += 1;
 			wisdomMessageLikeAPIService.like({servlet_params : param}, function(response){
-		 		log.d("response received");
-		 		if(response !== null){
-
-		 		}
+				//Do something if needed.
 	 		});
 		}
 
