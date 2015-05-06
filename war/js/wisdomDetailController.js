@@ -134,7 +134,6 @@ function($scope,
 				if(response !== null && response !== undefined){
 					if(response.params !== null && response.params !== undefined){
 						var point = response.params.point;
-						log.d("updated point: " + point);
 						toasterService.showSuccessToasterShort("Point updated", "Your point is now " + point);
 					} else {
 						//Error handling
