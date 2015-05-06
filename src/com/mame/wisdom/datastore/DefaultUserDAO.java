@@ -383,23 +383,14 @@ public class DefaultUserDAO implements UserDAO {
 			DbgUtil.showLog(TAG, "newPoint: " + newPoint);
 			data.setTotalPoint(newPoint);
 
-			DbgUtil.showLog(TAG, "AA");
-
 			if (createdWisdomId != WConstant.NO_WISDOM) {
-				DbgUtil.showLog(TAG, "BB");
 
 				data.addCreatedWisdomId(createdWisdomId);
 			}
 
-			DbgUtil.showLog(TAG, "CC");
-
 			if (likedWisdomId != WConstant.NO_WISDOM) {
-
-				DbgUtil.showLog(TAG, "DD");
 				data.addLikedWisdomId(likedWisdomId);
 			}
-
-			DbgUtil.showLog(TAG, "EE");
 
 			Entity newEntity = DefaultUserDAOHelper
 					.createEntityFromUserStatusData(data);

@@ -14,6 +14,7 @@ import com.mame.wisdom.exception.WisdomDatastoreException;
 import com.mame.wisdom.exception.WisdomFacadeException;
 import com.mame.wisdom.search.WisdomSearchService;
 import com.mame.wisdom.util.DbgUtil;
+import com.mame.wisdom.util.UserPointOption;
 
 public class WisdomFacade {
 
@@ -261,10 +262,11 @@ public class WisdomFacade {
 		return false;
 	}
 
-	public boolean updateMessageLikeNum(long wisdomId, long itemId) {
+	public boolean updateMessageLikeNum(long userId, long wisdomId, long itemId) {
 		DbgUtil.showLog(TAG, "updateMessageLikeNum");
 
-		if (wisdomId == WConstant.NO_WISDOM || itemId == WConstant.NO_WISDOM) {
+		if (userId == WConstant.NO_USER || wisdomId == WConstant.NO_WISDOM
+				|| itemId == WConstant.NO_WISDOM) {
 			throw new IllegalArgumentException("Illegal parameter");
 		}
 
@@ -289,7 +291,6 @@ public class WisdomFacade {
 			if (isUpdated) {
 				dao.updateWisdom(data);
 			}
-
 			return true;
 
 		} catch (WisdomDatastoreException e) {

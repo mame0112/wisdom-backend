@@ -11,6 +11,7 @@ wisdomApp.controller('wisdomDetailController',
 '$state',
 'userDataHolder',
 'wisdomMessageLikeAPIService',
+'toasterService',
 function($scope, 
 	log, 
 	wisdomAPIService, 
@@ -22,7 +23,8 @@ function($scope,
 	$sce, 
 	$state, 
 	userDataHolder,
-	wisdomMessageLikeAPIService){
+	wisdomMessageLikeAPIService,
+	toasterService){
  	log.d("wisdomDetailController");
 
  	var wisdomId = $stateParams.wisdomId;
@@ -114,9 +116,11 @@ function($scope,
 	$scope.likeButtonPress = function(index)
 	{
 
+		var userId = userDataHolder.getUserId();
 		var messageId = index;
 
 		var param = {
+			'userId': userId,
 			'id': wisdomId,
 			'itemId': messageId
 		};
@@ -127,7 +131,19 @@ function($scope,
 
 			$scope.messages[index].like_num += 1;
 			wisdomMessageLikeAPIService.like({servlet_params : param}, function(response){
-				//Do something if needed.
+				if(response !== null && response !== undefined){
+					if(response.params !== null && response.params !== undefined){
+						var point = response.params.point;
+						log.d("updated point: " + point);
+						toasterService.showSuccessToasterShort("Point updated", "Your point is now " + point);
+					} else {
+						//Error handling
+						toasterService.showErrorToasterShort("Error", "Failed to do 'Like'. Please try again later");
+					}
+				} else {
+					//Error handling
+					toasterService.showErrorToasterShort("Error", "Failed to do 'Like'. Please try again later");
+				}
 	 		});
 		}
 

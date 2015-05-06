@@ -8,11 +8,14 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.data.WDWisdomData;
+import com.mame.wisdom.datastore.UserDAO;
+import com.mame.wisdom.datastore.UserDataFacade;
 import com.mame.wisdom.datastore.WisdomFacade;
 import com.mame.wisdom.jsonbuilder.JsonBuilder;
 import com.mame.wisdom.jsonbuilder.JsonConstant;
 import com.mame.wisdom.jsonbuilder.MessageLikeJsonBuilder;
 import com.mame.wisdom.util.DbgUtil;
+import com.mame.wisdom.util.UserPointOption;
 
 public class MessageLikeAction implements Action {
 
@@ -32,12 +35,23 @@ public class MessageLikeAction implements Action {
 			builder.addResponseId(Integer.valueOf(responseId));
 
 			JSONObject object = new JSONObject(param);
+			long userId = object.getLong(JsonConstant.PARAM_USER_ID);
 			long wisdomId = object.getLong(JsonConstant.PARAM_WISDOM_ID);
 			long messageId = object.getLong(JsonConstant.PARAM_WISDOM_ITEM_ID);
 
 			WisdomFacade facade = new WisdomFacade();
-			boolean result = facade.updateMessageLikeNum(wisdomId, messageId);
-			builder.addResponseParam(result);
+			boolean result = facade.updateMessageLikeNum(userId, wisdomId,
+					messageId);
+			if (result) {
+				UserDataFacade userFacade = new UserDataFacade();
+				long updatedPoint = userFacade.updateUserStatus(userId,
+						UserPointOption
+								.getPoint(UserPointOption.POINT_LIKE_WISDOM),
+						WConstant.NO_WISDOM, wisdomId);
+				builder.addResponseParam(updatedPoint);
+			} else {
+				builder.addErrorMessage("Failed to update the number of like");
+			}
 
 		} else {
 			builder.addErrorMessage("parameter is null");
@@ -48,5 +62,4 @@ public class MessageLikeAction implements Action {
 
 		return result;
 	}
-
 }

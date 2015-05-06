@@ -52,14 +52,17 @@ public class MessageLikeJsonBuilder extends JsonBuilder {
 			throw new IllegalArgumentException("parameter is null");
 		}
 
-		if (!(param[0] instanceof Boolean)) {
+		if (!(param[0] instanceof Long)) {
 			throw new IllegalArgumentException("Illegal parameter type");
 		}
 
-		boolean input = (Boolean) param[0];
+		long updatedPoint = (long) param[0];
 
 		try {
-			mRootObject.put(JsonConstant.PARAMS, input);
+			JSONObject object = new JSONObject();
+			object.put(JsonConstant.PARAM_USER_POINT, updatedPoint);
+
+			mRootObject.put(JsonConstant.PARAMS, object);
 		} catch (JSONException e) {
 			DbgUtil.showLog(TAG, "JSONException: " + e.getMessage());
 		}
