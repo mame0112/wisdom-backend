@@ -61,4 +61,9 @@ public class WDWisdomMessage implements WDWisdomItemEntry {
 		return mLastUpdateDate;
 	}
 
+	@Override
+	public void setItemId(long id) {
+		mItemId = id;
+	}
+
 }

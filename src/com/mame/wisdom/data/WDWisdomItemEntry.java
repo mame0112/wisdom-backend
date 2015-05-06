@@ -23,5 +23,7 @@ public interface WDWisdomItemEntry extends Serializable {
 	public String getLastUpdateUserName();
 
 	public long getLastUpdateDate();
+	
+	public void setItemId(long id);
 
 }

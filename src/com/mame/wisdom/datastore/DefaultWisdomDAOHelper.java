@@ -8,6 +8,7 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Text;
 import com.google.appengine.labs.repackaged.org.json.JSONArray;
 import com.mame.wisdom.data.WDWisdomData;
+import com.mame.wisdom.data.WDWisdomDataBuilder;
 import com.mame.wisdom.data.WDWisdomItemEntry;
 import com.mame.wisdom.util.DbgUtil;
 import com.mame.wisdom.util.JsonParseUtil;
@@ -35,8 +36,6 @@ public class DefaultWisdomDAOHelper {
 			Blob thumbnail = (Blob) e
 					.getProperty(DBConstant.ENTITY_WISDOM_THUMBNAIL);
 
-			DbgUtil.showLog(TAG, "AAAA");
-
 			long viewCount = 0;
 
 			try {
@@ -46,23 +45,41 @@ public class DefaultWisdomDAOHelper {
 				DbgUtil.showLog(TAG, "Exception: " + ex.getMessage());
 			}
 
-			DbgUtil.showLog(TAG, "BBBB");
-
 			String entryJson = ((Text) e
 					.getProperty(DBConstant.ENTITY_WISDOM_ITMES)).getValue();
-
-			DbgUtil.showLog(TAG, "CCC");
 			List<WDWisdomItemEntry> items = JsonParseUtil
 					.createWisdomItemEntryListFromJsonString(entryJson);
 
-			WDWisdomData data = new WDWisdomData(wisdomId, title, description,
-					tag, createdUserId, lastUpdatedDate, thumbnail, items,
-					viewCount);
-			return data;
+			WDWisdomDataBuilder builder = WDWisdomDataBuilder.createFrom(null);
+			return builder.setWisdomId(wisdomId).setTitle(title)
+					.setDescription(description).setTag(tag)
+					.setCreatedUserId(createdUserId)
+					.setLastUpdatedDate(lastUpdatedDate)
+					.setThumbnail(thumbnail).setViewCount(viewCount)
+					.setEntires(items).getWisdomData();
+			// WDWisdomData data = new WDWisdomData(wisdomId, title,
+			// description,
+			// tag, createdUserId, lastUpdatedDate, thumbnail, items,
+			// viewCount);
+			// return data;
 		}
 
 		return null;
 	}
+
+//	private List<Long> createWisdomMessageOrder(List<WDWisdomItemEntry> items) {
+//
+//		if (items != null) {
+//			List<Long> ids = new ArrayList<Long>();
+//			for (WDWisdomItemEntry item : items) {
+//				ids.add(item.getItemId());
+//			}
+//
+//			return ids;
+//		}
+//
+//		return null;
+//	}
 
 	public List<WDWisdomData> parseListEntityToWDWisdomData(
 			List<Entity> entities) {

@@ -59,4 +59,9 @@ public class WDWisdomTitle implements WDWisdomItemEntry {
 	public long getLastUpdateDate() {
 		return mLastUpdateDate;
 	}
+
+	@Override
+	public void setItemId(long id) {
+		mItemId = id;		
+	}
 }

@@ -73,26 +73,13 @@ public class UserRankingJsonBuilder extends JsonBuilder {
 
 				String name = user.getUserName();
 
-				// if (user.getTwitterName() != null) {
-				// DbgUtil.showLog(TAG, "Twitter");
-				// name = user.getTwitterName();
-				// } else {
-				// if (user.getFacebookName() != null) {
-				// DbgUtil.showLog(TAG, "facebook");
-				// name = user.getFacebookName();
-				// } else {
-				// if (user.getUsername() != null) {
-				// DbgUtil.showLog(TAG, "usernmae");
-				// name = user.getUsername();
-				// }
-				// }
-				// }
-
 				// If no name available, we should not return it
 				if (name != null) {
 					obj.put(JsonConstant.PARAM_USER_NAME, name);
 					obj.put(JsonConstant.PARAM_USER_POINT, user.getPoint());
 					obj.put(JsonConstant.PARAM_USER_ID, user.getUserId());
+					
+					//TODO
 					// obj.put(JsonConstant.PARAM_USER_THUMBNAIL,
 					// user.getThumbnail());
 					array.put(obj);

@@ -25,8 +25,7 @@ public class WDWisdomData implements Serializable {
 
 	private long mViewCount = 0;
 
-	// TODO need to consider how we handle this.
-	private List<Integer> mItemOrder = new ArrayList<Integer>();
+	private List<Long> mItemOrder = new ArrayList<Long>();
 
 	private List<WDWisdomItemEntry> mItems = new ArrayList<WDWisdomItemEntry>();
 
@@ -44,6 +43,25 @@ public class WDWisdomData implements Serializable {
 		mViewCount = viewCount;
 	}
 
+	/*
+	 * Copy constructor
+	 */
+	public WDWisdomData(WDWisdomData data) {
+		if (data == null) {
+			throw new IllegalArgumentException("parameter is null");
+		}
+
+		mWisdomId = data.getWisdomId();
+		mTitle = data.getTitle();
+		mDescription = data.getDescription();
+		mTag = data.getTag();
+		mCreatedUserId = data.getCreatedUserId();
+		mLastUpdatedDate = data.getLastUpdatedDate();
+		mThumbnail = data.getThumbnail();
+		mItems = data.getItems();
+		mViewCount = data.getViewCount();
+	}
+
 	public long getWisdomId() {
 		return mWisdomId;
 	}
@@ -56,40 +74,87 @@ public class WDWisdomData implements Serializable {
 		return mTitle;
 	}
 
+	public void setTitle(String title) {
+		mTitle = title;
+	}
+
 	public String getDescription() {
 		return mDescription;
+	}
+
+	public void setDescription(String description) {
+		mDescription = description;
 	}
 
 	public String getTag() {
 		return mTag;
 	}
 
+	public void setTag(String tag) {
+		mTag = tag;
+	}
+
 	public Blob getThumbnail() {
 		return mThumbnail;
+	}
+
+	public void setThumbnail(Blob thumbnail) {
+		mThumbnail = thumbnail;
 	}
 
 	public long getCreatedUserId() {
 		return mCreatedUserId;
 	}
 
+	public void setCreatedUserId(long id) {
+		mCreatedUserId = id;
+	}
+
 	public long getLastUpdatedDate() {
 		return mLastUpdatedDate;
+	}
+
+	public void setLastUpdatedDate(long date) {
+		mLastUpdatedDate = date;
 	}
 
 	public List<WDWisdomItemEntry> getItems() {
 		return mItems;
 	}
 
+	public void setItems(List<WDWisdomItemEntry> items) {
+		mItems = items;
+	}
+
 	public long getViewCount() {
 		return mViewCount;
+	}
+
+	public void setViewCount(long count) {
+		mViewCount = count;
 	}
 
 	public void increaseViewCount() {
 		mViewCount = mViewCount + 1;
 	}
 
-	public void setThumbnail(Blob thumbnail) {
-		mThumbnail = thumbnail;
+	public void setEntries(List<WDWisdomItemEntry> entries) {
+		// setEntriesOrder(entries);
+		mItems = entries;
+	}
+
+	public void setEntryOrder(List<Long> itemOrder) {
+		mItemOrder = itemOrder;
+	}
+
+	// private void setEntriesOrder(List<WDWisdomItemEntry> entries) {
+	// for (WDWisdomItemEntry entry : entries) {
+	// mItemOrder.add(entry.getItemId());
+	// }
+	// }
+
+	public List<Long> getEntriesOrder() {
+		return mItemOrder;
 	}
 
 }

@@ -8,6 +8,7 @@ import com.google.appengine.labs.repackaged.org.json.JSONArray;
 import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.data.WDSubCategoryData;
 import com.mame.wisdom.data.WDWisdomData;
+import com.mame.wisdom.data.WDWisdomItemEntry;
 import com.mame.wisdom.data.WisdomDataStructure;
 import com.mame.wisdom.exception.WisdomDatastoreException;
 import com.mame.wisdom.exception.WisdomFacadeException;
@@ -162,7 +163,8 @@ public class WisdomFacade {
 						.createWisdomDataFromInputString(input);
 				data.getWisdomData().setThumbnail(thumbnail);
 				return facade.addWisdom(data.getCategory(),
-						data.getSubCategory(), data.getWisdomData());
+						data.getSubCategory(),
+						assignIndexAndOrder(data.getWisdomData()));
 			} catch (WisdomDatastoreException e) {
 				DbgUtil.showLog(TAG,
 						"WisdomDatastoreException: " + e.getMessage());
@@ -170,6 +172,27 @@ public class WisdomFacade {
 			}
 		}
 
+		return null;
+	}
+
+	/**
+	 * Assign id for each entry and define order for them.
+	 * 
+	 * @param data
+	 * @return
+	 */
+	private WDWisdomData assignIndexAndOrder(WDWisdomData data) {
+		if (data != null) {
+			List<WDWisdomItemEntry> items = data.getItems();
+
+			int count = 0;
+
+			for (WDWisdomItemEntry item : items) {
+				item.setItemId(count);
+				count = count + 1;
+			}
+			return data;
+		}
 		return null;
 	}
 

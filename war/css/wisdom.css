@@ -133,14 +133,19 @@
 }
 
 .wisdom .bodyarea .subtitle{
+	font-size: 16px;
+	font-weight: bold;
 	width: 100%;
-	text-decoration: underline;
-	text-decoration-color: red;
+	border-bottom: solid 2px #888888;
 	margin-top: 2.0em;
 }
 
 .wisdom .bodyarea .message{
 	clear: both;
+}
+
+.wisdom .bodyarea .message .messageBody{
+	font-size: 16px;
 }
 
 .wisdom .bodyarea .message .update{

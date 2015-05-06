@@ -28,12 +28,12 @@
 		<ul ng-repeat="entry in messages track by $index">
 			<li>
 				<p ng-show="{{entry.tag}} == 1" class="subtitle">{{entry.message}}</p>
-				<p ng-show="{{entry.tag}} == 2">{{entry.message}}</p>
 				<div class="message">
+					<p ng-show="{{entry.tag}} == 2" class="messageBody">{{entry.message}}</p>
 					<div class="update" ng-show="isValidDateFormat(entry.updated_date)">
 					Last updated: {{formatTimeInfo(entry.updated_date)}}
 					</div>
-					<div class="like" ng-show="{{entry.tag}} == 2">コメントにイイネ！する<img src="image/like.jpg">{{entry.like_num}}</div>
+					<div class="like" ng-show="{{entry.tag}} == 2"><a href="">コメントにイイネ！する<img src="image/like.jpg"></a>{{entry.like_num}}</div>
 				</div>
 			</li>
 		</ul>
