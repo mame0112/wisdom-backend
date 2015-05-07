@@ -56,7 +56,7 @@
 }
 
 .frame {
-    padding-top: 26px;
+    padding-top: 16px;
     height: 60px;
     position: relative;
 }
@@ -69,12 +69,15 @@
 
 .panel-heading{
     padding-top: 0px;
-    font-weight: bold;
+    padding-bottom: 0px;
+    font-size: 28px;
+    font-weight: 100;
+    border-bottom: solid 2px #888888;
 }
 
 .panel-body{
-    padding-top: 0px;
+    padding-top: 20px;
     font-weight: normal;
     color: #888888;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }

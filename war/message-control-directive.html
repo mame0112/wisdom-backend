@@ -32,8 +32,6 @@
 		  <button type="button" class="btn btn-default btn-xs" ng-click="moveMessageUpToTop(saveArray, $index)" ng-show="panelCondition[$index] == true">Top</button>
 		  <button type="button" class="btn btn-default btn-xs" ng-click="moveMessageDownToBottom(saveArray, $index)" ng-show="panelCondition[$index] == true">Bottom</button>
 	  	</div>
-<!-- 		<div ng-show="panelCondition[$index] == false" class="empty">
-		</div> -->
 
 		<div ng-class="findCssClassbyType(data)" ng-show="isOriginalMessageDisplayed(index)">{{data.entry}}</div>
 		<div class="form-group" ng-show="isModifyPanelVisible($index)">
