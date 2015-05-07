@@ -10,6 +10,8 @@ import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.fileupload.util.Streams;
 
+import com.google.appengine.api.blobstore.BlobstoreService;
+import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 import com.google.appengine.api.datastore.Blob;
 import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
@@ -110,11 +112,10 @@ public class CreateWisdomAction implements Action {
 				}
 			}
 
-			// BlobstoreService blobstoreService = BlobstoreServiceFactory
-			// .getBlobstoreService();
-			// String uploadUrl =
-			// blobstoreService.createUploadUrl("/uploadUrl");
-			// response.sendRedirect("/upload");
+			BlobstoreService blobstoreService = BlobstoreServiceFactory
+					.getBlobstoreService();
+			String uploadUrl = blobstoreService.createUploadUrl("/uploadUrl");
+			response.sendRedirect("/upload");
 
 		} catch (Exception e) {
 			DbgUtil.showLog(TAG, "Exception: " + e.getMessage());
