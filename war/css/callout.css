@@ -54,3 +54,27 @@
 .callout-info h4 {
     color: #5bc0de;
 }
+
+.frame {
+    padding-top: 26px;
+    height: 60px;
+    position: relative;
+}
+
+.item {
+    position: absolute;
+    top: 0;
+}
+
+
+.panel-heading{
+    padding-top: 0px;
+    font-weight: bold;
+}
+
+.panel-body{
+    padding-top: 0px;
+    font-weight: normal;
+    color: #888888;
+    margin-bottom: 30px;
+}

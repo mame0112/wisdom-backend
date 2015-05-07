@@ -169,10 +169,9 @@ wisdomApp.controller('messageOperationController',
 
  	$scope.findCssClassbyType = function(data)
  	{
- 		if(data.type === TYPE_TITLE)
- 		{
+ 		if(data.type == TYPE_TITLE) {
  			return "panel-heading";
- 		} else if (data.type === TYPE_MESSAGE){
+ 		} else if (data.type == TYPE_MESSAGE){
  			return "panel-body";
  		} else {
  			log.d("Unknown type.");
