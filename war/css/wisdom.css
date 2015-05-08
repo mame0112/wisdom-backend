@@ -159,6 +159,12 @@
 	text-align: right;
 }
 
+.wisdom .bodyarea .message .like img{
+	width: 32px;
+	height: 32px;
+	margin-bottom: 4px;
+}
+
 .wisdom .bodyarea .message .clear{
 	clear: both;
 }

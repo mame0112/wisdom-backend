@@ -25,12 +25,12 @@
 	<!-- This part is for already input information. -->
 	<div ng-repeat="data in saveArray track by $index" ng-mouseenter="onMouseOver($index)" ng-mouseleave="onMouseLeave($index)" class="messagecontrol_frame">
 		<div class="messagecontrol_item">
-		  <button type="button" class="btn btn-default btn-xs" ng-click="modifyInputMessage(data, $index)" ng-show="panelCondition[$index] == true">Modify</button>
-		  <button type="button" class="btn btn-default btn-xs" ng-click="deleteInputMessage(data)" ng-show="panelCondition[$index] == true">Delete</button>
-		  <button type="button" class="btn btn-default btn-xs" ng-click="moveUpMessagePosition(saveArray, $index)" ng-show="panelCondition[$index] == true">Up</button>
-		  <button type="button" class="btn btn-default btn-xs" ng-click="moveDownMessagePosition(saveArray, $index)" ng-show="panelCondition[$index] == true">Down</button>
-		  <button type="button" class="btn btn-default btn-xs" ng-click="moveMessageUpToTop(saveArray, $index)" ng-show="panelCondition[$index] == true">Top</button>
-		  <button type="button" class="btn btn-default btn-xs" ng-click="moveMessageDownToBottom(saveArray, $index)" ng-show="panelCondition[$index] == true">Bottom</button>
+		  <button type="button" class="btn btn-default btn-xs" ng-click="modifyInputMessage(data, $index)" ng-show="panelCondition[$index] == true"><img src="/image/message_handler_modify.png"></button>
+		  <button type="button" class="btn btn-default btn-xs" ng-click="deleteInputMessage(data)" ng-show="panelCondition[$index] == true"><img src="/image/message_handler_delete.png"></button>
+		  <button type="button" class="btn btn-default btn-xs" ng-click="moveUpMessagePosition(saveArray, $index)" ng-show="panelCondition[$index] == true"><img src="/image/message_handler_up.png"></button>
+		  <button type="button" class="btn btn-default btn-xs" ng-click="moveDownMessagePosition(saveArray, $index)" ng-show="panelCondition[$index] == true"><img src="/image/message_handler_down.png"></button>
+		  <button type="button" class="btn btn-default btn-xs" ng-click="moveMessageUpToTop(saveArray, $index)" ng-show="panelCondition[$index] == true"><img src="/image/message_handler_top.png"></button>
+		  <button type="button" class="btn btn-default btn-xs" ng-click="moveMessageDownToBottom(saveArray, $index)" ng-show="panelCondition[$index] == true"><img src="/image/message_handler_bottom.png"></button>
 	  	</div>
 
 		<div ng-class="findCssClassbyType(data)" ng-show="isOriginalMessageDisplayed(index)">{{data.entry}}</div>

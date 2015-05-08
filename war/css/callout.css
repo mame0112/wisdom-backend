@@ -61,9 +61,14 @@
     position: relative;
 }
 
-.messagecontrol_item {
+.messagecontrol_frame .messagecontrol_item {
     position: absolute;
     top: 0;
+}
+
+.messagecontrol_frame .messagecontrol_item img {
+    width: 24px;
+    height: 24px;
 }
 
 

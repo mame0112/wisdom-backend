@@ -38,6 +38,8 @@ function($scope,
  	// (We should prevent the user to continuous "Like" press)
  	var isLiked = [];
 
+ 	$scope.likeImage = [];
+
  	$scope.initialize = function(){
  		log.d("wisdomDetailController initialize");
 		modeService.changeCurrentMode(Constants.STATE.STATE_WISDOM_PAGE);
@@ -60,6 +62,7 @@ function($scope,
 
 	 				for(var i=0; i< $scope.messages.length; i++){
 	 					isLiked[i] = false;
+	 					$scope.likeImage[i] = 'image/star_not_selected.png';
 	 				}
 
 	 			} else {
@@ -128,6 +131,7 @@ function($scope,
 		//If the user hasn't selected liked yet
 		if(isLiked[index] === false){
 			isLiked[index] = true;
+			$scope.likeImage[index] = 'image/star_selected_material.png';
 
 			$scope.messages[index].like_num += 1;
 			wisdomMessageLikeAPIService.like({servlet_params : param}, function(response){

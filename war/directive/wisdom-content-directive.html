@@ -33,7 +33,7 @@
 					<div class="update" ng-show="isValidDateFormat(entry.updated_date)">
 					Last updated: {{formatTimeInfo(entry.updated_date)}}
 					</div>
-					<div class="like" ng-show="{{entry.tag}} == 2"><a href="" ng-click="likeButtonPress($index)"><img src="image/like.jpg"></a>{{entry.like_num}}</div>
+					<div class="like" ng-show="{{entry.tag}} == 2"><a href="" ng-click="likeButtonPress($index)"><img ng-src="{{likeImage[$index]}}"></a>{{entry.like_num}}</div>
 				</div>
 			</li>
 		</ul>
