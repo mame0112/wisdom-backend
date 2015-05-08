@@ -23,8 +23,8 @@
 
 <div class="callout callout-success" ng-show="saveArray.length !== 0">
 	<!-- This part is for already input information. -->
-	<div ng-repeat="data in saveArray track by $index" ng-mouseenter="onMouseOver($index)" ng-mouseleave="onMouseLeave($index)" class="frame">
-		<div class="item">
+	<div ng-repeat="data in saveArray track by $index" ng-mouseenter="onMouseOver($index)" ng-mouseleave="onMouseLeave($index)" class="messagecontrol_frame">
+		<div class="messagecontrol_item">
 		  <button type="button" class="btn btn-default btn-xs" ng-click="modifyInputMessage(data, $index)" ng-show="panelCondition[$index] == true">Modify</button>
 		  <button type="button" class="btn btn-default btn-xs" ng-click="deleteInputMessage(data)" ng-show="panelCondition[$index] == true">Delete</button>
 		  <button type="button" class="btn btn-default btn-xs" ng-click="moveUpMessagePosition(saveArray, $index)" ng-show="panelCondition[$index] == true">Up</button>

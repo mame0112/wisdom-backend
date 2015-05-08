@@ -55,13 +55,13 @@
     color: #5bc0de;
 }
 
-.frame {
+.messagecontrol_frame {
     padding-top: 16px;
     height: 60px;
     position: relative;
 }
 
-.item {
+.messagecontrol_item {
     position: absolute;
     top: 0;
 }
