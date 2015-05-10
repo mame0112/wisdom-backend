@@ -120,6 +120,7 @@ function($scope,
 	{
 
 		var userId = userDataHolder.getUserId();
+		log.d("userId: " + userId);
 		var messageId = index;
 
 		var param = {

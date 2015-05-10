@@ -378,18 +378,36 @@ public class DefaultUserDAO implements UserDAO {
 			DefaultUserDAOHelper helper = new DefaultUserDAOHelper();
 			WDUserStatusData data = helper
 					.constructUserStatusDataFromEntity(entity);
+
 			long totalPoint = data.getTotalPoint();
 			long newPoint = totalPoint + updatePoint;
 			DbgUtil.showLog(TAG, "newPoint: " + newPoint);
 			data.setTotalPoint(newPoint);
 
 			if (createdWisdomId != WConstant.NO_WISDOM) {
-
 				data.addCreatedWisdomId(createdWisdomId);
 			}
 
 			if (likedWisdomId != WConstant.NO_WISDOM) {
-				data.addLikedWisdomId(likedWisdomId);
+				boolean isAlreadyLiked = false;
+
+				List<Long> likedIds = data.getLikedWisdomIds();
+				if (likedIds != null) {
+					for (long id : likedIds) {
+						DbgUtil.showLog(TAG, "likedId: " + id);
+						if (id == likedWisdomId) {
+							DbgUtil.showLog(TAG, "Already registered");
+							isAlreadyLiked = true;
+							break;
+						}
+					}
+				}
+
+				// Only if the user never liked to target wisdom
+				if (isAlreadyLiked == false) {
+					data.addLikedWisdomId(likedWisdomId);
+				}
+
 			}
 
 			Entity newEntity = DefaultUserDAOHelper

@@ -267,6 +267,8 @@ public class WisdomFacade {
 
 		if (userId == WConstant.NO_USER || wisdomId == WConstant.NO_WISDOM
 				|| itemId == WConstant.NO_WISDOM) {
+			DbgUtil.showLog(TAG, "userId: " + userId + " wisdomId: " + wisdomId
+					+ " itemId " + itemId);
 			throw new IllegalArgumentException("Illegal parameter");
 		}
 

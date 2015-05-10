@@ -55,13 +55,19 @@ public class UserStatusAction implements Action {
 
 					// Get created wisdom
 					// TODO Need to implement offset and limit
-					List<WDWisdomData> createdWisdoms = wisdomFacade
-							.getWisdomByIds(statusData.getCreatedWisdomIds());
+					List<WDWisdomData> createdWisdoms = null;
+					if (statusData.getCreatedWisdomIds() != null) {
+						createdWisdoms = wisdomFacade.getWisdomByIds(statusData
+								.getCreatedWisdomIds());
+					}
 
 					// Get liked wisdom
 					// TODO Need to implement offset and limit
-					List<WDWisdomData> likedWisdoms = wisdomFacade
-							.getWisdomByIds(statusData.getLikedWisdomIds());
+					List<WDWisdomData> likedWisdoms = null;
+					if (statusData.getLikedWisdomIds() != null) {
+						likedWisdoms = wisdomFacade.getWisdomByIds(statusData
+								.getLikedWisdomIds());
+					}
 
 					builder.addResponseParam(statusData.getTotalPoint(),
 							createdWisdoms, likedWisdoms);
