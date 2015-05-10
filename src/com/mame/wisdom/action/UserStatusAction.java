@@ -46,7 +46,7 @@ public class UserStatusAction implements Action {
 
 				if (statusData != null) {
 
-					List<Long> tmp = statusData.getCreatedWisdomIds();
+					List<Long> tmp = statusData.getLikedWisdomIds();
 					for (long l : tmp) {
 						DbgUtil.showLog(TAG, "l:: " + l);
 					}
@@ -68,8 +68,7 @@ public class UserStatusAction implements Action {
 
 				} else {
 					// No status data
-					builder.addResponseParam(statusData.getTotalPoint(), null,
-							null);
+					builder.addResponseParam(0, null, null);
 				}
 
 				// Get wisdoms created by user.

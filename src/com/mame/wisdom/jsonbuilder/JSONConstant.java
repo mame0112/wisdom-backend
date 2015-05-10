@@ -36,7 +36,7 @@ public class JsonConstant {
 
 	public final static String PARAM_USER_CREATED_WISDOM = "created";
 
-	public final static String PARAM_USER_LIKED_WISDOM = "likeed";
+	public final static String PARAM_USER_LIKED_WISDOM = "liked";
 
 	public final static String PARAM_USER_LAST_LOGIN = "logindate";
 
