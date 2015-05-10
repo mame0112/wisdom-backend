@@ -189,6 +189,14 @@ wisdomApp.directive('headerDirective', function(){
 	};
 })
 
+.directive('inputtedMessageController', function(){
+	return {
+		restrict: 'A',
+		controller: 'inputtedMessageController',
+		templateUrl: 'directive/inputted-message-directive.html'
+	};
+})
+
 // Directive for debug
 .directive('debugDirective', function(){
 	return {
