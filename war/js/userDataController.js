@@ -61,6 +61,17 @@ wisdomApp.controller('UserDataController',
  				$scope.point = response.params.point;
  				$scope.creates = response.params.created;
  				$scope.likes = response.params.liked;
+
+ 				$scope.createdNum = 0;
+				if($scope.creates !== null && $scope.creates !== undefined){
+	 				$scope.createdNum = $scope.creates.length;
+				}
+
+				$scope.likedNum = 0;
+				if($scope.likes !== null && $scope.likes !== undefined){
+	 				$scope.likedNum = $scope.likes.length;
+				}
+
  			});
  		}
  	};
