@@ -26,13 +26,15 @@ var wisdomApp = angular.module('WidsomApp',
 		state('signin', {
 			url: '/signin',
 			templateUrl: 'view/signin.html',
-			data : { pageTitle: 'Sign in' }
+			data : { pageTitle: 'Sign in' },
+			isSslRequired: true
 		}).
 		state('signup', {
 			url: '/signup',
 			templateUrl: 'view/signup.html',
 			controller: 'SignupController',
-			data : { pageTitle: 'Sign up' }
+			data : { pageTitle: 'Sign up' },
+			isSslRequired: true
 		}).
 		state('overview', {
 			url: '/overview',
@@ -52,7 +54,8 @@ var wisdomApp = angular.module('WidsomApp',
 		state('contact', {
 			url: '/contact',
 			templateUrl: 'view/contact.html',
-			data : { pageTitle: 'Contact' }
+			data : { pageTitle: 'Contact' },
+			isSslRequired: true
 		}).
 		state('user', {
 			url: '/view',
@@ -92,4 +95,16 @@ var wisdomApp = angular.module('WidsomApp',
 			data : { pageTitle: 'Search wisdom' }
 		});
 
+}])
+
+.run(['$rootScope', '$state', 'sslConnectionSwitchService', function ($rootScope, $state, sslConnectionSwitchService) {
+    $rootScope.$on('$stateChangeStart', function(e, toState, toParams, fromState, fromParams){
+        if (toState.isSslRequired) {
+			sslConnectionSwitchService.forceSslConnection();
+        } else {
+			sslConnectionSwitchService.forceBasicConnection();			
+        }
+        // e.preventDefault();
+            // $state.go('signin');
+    });
 }]);

@@ -25,6 +25,8 @@
 
   <sessions-enabled>true</sessions-enabled>
   
+  <ssl-enabled>true</ssl-enabled>
+  
   <!--
     HTTP Sessions are disabled by default. To enable HTTP sessions specify:
 
