@@ -85,6 +85,23 @@
     margin-top: 24px;
 }
 
+#infobar .divider{
+    padding-bottom: 8px;
+    margin: 0px;
+    clear: both;
+}
+
+#infobar ul{
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+
+#infobar ul{
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
 #infobar .maintitle{
     font-size: 16px;
     padding-bottom: -1.0em;
@@ -101,16 +118,20 @@
     margin-left:0px;
     padding-left: 0px;
     list-style-type: none;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
 }
 
 #infobar .list .contents{
-
+    padding: 0px;
+    margin: 0px;
 }
 
 #infobar .list .contents .image{
     float: left;
-    padding-left: 8px;
+    padding-left: 0px;
     padding-right: 8px;
+    padding-bottom: 0px;
 }
 
 #infobar .list .contents .content{
@@ -148,6 +169,8 @@
     height: 48px;
     background: #888888;
     border-radius: 2px 2px 2px 2px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
 }
 
 #infobar .thumbnail .text{
