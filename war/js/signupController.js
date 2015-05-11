@@ -139,10 +139,17 @@ wisdomApp.controller('SignupController',
 			 			if(response.params.length !== 0)
 			 			{
 					 		$scope.param = response.params[0];
-					 		log.d("userId: " + $scope.param.userId);
 							toasterService.showSuccessToasterShort("Signup", "Account successfully created!");
-							//TODO Need to log in
+
+							var userData = {
+								"userId":$scope.param.userId,
+								"username":params.name
+							};
+
+							//TODO need to support user thumbnail
+							userDataHolder.setUserData(userData);
 							$state.go('/');
+
 			 			} else {
 				 			log.d("response is null or undefined");
 							toasterService.showErrorToasterLong("Signup", "Something went wrong. Please try again later");
