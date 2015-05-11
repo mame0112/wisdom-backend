@@ -1,8 +1,8 @@
-<!-- Indices written at Mon, 11 May 2015 22:57:24 JST -->
+<!-- Indices written at Mon, 11 May 2015 23:59:05 JST -->
 
 <datastore-indexes>
 
-    <!-- Used 4 times in query history -->
+    <!-- Used 6 times in query history -->
     <datastore-index kind="kind_user_status" ancestor="true" source="auto">
         <property name="Status_total_point" direction="desc"/>
     </datastore-index>

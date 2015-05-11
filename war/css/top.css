@@ -68,16 +68,51 @@
 
 }
 
-#ranking .media-heading{
+#ranking .item{
+
+}
+
+
+#ranking .item .thumbnail{
+    position: relative;
+    width: 60px;
+    float: left;
+    padding: 0px;
+    margin: 0px;
+    border-style: none;
+}
+
+#ranking .item .thumbnail .number{
+    position: absolute;
+    bottom: 16px;
+    left: 25px;
+    color: #ffffff;
+    font-size: 20px;
+}
+
+#ranking .item .thumbnail .image{
+
+}
+
+
+#ranking .item .media-heading{
     font-size: 14px;
     font-weight: thin;
     color: #333333;
 }
 
-#ranking .media-body{
+#ranking .item .media-body{
+    padding-top: 10px;
+    padding-left: 6px;
     font-size: 14px;
     font-weight: thin;
     color: #888888;
+}
+
+#ranking .item .divider{
+    clear: both;
+    margin: 2px;
+    padding: 2px;
 }
 
 #infobar{
