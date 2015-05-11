@@ -11,7 +11,6 @@ wisdomApp.service('sslConnectionSwitchService', ['$location', 'log', '$window', 
     	forceSslConnection : function(){
     		log.d("forceSslConnection: " + $location.absUrl());
 			if ($location.protocol() !== 'https') {
-				// log.d("target: " + $location.absUrl().replace('http', 'https') + "signup");
 		        // $window.location.href = $location.absUrl().replace('http', 'https');
 		    }
     	},
