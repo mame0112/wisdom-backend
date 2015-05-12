@@ -8,14 +8,22 @@ var wisdomApp = angular.module('WidsomApp',
 	'toaster',
 	'angulartics',
 	'angulartics.google.analytics',
-	'ngProgress'
+	'ngProgress',
+	'pascalprecht.translate'
 	])
 .controller('WidsomController', ['$scope', 'Constants', 'log', function($scope, Constants, log){
 	
 }])
 
-.config(['$stateProvider', '$urlRouterProvider',
-	function($stateProvider, $urlRouterProvider) {
+.config(['$stateProvider', '$urlRouterProvider', '$translateProvider',
+	function($stateProvider, $urlRouterProvider, $translateProvider) {
+
+		$translateProvider.useStaticFilesLoader({
+	        prefix : '../lang/lang_',
+	        suffix : '.json'
+	    });
+	    $translateProvider.preferredLanguage(findLanguage());
+
 		$urlRouterProvider.otherwise('/');
 		$stateProvider.
 		state('/', {
@@ -95,6 +103,15 @@ var wisdomApp = angular.module('WidsomApp',
 			data : { pageTitle: 'Search wisdom' }
 		});
 
+		// $translateProvider.translation("ja", {
+		// 	NAME: "aa",
+		// });
+		// $translateProvider.translation("ja",
+  //   	{
+		// 	NAME: "名前",
+		// 	AGE: "年齢",
+  //   	});
+
 }])
 
 .run(['$rootScope', '$state', 'sslConnectionSwitchService', function ($rootScope, $state, sslConnectionSwitchService) {
@@ -108,3 +125,12 @@ var wisdomApp = angular.module('WidsomApp',
             // $state.go('signin');
     });
 }]);
+
+
+function findLanguage() {
+    try {
+        return (navigator.browserLanguage || navigator.language || navigator.userLanguage).substr(0, 2);
+    } catch (e) {
+        return "en";
+    }
+}
