@@ -1,31 +1,31 @@
 <div ng-controller="contactController" ng-init="initialize()" id="contact">
-	<p class="overview">Please give us your feedback. Comment, question, anything OK.</p>
+	<p class="overview" translate="contact.overview">Please give us your feedback. Comment, question, anything OK.</p>
 	<form role="form" name="contact" novalidation>
 
 		<div class="item">
-			<div class="subtitle">Name
-				<span class="notice" ng-show="contact.name.$error.required">*</span>
+			<div class="subtitle" translate="contact.name">Name
 			</div>
+			<span class="notice" ng-show="contact.name.$error.required">*</span>
 		<input type="text" class="form-control" placeholder="Input your name" name="name" ng-model="name" required>
 		</div>
 
 		<div class="item">
-			<div class="subtitle">Email
-				<span class="notice" ng-show="contact.email.$error.required">*</span>
+			<div class="subtitle" translate="contact.email">Email
 			</div>
+			<span class="notice" ng-show="contact.email.$error.required">*</span>
 		<input type="email" class="form-control" placeholder="Input your e-mail address" name="email" ng-model="email" ng-pattern="/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/" required>
-		<span class="notice" ng-show="contact.email.$error.pattern && contact.email.$touched">Illegal email address</span>
+		<span class="notice" ng-show="contact.email.$error.pattern && contact.email.$touched" translate="contact.illegal_email">Illegal email address</span>
 		</div>
 
 		<div class="item">
-			<div class="subtitle">Message
-				<span class="notice" ng-show="contact.message.$error.required">*</span>
+			<div class="subtitle" translate="contact.message">Message
 			</div>
+			<span class="notice" ng-show="contact.message.$error.required">*</span>
 			<textarea type="text" class="form-control" placeholder="Input any message" name="message" ng-model="message" required></textarea>
 		</div>
 
 		<div class="item">
-			<button type="submit" class="btn btn-primary" name="submit" ng-model="submit" ng-click="sendMessage()">Send message</button>
+			<button type="submit" class="btn btn-primary" name="submit" ng-model="submit" ng-click="sendMessage()" translate="contact.send">Send message</button>
 		</div>
 	</form>
 </div>

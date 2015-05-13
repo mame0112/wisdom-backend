@@ -1,13 +1,13 @@
 <div id="ranking" ng-controller="rankingController" ng-init="initialize()">
-<div class="maintitle">{{today}}'s ranking</div>
+<div class="maintitle" translate="ranking.title" translate-values="{value: today}">{{today}}'s ranking</div>
 <hr class="title_divider">
 	<div class="item" ng-repeat="score in scores">
 		<div class="thumbnail">
-			<img class="image" src="../image/ranking_1st.png" alt="..." ng-if="$index == 0">
-			<img class="image" src="../image/ranking_2nd.png" alt="..." ng-if="$index == 1">
-			<img class="image" src="../image/ranking_3rd.png" alt="..." ng-if="$index == 2">
-			<img class="image" src="../image/ranking_4th.png" alt="..." ng-if="$index == 3 || $index == 4">
-			<img class="image" src="../image/ranking_6th.png" alt="..." ng-if="$index >= 5 && $index <= 9">
+			<img class="image" src="../image/ranking_1st.png" alt="ranking_image_1st" ng-if="$index == 0">
+			<img class="image" src="../image/ranking_2nd.png" alt="ranking_image_2nd" ng-if="$index == 1">
+			<img class="image" src="../image/ranking_3rd.png" alt="ranking_image_3rd" ng-if="$index == 2">
+			<img class="image" src="../image/ranking_4th.png" alt="ranking_image_4th" ng-if="$index == 3 || $index == 4">
+			<img class="image" src="../image/ranking_6th.png" alt="ranking_image_6st" ng-if="$index >= 5 && $index <= 9">
 			<div class="number">
 				{{$index + 1}}
 			</div>

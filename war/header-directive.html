@@ -14,20 +14,20 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" collapse="navbarCollapsed">
       <ul class="nav navbar-nav">
-        <li><a ui-sref="overview">Overview</a></li>
-        <li><a ui-sref="contact">Contact</a></li>
-        <li><a href="http://mame0112.hatenablog.com/">Blog</a></li>
+        <li><a ui-sref="overview" translate="header.overview">Overview</a></li>
+        <li><a ui-sref="contact" translate="header.contact">Contact</a></li>
+        <li><a href="http://mame0112.hatenablog.com/" translate="header.sign_in">Blog</a></li>
       </ul>
       <form class="navbar-form navbar-left" role="search">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search" ng-model="searchParam">
         </div>
-        <button class="btn btn-default" ng-click="searchWisdom(searchParam)" analytics-on="click" analytics-event="Search">Search</button>
+        <button class="btn btn-default" ng-click="searchWisdom(searchParam)" analytics-on="click" analytics-event="Search" translate="header.search_button">Search</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a ui-sref="newwisdom" ng-click="onCreatePageSelect()">Create page</a></li>
-        <li><a ui-sref="signin" ng-click="onSigninOptionSelect()" ng-show="isSigninVisible()">Sign in</a></li>
-        <li><a ui-sref="signup" ng-click="onSignupOptionSelect()" ng-show="isSignupVisible()">Sign up</a></li>
+        <li><a ui-sref="newwisdom" ng-click="onCreatePageSelect()" translate="header.create_page">Create page</a></li>
+        <li><a ui-sref="signin" ng-click="onSigninOptionSelect()" ng-show="isSigninVisible()" translate="header.sign_in">Sign in</a></li>
+        <li><a ui-sref="signup" ng-click="onSignupOptionSelect()" ng-show="isSignupVisible()" translate="header.sign_up">Sign up</a></li>
         <li><a ui-sref="user.detail({userId: getUserId()})">{{getUserName()}}</a></li>
         <li><a ui-sref="#/view/{{getUserId(userData)}}" ng-click="onUserInfoSelect()" ng-show="isUserInfoVisible()"><img ng-src="{{getThumbnail(userData)}}"></a>
         </li>
@@ -44,11 +44,11 @@
           </ul>
         -->
         <li class="dropdown" dropdown on-toggle="toggled(open)" ng-show="isNotificationVisible()">
-          <a href class="dropdown-toggle" dropdown-toggle>
+          <a href class="dropdown-toggle" dropdown-toggle translate="header.notification">
             Notification
           </a>
           <ul class="dropdown-menu">
-            <li><a ui-sref="/" ng-click="signout()">Sign out</a></li>
+            <li><a ui-sref="/" ng-click="signout()" translate="header.sign_out">Sign out</a></li>
             <li><a href>BBB</a></li>
           </ul>
         </li>

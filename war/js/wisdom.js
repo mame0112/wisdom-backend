@@ -22,7 +22,11 @@ var wisdomApp = angular.module('WidsomApp',
 	        prefix : '../lang/lang_',
 	        suffix : '.json'
 	    });
-	    $translateProvider.preferredLanguage(findLanguage());
+	    // $translateProvider.preferredLanguage(findLanguage());
+		$translateProvider.preferredLanguage('ja');
+		$translateProvider.fallbackLanguage('en');
+		$translateProvider.useMissingTranslationHandlerLog();
+		$translateProvider.useLocalStorage();
 
 		$urlRouterProvider.otherwise('/');
 		$stateProvider.
@@ -102,15 +106,6 @@ var wisdomApp = angular.module('WidsomApp',
 			controller: 'searchResultController',
 			data : { pageTitle: 'Search wisdom' }
 		});
-
-		// $translateProvider.translation("ja", {
-		// 	NAME: "aa",
-		// });
-		// $translateProvider.translation("ja",
-  //   	{
-		// 	NAME: "名前",
-		// 	AGE: "年齢",
-  //   	});
 
 }])
 

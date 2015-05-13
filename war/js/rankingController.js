@@ -4,7 +4,8 @@ wisdomApp.controller('rankingController',
 'userRankingAPIService',
 'timeService',
 'timeFormatService',
-function($scope, log, userRankingAPIService, timeService, timeFormatService){
+'$translate',
+function($scope, log, userRankingAPIService, timeService, timeFormatService, $translate){
  	log.d("rankingController");
 
  	$scope.wisdoms = null;

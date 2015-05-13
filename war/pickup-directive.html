@@ -1,5 +1,5 @@
 <div id="items" ng-controller="pickupController" ng-init="initialize()">
-<div class="maintitle">{{today}}'s wisdom</div>
+<div class="maintitle" translate="pickup.title" translate-values="{value: today}">{{today}}'s wisdom</div>
 <hr class="title_divider">
 <ul ng-repeat="data in wisdoms" class="list">
 	<li class="contents">
