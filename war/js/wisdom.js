@@ -27,6 +27,7 @@ var wisdomApp = angular.module('WidsomApp',
 		$translateProvider.fallbackLanguage('en');
 		$translateProvider.useMissingTranslationHandlerLog();
 		$translateProvider.useLocalStorage();
+		$translateProvider.useSanitizeValueStrategy('escaped');
 
 		$urlRouterProvider.otherwise('/');
 		$stateProvider.

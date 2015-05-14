@@ -18,7 +18,7 @@
         <div class="subtitle" translate="signin.username">User name
           <span class="notice" ng-show="signin.name.$error.required">*</span>
         </div>
-      <input type="text" class="form-control" placeholder="Input your user name" name="name" ng-model="name" required ng-minlength="6" ng-maxlength="16">
+      <input type="text" class="form-control" placeholder="{{'signin.input_your_username' | translate}}" name="name" ng-model="name" required ng-minlength="6" ng-maxlength="16">
       <span class="notice" ng-show="signin.name.$error.minlength" translate="signin.username_more_than_6">Must be more than 6 characters</span>
       <span class="notice" ng-show="signin.name.$error.maxlength" translate="signin.username_less_than_16">Must be less than 16 characters</span>
       </div>
@@ -27,7 +27,7 @@
         <div class="subtitle" translate="signin.password">Password
           <span class="notice" ng-show="signin.password.$error.required">*</span>
         </div>
-      <input type="password" class="form-control" placeholder="Input your password" name="password" ng-model="password" required required ng-minlength="6" ng-maxlength="16" ng-pattern="/^[a-zA-Z0-9]+$/">
+      <input type="password" class="form-control" placeholder="{{'signin.input_your_password' | translate}}" name="password" ng-model="password" required required ng-minlength="6" ng-maxlength="16" ng-pattern="/^[a-zA-Z0-9]+$/">
       <span class="notice" ng-show="signin.password.$error.minlength" translate="signin.password_more_than_6">Must be more than 6 characters</span>
       <span class="notice" ng-show="signin.password.$error.maxlength" translate="signin.password_less_than_16">Must be less than 16 characters</span>
       <span class="notice" ng-show="signin.password.$error.pattern" translate="signin.password_illegal">Illegal password type. It must be [0 - 9] and [a - Z], [A - Z]</span>

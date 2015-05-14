@@ -11,6 +11,7 @@ wisdomApp.controller('SigninController',
  'userLoginAPIService',
  'toasterService',
  '$state',
+ '$translate',
  function(
  	$scope, 
  	log, 
@@ -23,9 +24,14 @@ wisdomApp.controller('SigninController',
  	$cookies, 
 	userLoginAPIService,
 	toasterService,
-	$state){
+	$state,
+	$translate){
 
  	log.d("SigninController");
+
+	var toaster_title;
+	var toaster_success_desc;
+	var toaster_fail_desc;
 
 	var account = $cookies.name;
 	log.d("account: " + account);
@@ -36,6 +42,20 @@ wisdomApp.controller('SigninController',
  	var params = {
  		"name":userName,
  		"password":password,
+ 	};
+
+ 	$scope.initialize = function()
+ 	{
+		$translate([
+			'signin.toaster_title',
+			'signin.toaster_success_desc',
+			'signin.toaster_fail_desc'
+			])
+		.then(function (translations) {
+			toaster_title = translations['signin.toaster_title'];
+			toaster_success_desc = translations['signin.toaster_success_desc'];
+			toaster_fail_desc = translations['signin.toaster_fail_desc'];
+		});
  	};
 
  	$scope.twitterSignin = function()
@@ -65,15 +85,16 @@ wisdomApp.controller('SigninController',
 				 		$scope.param = response.params;
 				 		log.d("userId: " + $scope.param.userId);
 				 		userDataHolder.setUserData($scope.param);
-						toasterService.showSuccessToasterShort("Signup", "Successfully signed in");
+						toasterService.showSuccessToasterShort(toaster_title, toaster_success_desc);
 						//TODO Need to log in
 						$state.go('/');
 		 			} else {
-						toasterService.showErrorToasterLong("Signin", "Failed to sign in. Please check user name and password");
+						// toasterService.showErrorToasterLong("Signin", "Failed to sign in. Please check user name and password");
+						toasterService.showErrorToasterLong(toaster_title, toaster_fail_desc);
 			 			log.d("response is null or undefined");
 		 			}
 	 			} else {
-					toasterService.showErrorToasterLong("Signin", "Failed to sign in. Please check user name and password");
+					toasterService.showErrorToasterLong(toaster_title, toaster_fail_desc);
 		 			log.d("response is null or undefined");
 	 			}
 	 		});

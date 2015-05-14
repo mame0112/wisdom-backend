@@ -1,43 +1,44 @@
 <div ng-controller="wisdomCreateController" ng-init="initialize()" id="newwisdom">
 <form role="form" name="newwisdom" novalidation>
-<p class="description"><font color="#ff0000">*</font> is mandatory</p>
+<font color="#ff0000">*</font>
+<p class="description" translate="newwisdom.mandatory_text"> is mandatory</p>
 
-<div class="subTitle">Basic information</div>
+<div class="subTitle" translate="newwisdom.basix_title">Basic information</div>
 <div class="basic">
 
 	<div class="callout callout-success">
-		<h4>Category</h4>
+		<h4 translate="newwisdom.category">Category</h4>
 		<div class="btn-group" dropdown>
 			<select ng-model="category" name="category" ng-model="category" ng-options="c.name as c.name for c in categories"
 			ng-change="getSubcategoryItems(category)" required>
-			<option value="">Select category</option>
+			<option value="" translate="newwisdom.select_category">Select category</option>
 			</select>
 			<span class="notice" ng-show="newwisdom.category.$error.required">*</span>
 		</div>
 	</div>
 
 	<div class="callout callout-success">
-		<h4>Sub Category</h4>
+		<h4 translate="newwisdom.subcategory">Sub Category</h4>
 			<div class="btn-group" dropdown>
 				<select ng-model="subCategory" name="subCategory" ng-options="s.name as s.name for s in subCategories" required>
-				<option value="">Select sub category</option>
+				<option value="" translate="newwisdom.select_subcategory">Select sub category</option>
 				</select>
 				<span class="notice" ng-show="newwisdom.subCategory.$error.required">*</span>
 			</div>
 	</div>
 
 	<div class="callout callout-success">
-	<h4>input tag
+	<h4 translate="newwisdom.tag">input tag
 		<span class="notice" ng-show="newwisdom.tag.$error.required">*</span>
 	</h4>
-		<p>Input tag if necessary. (e.g. “Classic” or “Jazz” for “Music” category / “Piano” sub category)</p>
-		<input type="text" class="form-control" placeholder="Input tag" name="tag" ng-model="wisdom.tag" required ng-minlength="2" ng-maxlength="10">
+		<p translate="newwisdom.tag_description">Input tag if necessary. (e.g. “Classic” or “Jazz” for “Music” category / “Piano” sub category)</p>
+		<input type="text" class="form-control" placeholder="{{'newwisdom.tag_help' | translate}}" name="tag" ng-model="wisdom.tag" required ng-minlength="2" ng-maxlength="10">
 		<span class="error" ng-show="newwisdom.tag.$error.minlength">Required more than 2 characters</span>
 		<span class="error" ng-show="newwisdom.tag.$error.maxlength">Required less than 10 characters</span>
 	</div>
 
 	<div class="callout callout-success">
-		<h4>Thumbnail</h4>
+		<h4 translate="newwisdom.thumbnail">Thumbnail</h4>
 
 		<div class="form-group">
 			<input type="file" ng-file-select="onFileSelect($files)">
@@ -45,33 +46,33 @@
 	</div>
 
 	<div class="callout callout-success">
-		<h4>Title
+		<h4 translate="newwisdom.title">Title
 			<span class="notice" ng-show="newwisdom.title.$error.required">*</span>
 		</h4>
-		<input type="text" class="form-control" placeholder="Input title" name="title" ng-model="wisdom.title" required ng-maxlength="{{titleMaxLength}}">
+		<input type="text" class="form-control" placeholder="{{'newwisdom.title_help' | translate}}" name="title" ng-model="wisdom.title" required ng-maxlength="{{titleMaxLength}}">
 		<p class="count">{{titleMaxLength - wisdom.title.length}}/{{titleMaxLength}}</p>
 		<span class="error" ng-show="newwisdom.title.$error.maxlength">Title must be less than {{titleMaxLength}} characters</span>
 	</div>
 
 	<div class="callout callout-success">
-		<h4>Description
+		<h4 translate="newwisdom.description">Description
 			<span class="notice" ng-show="newwisdom.description.$error.required">*</span>
 		</h4>
-		<input type="text" class="form-control" placeholder="Input description" name="description" ng-model="wisdom.description" required ng-maxlength="{{descMaxLength}}">
+		<input type="text" class="form-control" placeholder="{{'newwisdom.description_help'|translate}}" name="description" ng-model="wisdom.description" required ng-maxlength="{{descMaxLength}}">
 		<p class="count">{{descMaxLength - wisdom.description.length}}/{{descMaxLength}}</p>
 		<span class="error" ng-show="newwisdom.description.$error.maxlength">Required less than {{descMaxLength}} characters</span>
 	</div>
 </div>
 
-<div class="subTitle">Optional information</div>
+<div class="subTitle" translate="newwisdom.optional_title_text">Optional information</div>
 
 <div message-control-directive></div>
 
 <div class="form-group">
-	<input type="checkbox" checked="checked" ng-model="agreeToTos"> Agree to <a ng-href="#/tos" target="_blank">Terms of service</a>
+	<input type="checkbox" checked="checked" ng-model="agreeToTos" translate="newwisdom.agree_to_tos"> Agree to <a ng-href="#/tos" target="_blank">Terms of service</a>
 </div>
 <div class="form-group">
-	<button type="submit" class="btn btn-primary" ng-click="addNewWisdom()" ng-disabled="!agreeToTos">Create new wisdom</button>
+	<button type="submit" class="btn btn-primary" ng-click="addNewWisdom()" ng-disabled="!agreeToTos" translate="newwisdom.create_button">Create new wisdom</button>
 </div>
 
 </form>

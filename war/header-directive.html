@@ -1,5 +1,5 @@
 <nav class="navbar navbar-default" ng-controller="headerController" role="navigation">
-  <div class="container-fluid">
+  <div class="container-fluid" ng-init="initialize()">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" ng-click="navbarCollapsed = !navbarCollapsed">
@@ -16,11 +16,11 @@
       <ul class="nav navbar-nav">
         <li><a ui-sref="overview" translate="header.overview">Overview</a></li>
         <li><a ui-sref="contact" translate="header.contact">Contact</a></li>
-        <li><a href="http://mame0112.hatenablog.com/" translate="header.sign_in">Blog</a></li>
+        <li><a href="http://mame0112.hatenablog.com/" translate="header.blog">Blog</a></li>
       </ul>
       <form class="navbar-form navbar-left" role="search">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search" ng-model="searchParam">
+          <input type="text" class="form-control" placeholder="{{'header.search_help' | translate}}" ng-model="searchParam">
         </div>
         <button class="btn btn-default" ng-click="searchWisdom(searchParam)" analytics-on="click" analytics-event="Search" translate="header.search_button">Search</button>
       </form>

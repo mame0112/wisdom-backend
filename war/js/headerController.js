@@ -12,6 +12,7 @@ wisdomApp.controller('headerController',
  '$location',
  '$state',
 'toasterService',
+// '$translate',
  function(
  	$scope, 
  	$http, 
@@ -25,7 +26,9 @@ wisdomApp.controller('headerController',
  	$window,
  	$location,
  	$state,
- 	toasterService){
+ 	toasterService
+ 	// $translate
+ 	){
 
  	log.d("headerController");
 
@@ -36,6 +39,22 @@ wisdomApp.controller('headerController',
 	log.d("header directive initialize");
 	$scope.userId = userDataHolder.getUserId();
 	log.d("userId: " + $scope.userId);
+
+	// var signout_done;
+	// var signout_title;
+
+	$scope.initialize = function()
+	{
+		log.d("aaaaaaaaaaaaa");
+		// $translate([
+		// 	'signout_done',
+		// 	'signout_title',
+		// 	])
+		// .then(function (translations) {
+		// 	signout_done = translations['header.signout_done'];
+		// 	signout_title = translations['header.signout_title'];
+		// });
+	};
 
 	$scope.toggled = function(open) {
 		log.d('Dropdown is now: ', open);
@@ -177,50 +196,7 @@ wisdomApp.controller('headerController',
  		userDataHolder.removeUserData();
 	 	$scope.userId = Constants.NO_USER;
  		$state.go('/');
-		toasterService.showSuccessToasterShort("Sign out", "Successfully signed out");
+		toasterService.showSuccessToasterShort(signout_title, signout_done);
  	};
-
- 	// $scope.getTwitterName = function(data)
- 	// {
- 	// 	// log.d("getTwitterName");
- 	// 	return dataRetriveService.getTwitterName(data);
- 	// };
-
- 	// $scope.getPoint = function(data)
- 	// {
- 	// 	// log.d("getPoint");
- 	// 	return dataRetriveService.getPoint(data);
- 	// };
-
- 	// $scope.getTwitterTokenSecret = function(data)
- 	// {
- 	// 	// log.d("getTwitterTokenSecret");
- 	// 	return dataRetriveService.getTwitterTokenSecret(data);
- 	// };
-
- 	//  $scope.getThumbnail = function(data)
- 	// {
- 	// 	// log.d("getThumbnail: " + dataRetriveService.getThumbnail(data));
- 	// 	return dataRetriveService.getThumbnail(data);
- 	// };
-
-  // 	 $scope.getLogindate = function(data)
- 	// {
- 	// 	// log.d("getLogindate");
- 	// 	return dataRetriveService.getLogindate(data);
- 	// };
-
-  // 	 $scope.getUserId = function(data)
- 	// {
- 	// 	// log.d("getUserId");
- 	// 	return dataRetriveService.getUserId(data);
- 	// };
-
-  //  	 $scope.getTwitterToken = function(data)
- 	// {
- 	// 	// log.d("getTwitterToken");
- 	// 	return dataRetriveService.getTwitterToken(data);
- 	// };
-
 
 }]);

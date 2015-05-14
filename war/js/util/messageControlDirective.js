@@ -5,7 +5,8 @@ wisdomApp.controller('messageOperationController',
  'createWisdomSharedStateService',
  'timeService',
  'Constants',
- function($scope, log, modeService, createWisdomSharedStateService, timeService, Constants){
+  '$translate',
+ function($scope, log, modeService, createWisdomSharedStateService, timeService, Constants, $translate){
  	log.d("messageOperationController");
 
  	var DISPLAY_TITLE = true;

@@ -1,6 +1,6 @@
 <div id="items" ng-controller="categoryController" ng-init="initialize()">
 <div ng-if="wisdomNum > 0">
-	<div class="maintitle">Wisdom lists for {{categoryName}} > {{subCategoryName}} ({{start+1}} to {{end}} / total {{wisdomNum}} wisdoms)</div>
+	<div class="maintitle" translate="category.title" translate-values="{value1: categoryName, value2: subCategoryName, value3: start+1, value4: end, value5: wisdomNum}">Wisdom lists for {{categoryName}} > {{subCategoryName}} ({{start+1}} to {{end}} / total {{wisdomNum}} wisdoms)</div>
 	<hr class="title_divider">
 	<ul class="list" ng-repeat="data in wisdoms">
 		<li class="contents">
@@ -27,7 +27,7 @@
 	<pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged(currentPage)"></pagination>
 </div>
 
-<div ng-if="!!wisdomNum == false">
+<div ng-if="!!wisdomNum == false" translate="category.no_content">
 	No content.
 </div>
 

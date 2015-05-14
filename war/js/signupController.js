@@ -43,6 +43,24 @@ wisdomApp.controller('SignupController',
  		log.d("initialize");
 		var name = $cookieStore.get('name');
 		log.d("name: " + name);
+
+		// $translate([
+		// 	'newwisdom.basix_title',
+		// 	'newwisdom.select_category',
+		// 	'newwisdom.',
+		// 	'newwisdom.',
+		// 	'newwisdom.',
+		// 	'newwisdom.',
+		// 	'signin.toaster_title',
+		// 	'signin.toaster_success_desc',
+		// 	'signin.toaster_fail_desc'
+		// 	])
+		// .then(function (translations) {
+		// 	toaster_title = translations['signin.toaster_title'];
+		// 	toaster_success_desc = translations['signin.toaster_success_desc'];
+		// 	toaster_fail_desc = translations['signin.toaster_fail_desc'];
+		// });
+
  	};
 
  	$scope.twitterSignup = function()
