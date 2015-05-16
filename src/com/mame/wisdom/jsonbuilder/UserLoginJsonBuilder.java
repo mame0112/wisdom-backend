@@ -50,7 +50,7 @@ public class UserLoginJsonBuilder extends JsonBuilder {
 	public void addResponseParam(Object... param) throws JSONBuilderException {
 		DbgUtil.showLog(TAG, "addResponseParam");
 
-		if (param != null) {
+		if (param != null && param[0] != null) {
 			if (!(param[0] instanceof WDUserData)) {
 				throw new JSONBuilderException("Illegal parameter type");
 			}
@@ -63,6 +63,7 @@ public class UserLoginJsonBuilder extends JsonBuilder {
 			}
 		} else {
 			try {
+				DbgUtil.showLog(TAG, "AAA");
 				mRootObject.put(JsonConstant.PARAMS, new JSONObject());
 			} catch (JSONException e) {
 				DbgUtil.showLog(TAG, "JSONException: " + e.getMessage());

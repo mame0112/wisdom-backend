@@ -50,14 +50,17 @@ public class UserAccountLoginAction implements Action {
 					if (userData != null) {
 						// If password is correct
 						if (password.equals(userData.getPassword())) {
+							DbgUtil.showLog(TAG, "AAA");
 							builder.addResponseParam(userData);
 						} else {
+							DbgUtil.showLog(TAG, "BBB");
 							// Wrong user
-							builder.addResponseParam(WConstant.NO_USER);
+							builder.addResponseParam((WDUserData) null);
 						}
 					} else {
+						DbgUtil.showLog(TAG, "CCC");
 						// Wrong user
-						builder.addResponseParam(WConstant.NO_USER);
+						builder.addResponseParam((WDUserData) null);
 					}
 				} else {
 					builder.addErrorMessage("Illegal argument. user name, password or mail address is null");
