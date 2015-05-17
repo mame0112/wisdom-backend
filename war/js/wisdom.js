@@ -115,11 +115,12 @@ var wisdomApp = angular.module('WidsomApp',
 .run(['$rootScope', '$state', 'sslConnectionSwitchService', function ($rootScope, $state, sslConnectionSwitchService) {
     $rootScope.$on('$stateChangeStart', function(e, toState, toParams, fromState, fromParams){
     	console.log("AAAA");
-        if (toState.isSslRequired) {
-			sslConnectionSwitchService.forceSslConnection();
-        } else {
-			sslConnectionSwitchService.forceBasicConnection();			
-        }
+		sslConnectionSwitchService.forceSslConnection();
+   //      if (toState.isSslRequired) {
+			// sslConnectionSwitchService.forceSslConnection();
+   //      } else {
+			// sslConnectionSwitchService.forceBasicConnection();			
+   //      }
         // e.preventDefault();
             // $state.go('signin');
     });
