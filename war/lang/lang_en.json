@@ -1,0 +1,164 @@
+{
+	"common": {
+		"cancel": "Cancel",
+		"save": "Save"
+	},
+	"index":{
+		"app_description":"Share your wisdom with beginners.",
+		"learn_more": "see more details"
+	},
+	"header":{
+		"overview":"Overview",
+		"contact": "Contact",
+		"blog": "Blog",
+		"search_button": "Search",
+		"sign_in": "Sign in",
+		"sign_up": "Sign up",
+		"sign_out": "Sign out",
+		"create_page": "Share new wisdom",
+		"notification": "Notification",
+		"search_help": "Search some words",
+		"signout_title": "Sign out",
+		"signout_done": "Successfully sign out"
+	},
+	"footer":{
+		"home":"Home",
+		"overview":"Overview",
+		"contact": "Contact",
+		"privacy": "Privacy policy",
+		"tos": "Terms of use",
+		"blog": "Blog"
+	},
+	"ranking":{
+		"title": "{{value}}'s ranking"
+	},
+	"pickup":{
+		"title": "Today's recommendation"
+	},
+	"signin":{
+		"title_sns": "Sign in with SNS account",
+		"signin_twitter": "Use twitter account",
+		"title_account": "Use user name and password",
+		"username": "User name",
+		"username_help": "Input user name",
+		"password": "Password",
+		"password_help": "Input password",
+		"signin_with_username": "Sign in with user name and password",
+		"have_account": "If you don't have account",
+		"signup": "Create account",
+		"username_more_than_6":"User name must be more than 6 characters",
+		"username_less_than_16":"User name must be less than 16 characters",
+		"password_more_than_6":"Password must be more than 6 characters",
+		"password_less_than_16":"Password must be less than 16 characters",
+		"password_illegal":"You can't user 2 byte characters for password",
+		"input_your_username":"From 6 to 16 characters",
+		"input_your_password":"From 6 to 16 characters, Only half-width can be used",
+		"toaster_title": "Sign in",
+		"toaster_success_desc":"Successfully sign in",
+		"toaster_fail_desc": "Failed to sign in. Please check your user name and password"
+	},
+	"signin_note":{
+		"title": "Let's spread your wisdom by signing in to chienowa",
+		"description": "Once you sign in, you can share your wisdom to beginners. And you might be awarded accordingly."
+	},
+	"signup":{
+		"title_sns": "Participate in SNS account",
+		"signup_twitter": "Use Twitter account",
+		"title_account": "Use user name and password",
+		"username": "User name",
+		"username_help": "Input user name",
+		"password": "Password",
+		"password_help": "Input password",
+		"email": "Mail address",
+		"signup_with_username": "Sign in with user name and password",
+		"input_your_username":"From 6 to 16 characters",
+		"input_your_password":"From 6 to 16 characters, Only half-width can be used",
+		"input_your_mailaddress":"Input mail address",
+		"username_more_than_6":"User name must be more than 6 characters",
+		"username_less_than_16":"User name must be less than 16 characters",
+		"password_more_than_6":"Password must be more than 6 characters",
+		"password_less_than_16":"Password must be less than 16 characters",
+		"password_illegal":"You can't user 2 byte characters for password",
+		"email_illegal":"Illegal mail address",
+		"signup_button":"Create account"
+	},
+	"signup_note":{
+		"title1": "Let's spread your wisdom",
+		"description1": "We believe you would have knowledge for certain area. For instance, cooking, music sports... We think such knowlege would help out beginners since they don't know how and what they should do at the beginning. How about help out such beginners?",
+		"title2": "What happens if I join chienowa?",
+		"description2": "If you join the chienowa, As a export for some area, you would be able to share and spread your knowledge and wisdom to beginners!"
+	},
+	"contact":{
+		"overview":"We are always welcome to your comments and messages.",
+		"name":"Name",
+		"email":"Mail address",
+		"message": "Message",
+		"send": "Send message",
+		"illegal_email": "Illegal mail address",
+		"name_hint": "Input your name",
+		"email_hint":"Input your mail address",
+		"message_hint":"Input message",
+		"message_send_result":"Send message",
+		"successfully_sent": "Thank you for sending out your message. Your message is successfully sent out to us.",
+		"send_failed": "Failed to send mesage. And please try again later",
+		"contact_us": "Contact us"
+	},
+	"search":{
+		"title": "Search result for '{{value}}' (Total {{value2}} wisdoms are foujd)",
+		"loading": "Searching...",
+		"not_found": "No wisdom found"
+	},
+	"category":{
+		"title": "Wisdom list for {{value1}}>{{value2}} Total {{value5}} items From {{value3}} to {{value4}}",
+		"no_content": "No wisdom"
+	},
+	"wisdom":{
+		"last_update":"Last updated: ",
+		"join": "How about join to chienowa and spread your wisdom and help out beginners all over the world?",
+		"create_account":"Create account",
+		"or":"or",
+		"signin":"Sign in",
+		"modify_wisdom": "Modify wisdom",
+		"wisdom_update_title":"You liked to wisdom",
+		"wisdom_update_desc":"Your current point:: ",
+		"wisdom_update_desc_point":"point",
+		"like_error": "Error",
+		"like_failed": "Error occured. Please try again later"
+	},
+	"newwisdom":{
+		"mandatory_text":"is mandatory item",	
+		"basix_title": "Basic inforamtion",
+		"select_category": "-- Select Category --",
+		"category":"Category",
+		"subcategory":"Sub category",
+		"select_subcategory": "-- Select Sub category --",
+		"tag":"Tag",
+		"thumbnail":"Thumbnail",
+		"title":"Title",
+		"description":"Overivew",
+		"tag_description":"Addtional keyword that shall support category and subcategory. (For instance: Category: Music and Sub category: Piano. And the tag would be Jazz)",
+		"tag_help": "Within xxx characters",
+		"title_help": "Within xxx characters",
+		"description_help": "Within xxx characters",
+		"optional_title_text":"Additional information",
+		"optional_title":"Headline",
+		"optional_desc":"Summary",
+		"optional_title_text":"Input title",
+		"optional_desc_text":"Input text",
+		"optional_title_help":"Within xxx characters",
+		"optional_desc_help":"Within xxx characters",
+		"agree_to_tos": "Agree to terms of use",
+		"create_button": "Create new wisdom"
+	},
+	"modifywisdom":{
+		"title":"Title",
+		"description":"Overview",
+		"tag": "Tag"
+	},
+	"categories":{
+		"sports":"Sports",
+		"Music":"Music",
+		"cooking":"Cooking"
+	}
+
+}
