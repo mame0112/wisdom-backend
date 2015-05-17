@@ -203,4 +203,47 @@ wisdomApp.controller('headerController',
 		toasterService.showSuccessToasterShort(signout_title, signout_done);
  	};
 
+ 	$scope.getCurrentLanguage = function()
+ 	{
+	    var currentLang = $translate.proposedLanguage() || $translate.use();
+	    console.log("currentLang: " + currentLang);
+	    return currentLang;
+ 	};
+
+ 	$scope.isNowJapanese = function()
+ 	{
+	    var currentLang = $translate.proposedLanguage() || $translate.use();
+	    if(currentLang === 'ja'){
+	    	return true;
+	    } else {
+	    	return false;
+	    }
+ 	};
+
+  	$scope.isNowEnglish = function()
+ 	{
+	    var currentLang = $translate.proposedLanguage() || $translate.use();
+	    if(currentLang === 'en'){
+	    	return true;
+	    } else {
+	    	return false;
+	    }
+ 	};
+
+	$scope.changeLanguage = function (currentLang) {
+		log.d("changeLanguage: " + currentLang);
+
+		if(currentLang === 'ja'){
+			log.d("Change to Japanese");
+			$translate.use('ja');
+		} else if (currentLang === 'en'){
+			log.d("Change to English");
+			$translate.use('en');
+		} else {
+			log.d("Unexpected language");
+			$translate.use('ja');
+		}
+
+	};
+
 }]);

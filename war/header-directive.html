@@ -48,8 +48,9 @@
             Notification
           </a>
           <ul class="dropdown-menu">
-            <li><a ui-sref="/" ng-click="signout()" translate="header.sign_out">Sign out</a></li>
-            <li><a href>BBB</a></li>
+            <li><a ui-sref="/" ng-click="signout()">Sign out</a></li>
+            <li ng-if="isNowJapanese() === true"><a ui-sref="/" ng-click="changeLanguage('en')">Switch to English</a></li>
+            <li ng-if="isNowEnglish() === true"><a ui-sref="/" ng-click="changeLanguage('ja')">日本語に切り替え</a></li>
           </ul>
         </li>
       </ul>
