@@ -12,7 +12,7 @@ wisdomApp.controller('headerController',
  '$location',
  '$state',
 'toasterService',
-// '$translate',
+'$translate',
  function(
  	$scope, 
  	$http, 
@@ -26,8 +26,8 @@ wisdomApp.controller('headerController',
  	$window,
  	$location,
  	$state,
- 	toasterService
- 	// $translate
+ 	toasterService,
+ 	$translate
  	){
 
  	log.d("headerController");
@@ -40,21 +40,25 @@ wisdomApp.controller('headerController',
 	$scope.userId = userDataHolder.getUserId();
 	log.d("userId: " + $scope.userId);
 
+	$scope.$on('$viewContentLoaded', function() {
+		log.d("viewContentLoaded");
+	});
+
 	// var signout_done;
 	// var signout_title;
 
-	$scope.initialize = function()
-	{
-		log.d("aaaaaaaaaaaaa");
-		// $translate([
-		// 	'signout_done',
-		// 	'signout_title',
-		// 	])
-		// .then(function (translations) {
-		// 	signout_done = translations['header.signout_done'];
-		// 	signout_title = translations['header.signout_title'];
-		// });
-	};
+	// $scope.initialize = function()
+	// {
+	// 	log.d("aaaaaaaaaaaaa");
+	// $translate([
+	// 	'signout_done',
+	// 	'signout_title',
+	// 	])
+	// .then(function (translations) {
+	// 	signout_done = translations['header.signout_done'];
+	// 	signout_title = translations['header.signout_title'];
+	// });
+	// };
 
 	$scope.toggled = function(open) {
 		log.d('Dropdown is now: ', open);

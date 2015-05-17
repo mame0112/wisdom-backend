@@ -9,7 +9,7 @@ var wisdomApp = angular.module('WidsomApp',
 	'angulartics',
 	'angulartics.google.analytics',
 	'ngProgress',
-	'pascalprecht.translate'
+	'pascalprecht.translate',
 	])
 .controller('WidsomController', ['$scope', 'Constants', 'log', function($scope, Constants, log){
 	
@@ -84,7 +84,7 @@ var wisdomApp = angular.module('WidsomApp',
 		state('wisdom',{
 			url: '/detail/:wisdomId',
 			templateUrl: 'view/wisdom.html',
-			data : { pageTitle: 'Wisdom' }
+			data : { pageTitle: 'Wisdom' },
 		}).
 		state('category',{
 			url: '/category/:categoryId/:subCategoryId',
@@ -112,6 +112,7 @@ var wisdomApp = angular.module('WidsomApp',
 
 .run(['$rootScope', '$state', 'sslConnectionSwitchService', function ($rootScope, $state, sslConnectionSwitchService) {
     $rootScope.$on('$stateChangeStart', function(e, toState, toParams, fromState, fromParams){
+    	console.log("AAAA");
         if (toState.isSslRequired) {
 			sslConnectionSwitchService.forceSslConnection();
         } else {
@@ -119,6 +120,16 @@ var wisdomApp = angular.module('WidsomApp',
         }
         // e.preventDefault();
             // $state.go('signin');
+    });
+
+    $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
+    	console.log("BBB");
+        $rootScope.title = current.$$route.title;
+    });
+
+    $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+    	console.log("CCC");
+        // $rootScope.title = toParams.$$route.title;
     });
 }]);
 

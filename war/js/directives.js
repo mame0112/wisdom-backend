@@ -20,6 +20,8 @@ wisdomApp.directive('headerDirective', function(){
 
 			var listener = function(event, toState) {
 
+				console.log("set new title: " + $rootScope.pageTitle);
+
 				var serviceName = 'chienowa[チエノワ]';
 				var title = null;
 

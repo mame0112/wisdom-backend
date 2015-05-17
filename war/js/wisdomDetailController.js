@@ -12,6 +12,8 @@ wisdomApp.controller('wisdomDetailController',
 'userDataHolder',
 'wisdomMessageLikeAPIService',
 'toasterService',
+'Page',
+'$translate',
 function($scope, 
 	log, 
 	wisdomAPIService, 
@@ -24,7 +26,9 @@ function($scope,
 	$state, 
 	userDataHolder,
 	wisdomMessageLikeAPIService,
-	toasterService){
+	toasterService,
+	Page,
+	$translate){
  	log.d("wisdomDetailController");
 
  	var wisdomId = $stateParams.wisdomId;
@@ -34,15 +38,41 @@ function($scope,
 
  	$scope.colorGenerater = creativeColorGenerateService;
 
+ 	var wisdom_update_title;
+ 	var wisdom_update_desc;
+ 	var like_error;
+ 	var like_failed;
+
+ 	Page.setTitle("AAAAAAA");
+
  	// Variable to identify if the user already select "Like"
  	// (We should prevent the user to continuous "Like" press)
  	var isLiked = [];
 
  	$scope.likeImage = [];
 
+
  	$scope.initialize = function(){
  		log.d("wisdomDetailController initialize");
+
 		modeService.changeCurrentMode(Constants.STATE.STATE_WISDOM_PAGE);
+
+		//Setup translations
+		$translate([
+			'wisdom.wisdom_update_title',
+			'wisdom.wisdom_update_desc',
+			'wisdom.like_error',
+			'wisdom.like_failed',
+			'wisdom.wisdom_update_desc_point',
+
+			])
+		.then(function (translations) {
+			wisdom_update_title = translations['wisdom.wisdom_update_title'];
+			wisdom_update_desc = translations['wisdom.wisdom_update_desc'];
+			wisdom_update_desc_point = translations['wisdom.wisdom_update_desc_point'];
+			like_error = translations['wisdom.like_error'];
+			like_failed = translations['wisdom.like_failed'];
+		});
 
 		//Get target wisdom
 	 	wisdomAPIService.wisdom({servlet_wisdom_id : wisdomId}, function(response){
@@ -139,14 +169,14 @@ function($scope,
 				if(response !== null && response !== undefined){
 					if(response.params !== null && response.params !== undefined){
 						var point = response.params.point;
-						toasterService.showSuccessToasterShort("Point updated", "Your point is now " + point);
+						toasterService.showSuccessToasterShort(wisdom_update_title, wisdom_update_desc + point + wisdom_update_desc_point);
 					} else {
 						//Error handling
-						toasterService.showErrorToasterShort("Error", "Failed to do 'Like'. Please try again later");
+						toasterService.showErrorToasterShort(like_error, like_failed);
 					}
 				} else {
 					//Error handling
-					toasterService.showErrorToasterShort("Error", "Failed to do 'Like'. Please try again later");
+					toasterService.showErrorToasterShort(like_error, like_failed);
 				}
 	 		});
 		}

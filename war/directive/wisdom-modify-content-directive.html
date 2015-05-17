@@ -7,11 +7,11 @@
 		  </div>
 		  <embed ng-src="{{content}}" style="width:200px;height:200px;"></embed>
 		  <div class="content">
-		  title
+		  <p translate="modifywisdom.title">title</p>
 		  <input type="text" class="form-control" placeholder="Input title" name="title" value="{{wisdom.title}}" ng-model="wisdom.title" required ng-minlength="2" ng-maxlength="10">
-		  tag
+		  <p translate="modifywisdom.tag">tag</p>
 		  <input type="text" class="form-control" placeholder="Input tag" name="tag" value="{{wisdom.tag}}" ng-model="wisdom.tag" required ng-minlength="2" ng-maxlength="10">
-		  description
+		  <p translate="modifywisdom.description">description</p>
 		  <input type="text" class="form-control" placeholder="Input description" name="description" value="{{wisdom.description}}" ng-model="wisdom.description" required ng-minlength="2">
 		  </div>
 	</div>
@@ -45,14 +45,14 @@
 			<div ng-class="findCssClassbyType(data)" ng-show="isOriginalMessageDisplay($index)">{{data.message}}</div>
 			<div class="form-group" ng-show="isModifyPanelVisible($index)">
 				<input type="text" class="form-control" placeholder="Input something" ng-model="messageModifyField">
-				<button type="button" class="btn btn-default" ng-click="hideMessageInputArea($index)">Cancel</button>
-				<button type="button" class="btn btn-primary" ng-click="saveModifiedTexts(data, messageModifyField, $index)">Save</button>
+				<button type="button" class="btn btn-default" ng-click="hideMessageInputArea($index)" translate="common.cancel">Cancel</button>
+				<button type="button" class="btn btn-primary" ng-click="saveModifiedTexts(data, messageModifyField, $index)" translate="common.save">Save</button>
 			</div>
 		</div>
 	</div>
 
 
 
-	<button type="submit" class="btn btn-primary" name="modify" ng-model="modify" ng-click="cancelModification()">Cancel</button>
-	<button type="submit" class="btn btn-primary" name="modify" ng-model="modify" ng-click="saveModification()">Save</button>
+	<button type="submit" class="btn btn-primary" name="modify" ng-model="modify" ng-click="cancelModification()" translate="common.cancel">Cancel</button>
+	<button type="submit" class="btn btn-primary" name="modify" ng-model="modify" ng-click="saveModification()" translate="common.save">Save</button>
 </div>

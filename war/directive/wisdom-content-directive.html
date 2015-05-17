@@ -13,7 +13,8 @@
 			<div class="description">{{wisdom.description}}</div>
 			<div class="tag"><p>{{wisdom.tag}}</p></div>
 			<div class="status">
-				<div class="updateDate">Last updated: {{formatTimeInfo(wisdom.updated_date)}}</div>
+				<div class="updateDate">
+				<p translate="wisdom.last_update">Last updated:</p> {{formatTimeInfo(wisdom.updated_date)}}</div>
 				<div class="viewinfo">
 					<ul>
 						<li><div class="viewnum">{{wisdom.count}}</div></li>
@@ -31,20 +32,28 @@
 				<div class="message">
 					<p ng-show="{{entry.tag}} == 2" class="messageBody">{{entry.message}}</p>
 					<div class="update" ng-show="isValidDateFormat(entry.updated_date)">
-					Last updated: {{formatTimeInfo(entry.updated_date)}}
+					<p translate="wisdom.last_update">
+					Last updated: </p>
+					{{formatTimeInfo(entry.updated_date)}}
 					</div>
 					<div class="like" ng-show="{{entry.tag}} == 2"><a href="" ng-click="likeButtonPress($index)"><img ng-src="{{likeImage[$index]}}"></a>{{entry.like_num}}</div>
 				</div>
 			</li>
 		</ul>
 	</div>
+	<hr>
 	<div class="accountSelector">
-		<hr>
-		How about join in 'chienowa' and spread your wisdom to beginners?
+		<p translate="wisdom.join">
+		How about join in 'chienowa' and spread your wisdom to 	beginners?
+		</p>
 		<div class="buttons">
-			<button type="submit" class="btn btn-primary" name="modify" ng-model="modify" ng-click="modifyWisdom()" ng-show="isSignedIn() == true">Modify wisdom</button>
+			<button type="submit" class="btn btn-primary" name="modify" ng-model="modify" ng-click="modifyWisdom()" ng-show="isSignedIn() == true" translate="wisdom.modify_wisdom">Modify wisdom</button>
 			<div ng-show="isSignedIn() == false">
-				<button type="submit" class="btn btn-primary" name="modify" ng-model="modify" ng-click="createAccount()">Create account</button> or <a ui-sref="signin">Sign in</a>
+				<button type="submit" class="btn btn-primary" name="modify" ng-model="modify" ng-click="createAccount()" translate="wisdom.create_account">
+				Create account
+				</button>
+				<p translate="wisdom.or">or</p>
+				 <a ui-sref="signin" translate="wisdom.signin">Sign in</a>
 			</div>
 		</div>
 	</div>

@@ -4,12 +4,17 @@ wisdomApp.controller('contactController',
 'contactAPIService',
 'toasterService',
 '$state',
-function($scope, log, contactAPIService, toasterService, $state){
+'$translate',
+function($scope, log, contactAPIService, toasterService, $state, $translate){
  	log.d("contactController");
 
  	var name = null;
  	var email = null;
  	var message = null;
+
+ 	var message_send_result = null;
+ 	var successfully_sent = null;
+ 	var send_failed = null;
 
  	var param = {
  		"name": name,
@@ -20,6 +25,18 @@ function($scope, log, contactAPIService, toasterService, $state){
  	$scope.initialize = function()
  	{
  		log.d("initialize");
+
+		$translate([
+			'contact.message_send_result',
+			'contact.successfully_sent',
+			'contact.send_failed'
+			])
+		.then(function (translations) {
+			message_send_result = translations['contact.message_send_result'];
+			successfully_sent = translations['contact.successfully_sent'];
+			send_failed = translations['contact.send_failed'];
+		});
+
  	};
 
  	$scope.sendMessage = function()
@@ -31,11 +48,11 @@ function($scope, log, contactAPIService, toasterService, $state){
 	 		log.d("latest received");
 
 	 		if(response !== null && response !== undefined){
-				toasterService.showSuccessToasterLong("Contact", "Message successfully sent!");
+				toasterService.showSuccessToasterLong(message_send_result, successfully_sent);
 				$state.go('/');
 	 		} else {
 	 			//Error handling
-				toasterService.showErrorToasterLong("Contact", "Failed to send message. Please try again");
+				toasterService.showErrorToasterLong(message_send_result, send_failed);
 	 		}
 
 	 	});
