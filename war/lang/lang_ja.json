@@ -159,6 +159,16 @@
 		"sports":"スポーツ",
 		"Music":"音楽",
 		"cooking":"料理"
+	},
+	"userpage":{
+		"created":"作成した数",
+		"like":"”いいねした数",
+		"point":"ポイント",
+		"no_liked_wisdom":"まだいいねした知恵がありません",
+		"no_created_wisdom":"まだ作った知恵がありません",
+		"created_wisdom": "作成した知恵",
+		"liked_wisdom":"いいねした知恵"
 	}
+
 
 }

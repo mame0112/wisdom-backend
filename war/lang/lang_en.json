@@ -159,6 +159,15 @@
 		"sports":"Sports",
 		"Music":"Music",
 		"cooking":"Cooking"
+	},
+	"userpage":{
+		"created":"Created",
+		"like":"Liked",
+		"point":"Point",
+		"no_liked_wisdom":"No liked wisdom",
+		"no_created_wisdom":"No created wisdom",
+		"created_wisdom": "Created wisdoms",
+		"liked_wisdom":"Liked wisdoms"
 	}
 
 }
