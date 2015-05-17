@@ -23,10 +23,10 @@ var wisdomApp = angular.module('WidsomApp',
 	        suffix : '.json'
 	    });
 	    // $translateProvider.preferredLanguage(findLanguage());
-	    $translateProvider.determinePreferredLanguage();
+	    // $translateProvider.determinePreferredLanguage();
 
-		// $translateProvider.preferredLanguage('ja');
-		// $translateProvider.fallbackLanguage('en');
+		$translateProvider.preferredLanguage('ja');
+		$translateProvider.fallbackLanguage('en');
 		$translateProvider.useMissingTranslationHandlerLog();
 		$translateProvider.useLocalStorage();
 		$translateProvider.useSanitizeValueStrategy('escaped');

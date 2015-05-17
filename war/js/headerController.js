@@ -233,7 +233,7 @@ wisdomApp.controller('headerController',
 	$scope.changeLanguage = function (currentLang) {
 		log.d("changeLanguage: " + currentLang);
 
-		if(currentLang === 'ja'){
+		if(currentLang === 'ja' || currentLang == 'ja_jp'){
 			log.d("Change to Japanese");
 			$translate.use('ja');
 		} else if (currentLang === 'en'){
