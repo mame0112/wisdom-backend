@@ -4,8 +4,7 @@ wisdomApp.service('sslConnectionSwitchService', ['$location', 'log', '$window', 
         forceSslConnection : function()
         {
             //If we use this in local development environment, we shouldn't use https.
-            log.d("forceSslConnection2");
-            if($location.absUrl().indexOf() != -1){
+            if($location.absUrl().indexOf("appspot") != -1){
                 if ($location.protocol() !== 'https') {
                     $window.location.href = $location.absUrl().replace('http', 'https');
                 }
