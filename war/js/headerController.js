@@ -60,6 +60,11 @@ wisdomApp.controller('headerController',
 	// });
 	// };
 
+	$scope.switchNavivarStatus = function()
+	{
+		$scope.navbarCollapsed = !$scope.navbarCollapsed;
+	};
+
 	$scope.toggled = function(open) {
 		log.d('Dropdown is now: ', open);
 	};
