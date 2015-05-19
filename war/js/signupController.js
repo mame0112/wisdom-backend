@@ -12,6 +12,7 @@ wisdomApp.controller('SignupController',
 	'userNameAPIService',
 	'toasterService',
 	'$state',
+	'$cordovaOauth',
  function(
  	$scope, 
  	$stateParams, 
@@ -24,7 +25,8 @@ wisdomApp.controller('SignupController',
  	$cookieStore, 
  	userNameAPIService,
  	toasterService,
- 	$state){
+ 	$state,
+ 	$cordovaOauth){
  	log.d("SignupController");
  	// log.d("userId: " + $scope.userId);
 
@@ -43,6 +45,14 @@ wisdomApp.controller('SignupController',
  		log.d("initialize");
 		var name = $cookieStore.get('name');
 		log.d("name: " + name);
+
+        // $cordovaOauth.facebook("1459557601000808", ["email"]).then(function(result) {
+        // 	log.d("success");
+        //     // results
+        // }, function(error) {
+        //     // error
+        // 	log.d("error");
+        // });
 
 		// $translate([
 		// 	'newwisdom.basix_title',

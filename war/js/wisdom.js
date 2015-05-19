@@ -10,6 +10,7 @@ var wisdomApp = angular.module('WidsomApp',
 	'angulartics.google.analytics',
 	'ngProgress',
 	'pascalprecht.translate',
+	'ngCordova'
 	])
 .controller('WidsomController', ['$scope', 'Constants', 'log', function($scope, Constants, log){
 	
