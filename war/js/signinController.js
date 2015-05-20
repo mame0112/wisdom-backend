@@ -12,6 +12,7 @@ wisdomApp.controller('SigninController',
  'toasterService',
  '$state',
  '$translate',
+ '$auth',
  function(
  	$scope, 
  	log, 
@@ -25,7 +26,8 @@ wisdomApp.controller('SigninController',
 	userLoginAPIService,
 	toasterService,
 	$state,
-	$translate){
+	$translate,
+	$auth){
 
  	log.d("SigninController");
 
@@ -58,10 +60,15 @@ wisdomApp.controller('SigninController',
 		});
  	};
 
+	$scope.authenticate = function(provider) {
+		log.d("authenticate");
+		$auth.authenticate(provider);
+	};
+
  	$scope.twitterSignin = function()
  	{
  		log.d("twitterSignin");
-		twitterAPIService.$account(function(data){
+		twitterAPIService.account(function(data){
 	 		log.d("API called");
 	 		$scope.userData = data;
 	 		var userId = dataRetriveService.getUserId(data);
@@ -112,3 +119,37 @@ wisdomApp.controller('SigninController',
 	});
 
 }]);
+
+
+// This is called with the results from from FB.getLoginStatus().
+  function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    console.log(response);
+    // The response object is returned with a status field that lets the
+    // app know the current login status of the person.
+    // Full docs on the response object can be found in the documentation
+    // for FB.getLoginStatus().
+    if (response.status === 'connected') {
+      // Logged into your app and Facebook.
+      testAPI();
+    } else if (response.status === 'not_authorized') {
+      console.log("Please log into this app.");
+      // The person is logged into Facebook, but not your app.
+      // document.getElementById('status').innerHTML = 'Please log ' +
+      //   'into this app.';
+    } else {
+      // The person is not logged into Facebook, so we're not sure if
+      // they are logged into this app or not.
+      console.log("Please log into Facebook");
+      // document.getElementById('status').innerHTML = 'Please log ' +
+      //   'into Facebook.';
+    }
+  }
+
+
+ // $scope.checkLoginState = function() {
+ //    FB.getLoginStatus(function(response) {
+ //      statusChangeCallback(response);
+ //    });
+ //  };
+

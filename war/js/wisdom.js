@@ -10,14 +10,39 @@ var wisdomApp = angular.module('WidsomApp',
 	'angulartics.google.analytics',
 	'ngProgress',
 	'pascalprecht.translate',
-	'ngCordova'
+	'ngCordova',
+	'satellizer'
 	])
 .controller('WidsomController', ['$scope', 'Constants', 'log', function($scope, Constants, log){
 	
 }])
 
-.config(['$stateProvider', '$urlRouterProvider', '$translateProvider',
-	function($stateProvider, $urlRouterProvider, $translateProvider) {
+.config(['$stateProvider', '$urlRouterProvider', '$translateProvider', '$authProvider',
+	function($stateProvider, $urlRouterProvider, $translateProvider, $authProvider) {
+
+		$authProvider.twitter({
+			url: '/controller/twitterSignup',
+			type: '1.0',
+  			popupOptions: { width: 495, height: 645 }
+		});
+
+		$authProvider.facebook({
+			clientId: '1459557601000808'
+		});
+
+		// Facebook
+		$authProvider.facebook({
+			// url: '/auth/facebook',
+			url: '/#/signin',
+			authorizationEndpoint: 'https://www.facebook.com/v2.3/dialog/oauth',
+			redirectUri: window.location.origin || window.location.protocol + '//' + window.location.host + '/',
+			scope: 'email',
+			scopeDelimiter: ',',
+			requiredUrlParams: ['display', 'scope'],
+			display: 'popup',
+			type: '2.0',
+			popupOptions: { width: 481, height: 269 }
+		});
 
 		$translateProvider.useStaticFilesLoader({
 	        prefix : '../lang/lang_',

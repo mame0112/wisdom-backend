@@ -89,7 +89,7 @@ public class ActionFactory {
 				new TwitterSigninAction());
 
 		// Create account by Twitter (This is not API)
-		mAction.put(ActionConstants.GET + ActionConstants.KEY_TWITTER_SIGNUP,
+		mAction.put(ActionConstants.POST + ActionConstants.KEY_TWITTER_SIGNUP,
 				new TwitterCreateAccountAction());
 
 		// Callback action by twitter

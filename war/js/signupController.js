@@ -13,6 +13,7 @@ wisdomApp.controller('SignupController',
 	'toasterService',
 	'$state',
 	'$cordovaOauth',
+	'$auth',
  function(
  	$scope, 
  	$stateParams, 
@@ -26,7 +27,8 @@ wisdomApp.controller('SignupController',
  	userNameAPIService,
  	toasterService,
  	$state,
- 	$cordovaOauth){
+ 	$cordovaOauth,
+ 	$auth){
  	log.d("SignupController");
  	// log.d("userId: " + $scope.userId);
 
@@ -72,6 +74,7 @@ wisdomApp.controller('SignupController',
 		// });
 
  	};
+
 
  	$scope.twitterSignup = function()
  	{
