@@ -102,6 +102,10 @@
     float: left;
 }
 
+.wisdom .titlearea .content .updateDate .note{
+	display: inline;
+}
+
 .wisdom .titlearea .content .viewinfo{
     color: #888888;
     padding-right: 10px;
@@ -154,6 +158,10 @@
 	float: left;
 }
 
+.wisdom .bodyarea .message .update p{
+	display: inline;
+}
+
 .wisdom .bodyarea .message .like{
 	color: #888888;
 	text-align: right;
@@ -176,11 +184,22 @@
 .wisdom .accountSelector{
 	margin-top: 20px;
 	width: 100%;
+	border: solid thin #eeeeee;
+	padding-top: 10px;
 }
 
-.wisdom .accountSelector .buttons{
-	margin-top: 20px;
+.wisdom .accountSelector .description{
 	text-align: center;
+}
+
+
+.wisdom .accountSelector .buttons{
+	padding-bottom: 10px;
+	text-align: center;
+}
+
+.wisdom .accountSelector .buttons p{
+	display: inline;
 }
 
 #newwisdom{

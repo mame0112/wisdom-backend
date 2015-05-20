@@ -36,10 +36,21 @@
       </div>
 
       <div class="item">
+      <p class="buttons">
         <button type="submit" class="btn btn-primary" name="submit" ng-model="submit" ng-disabled="(name.length == 0)" ng-click="usernameSignin()" translate="signin.signin_with_username">Sign in by user name and password</button>
+        </p>
         <p class="additional" translate="signin.have_account">Don't you have account?</p>
-        <p class="additional"><a ui-sref="signup" translate="signin.signup">Sign up</a></p>
+          <a ui-sref="signup" translate="signin.signup">Sign up</a>
       </div>
+
+
+<!--       <div class="footer">
+      <p class="buttons">
+        <button type="submit" class="btn btn-primary" name="submit" ng-model="submit" ng-disabled="(name.length == 0)" ng-click="usernameSignin()" translate="signin.signin_with_username">Sign in by user name and password</button>
+        </p>
+        <p class="additional" translate="signin.have_account">Don't you have account?</p>
+          <a ui-sref="signup" translate="signin.signup">Sign up</a>
+      </div> -->
     </form>
   </div>
 </div>

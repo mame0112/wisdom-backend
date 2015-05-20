@@ -14,7 +14,7 @@
 			<div class="tag"><p>{{wisdom.tag}}</p></div>
 			<div class="status">
 				<div class="updateDate">
-				<p translate="wisdom.last_update">Last updated:</p> {{formatTimeInfo(wisdom.updated_date)}}</div>
+				<p translate="wisdom.last_update" class="note">Last updated:</p> {{formatTimeInfo(wisdom.updated_date)}}</div>
 				<div class="viewinfo">
 					<ul>
 						<li><div class="viewnum">{{wisdom.count}}</div></li>
@@ -32,9 +32,8 @@
 				<div class="message">
 					<p ng-show="{{entry.tag}} == 2" class="messageBody">{{entry.message}}</p>
 					<div class="update" ng-show="isValidDateFormat(entry.updated_date)">
-					<p translate="wisdom.last_update">
-					Last updated: </p>
-					{{formatTimeInfo(entry.updated_date)}}
+						<!-- <p translate="wisdom.last_update" class="description">Last updated: </p> -->
+						<p>{{formatTimeInfo(entry.updated_date)}}</p>
 					</div>
 					<div class="like" ng-show="{{entry.tag}} == 2"><a href="" ng-click="likeButtonPress($index)"><img ng-src="{{likeImage[$index]}}"></a>{{entry.like_num}}</div>
 				</div>
@@ -43,8 +42,8 @@
 	</div>
 	<hr>
 	<div class="accountSelector">
-		<p translate="wisdom.join">
-		How about join in 'chienowa' and spread your wisdom to 	beginners?
+		<p translate="wisdom.join" class="description">
+		How about join in 'chienowa' and spread your wisdom to beginners?
 		</p>
 		<div class="buttons">
 			<button type="submit" class="btn btn-primary" name="modify" ng-model="modify" ng-click="modifyWisdom()" ng-show="isSignedIn() == true" translate="wisdom.modify_wisdom">Modify wisdom</button>

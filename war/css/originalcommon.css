@@ -118,16 +118,22 @@ body {
 	display: inline;
 }
 
-#signup .content .item .additional{
-	margin-top: 14px;
-}
-
-#signup .content .item .additional a{
-}
-
 #signup .content .description{
 	font-size: 16px;
 	color: #666666;
+}
+
+#signup .content .footer{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	border: solid thin #eeeeee;
+	display: block;
+}
+
+#signup .content .item .additional{
+	margin-top: 14px;
+	display: inline;
 }
 
 #signup .note .title{
