@@ -4,6 +4,19 @@
               http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5" xmlns="http://java.sun.com/xml/ns/javaee">
 
+	<!-- Filter -->
+	<filter>
+		<filter-name>seoFilter</filter-name>
+		<filter-class>com.mame.wisdom.seo.CrawlServlet</filter-class>
+	</filter>
+	<filter-mapping>
+	    <filter-name>
+			seoFilter
+	    </filter-name>
+	    <url-pattern>
+	      /*
+	    </url-pattern>
+	  </filter-mapping>
 	<!-- Servlets -->
 	<servlet>
 		<servlet-name>greetServlet</servlet-name>

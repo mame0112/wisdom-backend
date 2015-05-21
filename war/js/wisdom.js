@@ -11,14 +11,20 @@ var wisdomApp = angular.module('WidsomApp',
 	'ngProgress',
 	'pascalprecht.translate',
 	'ngCordova',
-	'satellizer'
+	'satellizer',
+	'ngFacebook'
 	])
 .controller('WidsomController', ['$scope', 'Constants', 'log', function($scope, Constants, log){
 	
 }])
 
-.config(['$stateProvider', '$urlRouterProvider', '$translateProvider', '$authProvider',
-	function($stateProvider, $urlRouterProvider, $translateProvider, $authProvider) {
+.config(['$stateProvider', '$urlRouterProvider', '$translateProvider', '$authProvider', '$facebookProvider',
+	function($stateProvider, $urlRouterProvider, $translateProvider, $authProvider, $facebookProvider) {
+
+		$facebookProvider.setAppId('1459557601000808');
+		$facebookProvider.setCustomInit({
+			version : 'v2.2'
+		});
 
 		$authProvider.twitter({
 			url: '/controller/twitterSignup',
@@ -159,6 +165,16 @@ var wisdomApp = angular.module('WidsomApp',
     	console.log("CCC");
         // $rootScope.title = toParams.$$route.title;
     });
+
+ (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
 }]);
 
 

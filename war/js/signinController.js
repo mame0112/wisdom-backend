@@ -13,6 +13,7 @@ wisdomApp.controller('SigninController',
  '$state',
  '$translate',
  '$auth',
+ '$facebook',
  function(
  	$scope, 
  	log, 
@@ -27,7 +28,8 @@ wisdomApp.controller('SigninController',
 	toasterService,
 	$state,
 	$translate,
-	$auth){
+	$auth,
+	$facebook){
 
  	log.d("SigninController");
 
@@ -117,6 +119,40 @@ wisdomApp.controller('SigninController',
 	$scope.$watch('password', function(newValue, oldValue) {
 		params.password = newValue;
 	});
+
+  $scope.isLoggedIn = false;
+
+  $scope.login = function() {
+    $facebook.login().then( refresh );
+  };
+  $scope.logout = function() {
+    $facebook.logout().then( refresh );
+  };
+
+  function refresh() {
+    $facebook.api("/me").then( 
+      function(response) {
+      	log.d("Welcome: " + response.name);
+      	log.d("Access token; " + response.authResponse.accessToken);
+        // $scope.welcomeMsg = "Welcome " + response.name;
+        $scope.isLoggedIn = true;
+      },  
+      function(err) {
+      	log.d("Please log in");
+        // $scope.welcomeMsg = "Please log in";
+        $scope.isLoggedIn = false;
+      }   
+    );  
+
+    $facebook.getLoginStatus().then(
+      function(response){
+      	log.d("response: " + response);
+        console.log(response);
+      },
+      function(er){
+      }
+    );
+  }
 
 }]);
 
