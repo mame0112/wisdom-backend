@@ -48,6 +48,7 @@ wisdomApp.controller('SignupController',
 		var name = $cookieStore.get('name');
 		log.d("name: " + name);
 
+
         // $cordovaOauth.facebook("1459557601000808", ["email"]).then(function(result) {
         // 	log.d("success");
         //     // results
@@ -73,6 +74,17 @@ wisdomApp.controller('SignupController',
 		// 	toaster_fail_desc = translations['signin.toaster_fail_desc'];
 		// });
 
+ 	};
+
+ 	$scope.isCreateAccountDisabled = function()
+ 	{
+ 		if($scope.name !== undefined && $scope.password !== undefined && $scope.email !== undefined){
+ 			if($scope.name.length >= 6 && $scope.password.length >= 6 && $scope.email.length >= 3){
+ 				return false;
+ 			}
+ 		}
+
+ 		return true;
  	};
 
 

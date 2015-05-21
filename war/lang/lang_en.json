@@ -63,7 +63,8 @@
 	},
 	"signup":{
 		"title_sns": "Participate in SNS account",
-		"signup_twitter": "Use Twitter account",
+		"signup_twitter": "Sign up with Twitter",
+		"signup_facebook": "Sign up with Facebook",
 		"title_account": "Use user name and password",
 		"username": "User name",
 		"username_help": "Input user name",

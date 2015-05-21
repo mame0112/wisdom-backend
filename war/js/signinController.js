@@ -82,6 +82,18 @@ wisdomApp.controller('SigninController',
  		});
  	};
 
+ 	$scope.isNameSubmitButtonDisable = function()
+ 	{
+ 		if($scope.name !== undefined && $scope.password !== undefined){
+ 			if($scope.name.length >= 6 && $scope.password.length >= 6){ 
+ 				return false;
+ 			}
+ 		}
+
+ 		return true;
+
+ 	};
+
  	$scope.usernameSignin = function()
  	{
  		log.d("usernameSignin");

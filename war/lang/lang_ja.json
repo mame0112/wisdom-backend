@@ -63,7 +63,8 @@
 	},
 	"signup":{
 		"title_sns": "SNSアカウントで参加",
-		"signup_twitter": "Twitterを使う",
+		"signup_twitter": "Twitterアカウントを使う",
+		"signup_facebook": "Facebookアカウントを使う",
 		"title_account": "メールアドレスとパスワードで参加",
 		"username": "ユーザ名",
 		"username_help": "ユーザ名を入力してください",

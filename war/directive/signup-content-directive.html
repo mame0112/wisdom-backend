@@ -2,7 +2,8 @@
 <div class="content">
   <p class="title" translate="signup.title_sns">Join 'chienowa' by SNS account</p>
   <div class="snsitem">
-    <button type="Sign up with Twitter" class="btn btn-primary" ng-click="twitterSignup()" translate="signup.signup_twitter">Sign up with Twitter</button>  
+    <button type="Sign up with Twitter" class="btn btn-primary" ng-click="twitterSignup()" translate="signup.signup_twitter">Sign up with Twitter</button>
+    <button type="Sign up with Twitter" class="facebook" ng-click="twitterSignup()" translate="signup.signup_facebook">Sign up with Facebook</button>
   </div>
   <div class="snsitem">
     <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
@@ -15,20 +16,18 @@
     <form role="form" name="signup" novalidation>
 
       <div class="item">
-        <div class="subtitle" translate="signup.username">User name
-          <span class="notice" ng-show="signup.name.$error.required">*</span>
-          <p class="note">(From 6 to 16 characters)</p>
-        </div>
+        <div class="subtitle" translate="signup.username">User name</div>
+        <span class="notice" ng-show="signup.name.$error.required">*</span>
+        <p class="note">(From 6 to 16 characters)</p>
       <input type="text" class="form-control" placeholder="{{'signup.input_your_username' | translate}}" name="name" ng-model="name" required ng-minlength="6" ng-maxlength="16">
       <span class="notice" ng-show="signup.name.$error.minlength" translate="signup.username_more_than_6">Must be more than 6 characters</span>
       <span class="notice" ng-show="signup.name.$error.maxlength" translate="signup.username_less_than_16">Must be less than 16 characters</span>
       </div>
 
       <div class="item">
-        <div class="subtitle" translate="signup.password">Password
-          <span class="notice" ng-show="signup.password.$error.required">*</span>
-          <p class="note">(From 6 to 16 characters)</p>
-        </div>
+        <div class="subtitle" translate="signup.password">Password</div>
+        <span class="notice" ng-show="signup.password.$error.required">*</span>
+        <p class="note">(From 6 to 16 characters)</p>
       <input type="password" class="form-control" placeholder="{{'signup.input_your_password' | translate}}" name="password" ng-model="password" required required ng-minlength="6" ng-maxlength="16" ng-pattern="/^[a-zA-Z0-9]+$/">
       <span class="notice" ng-show="signup.password.$error.minlength" translate="signup.password_more_than_6">Must be more than 6 characters</span>
       <span class="notice" ng-show="signup.password.$error.maxlength" translate="signup.password_less_than_16">Must be less than 16 characters</span>
@@ -36,16 +35,15 @@
       </div>
 
       <div class="item">
-        <div class="subtitle" translate="signup.email">Email
-          <span class="notice" ng-show="signup.email.$error.required">*</span>
-        </div>
+        <div class="subtitle" translate="signup.email">Email</div>
+        <span class="notice" ng-show="signup.email.$error.required">*</span>
       <input type="email" class="form-control" placeholder="{{'signup.input_your_mailaddress' | translate}}" name="email" ng-model="email" ng-pattern="/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/" required>
       <span class="notice" ng-show="signup.email.$error.pattern && signup.email.$touched" translate="signup.email_illegal">Illegal email address</span>
       </div>
 
 
       <div class="item">
-        <button type="submit" class="btn btn-primary" name="submit" ng-model="submit" ng-disabled="(name.length == 0)" ng-click="createAccount()" translate="signup.signup_button">Sign up</button>
+        <button type="submit" class="btn btn-primary" name="submit" ng-model="submit" ng-disabled="isCreateAccountDisabled()" ng-click="createAccount()" translate="signup.signup_button">Sign up</button>
       </div>
     </form>
   </div>
