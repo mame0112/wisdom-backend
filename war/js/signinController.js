@@ -145,7 +145,7 @@ wisdomApp.controller('SigninController',
     $facebook.api("/me").then( 
       function(response) {
       	log.d("Welcome: " + response.name);
-      	log.d("Access token; " + response.authResponse.accessToken);
+      	// log.d("Access token; " + response.authResponse.accessToken);
         // $scope.welcomeMsg = "Welcome " + response.name;
         $scope.isLoggedIn = true;
       },  

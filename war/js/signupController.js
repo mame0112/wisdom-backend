@@ -14,6 +14,7 @@ wisdomApp.controller('SignupController',
 	'$state',
 	'$cordovaOauth',
 	'$auth',
+	'$facebook',
  function(
  	$scope, 
  	$stateParams, 
@@ -28,7 +29,8 @@ wisdomApp.controller('SignupController',
  	toasterService,
  	$state,
  	$cordovaOauth,
- 	$auth){
+ 	$auth,
+ 	$facebook){
  	log.d("SignupController");
  	// log.d("userId: " + $scope.userId);
 
@@ -97,6 +99,35 @@ wisdomApp.controller('SignupController',
 	 	// 	log.d("API called");
  		// });
  	};
+
+ 	$scope.facebookSignup = function()
+ 	{
+		$facebook.login().then( refresh );
+ 	};
+
+	function refresh() {
+		$facebook.api("/me").then( 
+		function(response) {
+		log.d("Welcome: " + response.name);
+		// $scope.welcomeMsg = "Welcome " + response.name;
+		$scope.isLoggedIn = true;
+	},
+	function(err) {
+		log.d("Please log in");
+		// $scope.welcomeMsg = "Please log in";
+		$scope.isLoggedIn = false;
+		}
+	);  
+
+	$facebook.getLoginStatus().then(
+		function(response){
+			log.d("response: " + response);
+			console.log(response);
+			},
+				function(er){
+			}
+		);
+	}
 
 	$scope.$on(Constants.MODE_CHNAGE, function(event, param){
  		log.d("Mode changed: " + param);
