@@ -182,10 +182,6 @@
 }
 
 #infobar .list .contents .content{
-    
-}
-
-#infobar .list .contents .content{
     font-size: 16px;
     color: #000000;
 
@@ -197,6 +193,11 @@
     -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
 }
+
+#infobar .list .contents .content .title{
+    color: #000000;
+}
+
 
 #infobar .list .contents .content p{
     font-size: 14px;

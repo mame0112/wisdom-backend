@@ -3,17 +3,17 @@
 	<hr class="title_divider">
 	<ul ng-repeat="data in highlights" class="list">
 		<li class="contents">
-		<div class="image">
-		    <a class="pull-left" ui-sref="wisdom({wisdomId:data.id})">
-			<div class="thumbnail" ng-style="{'background': colorGenerator.generateColor(data.title)}">
-				<div class="text">{{data.title | capitalize}}</div>
+			<div class="image">
+			    <a class="pull-left" ui-sref="wisdom({wisdomId:data.id})">
+				<div class="thumbnail" ng-style="{'background': colorGenerator.generateColor(data.title)}">
+					<div class="text">{{data.title | capitalize}}</div>
+				</div>
+		        </a>
 			</div>
-	        </a>
-		</div>
-	    <div class="content">
-	        <a ui-sref="wisdom({wisdomId:data.id})">{{data.title}}</a>
-	        <p class="description">{{data.description}}</p>
-	    </div>
+		    <div class="content">
+		        <a ui-sref="wisdom({wisdomId:data.id})" class="title">{{data.title}}</a>
+		        <p class="description">{{data.description}}</p>
+		    </div>
 		    <hr class="divider">
 		</li>
 	</ul>

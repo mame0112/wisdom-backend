@@ -5,20 +5,12 @@
 	<li class="contents">
 	<div class="image">
 		<a ui-sref="wisdom({wisdomId: data.id})">
-		<!--
-	    <img src="image/64-64.png" alt="" class="media-object" />
-		<div class="square" ng-style="{background: '#FF0000'}">
-		<div class="square" ng-style="creativeColorGenerateService.getThumbnailBackgroundColor(data.title)"></div>
-	    -->
 		<div class="thumbnail" ng-style="{'background': creativeColorGenerateService.generateColor(data.title)}">
 			<div class="text">{{data.title | capitalize}}</div>
 		</div>
 	    </a>
 	</div>
 	<div class="content">
-	<!--
-		<div class="title"><p><a ui-sref="wisdom({wisdomId: data.id})">{{data.title}}</a></p></div>
-		-->
 		<div class="title"><a ui-sref="wisdom({wisdomId: data.id})"><p>{{data.title}}</p></a></div>
 		<div class="description"><p>{{data.description}}</p></div>
 		<div class="tag"><p>{{data.tag}}</p></div>
@@ -33,21 +25,4 @@
 	<hr class="border">
 	</li>
 </ul>
-<!--
-	<ul class="media-list" ng-repeat="data in wisdoms">
-		<li class="media">
-			<a class="pull-left" ui-sref="wisdom({wisdomId: data.id})">
-	        <img src="image/64-64.png" alt="" class="media-object" />
-    	    </a>
-		    <div class="media-body">
-		        <a ui-sref="wisdom({wisdomId: data.id})">
-		        	<h4 class="media-heading">{{data.title}}</h4>
-	        	</a>
-			<p>{{data.description}}</p>
-			<p>{{data.tag}}</p>
-		    </div>
-		</li>
-	</ul>
--->
-
 </div>
