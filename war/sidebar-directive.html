@@ -1,11 +1,10 @@
 <div id="sidebar" ng-controller="SidebarController" ng-init="initialize()">
-  <accordion close-others="true">
-    <accordion-group heading="{{data.name}}" class="parentItem" ng-repeat="data in Category" ng-click="selectCategory(data)">
-      <p ng-repeat="subc in subCategory">
-      <a ui-sref="category({categoryId:data.name, subCategoryId:subc.name})" class="childItem">
-      <!--<font color={{data.color}}> -->
-      {{subc.name}}
-      </font></a>
-      </p>
-    </accordion-group>
+	<accordion close-others="true">
+		<accordion-group heading="{{data.name}}" class="parentItem" ng-repeat="data in Category" ng-click="selectCategory(data)">
+			<p ng-repeat="subc in subCategory">
+				<a ui-sref="category({categoryId:data.name, subCategoryId:subc.name})" class="childItem">{{subc.name}}
+				</a>
+			</p>
+		</accordion-group>
+	</accordion>
 </div>
