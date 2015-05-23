@@ -164,6 +164,8 @@ wisdomApp.controller('headerController',
 
  		$state.go('search', {result : data});
 
+ 		$scope.switchNavivarStatus();
+
  		// log.d("searchWisdom");
  		// if(data !== null && data !== undefined){
 	 	// 	// log.d("input value: " + data);
@@ -203,6 +205,7 @@ wisdomApp.controller('headerController',
  	$scope.signout = function()
  	{
  		userDataHolder.removeUserData();
+		$scope.switchNavivarStatus();
 	 	$scope.userId = Constants.NO_USER;
  		$state.go('/');
 		toasterService.showSuccessToasterShort(signout_title, signout_done);
@@ -237,6 +240,8 @@ wisdomApp.controller('headerController',
 
 	$scope.changeLanguage = function (currentLang) {
 		log.d("changeLanguage: " + currentLang);
+
+ 		$scope.switchNavivarStatus();
 
 		if(currentLang === 'ja' || currentLang == 'ja_jp'){
 			log.d("Change to Japanese");
