@@ -39,6 +39,18 @@ function($scope, log, contactAPIService, toasterService, $state, $translate){
 
  	};
 
+ 	$scope.isSubmitButtonDisable = function()
+ 	{
+ 		if($scope.name !== undefined && $scope.email !== undefined && $scope.message !== undefined){
+ 			if($scope.name.length !== 0 && $scope.email.length !== 0 && $scope.message.length !== 0){
+ 				return false;
+ 			}
+ 		}
+
+ 		return true;
+
+ 	};
+
  	$scope.sendMessage = function()
  	{
  		log.d("sendMessage");
