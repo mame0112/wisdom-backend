@@ -197,6 +197,15 @@ wisdomApp.controller('headerController',
  		// }
  	};
 
+ 	$scope.isSearchButtonDisable = function()
+ 	{
+ 		if($scope.searchParam === undefined || $scope.searchParam.length === 0){
+ 			return true;
+ 		}
+
+ 		return false;
+ 	};
+
  	$scope.getUserId = function()
  	{
  		return userDataHolder.getUserId();
