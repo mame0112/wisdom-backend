@@ -207,6 +207,20 @@
 
 }
 
+#newwisdom .header{
+	margin-bottom: 10px;
+}
+
+#newwisdom .header .note{
+	color: #ff0000;
+	display: inline;
+
+}
+
+#newwisdom .header .description{
+	display: inline;
+}
+
 #newwisdom .subTitle{
 	font-size: 24px;
 }
@@ -236,5 +250,16 @@
 
 #instruction {
 
+}
+
+#instruction .title{
+	color: #000000;
+	font-size: 16px;
+}
+
+#instruction .message{
+	color: #333333;
+	margin-bottom: 16px;
+	font-size: 14px;
 }
 
