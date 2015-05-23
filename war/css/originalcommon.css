@@ -52,6 +52,10 @@ body {
 	color: #ff0000;
 }
 
+#contact .item .subtitle{
+	display: inline;
+}
+
 #contact .note {
 
 }
