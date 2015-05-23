@@ -11,7 +11,7 @@
 
 #userpage .sidebar .header{
 	width: 56%;
-	margin: 20px auto;
+	margin: 0 auto;
     padding-bottom: 0px;
     margin-bottom: 0px;
 }
@@ -21,7 +21,7 @@
 	height: 144px;
 	width: 144px;
 	float: center;
-	margin-right: 10px;
+    margin: 0 auto;
 }
 
 #userpage .sidebar .header .thumbnail .initial{
@@ -217,7 +217,7 @@
     text-overflow: ellipsis;
 }
 
-
+/*
 
 #userpage .header{
 	background-color: #efefef;
@@ -232,7 +232,11 @@
 
 }
 
-#userpage .header .user .thumbnail{
+#userpage .sidebar .header{
+    background-color: #FF0000;
+}
+
+#userpage .sidebar .header .user .thumbnail{
 	border-radius: 50%;
 	height: 72px;
 	width: 72px;
@@ -241,14 +245,14 @@
 	margin-right: 10px;
 }
 
-#userpage .header .user .thumbnail .initial{
+#userpage .sidebar .header .user .thumbnail .initial{
 	color: #FFFFFF;
 	font-size: 48px;
     text-align:center;
     vertical-align: middle;
 }
 
-#userpage .header .user .username{
+#userpage .sidebar .header .user .username{
 	color: #666666;
 	font-size: 24px;
 	padding-left: 12px;
@@ -339,8 +343,7 @@
     -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
 }
-
-
+*/
 
 
 
