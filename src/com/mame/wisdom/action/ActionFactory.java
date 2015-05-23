@@ -95,6 +95,10 @@ public class ActionFactory {
 		// Callback action by twitter
 		mAction.put(ActionConstants.GET + ActionConstants.KEY_TWITTER_CALLBACK,
 				new TwitterCallbackAction());
+		
+		// Facebook token registration
+		mAction.put(ActionConstants.GET + ActionConstants.KEY_FACEBOOK_SIGNUP,
+				new FacebookSignupAction());
 
 		// Callback action by twitter
 		mAction.put(ActionConstants.GET + ActionConstants.KEY_CONTACT,

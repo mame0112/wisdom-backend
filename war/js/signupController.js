@@ -15,6 +15,7 @@ wisdomApp.controller('SignupController',
 	'$cordovaOauth',
 	'$auth',
 	'$facebook',
+	'facebookSignupAPIService',
  function(
  	$scope, 
  	$stateParams, 
@@ -30,7 +31,8 @@ wisdomApp.controller('SignupController',
  	$state,
  	$cordovaOauth,
  	$auth,
- 	$facebook){
+ 	$facebook,
+ 	facebookSignupAPIService){
  	log.d("SignupController");
  	// log.d("userId: " + $scope.userId);
 
@@ -102,13 +104,31 @@ wisdomApp.controller('SignupController',
 
  	$scope.facebookSignup = function()
  	{
+ 		log.d("facebookSignup");
 		$facebook.login().then( refresh );
  	};
 
 	function refresh() {
 		$facebook.api("/me").then( 
 		function(response) {
+			log.d("refresh response: " + response);
 		log.d("Welcome: " + response.name);
+
+		var param = {
+
+		};
+
+		facebookSignupAPIService.facebookSignup(({servlet_params : param}, function(response){
+			if(response !== null && response !== undefined){
+				if(response.params !== null && response.params !== undefined){
+					log.d("successfully facebook sign in and store data");
+				} else {
+					//Error occured while storeing data
+				}
+			} else {
+				//Error occured while storeing data
+			}
+		}));
 		// $scope.welcomeMsg = "Welcome " + response.name;
 		$scope.isLoggedIn = true;
 	},

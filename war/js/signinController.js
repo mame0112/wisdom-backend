@@ -14,6 +14,7 @@ wisdomApp.controller('SigninController',
  '$translate',
  '$auth',
  '$facebook',
+ 'facebookSigninAPIService',
  function(
  	$scope, 
  	log, 
@@ -29,7 +30,8 @@ wisdomApp.controller('SigninController',
 	$state,
 	$translate,
 	$auth,
-	$facebook){
+	$facebook,
+	facebookSigninAPIService){
 
  	log.d("SigninController");
 
@@ -145,6 +147,17 @@ wisdomApp.controller('SigninController',
     $facebook.api("/me").then( 
       function(response) {
       	log.d("Welcome: " + response.name);
+		facebookSigninAPIService.facebookSignin(({servlet_params : param}, function(response){
+			if(response !== null && response !== undefined){
+				if(response.params !== null && response.params !== undefined){
+					log.d("successfully facebook sign in and store data");
+				} else {
+					//Error occured while storeing data
+				}
+			} else {
+				//Error occured while storeing data
+			}
+		}));
       	// log.d("Access token; " + response.authResponse.accessToken);
         // $scope.welcomeMsg = "Welcome " + response.name;
         $scope.isLoggedIn = true;

@@ -196,4 +196,27 @@ wisdomApp.factory('apiService', ['$resource', 'log',
             like: {method: 'GET', isArray: false},
         });
     }
-]);
+])
+
+.factory('facebookSignupAPIService', ['$resource', 'log',
+ function($resource, log) {
+    return $resource('/controller/facebookSignup',
+         {servlet_resp_id: 1, param: '@servlet_params'},
+         { 
+            //Search widoms by given keyword
+            facebookSignup: {method: 'GET', isArray: false},
+        });
+    }
+])
+
+.factory('facebookSigninAPIService', ['$resource', 'log',
+ function($resource, log) {
+    return $resource('/controller/facebookSignin',
+         {servlet_resp_id: 1, param: '@servlet_params'},
+         { 
+            //Search widoms by given keyword
+            facebookSignin: {method: 'GET', isArray: false},
+        });
+    }
+])
+;
