@@ -52,6 +52,8 @@ public class WConstant {
 	public final static String SERVLET_PASSWORD_NAME = "servlet_password";
 
 	public final static String SERVLET_THUMBNAIL_URL = "servlet_thumbnail_url";
+	
+	public final static String SERVLET_FACEBOOK_ACCESS_TOKEN = "servlet_facebook_access_token";
 
 	/**
 	 * Wisdom data field

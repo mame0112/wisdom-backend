@@ -51,7 +51,8 @@ public class SignupAction implements Action {
 
 			UserDAO userDAO = new DefaultUserDAO();
 			try {
-				userDAO.storeNewUserData(data);
+				long newUserId = userDAO.storeNewUserData(data);
+				DbgUtil.showLog(TAG, "newUserId: " + newUserId);
 			} catch (WisdomDatastoreException e) {
 				builder.addErrorMessage(e.getMessage());
 			}

@@ -85,6 +85,11 @@ public class WDUserDataBuilder {
 		mUserData.setMailAddress(mailAddress);
 		return this;
 	}
+	
+	//TODO Need to add if necessary
+//	public WDUserDataBuilder setFacebookAccessToken(String fbAccessToken){
+//		return this;
+//	}
 
 	public WDUserData getConstructedData() {
 		return mUserData;

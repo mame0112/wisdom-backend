@@ -11,7 +11,8 @@ import com.mame.wisdom.util.DbgUtil;
 
 public class FacebookSignupJsonBuilder extends JsonBuilder {
 
-	private final static String TAG = FacebookSignupJsonBuilder.class.getSimpleName();
+	private final static String TAG = FacebookSignupJsonBuilder.class
+			.getSimpleName();
 
 	private JSONObject mRootObject = new JSONObject();
 
@@ -54,30 +55,21 @@ public class FacebookSignupJsonBuilder extends JsonBuilder {
 		}
 
 		// If instance type is not correct
-		if (!(param[0] instanceof List<?>)) {
+		if (!(param[0] instanceof Long)) {
 			throw new JSONBuilderException("illegal instance type");
 		}
 
-//		List<WDWisdomData> data = (List<WDWisdomData>) param[0];
-//
-//		try {
-//			JSONArray itemArray = new JSONArray();
-//
-//			for (WDWisdomData d : data) {
-//				JSONObject itemObject = new JSONObject();
-//				itemObject.put(JsonConstant.PARAM_WISDOM_ID, d.getWisdomId());
-//				itemObject.put(JsonConstant.PARAM_WISDOM_TITLE, d.getTitle());
-//				itemObject.put(JsonConstant.PARAM_WISDOM_DESCRIPTION,
-//						d.getDescription());
-//				itemObject.put(JsonConstant.PARAM_WISDOM_TAG, d.getTag());
-//				itemArray.put(itemObject);
-//			}
-//
-//			mRootObject.put(JsonConstant.PARAMS, itemArray);
+		long userId = (Long) param[0];
 
-//		} catch (JSONException e) {
-//			DbgUtil.showLog(TAG, "JSONException: " + e.getMessage());
-//		}
+		JSONArray itemArray = new JSONArray();
+		JSONObject object = new JSONObject();
+		try {
+			object.put(JsonConstant.PARAM_USER_ID, userId);
+			itemArray.put(object);
+			mRootObject.put(JsonConstant.PARAMS, itemArray);
+		} catch (JSONException e) {
+			DbgUtil.showLog(TAG, "JSONException: " + e.getMessage());
+		}
 
 	}
 

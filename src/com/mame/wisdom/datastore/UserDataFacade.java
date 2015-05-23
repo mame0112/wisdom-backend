@@ -24,16 +24,21 @@ public class UserDataFacade {
 		DbgUtil.showLog(TAG, "UserDataFacade");
 	}
 
-	public synchronized boolean createNewUserData(WDUserData data)
+	/**
+	 * Save new user data.
+	 * 
+	 * @param data
+	 * @return user id for newly created user data.
+	 * @throws WisdomDatastoreException
+	 */
+	public synchronized long createNewUserData(WDUserData data)
 			throws WisdomDatastoreException {
 		DbgUtil.showLog(TAG, "createNewUserData");
 
 		DAOFactory factory = DAOFactory.getDAOFactory();
 		UserDAO userDAO = factory.getUserDAO();
 
-		userDAO.storeNewUserData(data);
-
-		return false;
+		return userDAO.storeNewUserData(data);
 	}
 
 	public WDUserData getUserDataByTwitterName(String twitterName)
