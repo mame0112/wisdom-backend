@@ -34,8 +34,20 @@ wisdomApp.controller('SidebarController',
 				])
 			.then(function (translations) {
 				$timeout(function() {
-					$scope.Category[index] = translations[category[index].translate];
-					log.d("$scope.Category[i]: " + $scope.Category[index]);
+
+					var categoryData = {
+						"id": 0,
+						"name": null,
+						"translate": null
+					};
+
+					categoryData.translate = translations[category[index].translate];
+					categoryData.id = index;
+					categoryData.name = category[index].name;
+
+
+					$scope.Category[index] = categoryData;
+					log.d("$scope.Category[i].translate: " + $scope.Category[index].translate);
 	        	}, 0);
 			});
 	 	}
@@ -46,27 +58,38 @@ wisdomApp.controller('SidebarController',
  		if(data !== null)
  		{
 	 		var category = data;
-	 		log.d("input category: " + category);
-	 		subCategoryLoaderService.load(category).then(function(d){
+	 		log.d("input category: " + category.name);
+	 		subCategoryLoaderService.load(category.name).then(function(d){
 	 			log.d("d: " + d.data);
-	 			$scope.subCategory = d.data;
+	 			// $scope.subCategory = d.data;
+	 			for(var i=0; i<d.data.length; i++){
+	 				log.d("translate: " + d.data[i].translate);
+					translateSubCategory(d.data[i].translate, i, d.data[i].name);
+	 			}
+
+				function translateSubCategory(value, index, name){
+					$translate([
+						value
+						])
+					.then(function (translations) {
+						$timeout(function() {
+
+							log.d("name: " + name);
+
+							var categoryData = {
+								"name": name,
+								"translate": translations[value]
+							};
+
+							// $scope.subCategory[index] = translations[value];
+							$scope.subCategory[index] = categoryData;
+							log.d("translations[value]: " + translations[value]);
+							// log.d("$scope.subCategory[i]: " + $scope.subCategory[index]);
+			        	}, 0);
+					});
+				}
 	 		});
 
-	 		// $scope.subCategory = subCategoryLoaderService.load(category);
-	 		// log.d("$scope.subCategory: " + $scope.subCategory);
-
-	 		// log.d("length: " + $scope.subCategory.length);
-
-	 		// log.d("length: " + $scope.subCategory.length);
-
-	 		// for(i=0; i<$scope.subCategory.length; i++)
-	 		// {
-	 		// 	var item = $scope.subCategory[i];
-	 		// 	log.d("item:" + item);
-	 		// }
-	 		// var loaderservice = new subCategoryLoaderService();
-	 		// $scope.subCategory = subCategoryLoaderService.load(category);
-	 		// log.d("subCategory: " + $scope.subCategory);
  		}
 
  	};

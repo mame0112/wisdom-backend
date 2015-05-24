@@ -1,9 +1,9 @@
 <div id="sidebar" ng-controller="SidebarController" ng-init="initialize()">
 	<accordion close-others="true">
 		<!-- <accordion-group heading="{{data.translate}}" class="parentItem" ng-repeat="data in Category" ng-click="selectCategory(data)"> -->
-		<accordion-group heading="{{data}}" class="parentItem" ng-repeat="data in Category" ng-click="selectCategory(data)">
+		<accordion-group heading="{{data.translate}}" class="parentItem" ng-repeat="data in Category" ng-click="selectCategory(data)">
 			<p ng-repeat="subc in subCategory">
-				<a ui-sref="category({categoryId:data.name, subCategoryId:subc.name})" class="childItem">{{subc.name}}
+				<a ui-sref="category({categoryId:data.name, subCategoryId:subc.name})" class="childItem">{{subc.translate}}
 				</a>
 			</p>
 		</accordion-group>
