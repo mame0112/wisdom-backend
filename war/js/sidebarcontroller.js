@@ -1,13 +1,17 @@
 wisdomApp.controller('SidebarController',
- ['$scope', 'Constants', 'log', 'subCategoryLoaderService',
-  function($scope, Constants, log, subCategoryLoaderService){
+ ['$scope', 'Constants', 'log', 'subCategoryLoaderService', '$translate', '$timeout',
+  function($scope, Constants, log, subCategoryLoaderService, $translate, $timeout){
 
- 	$scope.Category = Constants.Category;
+
+ 	$scope.Category = {};
+ 	// $scope.Category = Constants.Category;
  	$scope.subCategory = {};
 
  	$scope.initialize = function() {
 		log.d("initialize");
-		setupItems();
+		// setupItems();
+
+		translateCategories(Constants.Category);
 
 		// subCategoryLoaderService.load();
 
@@ -17,11 +21,31 @@ wisdomApp.controller('SidebarController',
 		log.d("isVisible");
  	};
 
+ 	function translateCategories(category)
+ 	{
+
+ 		for(var i=0; i<category.length; i++) {
+ 			translate(i);
+ 		}
+
+	 	function translate (index){
+			$translate([
+				category[index].translate
+				])
+			.then(function (translations) {
+				$timeout(function() {
+					$scope.Category[index] = translations[category[index].translate];
+					log.d("$scope.Category[i]: " + $scope.Category[index]);
+	        	}, 0);
+			});
+	 	}
+ 	}
+
  	$scope.selectCategory = function(data)
  	{
  		if(data !== null)
  		{
-	 		var category = data.name;
+	 		var category = data;
 	 		log.d("input category: " + category);
 	 		subCategoryLoaderService.load(category).then(function(d){
 	 			log.d("d: " + d.data);

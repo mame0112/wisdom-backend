@@ -169,6 +169,11 @@
 		"no_created_wisdom":"No created wisdom",
 		"created_wisdom": "Created wisdoms",
 		"liked_wisdom":"Liked wisdoms"
+	},
+	"category":{
+		"sports": "Sports",
+		"music": "Music",
+		"cooking": "Cooking"
 	}
 
 }

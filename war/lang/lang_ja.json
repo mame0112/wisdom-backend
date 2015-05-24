@@ -169,6 +169,11 @@
 		"no_created_wisdom":"まだ作った知恵がありません",
 		"created_wisdom": "作成した知恵",
 		"liked_wisdom":"いいねした知恵"
+	},
+	"category":{
+		"sports": "スポーツ",
+		"music": "音楽",
+		"cooking": "料理"
 	}
 
 
