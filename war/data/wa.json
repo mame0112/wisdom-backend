@@ -1,0 +1,7 @@
+[
+	{"id": 0, "name": "shodo","translate":"wa.shodo"},
+	{"id": 1, "name": "kado", "translate":"wa.kado"},
+	{"id": 2, "name": "sado", "translate":"wa.sado"},
+	{"id": 3, "name": "shogi", "translate":"wa.shogi"},
+	{"id": 4, "name": "igo", "translate":"wa.igo"}
+]

@@ -173,13 +173,69 @@
 	"category":{
 		"sports": "Sports",
 		"music": "Music",
-		"cooking": "Cooking"
+		"cooking": "Cooking",
+		"language": "Language",
+		"business": "Business",
+		"fashion": "Fashion",
+		"art": "Design/Art",
+		"wa": "Japanese culture"
 	},
 	"sports":{
 		"baseball":"Baseball",
 		"football":"Soccer",
 		"snowboard":"Snow board",
-		"tennis":"Tennis"
+		"tennis":"Tennis",
+		"yoga":"Yoga",
+		"dance":"Dance",
+		"volleyball":"Volley ball"
+	},
+	"music":{
+		"piano":"piano",
+		"vocal":"Vocal",
+		"guitar":"Guitar",
+		"tennis":"Tennis",
+		"drums":"Drums",
+		"dtm":"DTM"
+	},
+	"cooking":{
+		"menu":"Menu",
+		"tool":"Tool",
+		"lunchbox":"Lunch box",
+		"single":"Single"
+	},
+	"language":{
+		"english":"Engish",
+		"chinese":"Chinese",
+		"korean":"Korean",
+		"french":"French",
+		"italy":"Itary",
+		"spanish":"Spanish",
+		"german":"German"
+	},
+	"business":{
+		"skill":"Skill",
+		"pc":"PC",
+		"programming":"Programming"
+	},
+	"fashion":{
+		"cloth":"Cloth",
+		"makeup":"Make up",
+		"esthetic":"Esthetic",
+		"nail":"Nail",
+		"aroma":"Aroma"
+	},
+	"art":{
+		"painting":"Painting/Drawing",
+		"dtp":"DTP",
+		"camera":"Camera",
+		"flowerarrange":"Flower arrangement"
+	},
+	"wa":{
+		"shodo":"Shodo",
+		"kado":"Kado",
+		"sado":"Sado",
+		"shogi":"Shogi",
+		"igo":"Igo"
 	}
 
 }

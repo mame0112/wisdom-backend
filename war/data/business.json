@@ -1,0 +1,5 @@
+[
+	{"id": 0, "name": "skill", "translate":"business.skill"},
+	{"id": 1, "name": "pc", "translate":"business.pc"},
+	{"id": 2, "name": "programming", "translate":"business.programming"}
+]

@@ -1,0 +1,7 @@
+[
+	{"id": 0, "name": "cloth","translate":"fashion.cloth"},
+	{"id": 1, "name": "makeup", "translate":"fashion.makeup"},
+	{"id": 2, "name": "esthetic", "translate":"fashion.esthetic"},
+	{"id": 3, "name": "nail", "translate":"fashion.nail"},
+	{"id": 4, "name": "aroma", "translate":"fashion.aroma"}
+]

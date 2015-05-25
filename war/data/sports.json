@@ -1,6 +1,9 @@
 [
-	{"id": 0, "name": "Baseball", "color":"#FF0000", "translate":"sports.baseball"},
-	{"id": 1, "name": "Football", "color":"#00FF00", "translate":"sports.football"},
-	{"id": 2, "name": "Snow boarding", "color":"#0000FF", "translate":"sports.snowboard"},
-	{"id": 3, "name": "Tennis", "color":"#0FF000", "translate":"sports.tennis"}
+	{"id": 0, "name": "Baseball", "translate":"sports.baseball"},
+	{"id": 1, "name": "Football", "translate":"sports.football"},
+	{"id": 2, "name": "Snow boarding", "translate":"sports.snowboard"},
+	{"id": 3, "name": "Tennis", "translate":"sports.tennis"},
+	{"id": 4, "name": "Yoga", "translate":"sports.yoga"},
+	{"id": 5, "name": "Dance", "translate":"sports.dance"},
+	{"id": 6, "name": "Volley ball", "translate":"sports.volleyball"}
 ]

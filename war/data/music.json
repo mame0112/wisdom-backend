@@ -1,6 +1,7 @@
 [
-	{"id": 0, "name": "Classic", "color":"#FF0000"},
-	{"id": 1, "name": "Jazz", "color":"#00FF00"},
-	{"id": 2, "name": "Piano", "color":"#0000FF"},
-	{"id": 3, "name": "Electone", "color":"#0FF000"}
+	{"id": 0, "name": "piano", "translate":"music.piano"},
+	{"id": 1, "name": "vocal", "translate":"music.vocal"},
+	{"id": 2, "name": "guitar", "translate":"music.guitar"},
+	{"id": 3, "name": "drums", "translate":"music.drums"},
+	{"id": 4, "name": "dtm", "translate":"music.dtm"}
 ]

@@ -1,0 +1,9 @@
+[
+	{"id": 0, "name": "Japanese", "translate":"language.english"},
+	{"id": 1, "name": "Chinese", "translate":"language.chinese"},
+	{"id": 2, "name": "Korean", "translate":"language.korean"},
+	{"id": 3, "name": "French", "translate":"language.french"},
+	{"id": 4, "name": "Italy", "translate":"language.italy"},
+	{"id": 5, "name": "Spanish", "translate":"language.spanish"},
+	{"id": 6, "name": "German", "translate":"language.german"}
+]

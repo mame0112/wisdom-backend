@@ -1,5 +1,6 @@
 [
-	{"id": 0, "name": "Japanese", "color":"#FF0000"},
-	{"id": 1, "name": "French", "color":"#00FF00"},
-	{"id": 2, "name": "Itarian", "color":"#0000FF"}
+	{"id": 0, "name": "menu", "translate":"cooking.menu"},
+	{"id": 1, "name": "tool", "translate":"cooking.tool"},
+	{"id": 2, "name": "lunchbox", "translate":"cooking.lunchbox"},
+	{"id": 3, "name": "single", "translate":"cooking.single"}
 ]

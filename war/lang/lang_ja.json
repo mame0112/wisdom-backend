@@ -173,14 +173,68 @@
 	"category":{
 		"sports": "スポーツ",
 		"music": "音楽",
-		"cooking": "料理"
+		"cooking": "料理",
+		"language": "語学/言語",
+		"business": "ビジネス",
+		"fashion": "ファッション",
+		"art": "アート/デザイン",
+		"wa": "日本文化"
 	},
 	"sports":{
 		"baseball":"野球",
 		"football":"サッカー",
 		"snowboard":"スノーボード",
-		"tennis":"テニス"
+		"tennis":"テニス",
+		"yoga":"ヨガ",
+		"dance":"ダンス",
+		"volleyball":"バレーボール"
+	},
+	"music":{
+		"piano":"ピアノ",
+		"vocal":"ボーカル",
+		"guitar":"ギター",
+		"tennis":"テニス",
+		"drums":"ドラム",
+		"dtm":"DTM"
+	},
+	"cooking":{
+		"menu":"献立",
+		"tool":"器具",
+		"lunchbox":"弁当",
+		"single":"一人暮らし"
+	},
+	"language":{
+		"english":"英語",
+		"chinese":"中国語",
+		"korean":"韓国語",
+		"french":"フランス語",
+		"italy":"イタリア語",
+		"spanish":"スペイン語",
+		"german":"ドイツ語"
+	},
+	"business":{
+		"skill":"ビジネススキル",
+		"pc":"パソコン",
+		"programming":"プログラミング"
+	},
+	"fashion":{
+		"cloth":"服飾",
+		"makeup":"メイク",
+		"esthetic":"エステ",
+		"nail":"ネイル",
+		"aroma":"アロマ"
+	},
+	"art":{
+		"painting":"絵画",
+		"dtp":"DTP",
+		"camera":"カメラ",
+		"flowerarrange":"フラワーアレンジメント"
+	},
+	"wa":{
+		"shodo":"書道",
+		"kado":"華道",
+		"sado":"茶道",
+		"shogi":"将棋",
+		"igo":"囲碁"
 	}
-
-
 }

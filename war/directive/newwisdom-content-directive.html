@@ -14,9 +14,10 @@
 			<span class="notice" ng-show="newwisdom.category.$error.required">*</span>
 		</div>
 		<div class="btn-group" dropdown>
-			<select ng-model="category" name="category" ng-model="category" ng-options="c.name as c.name for c in categories"
+			<select ng-model="category" name="category" ng-model="category" ng-options="c.name as c.translate for c in categories"
 			ng-change="getSubcategoryItems(category)" required>
 			<option value="" translate="newwisdom.select_category">Select category</option>
+			{{c.name}}
 			</select>
 		</div>
 	</div>

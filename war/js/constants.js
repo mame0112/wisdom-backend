@@ -8,6 +8,11 @@ wisdomApp.constant(
 			{id: 0, name: "Sports", translate:"category.sports"},
 			{id: 1, name: "Music", translate:"category.music"},
 			{id: 2, name: "Cooking", translate:"category.cooking"},
+			{id: 3, name: "Language", translate:"category.language"},
+			{id: 4, name: "Business", translate:"category.business"},
+			{id: 5, name: "Fashion", translate:"category.fashion"},
+			{id: 6, name: "Art", translate:"category.art"},
+			{id: 7, name: "Wa", translate:"category.wa"}
 		],
 
 		MODE_CHNAGE: 'mode_changed',

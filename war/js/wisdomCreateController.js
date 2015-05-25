@@ -4,7 +4,6 @@ wisdomApp.controller('wisdomCreateController',
    'Constants',
    'createWisdomSharedStateService',
    'newWisdomAPIService',
-   // 'wisdomAPIService',
    '$http',
    'userDataHolder',
    'timeService',
@@ -15,6 +14,8 @@ wisdomApp.controller('wisdomCreateController',
 	'$rootScope',
 	'toasterService',
 	'$state',
+	'categoryTranslateService',
+	'$timeout',
     function(
     	$scope, 
     	log, 
@@ -30,7 +31,9 @@ wisdomApp.controller('wisdomCreateController',
 		$window,
 		$rootScope,
 		toasterService,
-		$state
+		$state,
+		categoryTranslateService,
+		$timeout
     	){
  	log.d("wisdomCreateController");
 
@@ -39,7 +42,8 @@ wisdomApp.controller('wisdomCreateController',
 		isopen2: false
 	};
 
-	$scope.categories = Constants.Category;
+	// $scope.categories = Constants.Category;
+	$scope.categories = {};
 	$scope.subCategories = null;
 
 	$scope.titleMaxLength = Constants.WISDOM_TITLE_COUNT;
@@ -80,9 +84,44 @@ wisdomApp.controller('wisdomCreateController',
 			$state.go('signin');
 		}
 
-		// userData =  userDataHolder.getUserData();
-		// log.d("userId: " + userData.params.userId);
-		// result.createUserId = userData.params.userId;
+		categoryTranslateService.getTranslatedCategories().then(function(cs){
+			$scope.categories = cs;
+			log.d("cs: " + cs[1].translate);
+		});
+
+
+
+
+		// var cs = categoryTranslateService.getTranslatedCategories().theb({
+		// 	function(){
+
+		// 	}
+		// });
+
+		// Normal promise version
+		// var promise = categoryTranslateService.getTranslatedCategories();
+		// promise.then(function(response){
+		// 	log.d("success");
+		// 	$timeout(function() {
+		// 		$scope.categories = response;
+		// 		log.d("size: " + $scope.categories);
+		// 		log.d("response: " + $scope.categories.translate +  " " + $scope.categories.id + " " + $scope.categories.name);
+		// 	}, 0);
+		// }, function(reason){
+		// 	log.d("fail");
+		// }, function(update){
+		// 	log.d("notification");
+		// });
+
+		// $timeout(function() {
+		// 	$scope.categories = categoryTranslateService.getTranslatedCategories();
+		// 	log.d("length: " + $scope.categories.length);
+		// 	for(var i=0; i<$scope.categories.length; i++){
+		// 		var cate = $scope.categories[i];
+		// 		log.d("result: " + cate.name + " transate: " + cate.transate);
+		// 	}
+		// }, 0);
+
 	};
 
 

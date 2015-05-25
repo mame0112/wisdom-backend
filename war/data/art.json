@@ -1,0 +1,6 @@
+[
+	{"id": 0, "name": "painting", "translate":"art.painting"},
+	{"id": 1, "name": "dtp", "translate":"art.dtp"},
+	{"id": 2, "name": "camera", "translate":"art.camera"},
+	{"id": 3, "name": "flowerarrange", "translate":"art.flowerarrange"}
+]
