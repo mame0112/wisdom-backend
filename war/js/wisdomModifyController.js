@@ -115,8 +115,6 @@ function($scope,
   };
 
 
-
-
   $scope.moveUpMessagePosition= function(array, index)
   {
     log.d("moveUpMessagePosition");
