@@ -86,7 +86,6 @@ wisdomApp.controller('wisdomCreateController',
 
 		categoryTranslateService.getTranslatedCategories().then(function(cs){
 			$scope.categories = cs;
-			log.d("cs: " + cs[1].translate);
 		});
 
 
@@ -205,22 +204,11 @@ wisdomApp.controller('wisdomCreateController',
 		if(category !== null && category !== undefined) {
 	 		subCategoryLoaderService.load(category).then(function(d){
 	 			log.d("d: " + d.data);
-	 			$scope.subCategories = d.data;
+	 			// $scope.subCategories = d.data;
+	 			categoryTranslateService.getTranslatedSubCategories(d.data).then(function(cs){
+					$scope.subCategories = cs;
+				});
 	 		});
-
-			// var jsonFile = category.toLowerCase();
-
-			// $http({
-			// 	method: 'GET', 
-			// 	url: '/data/' + jsonFile + '.json'
-			// }).
-	  // 		success(function(data, status, headers, config) {
-	  // 			log.d("success: " + data);
-	  // 			$scope.subCategoryTitles = data;
-	  // 		}).
-			// error(function(data, status, headers, config) {
-			// 	console.log('error');
-			// });
 		}
 	};
 

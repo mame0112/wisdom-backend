@@ -28,7 +28,7 @@
 			<span class="notice" ng-show="newwisdom.subCategory.$error.required">*</span>
 		</div>
 		<div class="btn-group" dropdown>
-			<select ng-model="subCategory" name="subCategory" ng-options="s.name as s.name for s in subCategories" required>
+			<select ng-model="subCategory" name="subCategory" ng-options="s.name as s.translate for s in subCategories" required>
 			<option value="" translate="newwisdom.select_subcategory">Select sub category</option>
 			</select>
 
