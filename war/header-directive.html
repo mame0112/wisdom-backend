@@ -19,9 +19,7 @@
         <li ng-click="switchNavivarStatus()"><a href="http://mame0112.hatenablog.com/" translate="header.blog">Blog</a></li>
       </ul>
       <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="{{'header.search_help' | translate}}" ng-model="searchParam">
-        </div>
+          <input type="text" class="searchArea" placeholder="{{'header.search_help' | translate}}" ng-model="searchParam">
         <button class="btn btn-default" ng-click="searchWisdom(searchParam)" analytics-on="click" analytics-event="Search" translate="header.search_button" ng-disabled="isSearchButtonDisable()">Search</button>
       </form>
       <ul class="nav navbar-nav navbar-right">

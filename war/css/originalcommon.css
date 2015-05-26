@@ -32,6 +32,13 @@ body {
 	margin-top: 10px;
 }
 
+.searchArea{
+	padding-top: 4px;
+	padding-bottom: 6px;
+	padding-left: 8px;
+	display: inline;
+}
+
 #contact {
 
 }
@@ -78,6 +85,12 @@ body {
 	color: #666666;
 	font-size: 16px;
 	padding: 0px;
+}
+
+#contact .footer {
+	margin-top: 20px;
+	margin-bottom: 30px;
+
 }
 
 #signup {
