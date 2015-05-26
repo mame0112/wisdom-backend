@@ -149,7 +149,21 @@
 		"optional_title_help":"Within xxx characters",
 		"optional_desc_help":"Within xxx characters",
 		"agree_to_tos": "Agree to terms of use",
-		"create_button": "Create new wisdom"
+		"create_button": "Create new wisdom",
+		"howto_category_title":"Category and Sub category",
+		"howto_category_desc":"Select suitable category and subcategory that you are about to create page",
+		"howto_summary_title":"Title",
+		"howto_summary_desc":"Come up with easy to understand title. It would be good to use concreate keywords",
+		"howto_tag_title":"Tag",
+		"howto_tag_desc":"Additional one word for Category and Sub category. For instance, put 'Jazz' for Category 'Music' and Sub category 'Piano'. Easy to understand keyword is better.",
+		"howto_thumbnail_title":"Thumbnail",
+		"howto_thumbnail_desc":"Select eye catch image for your page",
+		"howto_overview_title":"Overview",
+		"howto_overview_desc":"Overview explanation for your page. It would be good if you can add information explaining about 'To whom' and 'What content'",
+		"howto_headline_title":"Headline (Optional)",
+		"howto_headline_desc":"Optional item. Please add depends on contents you are about to create. For this item, you can add more than two.",
+		"howto_description_title":"Detail explanation (Optional)",
+		"howto_description_desc":"Optional item. Please add depends on contents you are about to create. For this item, you can add more than two"
 	},
 	"modifywisdom":{
 		"title":"Title",
