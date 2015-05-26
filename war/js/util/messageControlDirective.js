@@ -182,15 +182,18 @@ wisdomApp.controller('messageOperationController',
 
  	$scope.onMouseOver = function(index)
  	{
- 		log.d("onMouseOver");
+ 		// log.d("onMouseOver");
  		$scope.panelCondition[index] = true;
+
  		// $scope.panelCondition = DISPLAY_TITLE;
  	};
 
  	$scope.onMouseLeave = function(index)
  	{
- 		log.d("onMouseLeave");
+ 		// log.d("onMouseLeave");
  		$scope.panelCondition[index] = false;
+
+
  		// $scope.panelCondition = DISPLAY_DESCRIPTION;
  	};
 
