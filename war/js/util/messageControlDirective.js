@@ -94,10 +94,12 @@ wisdomApp.controller('messageOperationController',
 		 		str = '{"entry": "' +input +'", "type": ' + TYPE_TITLE +  ', "updated_date": ' + current + '}';
 		 		log.d("###################: " + str);
 		 		$scope.saveArray.push(JSON.parse(str));
+		 		$scope.optionalHeadlineField = '';
  			} else {
 		 		str = '{"entry": "' +input +'", "type": ' + TYPE_MESSAGE + ', "updated_date": ' + current + '}';
 		 		log.d("###################: " + str);
 		 		$scope.saveArray.push(JSON.parse(str));
+		 		$scope.optionalDescField = '';
  			}
 
  			createWisdomSharedStateService.shareInputMessages($scope.saveArray);
@@ -303,6 +305,8 @@ wisdomApp.controller('messageOperationController',
  		// $scope.defaultMssageInputVisible = false;
 		$scope.messageField = '';
 		$scope.changeStateToStable();
+		$scope.optionalDescField = '';
+		$scope.optionalHeadlineField = '';
  	};
 
  	$scope.isModifyPanelVisible = function(index)
