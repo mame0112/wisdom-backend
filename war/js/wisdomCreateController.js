@@ -47,8 +47,10 @@ wisdomApp.controller('wisdomCreateController',
 	$scope.subCategories = null;
 
 	$scope.titleMaxLength = Constants.WISDOM_TITLE_COUNT;
-	$scope.descMaxLength = Constants.WISDOM_TITLE_COUNT;
+	$scope.descMaxLength = Constants.WISDOM_DESCRIPTION_COUNT;
 	$scope.subContentLength = Constants.WISDOM_TITLE_COUNT;
+
+	$scope.tosStatus = false;
 
 	var userData = null;
 
@@ -252,6 +254,19 @@ wisdomApp.controller('wisdomCreateController',
     $scope.onFileSelect = function ($files) {
         $scope.uploadProgress = 0;
         $scope.selectedFile = $files;
+    };
+
+    $scope.tosChanged = function(value)
+    {
+		$scope.tosStatus = value;
+    };
+
+    $scope.isTosDisabled = function()
+    {
+    	if($scope.tosStatus){
+    		return false;
+    	}
+    	return true;
     };
 
 	// $scope.uploadFile = function () {

@@ -41,9 +41,9 @@
 			<span class="notice" ng-show="newwisdom.tag.$error.required">*</span>
 		</div>
 		<p translate="newwisdom.tag_description">Input tag if necessary. (e.g. “Classic” or “Jazz” for “Music” category / “Piano” sub category)</p>
-		<input type="text" class="form-control" placeholder="{{'newwisdom.tag_help' | translate}}" name="tag" ng-model="wisdom.tag" required ng-minlength="2" ng-maxlength="10">
+		<input type="text" class="form-control" placeholder="{{'newwisdom.tag_help' | translate}}" name="tag" ng-model="wisdom.tag" required ng-minlength="2" ng-maxlength="8">
 		<span class="error" ng-show="newwisdom.tag.$error.minlength">Required more than 2 characters</span>
-		<span class="error" ng-show="newwisdom.tag.$error.maxlength">Required less than 10 characters</span>
+		<span class="error" ng-show="newwisdom.tag.$error.maxlength">Required less than 8 characters</span>
 	</div>
 
 	<div class="callout callout-success">
@@ -68,7 +68,7 @@
 			<span class="name" translate="newwisdom.description">Description</span>
 			<span class="notice" ng-show="newwisdom.description.$error.required">*</span>
 		</div>
-		<input type="text" class="form-control" placeholder="{{'newwisdom.description_help'|translate}}" name="description" ng-model="wisdom.description" required ng-maxlength="{{descMaxLength}}">
+		<textarea type="text" class="description" placeholder="{{'newwisdom.description_help'|translate}}" name="description" ng-model="wisdom.description" required ng-maxlength="{{descMaxLength}}"></textarea>
 		<p class="count">{{descMaxLength - wisdom.description.length}}/{{descMaxLength}}</p>
 		<span class="error" ng-show="newwisdom.description.$error.maxlength">Required less than {{descMaxLength}} characters</span>
 	</div>
@@ -79,10 +79,12 @@
 <div message-control-directive></div>
 
 <div class="form-group">
-	<input type="checkbox" checked="checked" ng-model="agreeToTos" translate="newwisdom.agree_to_tos"> Agree to <a ng-href="#/tos" target="_blank">Terms of service</a>
+
+	<input type="checkbox" checked="checked" ng-model="agreeToTos" ng-click="tosChanged(agreeToTos)" translate="newwisdom.agree_to_tos"> Agree to <a ng-href="#/tos" target="_blank">Terms of service</a>
+aa{{agreeToTos}}
 </div>
 <div class="form-group">
-	<button type="submit" class="btn btn-primary" ng-click="addNewWisdom()" ng-disabled="!agreeToTos" translate="newwisdom.create_button">Create new wisdom</button>
+	<button type="submit" class="btn btn-primary" ng-click="addNewWisdom()" ng-disabled="isTosDisabled()" translate="newwisdom.create_button">Create new wisdom</button>
 </div>
 
 </form>

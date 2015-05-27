@@ -1,46 +1,61 @@
-<dib ng-controller="messageOperationController" ng-init="initialize()">
+<div ng-controller="messageOperationController" ng-init="initialize()">
 
-<div class="callout callout-success">
-	<div class="btn-group" role="group" aria-label="item selection">
-		<button type="button" class="btn btn-default" ng-click="showTitleField()" translate="newwisdom.optional_title">Title</button>
-		<button type="button" class="btn btn-default" ng-click="showDescriptionField()" translate="newwisdom.optional_desc">Description</button>
+	<div class="callout callout-success">
+		<div class="btn-group" role="group" aria-label="item selection">
+			<button type="button" class="btn btn-default" ng-click="showTitleField()" translate="newwisdom.optional_title">Title</button>
+			<button type="button" class="btn btn-default" ng-click="showDescriptionField()" translate="newwisdom.optional_desc">Description</button>
+		</div>
 	</div>
-</div>
 
 
 	<!-- This part is for initial step (since saveArray is  0 at the beginning) -->
-<div class="callout callout-success" ng-show="isInputtingNewMessageState()">
-	<div class="form-group">
-		<h4 ng-show="messageState" translate="newwisdom.optional_title_text">input sub title</h4>
-		<h4 ng-show="!messageState" translate="newwisdom.optional_desc_text">input sub description</h4>
-		<input type="text" class="form-control" placeholder="{{'newwisdom.optional_title_help' | translate}}" ng-model="messageField" name="message" ng-minlength="10">
-		<button type="button" class="btn btn-default" ng-click="hideDefaultMessageInputArea()" translate="common.cancel">Cancel</button>
-		<button type="button" class="btn btn-primary" ng-click="saveMessageTexts(messageField)" translate="common.save">Save</button>
-		<span class="error" ng-show="newwisdom.message.$error.minlength">Required more than 10 characters</span>
-	</div>
-</div>
+	<div class="callout callout-success" ng-show="isInputtingNewMessageState()">
+		<!-- Input headline -->
+		<div class="form-group" ng-show="messageState">
+			<h4 translate="newwisdom.optional_title_text">input sub title</h4>
 
-<div class="callout callout-success" ng-show="saveArray.length !== 0">
-	<!-- This part is for already input information. -->
-	<div ng-repeat="data in saveArray track by $index" ng-mouseenter="onMouseOver($index)" ng-mouseleave="onMouseLeave($index)" class="messagecontrol_frame">
-		<div class="messagecontrol_item">
-		  <button type="button" class="btn btn-default btn-xs" ng-click="modifyInputMessage(data, $index)" ng-show="panelCondition[$index] == true"><img src="/image/message_handler_modify.png"></button>
-		  <button type="button" class="btn btn-default btn-xs" ng-click="deleteInputMessage(data)" ng-show="panelCondition[$index] == true"><img src="/image/message_handler_delete.png"></button>
-		  <button type="button" class="btn btn-default btn-xs" ng-click="moveUpMessagePosition(saveArray, $index)" ng-show="panelCondition[$index] == true"><img src="/image/message_handler_up.png"></button>
-		  <button type="button" class="btn btn-default btn-xs" ng-click="moveDownMessagePosition(saveArray, $index)" ng-show="panelCondition[$index] == true"><img src="/image/message_handler_down.png"></button>
-		  <button type="button" class="btn btn-default btn-xs" ng-click="moveMessageUpToTop(saveArray, $index)" ng-show="panelCondition[$index] == true"><img src="/image/message_handler_top.png"></button>
-		  <button type="button" class="btn btn-default btn-xs" ng-click="moveMessageDownToBottom(saveArray, $index)" ng-show="panelCondition[$index] == true"><img src="/image/message_handler_bottom.png"></button>
-	  	</div>
+			<input type="text" class="form-control" placeholder="{{'newwisdom.optional_title_help' | translate}}" ng-model="optionalHeadlineField" name="optionalHeadlineField" ng-maxlength="{{titleMaxLength}}">
+			<p class="count">{{titleMaxLength - optionalHeadlineField.length}}/{{titleMaxLength}}</p>
+			<span class="error" ng-show="newwisdom.optionalHeadlineField.$error.maxlength">Title must be less than {{titleMaxLength}} characters</span>
+			<button type="button" class="btn btn-default" ng-click="hideDefaultMessageInputArea()" translate="common.cancel">Cancel</button>
+			<button type="button" class="btn btn-primary" ng-click="saveMessageTexts(optionalHeadlineField)" ng-disabled="isHeadlineSaveButtonDisabled()" translate="common.save">Save</button>
+			<span class="error" ng-show="newwisdom.message.$error.minlength">Required more than 10 characters</span>
+		</div>
 
-		<div ng-class="findCssClassbyType(data)" ng-show="isOriginalMessageDisplayed(index)">{{data.entry}}</div>
-		<div class="form-group" ng-show="isModifyPanelVisible($index)">
-			<h4>Modify input text</h4>
-			<input type="text" class="form-control" placeholder="Input something" ng-model="messageModifyField">
-			<button type="button" class="btn btn-default" ng-click="hideMessageInputArea($index)">Cancel</button>
-			<button type="button" class="btn btn-primary" ng-click="saveModifiedTexts(data, messageModifyField, $index)">Save</button>
+		<!-- Input description -->
+		<div class="form-group" ng-show="!messageState">
+			<h4 translate="newwisdom.optional_desc_text">input sub description</h4>
+
+			<input type="text" class="form-control" placeholder="{{'newwisdom.optional_desc_help' | translate}}" ng-model="optionalDescField" name="optionalDescField" ng-maxlength="{{descMaxLength}}">
+			<p class="count">{{descMaxLength - optionalDescField.length}}/{{descMaxLength}}</p>
+			<span class="error" ng-show="newwisdom.optionalDescField.$error.maxlength">Title must be less than {{descMaxLength}} characters</span>
+			<button type="button" class="btn btn-default" ng-click="hideDefaultMessageInputArea()" translate="common.cancel">Cancel</button>
+			<button type="button" class="btn btn-primary" ng-click="saveMessageTexts(optionalDescField)" ng-disabled="isDescriptionSaveButtonDisabled()" translate="common.save">Save</button>
+			<span class="error" ng-show="newwisdom.message.$error.minlength">Required more than 10 characters</span>
 		</div>
 	</div>
-</div>
+
+
+	<div class="callout callout-success" ng-show="saveArray.length !== 0">
+		<!-- This part is for already input information. -->
+		<div ng-repeat="data in saveArray track by $index" ng-mouseenter="onMouseOver($index)" ng-mouseleave="onMouseLeave($index)" class="messagecontrol_frame">
+			<div class="messagecontrol_item">
+			  <button type="button" class="btn btn-default btn-xs" ng-click="modifyInputMessage(data, $index)" ng-show="panelCondition[$index] == true"><img src="/image/message_handler_modify.png"></button>
+			  <button type="button" class="btn btn-default btn-xs" ng-click="deleteInputMessage(data)" ng-show="panelCondition[$index] == true"><img src="/image/message_handler_delete.png"></button>
+			  <button type="button" class="btn btn-default btn-xs" ng-click="moveUpMessagePosition(saveArray, $index)" ng-show="panelCondition[$index] == true"><img src="/image/message_handler_up.png"></button>
+			  <button type="button" class="btn btn-default btn-xs" ng-click="moveDownMessagePosition(saveArray, $index)" ng-show="panelCondition[$index] == true"><img src="/image/message_handler_down.png"></button>
+			  <button type="button" class="btn btn-default btn-xs" ng-click="moveMessageUpToTop(saveArray, $index)" ng-show="panelCondition[$index] == true"><img src="/image/message_handler_top.png"></button>
+			  <button type="button" class="btn btn-default btn-xs" ng-click="moveMessageDownToBottom(saveArray, $index)" ng-show="panelCondition[$index] == true"><img src="/image/message_handler_bottom.png"></button>
+		  	</div>
+
+			<div ng-class="findCssClassbyType(data)" ng-show="isOriginalMessageDisplayed(index)">{{data.entry}}</div>
+			<div class="form-group" ng-show="isModifyPanelVisible($index)">
+				<h4>Modify input text</h4>
+				<input type="text" class="form-control" placeholder="Input something" ng-model="messageModifyField">
+				<button type="button" class="btn btn-default" ng-click="hideMessageInputArea($index)">Cancel</button>
+				<button type="button" class="btn btn-primary" ng-click="saveModifiedTexts(data, messageModifyField, $index)">Save</button>
+			</div>
+		</div>
+	</div>
 
 </div>
-</dib>

@@ -386,6 +386,35 @@ wisdomApp.controller('messageOperationController',
 		$scope.messageField = '';
  	};
 
+ 	$scope.isHeadlineSaveButtonDisabled = function()
+ 	{
+ 		if($scope.optionalHeadlineField !== undefined){
+	 		var length = $scope.optionalHeadlineField.length;
+	 		if(length > 0 && length <= Constants.WISDOM_TITLE_COUNT){
+	 			return false;
+	 		} else {
+	 			return true;
+	 		}
+ 		}
+
+ 		return true;
+ 	};
+
+ 	$scope.isDescriptionSaveButtonDisabled = function()
+ 	{
+ 		if($scope.optionalDescField !== undefined){
+	 		var length = $scope.optionalDescField.length;
+
+	 		if(length > 0 && length <= Constants.WISDOM_DESCRIPTION_COUNT){
+	 			return false;
+	 		} else {
+	 			return true;
+	 		}
+
+ 		}
+
+ 		return true;
+ 	};
 
 
 }]);

@@ -39,5 +39,7 @@ wisdomApp.constant(
 
 		WISDOM_TITLE_COUNT: 50,
 
+		WISDOM_DESCRIPTION_COUNT: 500,
+
 	}
 );
