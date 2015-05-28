@@ -1,4 +1,5 @@
 <div ng-controller="wisdomModifyController" class="wisdom" ng-init="initialize()">
+<form role="form" name="modifyisdom" novalidation>
 	<div class="titlearea">
 		  <div class="thumbnail">
 				<div class="image" ng-style="{'background': colorGenerater.generateColor(wisdom.title)}">
@@ -7,12 +8,15 @@
 		  </div>
 		  <embed ng-src="{{content}}" style="width:200px;height:200px;"></embed>
 		  <div class="content">
-		  <p translate="modifywisdom.title">title</p>
-		  <input type="text" class="form-control" placeholder="Input title" name="title" value="{{wisdom.title}}" ng-model="wisdom.title" required ng-minlength="2" ng-maxlength="10">
-		  <p translate="modifywisdom.tag">tag</p>
-		  <input type="text" class="form-control" placeholder="Input tag" name="tag" value="{{wisdom.tag}}" ng-model="wisdom.tag" required ng-minlength="2" ng-maxlength="10">
-		  <p translate="modifywisdom.description">description</p>
-		  <input type="text" class="form-control" placeholder="Input description" name="description" value="{{wisdom.description}}" ng-model="wisdom.description" required ng-minlength="2">
+			  <p translate="modifywisdom.title">title</p>
+			  <input type="text" class="form-control" placeholder="Input title" name="title" value="{{wisdom.title}}" ng-model="wisdom.title" required ng-minlength="2" ng-maxlength="10">
+			  <p translate="modifywisdom.tag">tag</p>
+			  <input type="text" class="form-control" placeholder="Input tag" name="tag" value="{{wisdom.tag}}" ng-model="wisdom.tag" required ng-minlength="{{WISDOM_TAG_MIN_COUNT}}" ng-maxlength="{{WISDOM_TAG_MAX_COUNT}}">
+				<span class="error" ng-show="modifyisdom.tag.$error.minlength">Required more than 2 characters</span>
+				<span class="error" ng-show="modifyisdom.tag.$error.maxlength">Required less than 8 characters</span>
+
+			  <p translate="modifywisdom.description">description</p>
+			  <input type="text" class="form-control" placeholder="Input description" name="description" value="{{wisdom.description}}" ng-model="wisdom.description" required ng-minlength="2">
 		  </div>
 	</div>
 
@@ -52,7 +56,13 @@
 	</div>
 
 
+	<div class="accountSelector">
+		<div class="buttons">
+			<button type="submit" class="btn btn-default" name="modify" ng-model="modify" ng-click="cancelModification()" translate="common.cancel">Cancel</button>
+			<button type="submit" class="btn btn-primary" name="modify" ng-model="modify" ng-click="saveModification()" translate="common.save">Save</button>
+		</div>
+	</div>
 
-	<button type="submit" class="btn btn-default" name="modify" ng-model="modify" ng-click="cancelModification()" translate="common.cancel">Cancel</button>
-	<button type="submit" class="btn btn-primary" name="modify" ng-model="modify" ng-click="saveModification()" translate="common.save">Save</button>
+</div>
+</form>
 </div>

@@ -12,6 +12,7 @@ wisdomApp.controller('wisdomModifyController',
 'toasterService',
 'userDataHolder',
 'timeService',
+'Constants',
 function($scope,
  log, 
  modifyWisdomAPIService, 
@@ -23,7 +24,8 @@ function($scope,
  $state, 
  toasterService, 
  userDataHolder, 
- timeService){
+ timeService,
+ Constants){
  	log.d("wisdomModifyController");
 
   var DISPLAY_TITLE = true;
@@ -37,6 +39,9 @@ function($scope,
   var TEXT_INPUT_DONE = 2;
   var TEXT_MODIFY = 3;
 
+  $scope.WISDOM_TAG_MIN_COUNT = Constants.WISDOM_TAG_MIN_COUNT;
+  $scope.WISDOM_TAG_MAX_COUNT = Constants.WISDOM_TAG_MAX_COUNT;
+
  	var input = $stateParams.currentWisdom;
 
   var userData = userDataHolder.getUserData();
@@ -48,7 +53,10 @@ function($scope,
 
   var params = {
     "wisdom":$scope.wisdom,
-    "userId": userId,
+    "userId": userId
+    // "title":$scope.title,
+    // "tag":$scope.tag,
+    // "description":$scope.description
   };
 
   $scope.panelCondition = {};
@@ -218,9 +226,7 @@ function($scope,
         }
       }
 
-
       modifyingItemNum = -1;
-
 
     }
   };
@@ -244,7 +250,7 @@ function($scope,
 
 	$scope.saveModification = function()
 	{
-
+    // log.d("saveModification: " + $scope.wisdom.title);
     //Parse Json Object to Json string
     params.wisdom.messages = angular.fromJson($scope.messages);
 
