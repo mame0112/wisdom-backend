@@ -121,6 +121,7 @@
 		"signin":"Sign in",
 		"modify_wisdom": "Modify wisdom",
 		"wisdom_update_title":"You liked to wisdom",
+		"wisdom_update_desc_no_user":"If you join chienowa from below button, you can get point and join ranking. Join us!",
 		"wisdom_update_desc":"Your current point:: ",
 		"wisdom_update_desc_point":"point",
 		"like_error": "Error",

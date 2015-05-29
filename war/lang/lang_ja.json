@@ -121,6 +121,7 @@
 		"signin":"ログインする",
 		"modify_wisdom": "知恵を修正する",
 		"wisdom_update_title":"知恵に「いいね」しました",
+		"wisdom_update_desc_no_user":"下記からチエノワに参加すると、ポイントが溜まりランキングが上がるので参加してみましょう！",
 		"wisdom_update_desc":"あなたの現在のポイント: ",
 		"wisdom_update_desc_point":"ポイント",
 		"like_error": "エラー",

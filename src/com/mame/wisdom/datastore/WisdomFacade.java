@@ -262,13 +262,11 @@ public class WisdomFacade {
 		return false;
 	}
 
-	public boolean updateMessageLikeNum(long userId, long wisdomId, long itemId) {
+	public boolean updateMessageLikeNum(long wisdomId, long itemId) {
 		DbgUtil.showLog(TAG, "updateMessageLikeNum");
 
-		if (userId == WConstant.NO_USER || wisdomId == WConstant.NO_WISDOM
-				|| itemId == WConstant.NO_WISDOM) {
-			DbgUtil.showLog(TAG, "userId: " + userId + " wisdomId: " + wisdomId
-					+ " itemId " + itemId);
+		if (wisdomId == WConstant.NO_WISDOM || itemId == WConstant.NO_WISDOM) {
+			DbgUtil.showLog(TAG, "wisdomId: " + wisdomId + " itemId " + itemId);
 			throw new IllegalArgumentException("Illegal parameter");
 		}
 

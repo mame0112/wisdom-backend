@@ -40,15 +40,23 @@ public class MessageLikeAction implements Action {
 			long messageId = object.getLong(JsonConstant.PARAM_WISDOM_ITEM_ID);
 
 			WisdomFacade facade = new WisdomFacade();
-			boolean result = facade.updateMessageLikeNum(userId, wisdomId,
-					messageId);
+			boolean result = facade.updateMessageLikeNum(wisdomId, messageId);
+
 			if (result) {
-				UserDataFacade userFacade = new UserDataFacade();
-				long updatedPoint = userFacade.updateUserStatus(userId,
-						UserPointOption
-								.getPoint(UserPointOption.POINT_LIKE_WISDOM),
-						WConstant.NO_WISDOM, wisdomId);
-				builder.addResponseParam(updatedPoint);
+				// If user is already log in
+				if (userId != WConstant.NO_USER) {
+					UserDataFacade userFacade = new UserDataFacade();
+					long updatedPoint = userFacade
+							.updateUserStatus(
+									userId,
+									UserPointOption
+											.getPoint(UserPointOption.POINT_LIKE_WISDOM),
+									WConstant.NO_WISDOM, wisdomId);
+					builder.addResponseParam(updatedPoint);
+				} else {
+					// If user is not log in
+					builder.addResponseParam(WConstant.NO_USER);
+				}
 			} else {
 				builder.addErrorMessage("Failed to update the number of like");
 			}

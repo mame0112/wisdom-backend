@@ -40,10 +40,10 @@ function($scope,
 
  	var wisdom_update_title;
  	var wisdom_update_desc;
+ 	var wisdom_update_desc_no_user;
  	var like_error;
  	var like_failed;
 
- 	Page.setTitle("AAAAAAA");
 
  	// Variable to identify if the user already select "Like"
  	// (We should prevent the user to continuous "Like" press)
@@ -64,7 +64,7 @@ function($scope,
 			'wisdom.like_error',
 			'wisdom.like_failed',
 			'wisdom.wisdom_update_desc_point',
-
+			'wisdom.wisdom_update_desc_no_user',
 			])
 		.then(function (translations) {
 			wisdom_update_title = translations['wisdom.wisdom_update_title'];
@@ -72,6 +72,7 @@ function($scope,
 			wisdom_update_desc_point = translations['wisdom.wisdom_update_desc_point'];
 			like_error = translations['wisdom.like_error'];
 			like_failed = translations['wisdom.like_failed'];
+			wisdom_update_desc_no_user = translations['wisdom.wisdom_update_desc_no_user'];
 		});
 
 		//Get target wisdom
@@ -169,7 +170,12 @@ function($scope,
 				if(response !== null && response !== undefined){
 					if(response.params !== null && response.params !== undefined){
 						var point = response.params.point;
-						toasterService.showSuccessToasterShort(wisdom_update_title, wisdom_update_desc + point + wisdom_update_desc_point);
+						if(point !== Constants.NO_USER){
+							toasterService.showSuccessToasterShort(wisdom_update_title, wisdom_update_desc + point + wisdom_update_desc_point);
+						} else {
+							toasterService.showSuccessToasterLong(wisdom_update_title, wisdom_update_desc_no_user);
+						}
+
 					} else {
 						//Error handling
 						toasterService.showErrorToasterShort(like_error, like_failed);
