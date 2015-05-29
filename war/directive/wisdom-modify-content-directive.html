@@ -9,14 +9,17 @@
 		  <embed ng-src="{{content}}" style="width:200px;height:200px;"></embed>
 		  <div class="content">
 			  <p translate="modifywisdom.title">title</p>
-			  <input type="text" class="form-control" placeholder="Input title" name="title" value="{{wisdom.title}}" ng-model="wisdom.title" required ng-minlength="2" ng-maxlength="10">
+			  <input type="text" class="form-control" placeholder="Input title" name="title" value="{{wisdom.title}}" ng-model="wisdom.title" required ng-maxlength="{{WISDOM_TITLE_COUNT}}">
+			<span class="error" ng-show="modifyisdom.title.$error.maxlength">Required less than {{WISDOM_TITLE_COUNT}} characters</span>
+
 			  <p translate="modifywisdom.tag">tag</p>
 			  <input type="text" class="form-control" placeholder="Input tag" name="tag" value="{{wisdom.tag}}" ng-model="wisdom.tag" required ng-minlength="{{WISDOM_TAG_MIN_COUNT}}" ng-maxlength="{{WISDOM_TAG_MAX_COUNT}}">
-				<span class="error" ng-show="modifyisdom.tag.$error.minlength">Required more than 2 characters</span>
-				<span class="error" ng-show="modifyisdom.tag.$error.maxlength">Required less than 8 characters</span>
+				<span class="error" ng-show="modifyisdom.tag.$error.minlength">Required more than {{WISDOM_TAG_MIN_COUNT}} characters</span>
+				<span class="error" ng-show="modifyisdom.tag.$error.maxlength">Required less than {{WISDOM_TAG_MAX_COUNT}} characters</span>
 
 			  <p translate="modifywisdom.description">description</p>
-			  <input type="text" class="form-control" placeholder="Input description" name="description" value="{{wisdom.description}}" ng-model="wisdom.description" required ng-minlength="2">
+			  <input type="text" class="form-control" placeholder="Input description" name="description" value="{{wisdom.description}}" ng-model="wisdom.description" required ng-maxlength="{{WISDOM_DESCRIPTION_COUNT}}">
+				<span class="error" ng-show="modifyisdom.description.$error.maxlength">Required less than {{WISDOM_DESCRIPTION_COUNT}} characters</span>
 		  </div>
 	</div>
 

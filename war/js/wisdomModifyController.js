@@ -39,8 +39,13 @@ function($scope,
   var TEXT_INPUT_DONE = 2;
   var TEXT_MODIFY = 3;
 
+
+  $scope.WISDOM_TITLE_COUNT = Constants.WISDOM_TITLE_COUNT;
+
   $scope.WISDOM_TAG_MIN_COUNT = Constants.WISDOM_TAG_MIN_COUNT;
   $scope.WISDOM_TAG_MAX_COUNT = Constants.WISDOM_TAG_MAX_COUNT;
+
+  $scope.WISDOM_DESCRIPTION_COUNT = Constants.WISDOM_DESCRIPTION_COUNT;
 
  	var input = $stateParams.currentWisdom;
 
