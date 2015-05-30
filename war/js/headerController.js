@@ -44,20 +44,21 @@ wisdomApp.controller('headerController',
 		log.d("viewContentLoaded");
 	});
 
-	// var signout_done;
-	// var signout_title;
+	var signout_done;
+	var signout_title;
+
 
 	// $scope.initialize = function()
 	// {
 	// 	log.d("aaaaaaaaaaaaa");
-	// $translate([
-	// 	'signout_done',
-	// 	'signout_title',
-	// 	])
-	// .then(function (translations) {
-	// 	signout_done = translations['header.signout_done'];
-	// 	signout_title = translations['header.signout_title'];
-	// });
+	// 	$translate([
+	// 		'signout_done',
+	// 		'signout_title',
+	// 		])
+	// 	.then(function (translations) {
+	// 		signout_done = translations['header.signout_done'];
+	// 		signout_title = translations['header.signout_title'];
+	// 	});
 	// };
 
 	$scope.switchNavivarStatus = function()
@@ -213,6 +214,7 @@ wisdomApp.controller('headerController',
 
  	$scope.signout = function()
  	{
+
  		userDataHolder.removeUserData();
 		$scope.switchNavivarStatus();
 	 	$scope.userId = Constants.NO_USER;

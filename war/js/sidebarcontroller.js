@@ -45,9 +45,8 @@ wisdomApp.controller('SidebarController',
 					categoryData.id = index;
 					categoryData.name = category[index].name;
 
-
 					$scope.Category[index] = categoryData;
-					log.d("$scope.Category[i].translate: " + $scope.Category[index].translate);
+
 	        	}, 0);
 			});
 	 	}

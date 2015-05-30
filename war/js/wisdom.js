@@ -14,11 +14,14 @@ var wisdomApp = angular.module('WidsomApp',
 	'satellizer',
 	'ngFacebook'
 	])
-.controller('WidsomController', ['$scope', 'Constants', 'log', function($scope, Constants, log){
-	
+.controller('WidsomController', ['$scope', 'Constants', 'log', function($scope, Constants, log, translatedStrings){
+	log.d("wisdomControler: " + translatedStrings);
+	$scope.translatedStrings = translatedStrings;
+
+	log.d("translated strings: " + $scope.translatedStrings);
 }])
 
-.config(['$stateProvider', '$urlRouterProvider', '$translateProvider', '$authProvider', '$facebookProvider',
+.config(['$stateProvider', '$urlRouterProvider', '$translateProvider', '$authProvider', '$facebookProvider', 
 	function($stateProvider, $urlRouterProvider, $translateProvider, $authProvider, $facebookProvider) {
 
 		$facebookProvider.setAppId('1459557601000808');
@@ -68,7 +71,12 @@ var wisdomApp = angular.module('WidsomApp',
 		state('/', {
 			url: '/',
 			templateUrl: 'view/toppage.html',
-			controller: 'WidsomController'
+			controller: 'WidsomController',
+			resolve: {
+				translatedStrings :function(translationService){
+					return translationService.getTranslatedStrings();
+				}
+			}
 		}).
 		state('signin', {
 			url: '/signin',
