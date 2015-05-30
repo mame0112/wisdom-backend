@@ -487,4 +487,37 @@ public class DefaultUserDAO implements UserDAO {
 		return null;
 
 	}
+
+	@Override
+	public WDUserData getUserDataByFacebookName(String facebookName)
+			throws WisdomDatastoreException {
+		DbgUtil.showLog(TAG, "getUserDataByFacebookName");
+
+		if (facebookName == null) {
+			throw new WisdomDatastoreException("facebook name is null");
+		}
+
+		Filter facebookNameFilter = new FilterPredicate(
+				DBConstant.ENTITY_USER_FACEBOOK_NAME, FilterOperator.EQUAL,
+				facebookName);
+
+		try {
+			Key key = DatastoreKeyGenerator.getAllUserDataKey();
+			Query query = new Query(DBConstant.KIND_USER_DATA, key);
+			query.setFilter(facebookNameFilter);
+			PreparedQuery pQuery = mDS.prepare(query);
+			Entity entity = pQuery.asSingleEntity();
+			if (entity != null) {
+				DbgUtil.showLog(TAG, "Entity is not null");
+				DefaultUserDAOHelper helper = new DefaultUserDAOHelper();
+				return helper.constructUserDataFromEntity(entity);
+			}
+		} catch (TooManyResultsException e) {
+			DbgUtil.showLog(TAG, "TooManyResultsException: " + e.getMessage());
+		} catch (IllegalStateException e) {
+			DbgUtil.showLog(TAG, "IllegalStateException: " + e.getMessage());
+		}
+
+		return null;
+	}
 }

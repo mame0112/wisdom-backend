@@ -201,7 +201,8 @@ wisdomApp.factory('apiService', ['$resource', 'log',
 .factory('facebookSignupAPIService', ['$resource', 'log',
  function($resource, log) {
     return $resource('/controller/facebookSignup',
-         {servlet_resp_id: 1, param: '@servlet_params'},
+         // {servlet_resp_id: 1, param: '@servlet_params'},
+         {servlet_resp_id: 1},
          { 
             //Search widoms by given keyword
             facebookSignup: {method: 'GET', isArray: false},

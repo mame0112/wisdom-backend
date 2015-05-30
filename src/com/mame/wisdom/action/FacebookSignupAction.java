@@ -8,8 +8,8 @@ import com.mame.wisdom.constant.WConstant;
 import com.mame.wisdom.data.WDUserData;
 import com.mame.wisdom.data.WDUserDataBuilder;
 import com.mame.wisdom.datastore.UserDataFacade;
+import com.mame.wisdom.jsonbuilder.FacebookSignupJsonBuilder;
 import com.mame.wisdom.jsonbuilder.JsonBuilder;
-import com.mame.wisdom.jsonbuilder.PublicWisdomJsonBuilder;
 import com.mame.wisdom.util.DbgUtil;
 
 public class FacebookSignupAction implements Action {
@@ -24,7 +24,16 @@ public class FacebookSignupAction implements Action {
 
 		String responseId = request.getParameter(WConstant.SERVLET_RESP_ID);
 		String param = request.getParameter(WConstant.SERVLET_PARAMS);
-		JsonBuilder builder = new PublicWisdomJsonBuilder();
+
+		if (responseId == null) {
+			DbgUtil.showLog(TAG, "responseId is null");
+		}
+
+		if (param == null) {
+			DbgUtil.showLog(TAG, "param is null");
+		}
+
+		JsonBuilder builder = new FacebookSignupJsonBuilder();
 
 		if (responseId != null && param != null) {
 			builder.addResponseId(Integer.valueOf(responseId));
@@ -33,23 +42,32 @@ public class FacebookSignupAction implements Action {
 
 			String facebookName = object
 					.getString(WConstant.SERVLET_FACEBOOK_NAME);
-			String accessToken = object
-					.getString(WConstant.SERVLET_FACEBOOK_ACCESS_TOKEN);
+			// String accessToken = object
+			// .getString(WConstant.SERVLET_FACEBOOK_ACCESS_TOKEN);
 			String thumbnail = object
 					.getString(WConstant.SERVLET_THUMBNAIL_URL);
 
-			if (facebookName != null && accessToken != null) {
+			if (facebookName != null && thumbnail != null) {
 				UserDataFacade facade = new UserDataFacade();
+				WDUserData data = facade
+						.findUserDataByFacebookName(facebookName);
+				// If the user already created account by facebook name
+				if (data != null) {
+					long userId = data.getUserId();
+					builder.addResponseParam(userId);
+				} else {
+					// If this is new for the user
+					WDUserDataBuilder userDataBuilder = WDUserDataBuilder
+							.createFrom(null);
+					WDUserData newUserData = userDataBuilder
+							.setFacebookName(facebookName)
+							.setThumbnail(thumbnail).getConstructedData();
 
-				WDUserDataBuilder userDataBuilder = WDUserDataBuilder
-						.createFrom(null);
-				WDUserData data = userDataBuilder.setFacebookName(facebookName)
-						.setThumbnail(thumbnail).getConstructedData();
+					long newUserId = facade.createNewUserData(newUserData);
+					DbgUtil.showLog(TAG, "newUserId: " + newUserId);
+					builder.addResponseParam(newUserId);
 
-				long newUserId = facade.createNewUserData(data);
-				DbgUtil.showLog(TAG, "newUserId: " + newUserId);
-				
-				builder.addResponseParam(newUserId);
+				}
 			} else {
 				builder.addErrorMessage("facebookName or accessToken is null");
 			}

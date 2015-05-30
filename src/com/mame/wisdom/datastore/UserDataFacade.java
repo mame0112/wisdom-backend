@@ -41,6 +41,20 @@ public class UserDataFacade {
 		return userDAO.storeNewUserData(data);
 	}
 
+	public synchronized WDUserData findUserDataByFacebookName(
+			String facebookName) throws WisdomDatastoreException {
+		DbgUtil.showLog(TAG, "findUserDataByFacebookNam");
+
+		if (facebookName == null) {
+			throw new WisdomDatastoreException("facebook name is null");
+		}
+
+		DAOFactory factory = DAOFactory.getDAOFactory();
+		UserDAO userDAO = factory.getUserDAO();
+
+		return userDAO.getUserDataByFacebookName(facebookName);
+	}
+
 	public WDUserData getUserDataByTwitterName(String twitterName)
 			throws WisdomDatastoreException {
 		DbgUtil.showLog(TAG, "getUserIdByTwitterName");

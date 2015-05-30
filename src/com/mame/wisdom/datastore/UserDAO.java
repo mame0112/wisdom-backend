@@ -68,4 +68,7 @@ public interface UserDAO {
 	public Map<Long, WDUserData> getUserDataList(List<WDUserStatusData> data)
 			throws WisdomDatastoreException;
 
+	public WDUserData getUserDataByFacebookName(String facebookName)
+			throws WisdomDatastoreException;
+
 }

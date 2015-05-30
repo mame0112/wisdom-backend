@@ -109,24 +109,38 @@ wisdomApp.controller('SignupController',
  	};
 
 	function refresh() {
+
+		// var facebookId = response.id;
+
 		$facebook.api("/me").then( 
 		function(response) {
 			log.d("refresh response: " + response);
-		log.d("Welcome: " + response.name);
+			log.d("Welcome: " + response.id);
+			log.d("Welcome: " + response.name);
 
-		var param = {
+			var pictureUrl = "http://graph.facebook.com/"+ response.id + "/picture?type=large";
 
+			log.d("pictureUrl: " + pictureUrl);
+
+		var servlet_facebook_name = response.name;
+		var servlet_thumbnail_url = pictureUrl;
+
+		var params = {
+			servlet_facebook_name:response.name,
+			servlet_thumbnail_url:pictureUrl
 		};
 
-		facebookSignupAPIService.facebookSignup(({servlet_params : param}, function(response){
+		facebookSignupAPIService.facebookSignup(({servlet_params : params}, function(response){
 			if(response !== null && response !== undefined){
 				if(response.params !== null && response.params !== undefined){
 					log.d("successfully facebook sign in and store data");
 				} else {
 					//Error occured while storeing data
+					log.d("fail");
 				}
 			} else {
 				//Error occured while storeing data
+				log.d("fail");
 			}
 		}));
 		// $scope.welcomeMsg = "Welcome " + response.name;
