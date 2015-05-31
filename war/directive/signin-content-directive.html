@@ -6,7 +6,6 @@
   </div>
   <div class="snsitem">
     <!-- <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button> -->
-    <button ng-click="authenticate('facebook')">Sign in with Facebook</button>
     <button ng-click="authenticate('twitter')">Sign in with Twitter</button>
     <button ng-click="login()" class="facebook">Sign in with Facebook</button>
   </div>
@@ -34,12 +33,21 @@
         <span class="notice" ng-show="signin.password.$error.pattern" translate="signin.password_illegal">Illegal password type. It must be [0 - 9] and [a - Z], [A - Z]</span>
       </div>
 
-      <div class="item">
+<!--       <div class="item">
         <p class="buttons">
         <button type="submit" class="btn btn-primary" name="submit" ng-model="submit" ng-disabled="isNameSubmitButtonDisable()" ng-click="usernameSignin()" translate="signin.signin_with_username">Sign in by user name and password</button>
         </p>
         <p class="additional" translate="signin.have_account">Don't you have account?</p>
           <a ui-sref="signup" translate="signin.signup">Sign up</a>
+      </div> -->
+      <div class="commonFooter">
+        <div class="buttons">
+          <button type="submit" class="btn btn-primary" name="submit" ng-model="submit" ng-disabled="isNameSubmitButtonDisable()" ng-click="usernameSignin()" translate="signin.signin_with_username">Sign in by user name and password</button>
+        </div>
+          <div class="additional">
+            <span translate="signin.have_account">Don't you have account?</span>
+            <a ui-sref="signup" translate="signin.signup">Sign up</a>
+          </div>
       </div>
 
 

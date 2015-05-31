@@ -81,7 +81,9 @@
 		"password_less_than_16":"Password must be less than 16 characters",
 		"password_illegal":"You can't user 2 byte characters for password",
 		"email_illegal":"Illegal mail address",
-		"signup_button":"Create account"
+		"signup_button":"Create account",
+		"now_join_desc":"Now let's join chienowa!",
+		"not_notified":"Even if you use SNS account, nothing will be notified to your friend."
 	},
 	"signup_note":{
 		"title1": "Let's spread your wisdom",

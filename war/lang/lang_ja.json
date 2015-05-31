@@ -73,7 +73,7 @@
 		"email": "メールアドレス",
 		"signup_with_username": "ユーザ名とパスワードでログイン",
 		"input_your_username":"6〜16文字、半角英数、ひらがな、カタカナ、漢字で入力",
-		"input_your_password":"6〜16文字、半角英数のみ入力可能です",
+		"input_your_password":"6〜16文字、半角英数のみ入力可能",
 		"input_your_mailaddress":"メールアドレスを入力",
 		"username_more_than_6":"ユーザ名は6文字以上である必要があります",
 		"username_less_than_16":"ユーザ名は16文字以下である必要があります",
@@ -81,7 +81,9 @@
 		"password_less_than_16":"パスワード名は16文字以下である必要があります",
 		"password_illegal":"パスワードは半角英数字のみ利用可能です",
 		"email_illegal":"不正なメールアドレスです",
-		"signup_button":"アカウント作成"
+		"signup_button":"アカウント作成",
+		"now_join_desc":"さあ、chienowa[チエノワ]に参加しましょう！",
+		"not_notified":"(SNSアカウントで参加しても、それがSNS上で自動的に公開されることは一切ありません)"
 	},
 	"signup_note":{
 		"title1": "知恵を広めよう",
