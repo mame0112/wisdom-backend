@@ -130,7 +130,10 @@ wisdomApp.controller('SignupController',
 			servlet_thumbnail_url:pictureUrl
 		};
 
-		facebookSignupAPIService.facebookSignup(({servlet_params : params}, function(response){
+		log.d("params.servlet_facebook_name: " + params.servlet_facebook_name);
+		log.d("params.servlet_thumbnail_url: " + params.servlet_thumbnail_url);
+
+		facebookSignupAPIService.facebookSignup({servlet_params : params}, function(response){
 			if(response !== null && response !== undefined){
 				if(response.params !== null && response.params !== undefined){
 					log.d("successfully facebook sign in and store data");
@@ -142,7 +145,7 @@ wisdomApp.controller('SignupController',
 				//Error occured while storeing data
 				log.d("fail");
 			}
-		}));
+		});
 		// $scope.welcomeMsg = "Welcome " + response.name;
 		$scope.isLoggedIn = true;
 	},
