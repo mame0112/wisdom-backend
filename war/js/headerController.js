@@ -47,19 +47,19 @@ wisdomApp.controller('headerController',
 	var signout_done;
 	var signout_title;
 
+	translatePresetData();
 
-	// $scope.initialize = function()
-	// {
-	// 	log.d("aaaaaaaaaaaaa");
-	// 	$translate([
-	// 		'signout_done',
-	// 		'signout_title',
-	// 		])
-	// 	.then(function (translations) {
-	// 		signout_done = translations['header.signout_done'];
-	// 		signout_title = translations['header.signout_title'];
-	// 	});
-	// };
+	function translatePresetData(){
+		$translate([
+			'header.signout_done',
+			'header.signout_title',
+			])
+		.then(function (translations) {
+			log.d("translated!!!!!!");
+			signout_done = translations['header.signout_done'];
+			signout_title = translations['header.signout_title'];
+		});
+	}
 
 	$scope.switchNavivarStatus = function()
 	{
@@ -251,6 +251,9 @@ wisdomApp.controller('headerController',
 
 	$scope.changeLanguage = function (currentLang) {
 		log.d("changeLanguage: " + currentLang);
+
+		//To change preset language, we need to translate at this timing.
+		translatePresetData();
 
  		$scope.switchNavivarStatus();
 
