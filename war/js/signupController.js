@@ -122,8 +122,8 @@ wisdomApp.controller('SignupController',
 
 			log.d("pictureUrl: " + pictureUrl);
 
-		var servlet_facebook_name = response.name;
-		var servlet_thumbnail_url = pictureUrl;
+		var servlet_facebook_name;
+		var servlet_thumbnail_url;
 
 		var params = {
 			servlet_facebook_name:response.name,
@@ -137,13 +137,25 @@ wisdomApp.controller('SignupController',
 			if(response !== null && response !== undefined){
 				if(response.params !== null && response.params !== undefined){
 					log.d("successfully facebook sign in and store data");
+					toasterService.showSuccessToasterShort("Signup", "Account successfully created!");
+
+					var userData = {
+						"userId":response.params[0].userId,
+						"username":params.servlet_facebook_name,
+						"thumbnailUrl":params.servlet_thumbnail_url
+					};
+
+					//TODO need to support user thumbnail
+					userDataHolder.setUserData(userData);
+
+					$state.go('/');
 				} else {
-					//Error occured while storeing data
 					log.d("fail");
+					toasterService.showErrorToasterLong("Signup", "Something went wrong. Please try again later");
 				}
 			} else {
-				//Error occured while storeing data
 				log.d("fail");
+				toasterService.showErrorToasterLong("Signup", "Something went wrong. Please try again later");
 			}
 		});
 		// $scope.welcomeMsg = "Welcome " + response.name;
