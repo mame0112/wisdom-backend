@@ -219,5 +219,4 @@ wisdomApp.factory('apiService', ['$resource', 'log',
             facebookSignin: {method: 'GET', isArray: false},
         });
     }
-])
-;
+]);

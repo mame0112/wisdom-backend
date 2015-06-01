@@ -14,7 +14,8 @@ wisdomApp.controller('SigninController',
  '$translate',
  '$auth',
  '$facebook',
- 'facebookSigninAPIService',
+ // 'facebookSigninAPIService',
+ 'facebookSignupService',
  function(
  	$scope, 
  	log, 
@@ -31,7 +32,8 @@ wisdomApp.controller('SigninController',
 	$translate,
 	$auth,
 	$facebook,
-	facebookSigninAPIService){
+	// facebookSigninAPIService,
+	facebookSignupService){
 
  	log.d("SigninController");
 
@@ -137,47 +139,66 @@ wisdomApp.controller('SigninController',
   $scope.isLoggedIn = false;
 
   $scope.login = function() {
-    $facebook.login().then( refresh );
-  };
-  $scope.logout = function() {
-    $facebook.logout().then( refresh );
+    // $facebook.login().then( refresh );
+    var response = facebookSignupService.signUpFacebook();
+    log.d("response: " + response);
+  //   then(function(){
+		// if(response !== null && response !== undefined){
+		// 	if(response.params !== null && response.params !== undefined){
+		// 		log.d("successfully facebook sign in and store data");
+		// 	} else {
+		// 		//Error occured while storeing data
+		// 		log.d("Error1");
+		// 	}
+		// } else {
+		// 	//Error occured while storeing data
+		// 	log.d("Error2");
+		// }
+  //   });
   };
 
-  function refresh() {
-    $facebook.api("/me").then( 
-      function(response) {
-      	log.d("Welcome: " + response.name);
-		facebookSigninAPIService.facebookSignin(({servlet_params : param}, function(response){
-			if(response !== null && response !== undefined){
-				if(response.params !== null && response.params !== undefined){
-					log.d("successfully facebook sign in and store data");
-				} else {
-					//Error occured while storeing data
-				}
-			} else {
-				//Error occured while storeing data
-			}
-		}));
-      	// log.d("Access token; " + response.authResponse.accessToken);
-        // $scope.welcomeMsg = "Welcome " + response.name;
-        $scope.isLoggedIn = true;
-      },  
-      function(err) {
-      	log.d("Please log in");
-        // $scope.welcomeMsg = "Please log in";
-        $scope.isLoggedIn = false;
-      }   
-    );  
+  // $scope.login = function() {
+  //   $facebook.login().then( refresh );
+  // };
+  // $scope.logout = function() {
+  //   $facebook.logout().then( refresh );
+  // };
 
-    $facebook.getLoginStatus().then(
-      function(response){
-      	log.d("response: " + response);
-        console.log(response);
-      },
-      function(er){
-      }
-    );
-  }
+  // function refresh() {
+  //   $facebook.api("/me").then( 
+  //     function(response) {
+  //     	log.d("Welcome: " + response.name);
+		// facebookSigninAPIService.facebookSignin(({servlet_params : param}, function(response){
+		// 	if(response !== null && response !== undefined){
+		// 		if(response.params !== null && response.params !== undefined){
+		// 			log.d("successfully facebook sign in and store data");
+		// 		} else {
+		// 			//Error occured while storeing data
+		// 		}
+		// 	} else {
+		// 		//Error occured while storeing data
+		// 	}
+		// }));
+  //     	// log.d("Access token; " + response.authResponse.accessToken);
+  //       // $scope.welcomeMsg = "Welcome " + response.name;
+  //       $scope.isLoggedIn = true;
+  //     },  
+  //     function(err) {
+  //     	log.d("Please log in");
+  //       // $scope.welcomeMsg = "Please log in";
+  //       $scope.isLoggedIn = false;
+  //     }   
+  //   );  
+
+  //   $facebook.getLoginStatus().then(
+  //     function(response){
+  //     	log.d("response: " + response);
+  //       console.log(response);
+  //     },
+  //     function(er){
+  //     }
+  //   );
+  // }
 
 }]);
 
