@@ -4,7 +4,7 @@ wisdomApp.factory('facebookSignupService', ['log', 'Constants', '$translate', '$
 		signUpFacebook: function()
 		{
 			log.d("signUpFacebook");
-			$facebook.login().then( tryFacebookSignup );
+			return $facebook.login().then( tryFacebookSignup );
 
 
 		// $facebook.api("/me").then( 
@@ -68,7 +68,7 @@ wisdomApp.factory('facebookSignupService', ['log', 'Constants', '$translate', '$
 
 			var pictureUrl = "http://graph.facebook.com/"+ response.id + "/picture?type=large";
 
-			getFacebookUserData(response.name, pictureUrl);
+			return getFacebookUserData(response.name, pictureUrl);
 
 		});
 
@@ -87,9 +87,10 @@ wisdomApp.factory('facebookSignupService', ['log', 'Constants', '$translate', '$
 		log.d("params.servlet_facebook_name: " + params.servlet_facebook_name);
 		log.d("params.servlet_thumbnail_url: " + params.servlet_thumbnail_url);
 
-		facebookSignupAPIService.facebookSignup({servlet_params : params}).$promise.then(function(response){
-			return 	response;
-		});
+		// facebookSignupAPIService.facebookSignup({servlet_params : params}).$promise.then(function(response){
+		// 	return 	response;
+		// });
+		return facebookSignupAPIService.facebookSignup({servlet_params : params});
 
 		// facebookSignupAPIService.facebookSignup({servlet_params : params}, function(response){
 		// 	return response;

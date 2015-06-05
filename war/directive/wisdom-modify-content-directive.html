@@ -58,6 +58,38 @@
 		</div>
 	</div>
 
+	<!-- Additional information input selector -->
+	<div class="callout callout-success">
+		<div class="btn-group" role="group" aria-label="item selection">
+			<button type="button" class="btn btn-default" ng-click="showTitleField()" translate="modifywisdom.optional_title">Title</button>
+			<button type="button" class="btn btn-default" ng-click="showDescriptionField()" translate="modifywisdom.optional_desc">Description</button>
+		</div>
+	</div>
+
+	<div class="callout callout-success">
+		<!-- Additional Title input field -->	
+		<div class="form-group" ng-show="{{isTitleFieldDisplay()}}">
+			<h4 translate="modifywisdom.optional_title_text">input sub title</h4>
+			<input type="text" class="form-control" placeholder="{{'modifywisdom.optional_title_help' | translate}}" ng-model="optionalHeadlineField" name="optionalHeadlineField" ng-maxlength="{{titleMaxLength}}">
+			<p class="count">{{WISDOM_SUB_TITLE_MAX_LENGTH - optionalHeadlineField.length}}/{{WISDOM_SUB_TITLE_MAX_LENGTH}}</p>
+			<span class="error" ng-show="modifyisdom.optionalHeadlineField.$error.maxlength">Title must be less than {{WISDOM_SUB_TITLE_MAX_LENGTH}} characters</span>
+			<button type="button" class="btn btn-default" ng-click="hideDefaultMessageInputArea()" translate="common.cancel">Cancel</button>
+			<button type="button" class="btn btn-primary" ng-click="saveMessageTexts(optionalHeadlineField)" ng-disabled="isHeadlineSaveButtonDisabled()" translate="common.save">Save</button>
+			<span class="error" ng-show="modifyisdom.message.$error.minlength">Required more than 10 characters</span>
+		</div>
+
+		<!-- Additional Description input field -->	
+		<div class="form-group" ng-show="{{isDescriptionFieldDisplay()}}">
+			<h4 translate="modifywisdom.optional_desc_text">input sub description</h4>
+
+			<input type="text" class="form-control" placeholder="{{'modifywisdom.optional_desc_help' | translate}}" ng-model="optionalDescField" name="optionalDescField" ng-maxlength="{{descMaxLength}}">
+			<p class="count">{{WISDOM_SUB_DESC_MAX_LENGTH - optionalDescField.length}}/{{WISDOM_SUB_DESC_MAX_LENGTH}}</p>
+			<span class="error" ng-show="modifyisdom.optionalDescField.$error.maxlength">Title must be less than {{WISDOM_SUB_DESC_MAX_LENGTH}} characters</span>
+			<button type="button" class="btn btn-default" ng-click="hideDefaultMessageInputArea()" translate="common.cancel">Cancel</button>
+			<button type="button" class="btn btn-primary" ng-click="saveMessageTexts(optionalDescField)" ng-disabled="isDescriptionSaveButtonDisabled()" translate="common.save">Save</button>
+			<span class="error" ng-show="modifyisdom.message.$error.minlength">Required more than 10 characters</span>
+		</div>
+	</div>
 
 	<div class="accountSelector">
 		<p class="buttons">

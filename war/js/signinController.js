@@ -140,8 +140,18 @@ wisdomApp.controller('SigninController',
 
   $scope.login = function() {
     // $facebook.login().then( refresh );
-    var response = facebookSignupService.signUpFacebook();
-    log.d("response: " + response);
+    // var response = facebookSignupService.signUpFacebook();
+    var response = facebookSignupService.signUpFacebook().then(function(response){
+    	log.d("success");
+    	if(response !== null && response !== undefined){
+	    	log.d("success2");
+    	} else {
+	    	log.d("success, but failed");
+    	}
+    }, function(){
+    	log.d("fail");
+    });
+    // log.d("response: " + response);
   //   then(function(){
 		// if(response !== null && response !== undefined){
 		// 	if(response.params !== null && response.params !== undefined){

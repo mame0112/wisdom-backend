@@ -39,13 +39,18 @@ function($scope,
   var TEXT_INPUT_DONE = 2;
   var TEXT_MODIFY = 3;
 
-
   $scope.WISDOM_TITLE_COUNT = Constants.WISDOM_TITLE_COUNT;
 
   $scope.WISDOM_TAG_MIN_COUNT = Constants.WISDOM_TAG_MIN_COUNT;
   $scope.WISDOM_TAG_MAX_COUNT = Constants.WISDOM_TAG_MAX_COUNT;
 
   $scope.WISDOM_DESCRIPTION_COUNT = Constants.WISDOM_DESCRIPTION_COUNT;
+
+  $scope.WISDOM_SUB_TITLE_MAX_LENGTH = Constants.WISDOM_TITLE_COUNT;
+
+  $scope.WISDOM_SUB_DESC_MAX_LENGTH = Constants.WISDOM_DESCRIPTION_COUNT;
+
+  $scope.STATE = DEFAULT;
 
  	var input = $stateParams.currentWisdom;
 
@@ -279,5 +284,101 @@ function($scope,
     });
 	};
 
+  $scope.showTitleField = function()
+  {
+    log.d("showTitleField");
+    $scope.changeStateToInputtingNewText();
+    $scope.messageState = DISPLAY_TITLE;
+    // $scope.defaultMssageInputVisible = true;
+  };
+
+  $scope.showDescriptionField = function()
+  {
+    log.d("showDescriptionField");
+    $scope.changeStateToInputtingNewText();
+    $scope.messageState = DISPLAY_DESCRIPTION;
+    // $scope.defaultMssageInputVisible = true;
+  };
+
+  $scope.isTitleFieldDisplay = function()
+  {
+    if($scope.messageState === DISPLAY_TITLE){
+      return true;
+    }
+    return false;
+  };
+
+  $scope.isDescriptionFieldDisplay = function()
+  {
+    if($scope.messageState === DISPLAY_DESCRIPTION){
+      return true;
+    }
+    return false;
+  };
+
+  $scope.changeStateToInputtingNewText = function()
+  {
+    $scope.STATE = NEW_TEXT_INPUT;
+    $scope.messageModifyField = '';
+  };
+
+    $scope.changeStateToModifyingText = function()
+  {
+    $scope.STATE = TEXT_MODIFY;
+    $scope.messageField = '';
+  };
+
+  $scope.hideDefaultMessageInputArea = function()
+  {
+    // $scope.defaultMssageInputVisible = false;
+    $scope.messageField = '';
+    $scope.changeStateToStable();
+    $scope.optionalDescField = '';
+    $scope.optionalHeadlineField = '';
+  };
+
+  $scope.saveMessageTexts = function(input)
+  {
+    log.d("saveMessageTexts: " + input);
+    if(input !== null && input !== undefined){
+      var type = input.type;
+      var str = null;
+
+      var current = timeService.getCurrentTime();
+
+      if($scope.messageState === DISPLAY_TITLE){
+        str = '{"entry": "' +input +'", "type": ' + TYPE_TITLE +  ', "updated_date": ' + current + '}';
+        log.d("###################: " + str);
+        $scope.messages.push(JSON.parse(str));
+        $scope.optionalHeadlineField = '';
+      } else {
+        str = '{"entry": "' +input +'", "type": ' + TYPE_MESSAGE + ', "updated_date": ' + current + '}';
+        log.d("###################: " + str);
+        $scope.messages.push(JSON.parse(str));
+        $scope.optionalDescField = '';
+      }
+
+      createWisdomSharedStateService.shareInputMessages($scope.messages);
+
+      //Prepare flag for modify
+      var index = $scope.messages.length-1;
+      $scope.modifyMessageCondition[index] = false;
+
+    }
+    $scope.changeStateToStable();
+  };
+
+  $scope.changeStateToStable = function()
+  {
+    if($scope.messages.length !== 0){
+      $scope.STATE = TEXT_INPUT_DONE;
+    } else {
+      $scope.STATE = DEFAULT;
+    }
+
+    $scope.messageField = '';
+    $scope.messageModifyField = '';
+
+  };
 
 }]);

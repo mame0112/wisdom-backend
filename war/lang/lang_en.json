@@ -131,7 +131,7 @@
 	},
 	"newwisdom":{
 		"mandatory_text":"is mandatory item",	
-		"basix_title": "Basic inforamtion",
+		"basic_title": "Basic inforamtion",
 		"select_category": "-- Select Category --",
 		"category":"Category",
 		"subcategory":"Sub category",
@@ -144,7 +144,7 @@
 		"tag_help": "From 2 to 8 characters",
 		"title_help": "35 characters or less is recommended. Maximum 50 characters",
 		"description_help": "150 characters or less is recommended. Maximum 500 characters",
-		"optional_title_text":"Additional information",
+		"additional_title":"Additional information",
 		"optional_title":"Headline",
 		"optional_desc":"Summary",
 		"optional_title_text":"Input title",
@@ -171,7 +171,13 @@
 	"modifywisdom":{
 		"title":"Title",
 		"description":"Overview",
-		"tag": "Tag"
+		"tag": "Tag",
+		"optional_title":"Headline",
+		"optional_desc":"Summary",
+		"optional_title_text":"Input title",
+		"optional_desc_text":"Input text",
+		"optional_title_help":"Within 50 characters",
+		"optional_desc_help":"Within 500 characters"
 	},
 	"categories":{
 		"sports":"Sports",
