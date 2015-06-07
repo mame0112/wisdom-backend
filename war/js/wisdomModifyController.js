@@ -28,16 +28,17 @@ function($scope,
  Constants){
  	log.d("wisdomModifyController");
 
-  var DISPLAY_TITLE = true;
-  var DISPLAY_DESCRIPTION= false;
+  // var DISPLAY_TITLE = true;
+  // var DISPLAY_DESCRIPTION= false;
 
   var TYPE_TITLE = 1;
   var TYPE_MESSAGE = 2;
 
   var DEFAULT = 0;
-  var NEW_TEXT_INPUT = 1;
-  var TEXT_INPUT_DONE = 2;
-  var TEXT_MODIFY = 3;
+  var NEW_TITLE_INPUT = 1;
+  var NEW_DESCRIPTION_INPUT = 2;
+  var TEXT_INPUT_DONE = 3;
+  var TEXT_MODIFY = 4;
 
   $scope.WISDOM_TITLE_COUNT = Constants.WISDOM_TITLE_COUNT;
 
@@ -107,8 +108,6 @@ function($scope,
       $scope.panelCondition[i] = false;
       // $scope.modifyMessageCondition[i] = false;
     }
-
-    //   $scope.messageState = DISPLAY_TITLE;
 
   };
 
@@ -286,21 +285,21 @@ function($scope,
 
   $scope.showTitleField = function()
   {
-    $scope.changeStateToInputtingNewText();
-    $scope.messageState = DISPLAY_TITLE;
+    $scope.changeStateToInputtingNewTitle();
+    $scope.STATE = NEW_TITLE_INPUT;
     // $scope.defaultMssageInputVisible = true;
   };
 
   $scope.showDescriptionField = function()
   {
-    $scope.changeStateToInputtingNewText();
-    $scope.messageState = DISPLAY_DESCRIPTION;
+    $scope.changeStateToInputtingNewDescription();
+    $scope.STATE = NEW_DESCRIPTION_INPUT;
     // $scope.defaultMssageInputVisible = true;
   };
 
   $scope.isTitleFieldDisplay = function()
   {
-    if($scope.messageState === DISPLAY_TITLE){
+    if($scope.STATE === NEW_TITLE_INPUT){
       return true;
     }
     return false;
@@ -308,15 +307,21 @@ function($scope,
 
   $scope.isDescriptionFieldDisplay = function()
   {
-    if($scope.messageState === DISPLAY_DESCRIPTION){
+    if($scope.STATE === NEW_DESCRIPTION_INPUT){
       return true;
     }
     return false;
   };
 
-  $scope.changeStateToInputtingNewText = function()
+  $scope.changeStateToInputtingNewTitle = function()
   {
-    $scope.STATE = NEW_TEXT_INPUT;
+    $scope.STATE = NEW_TITLE_INPUT;
+    $scope.messageModifyField = '';
+  };
+
+  $scope.changeStateToInputtingNewDescription = function()
+  {
+    $scope.STATE = NEW_DESCRIPTION_INPUT;
     $scope.messageModifyField = '';
   };
 
@@ -344,13 +349,13 @@ function($scope,
 
       var current = timeService.getCurrentTime();
 
-      if($scope.messageState === DISPLAY_TITLE){
-        str = '{"entry": "' +input +'", "type": ' + TYPE_TITLE +  ', "updated_date": ' + current + '}';
+      if($scope.STATE === NEW_TITLE_INPUT){
+        str = '{"message": "' +input +'", "type": ' + TYPE_TITLE +  ', "updated_date": ' + current + '}';
         log.d("###################: " + str);
         $scope.messages.push(JSON.parse(str));
         $scope.optionalHeadlineField = '';
-      } else {
-        str = '{"entry": "' +input +'", "type": ' + TYPE_MESSAGE + ', "updated_date": ' + current + '}';
+      } else if($scope.STATE === NEW_DESCRIPTION_INPUT){
+        str = '{"message": "' +input +'", "type": ' + TYPE_MESSAGE + ', "updated_date": ' + current + '}';
         log.d("###################: " + str);
         $scope.messages.push(JSON.parse(str));
         $scope.optionalDescField = '';
@@ -359,8 +364,8 @@ function($scope,
       // createWisdomSharedStateService.shareInputMessages($scope.messages);
 
       //Prepare flag for modify
-      var index = $scope.messages.length-1;
-      $scope.modifyMessageCondition[index] = false;
+      // var index = $scope.messages.length-1;
+      // $scope.modifyMessageCondition[index] = false;
 
     }
     $scope.changeStateToStable();
