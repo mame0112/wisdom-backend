@@ -350,12 +350,12 @@ function($scope,
       var current = timeService.getCurrentTime();
 
       if($scope.STATE === NEW_TITLE_INPUT){
-        str = '{"message": "' +input +'", "type": ' + TYPE_TITLE +  ', "updated_date": ' + current + '}';
+        str = '{"message": "' +input +'", "tag": ' + TYPE_TITLE +  ', "updated_date": ' + current + '}';
         log.d("###################: " + str);
         $scope.messages.push(JSON.parse(str));
         $scope.optionalHeadlineField = '';
       } else if($scope.STATE === NEW_DESCRIPTION_INPUT){
-        str = '{"message": "' +input +'", "type": ' + TYPE_MESSAGE + ', "updated_date": ' + current + '}';
+        str = '{"message": "' +input +'", "tag": ' + TYPE_MESSAGE + ', "updated_date": ' + current + '}';
         log.d("###################: " + str);
         $scope.messages.push(JSON.parse(str));
         $scope.optionalDescField = '';
@@ -382,6 +382,44 @@ function($scope,
     $scope.messageField = '';
     $scope.messageModifyField = '';
 
+  };
+
+  $scope.isHeadlineSaveButtonDisabled = function()
+  {
+    if($scope.optionalHeadlineField !== undefined){
+      if($scope.optionalHeadlineField.length === 0 || $scope.optionalHeadlineField.length >= $scope.WISDOM_SUB_TITLE_MAX_LENGTH){
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return true;
+    }
+  };
+
+  $scope.isDescriptionSaveButtonDisabled = function()
+  {
+    if($scope.optionalDescField !== undefined){
+      if($scope.optionalDescField.length === 0 || $scope.optionalDescField.length >= $scope.WISDOM_SUB_DESC_MAX_LENGTH){
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return true;
+    }
+  };
+
+  $scope.findCssClassbyType = function(data)
+  {
+    if(data.tag == TYPE_TITLE) {
+      return "panel-heading";
+    } else if (data.tag == TYPE_MESSAGE){
+      return "panel-body";
+    } else {
+      // log.d("Unknown type.");
+      return "panel-body";
+    }
   };
 
 }]);

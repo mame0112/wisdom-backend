@@ -177,7 +177,8 @@
 		"optional_title":"見出し",
 		"optional_desc":"本文",
 		"optional_title_help":"50文字以内",
-		"optional_desc_help":"500文字以内"
+		"optional_desc_help":"500文字以内",
+		"add_new_information":"新しい情報を追加"
 	},
 	"categories":{
 		"sports":"スポーツ",
