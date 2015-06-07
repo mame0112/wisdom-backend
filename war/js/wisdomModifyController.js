@@ -286,7 +286,6 @@ function($scope,
 
   $scope.showTitleField = function()
   {
-    log.d("showTitleField");
     $scope.changeStateToInputtingNewText();
     $scope.messageState = DISPLAY_TITLE;
     // $scope.defaultMssageInputVisible = true;
@@ -294,7 +293,6 @@ function($scope,
 
   $scope.showDescriptionField = function()
   {
-    log.d("showDescriptionField");
     $scope.changeStateToInputtingNewText();
     $scope.messageState = DISPLAY_DESCRIPTION;
     // $scope.defaultMssageInputVisible = true;
@@ -358,7 +356,7 @@ function($scope,
         $scope.optionalDescField = '';
       }
 
-      createWisdomSharedStateService.shareInputMessages($scope.messages);
+      // createWisdomSharedStateService.shareInputMessages($scope.messages);
 
       //Prepare flag for modify
       var index = $scope.messages.length-1;

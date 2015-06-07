@@ -69,7 +69,7 @@ var wisdomApp = angular.module('WidsomApp',
 		$translateProvider.useLocalStorage();
 		$translateProvider.useSanitizeValueStrategy('escaped');
 
-		// $urlRouterProvider.otherwise('/');
+		$urlRouterProvider.otherwise('/');
 		$stateProvider.
 		state('/', {
 			url: '/',
