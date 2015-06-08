@@ -80,6 +80,7 @@ function($scope,
 
  	if(input !== null && input !== undefined) {
 	 	$scope.wisdom = angular.fromJson(input);
+    log.d("title: " + $scope.wisdom.title);
 	 	// $scope.messages = $scope.wisdom.messages;
 
 	 	$scope.messages = JSON.parse($scope.wisdom.messages);

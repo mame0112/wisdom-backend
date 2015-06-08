@@ -178,7 +178,9 @@
 		"optional_desc":"本文",
 		"optional_title_help":"50文字以内",
 		"optional_desc_help":"500文字以内",
-		"add_new_information":"新しい情報を追加"
+		"add_new_information":"新しい情報を追加",
+		"save":"変更を保存",
+		"save_additional":"追加情報を保存"
 	},
 	"categories":{
 		"sports":"スポーツ",

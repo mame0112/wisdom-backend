@@ -178,7 +178,9 @@
 		"optional_desc_text":"Input text",
 		"optional_title_help":"Within 50 characters",
 		"optional_desc_help":"Within 500 characters",
-		"add_new_information":"Add new information"
+		"add_new_information":"Add new information",
+		"save":"Modify change",
+		"save_additional":"Save new information"
 	},
 	"categories":{
 		"sports":"Sports",
