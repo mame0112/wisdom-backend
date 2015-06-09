@@ -10,18 +10,18 @@
 		<div class="content">
 			<span class="name" translate="modifywisdom.title">Title</span>
 			<span class="notice" ng-show="modifywisdom.title.$error.required">*</span>
-			<input type="text" class="form-control" placeholder="Input title" name="title" value="{{wisdom.title}}" ng-model="title" required ng-maxlength="{{WISDOM_TITLE_COUNT}}">
+			<input type="text" class="form-control" placeholder="Input title" name="title" ng-model="wisdom.title" required ng-maxlength="{{WISDOM_TITLE_COUNT}}">
 			<span class="error" ng-show="modifywisdom.title.$error.maxlength">Required less than {{WISDOM_TITLE_COUNT}} characters</span>
 
 			<span class="name" translate="modifywisdom.tag">Tag</span>
 			<span class="notice" ng-show="modifywisdom.tag.$error.required">*</span>
-			<input type="text" class="form-control" placeholder="Input tag" name="tag" value="{{wisdom.tag}}" ng-model="tag" required ng-minlength="{{WISDOM_TAG_MIN_COUNT}}" ng-maxlength="{{WISDOM_TAG_MAX_COUNT}}">
+			<input type="text" class="form-control" placeholder="Input tag" name="tag" ng-model="wisdom.tag" required ng-minlength="{{WISDOM_TAG_MIN_COUNT}}" ng-maxlength="{{WISDOM_TAG_MAX_COUNT}}">
 			<span class="error" ng-show="modifywisdom.tag.$error.minlength">Required more than {{WISDOM_TAG_MIN_COUNT}} characters</span>
 			<span class="error" ng-show="modifywisdom.tag.$error.maxlength">Required less than {{WISDOM_TAG_MAX_COUNT}} characters</span>
 
 			<span class="name" translate="modifywisdom.description">Description</span>
 			<span class="notice" ng-show="modifywisdom.description.$error.required">*</span>
-			<input type="text" class="form-control" placeholder="Input description" name="description" value="{{wisdom.description}}" ng-model="description" required ng-maxlength="{{WISDOM_DESCRIPTION_COUNT}}">
+			<input type="text" class="form-control" placeholder="Input description" name="description" ng-model="wisdom.description" required ng-maxlength="{{WISDOM_DESCRIPTION_COUNT}}">
 			<span class="error" ng-show="modifywisdom.description.$error.maxlength">Required less than {{WISDOM_DESCRIPTION_COUNT}} characters</span>
 		</div>
 	</div>
@@ -52,7 +52,8 @@
 			  <button type="button" class="btn btn-default btn-xs" ng-click="moveMessageDownToBottom(messages, $index)" ng-show="panelCondition[$index] == true"><img src="/image/message_handler_bottom.png"></button>
 		  	</div>
 
-			<div ng-class="findCssClassbyType(data)" ng-show="isOriginalMessageDisplay($index)">{{data.message}}</div>
+			<div ng-class="findCssClassbyType(data)" ng-show="isOriginalMessageDisplay($index)">{{data.message}}
+			</div>
 			<div class="form-group" ng-show="isModifyPanelVisible($index)">
 				<input type="text" class="form-control" placeholder="Input something" ng-model="messageModifyField">
 				<button type="button" class="btn btn-default" ng-click="hideMessageInputArea($index)" translate="common.cancel">Cancel</button>

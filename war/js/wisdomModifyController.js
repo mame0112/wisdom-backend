@@ -80,7 +80,8 @@ function($scope,
 
  	if(input !== null && input !== undefined) {
 	 	$scope.wisdom = angular.fromJson(input);
-    log.d("title: " + $scope.wisdom.title);
+    // $scope.title = $scope.wisdom.title;
+    // log.d("title: " + $scope.wisdom.title);
 	 	// $scope.messages = $scope.wisdom.messages;
 
 	 	$scope.messages = JSON.parse($scope.wisdom.messages);
@@ -125,10 +126,16 @@ function($scope,
   };
 
   $scope.isModifyPanelVisible = function(index){
+    // if($scope.panelCondition[index] === true){
+    //   return true;
+    // }
+    // return false;
     if(modifyingItemNum === index){
-      return  true;
-    } else {
-      return false;
+      if($scope.isMessageModifyStable() === true){
+       return  true;
+      } else {
+        return false;
+      }
     }
   };
 
@@ -201,6 +208,9 @@ function($scope,
     var text = data.message;
     $scope.messageModifyField = text;
 
+    //Change state
+    $scope.STATE = TEXT_MODIFY;
+
     modifyingItemNum = index;
 
   };
@@ -210,6 +220,7 @@ function($scope,
   {
     log.d("hideMessageInputArea");
     modifyingItemNum = -1;
+    $scope.changeStateToStable();
   };
 
   $scope.saveModifiedTexts = function(original, newMessage, index)
@@ -239,17 +250,30 @@ function($scope,
       modifyingItemNum = -1;
 
     }
+
+    $scope.changeStateToStable();
+
   };
 
 
   $scope.onMouseOver = function(index)
   {
+    if($scope.isStateStable() === true){      
       $scope.panelCondition[index] = true;
+    }
   };
 
   $scope.onMouseLeave = function(index)
   {
     $scope.panelCondition[index] = false;
+  };
+
+  $scope.isFloatingPanelVisible = function(index)
+  {
+    if($scope.panelCondition[index] === true){
+      return true;
+    }
+    return false;
   };
 
 	$scope.cancelModification = function()
@@ -372,13 +396,30 @@ function($scope,
     $scope.changeStateToStable();
   };
 
+  $scope.isStateStable = function()
+  {
+    if($scope.STATE === DEFAULT){
+      return true;
+    }
+    return false;
+  };
+
+  $scope.isMessageModifyStable = function()
+  {
+    if($scope.STATE === TEXT_MODIFY){
+      return true;
+    }
+    return false;
+  };
+
   $scope.changeStateToStable = function()
   {
-    if($scope.messages.length !== 0){
-      $scope.STATE = TEXT_INPUT_DONE;
-    } else {
-      $scope.STATE = DEFAULT;
-    }
+    $scope.STATE = DEFAULT;
+    // if($scope.messages.length !== 0){
+    //   $scope.STATE = TEXT_INPUT_DONE;
+    // } else {
+    //   $scope.STATE = DEFAULT;
+    // }
 
     $scope.messageField = '';
     $scope.messageModifyField = '';
