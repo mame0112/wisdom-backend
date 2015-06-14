@@ -20,7 +20,7 @@ public class CrawlServlet implements Filter {
 
 	private final static String TAG = CrawlServlet.class.getSimpleName();
 
-	private final static String GOOGLE_AJAX_CRAWL_FRAGMENT = "?_escaped_fragment_=";
+	private final static String GOOGLE_AJAX_CRAWL_FRAGMENT = "_escaped_fragment_=";
 
 	private final static String HASH = "#!";
 

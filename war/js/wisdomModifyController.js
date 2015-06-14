@@ -370,19 +370,33 @@ function($scope,
     log.d("saveMessageTexts: " + input);
     if(input !== null && input !== undefined){
       var type = input.type;
-      var str = null;
+      // var str = null;
 
       var current = timeService.getCurrentTime();
 
+      var item = {
+          "message":input,
+          "tag":TYPE_TITLE,
+          "updated_date":current,
+          "update_userid":userData.userId,
+          "like_num": $scope.messages.length,
+          "itemId":0
+      };
+
       if($scope.STATE === NEW_TITLE_INPUT){
-        str = '{"message": "' +input +'", "tag": ' + TYPE_TITLE +  ', "updated_date": ' + current + '}';
-        log.d("###################: " + str);
-        $scope.messages.push(JSON.parse(str));
+        // str = '{"message": "' +input +'", "tag": ' + TYPE_TITLE +  ', "updated_date": ' + current + '}';
+        // log.d("###################: " + str);
+        // $scope.messages.push(JSON.parse(str));
+        item.tag = TYPE_TITLE;
+
+        $scope.messages.push(item);
         $scope.optionalHeadlineField = '';
       } else if($scope.STATE === NEW_DESCRIPTION_INPUT){
-        str = '{"message": "' +input +'", "tag": ' + TYPE_MESSAGE + ', "updated_date": ' + current + '}';
-        log.d("###################: " + str);
-        $scope.messages.push(JSON.parse(str));
+        // str = '{"message": "' +input +'", "tag": ' + TYPE_MESSAGE + ', "updated_date": ' + current + '}';
+        // log.d("###################: " + str);
+        // $scope.messages.push(JSON.parse(str));
+        item.tag = TYPE_MESSAGE;
+        $scope.messages.push(item);
         $scope.optionalDescField = '';
       }
 
@@ -415,12 +429,6 @@ function($scope,
   $scope.changeStateToStable = function()
   {
     $scope.STATE = DEFAULT;
-    // if($scope.messages.length !== 0){
-    //   $scope.STATE = TEXT_INPUT_DONE;
-    // } else {
-    //   $scope.STATE = DEFAULT;
-    // }
-
     $scope.messageField = '';
     $scope.messageModifyField = '';
 

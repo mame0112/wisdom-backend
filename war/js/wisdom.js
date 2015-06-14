@@ -25,7 +25,7 @@ var wisdomApp = angular.module('WidsomApp',
 	function($stateProvider, $urlRouterProvider, $translateProvider, $authProvider, $facebookProvider, $locationProvider) {
 
 		// $locationProvider.html5Mode(true);
-		// $locationProvider.hashPrefix('!');
+		$locationProvider.hashPrefix('!');
 
 		$facebookProvider.setAppId('1459557601000808');
 		$facebookProvider.setCustomInit({
