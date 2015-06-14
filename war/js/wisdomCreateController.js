@@ -241,6 +241,7 @@ wisdomApp.controller('wisdomCreateController',
 	        		log.d("wisdomId: " + param.wisdomId);
 	        		log.d("point: " + param.point);
 		        	toasterService.showSuccessToasterLong("New wisdom", "New wisdom is successfully created. Your point is now " + param.point );
+		        	$state.go('wisdom', {"wisdomId":param.wisdomId});
         		} else {
 		        	toasterService.showErrorToasterShort("New wisdom", "Failed to create new wisdom. Please try again");
         		}

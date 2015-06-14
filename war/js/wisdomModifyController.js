@@ -379,8 +379,8 @@ function($scope,
           "tag":TYPE_TITLE,
           "updated_date":current,
           "update_userid":userData.userId,
-          "like_num": $scope.messages.length,
-          "itemId":0
+          "like_num": 0,
+          "itemId":$scope.messages.length
       };
 
       if($scope.STATE === NEW_TITLE_INPUT){
