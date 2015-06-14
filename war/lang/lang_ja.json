@@ -111,8 +111,8 @@
 		"loading": "読み込み中...",
 		"not_found": "該当するものはありませんでした"
 	},
-	"category":{
-		"title": "{{value1}}>{{value2}}の知恵一覧 合計{{value5}}件中{{value3}}件目から{{value4}}件目",
+	"categorypage":{
+		"title": "{{value1}}内{{value2}}の知恵一覧 合計{{value5}}件中{{value3}}件目から{{value4}}件目",
 		"no_content": "何もありません"
 	},
 	"wisdom":{

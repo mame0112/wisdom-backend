@@ -111,7 +111,7 @@
 		"loading": "Searching...",
 		"not_found": "No wisdom found"
 	},
-	"category":{
+	"categorypage":{
 		"title": "Wisdom list for {{value1}}>{{value2}} Total {{value5}} items From {{value3}} to {{value4}}",
 		"no_content": "No wisdom"
 	},
