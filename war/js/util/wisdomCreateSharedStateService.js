@@ -13,6 +13,11 @@ wisdomApp.factory('createWisdomSharedStateService', ['log', function(log) {
 		getSharedMessages : function()
 		{
 			return messages;
+		},
+
+		clearSharedMessages : function()
+		{
+			messages = null;
 		}
 	};
 }]);

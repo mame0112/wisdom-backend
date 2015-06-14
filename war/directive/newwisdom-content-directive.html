@@ -75,7 +75,7 @@
 </div>
 
 <div class="subTitle" translate="newwisdom.optional_title_text">Optional information</div>
-
+<span class="optional_notice" ng-show="newwisdom.subCategory.$error.required">Input minimum 1 headline or text</span>
 <div message-control-directive></div>
 
 <div class="form-group">
@@ -84,7 +84,7 @@
 {{agreeToTos}}
 </div>
 <div class="form-group">
-	<button type="submit" class="btn btn-primary" ng-click="addNewWisdom()" ng-disabled="isTosDisabled()" translate="newwisdom.create_button">Create new wisdom</button>
+	<button type="submit" class="btn btn-primary" ng-click="addNewWisdom()" ng-disabled="isCreateButtonDisabled()" translate="newwisdom.create_button">Create new wisdom</button>
 </div>
 
 </form>

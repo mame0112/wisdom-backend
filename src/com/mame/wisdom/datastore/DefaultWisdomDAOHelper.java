@@ -67,19 +67,20 @@ public class DefaultWisdomDAOHelper {
 		return null;
 	}
 
-//	private List<Long> createWisdomMessageOrder(List<WDWisdomItemEntry> items) {
-//
-//		if (items != null) {
-//			List<Long> ids = new ArrayList<Long>();
-//			for (WDWisdomItemEntry item : items) {
-//				ids.add(item.getItemId());
-//			}
-//
-//			return ids;
-//		}
-//
-//		return null;
-//	}
+	// private List<Long> createWisdomMessageOrder(List<WDWisdomItemEntry>
+	// items) {
+	//
+	// if (items != null) {
+	// List<Long> ids = new ArrayList<Long>();
+	// for (WDWisdomItemEntry item : items) {
+	// ids.add(item.getItemId());
+	// }
+	//
+	// return ids;
+	// }
+	//
+	// return null;
+	// }
 
 	public List<WDWisdomData> parseListEntityToWDWisdomData(
 			List<Entity> entities) {
@@ -116,8 +117,11 @@ public class DefaultWisdomDAOHelper {
 					data.getDescription());
 			// entity.setProperty(DBConstant.ENTITY_WISDOM_ITMES,
 			// itemsJSON.toString());
-			entity.setProperty(DBConstant.ENTITY_WISDOM_ITMES, new Text(
-					itemsJSON.toString()));
+			if (itemsJSON != null) {
+				entity.setProperty(DBConstant.ENTITY_WISDOM_ITMES, new Text(
+						itemsJSON.toString()));
+			}
+
 			entity.setProperty(DBConstant.ENTITY_WISDOM_LAST_UPDATED_DATE,
 					data.getLastUpdatedDate());
 			entity.setProperty(DBConstant.ENTITY_WISDOM_TAG, data.getTag());

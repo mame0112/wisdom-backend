@@ -143,6 +143,7 @@ wisdomApp.controller('wisdomCreateController',
 
 		result.messages = createWisdomSharedStateService.getSharedMessages();
 		log.d("result: " + "category: " + result.category + "subCategory: " + result.subCategory +  " tag: " + result.tag + " thumbnail: " + result.thumbnail + " title: " + result.title + " description: " + result.description + "messages: " + result.messages + " createUserId: " + result.create_user_id + " updated time: " + result.updated_date);
+		log.d("message length: " + result.messages.length);
 
 		$scope.uploadFile();
 
@@ -237,6 +238,10 @@ wisdomApp.controller('wisdomCreateController',
         	log.d("success");
         	if(data !== null && data !== undefined){
         		if(data.params.length !== 0){
+
+        			//Clear message shared service
+        			createWisdomSharedStateService.clearSharedMessages();
+
         			var param = data.params[0];
 	        		log.d("wisdomId: " + param.wisdomId);
 	        		log.d("point: " + param.point);
@@ -262,12 +267,45 @@ wisdomApp.controller('wisdomCreateController',
 		$scope.tosStatus = value;
     };
 
-    $scope.isTosDisabled = function()
+    $scope.isCreateButtonDisabled = function()
     {
-    	if($scope.tosStatus){
-    		return false;
+    	//If TOS checkbox is checked
+    	if($scope.tosStatus === false){
+    		return true;
     	}
-    	return true;
+
+    	//If message is inputted more than 1
+    	var messages = createWisdomSharedStateService.getSharedMessages();
+		if(messages === null || messages === undefined || messages.length === 0){
+    		return true;
+    	}
+
+    	//If category is enabled
+    	if(result.category === null || result.category === undefined){
+    		return true;
+    	}
+
+    	//If subCategory is enabled
+    	if(result.subCategory === null || result.subCategory === undefined){
+    		return true;
+    	}
+
+    	//If tag is inputted
+    	if(result.tag === null || result.tag === undefined){
+    		return true;
+    	}
+
+    	//If title is inputted
+    	if(result.title === null || result.title === undefined){
+    		return true;
+    	}
+
+    	//If description is inputted
+    	if(result.description === null || result.description === undefined){
+    		return true;
+    	}
+
+    	return false;
     };
 
 	// $scope.uploadFile = function () {

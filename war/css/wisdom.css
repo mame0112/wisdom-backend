@@ -236,6 +236,10 @@
 	font-size: 24px;
 }
 
+#newwisdom .optional_notice{
+	color: #ff0000;
+}
+
 #newwisdom .notice{
 	color: #ff0000;
 	font-size: 18px;

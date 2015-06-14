@@ -123,8 +123,10 @@ public class WisdomFacadeHelper {
 					.getLong(JsonConstant.PARAM_WISDOM_CREATE_USER_ID);
 			long lastUpdatedDate = rootObject
 					.getLong(JsonConstant.PARAM_WISDOM_UPDATED_DATE);
+
 			JSONArray messageArray = rootObject
 					.getJSONArray(JsonConstant.PARAM_WISDOM_MESSAGES);
+			List<WDWisdomItemEntry> items = createItemEntityListFromJsonArray(messageArray);
 
 			Blob thumbBlob = null;
 			// THumbnail is an optional parameter. THen, we should ignore even
@@ -140,8 +142,6 @@ public class WisdomFacadeHelper {
 				DbgUtil.showLog(TAG,
 						"JSONException for thumbnail: " + e1.getMessage());
 			}
-
-			List<WDWisdomItemEntry> items = createItemEntityListFromJsonArray(messageArray);
 
 			DbgUtil.showLog(TAG, "createdUserId: " + createdUserId);
 			DbgUtil.showLog(TAG, "lastUpdatedDate: " + lastUpdatedDate);

@@ -160,7 +160,9 @@ public class WisdomFacade {
 			try {
 				WisdomDataStructure data = helper
 						.createWisdomDataFromInputString(input);
+				DbgUtil.showLog(TAG, "AAA");
 				data.getWisdomData().setThumbnail(thumbnail);
+				DbgUtil.showLog(TAG, "BBB");
 				return facade.addWisdom(data.getCategory(),
 						data.getSubCategory(),
 						assignIndexAndOrder(data.getWisdomData()));
@@ -181,7 +183,8 @@ public class WisdomFacade {
 	 * @return
 	 */
 	private WDWisdomData assignIndexAndOrder(WDWisdomData data) {
-		if (data != null) {
+		DbgUtil.showLog(TAG, "assignIndexAndOrder");
+		if (data != null && data.getItems() != null) {
 			List<WDWisdomItemEntry> items = data.getItems();
 
 			int count = 0;
@@ -190,9 +193,8 @@ public class WisdomFacade {
 				item.setItemId(count);
 				count = count + 1;
 			}
-			return data;
 		}
-		return null;
+		return data;
 	}
 
 	public WDSubCategoryData getCategoryContent(String category,
