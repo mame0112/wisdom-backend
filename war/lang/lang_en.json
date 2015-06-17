@@ -37,7 +37,8 @@
 	},
 	"signin":{
 		"title_sns": "Sign in with SNS account",
-		"signin_twitter": "Use twitter account",
+		"signin_twitter": "Use Twitter account",
+		"signin_facebook": "User Facebook account",
 		"title_account": "Use user name and password",
 		"username": "User name",
 		"username_help": "Input user name",

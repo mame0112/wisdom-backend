@@ -38,6 +38,7 @@
 	"signin":{
 		"title_sns": "SNSアカウントでログイン",
 		"signin_twitter": "Twitterでサインイン",
+		"signin_facebook": "Facebookでサインイン",
 		"title_account": "ユーザ名とパスワードでログイン",
 		"username": "ユーザ名",
 		"username_help": "ユーザ名を入力してください",
