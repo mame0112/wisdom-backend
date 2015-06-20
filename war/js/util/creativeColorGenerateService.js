@@ -1,6 +1,5 @@
 wisdomApp.factory('creativeColorGenerateService', ['log', 'ColorConstants',
  function(log, ColorConstants){
- 	log.d("creativeColorGenerateService");
 
  	var color = ColorConstants;
 
@@ -26,7 +25,8 @@ wisdomApp.factory('creativeColorGenerateService', ['log', 'ColorConstants',
 
  		switch(input){
  			case 0:
- 				result = ColorConstants.UNKNOWN;
+ 				result = ColorConstants.GREY;
+ 				// result = ColorConstants.UNKNOWN;
  			break;
  			case 1:
  				result = ColorConstants.RED;
@@ -83,7 +83,7 @@ wisdomApp.factory('creativeColorGenerateService', ['log', 'ColorConstants',
  				result = ColorConstants.BLUE_GREY;
  			break;
  			case 19:
- 				result = ColorConstants.GREY;
+ 				result = ColorConstants.UNKNOWN;
  			break;
  			default:
  				result = ColorConstants.UNKNOWN;
@@ -104,7 +104,6 @@ wisdomApp.factory('creativeColorGenerateService', ['log', 'ColorConstants',
  	return {
 
  		generateColor : function(input){
- 			// log.d("generateColor");
 
  			var result = null;
 
