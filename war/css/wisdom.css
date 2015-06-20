@@ -49,6 +49,10 @@
 .wisdom .titlearea .content{
 }
 
+.wisdom .titlearea .content .category{
+	padding-top: 14px;
+}
+
 .wisdom .titlearea .content .name{
 
 }

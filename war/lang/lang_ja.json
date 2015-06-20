@@ -128,7 +128,8 @@
 		"wisdom_update_desc":"あなたの現在のポイント: ",
 		"wisdom_update_desc_point":"ポイント",
 		"like_error": "エラー",
-		"like_failed": "エラーが発生しました。時間をおいて後ほどお試しください"
+		"like_failed": "エラーが発生しました。時間をおいて後ほどお試しください",
+		"category":"「{{value1}}」の「{{value2}}」に関する知恵"
 	},
 	"newwisdom":{
 		"mandatory_text":"は必須です",	

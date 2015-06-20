@@ -128,7 +128,8 @@
 		"wisdom_update_desc":"Your current point:: ",
 		"wisdom_update_desc_point":"point",
 		"like_error": "Error",
-		"like_failed": "Error occured. Please try again later"
+		"like_failed": "Error occured. Please try again later",
+		"category":"Wisdom for '{{value1}}' >'{{value2}}'"
 	},
 	"newwisdom":{
 		"mandatory_text":"is mandatory item",	

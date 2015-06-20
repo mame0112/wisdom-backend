@@ -1,5 +1,6 @@
 <div ng-controller="wisdomModifyController" class="wisdom" ng-init="initialize()">
 <form role="form" name="modifywisdom" novalidation>
+{{wisdom.category}}{{wisdom.subcategory}}
 	<div class="titlearea">
 		<div class="thumbnail">
 			<div class="image" ng-style="{'background': colorGenerater.generateColor(wisdom.title)}">
