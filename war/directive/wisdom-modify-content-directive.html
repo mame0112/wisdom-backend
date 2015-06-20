@@ -1,28 +1,28 @@
 <div ng-controller="wisdomModifyController" class="wisdom" ng-init="initialize()">
 <form role="form" name="modifywisdom" novalidation>
-{{wisdom.category}}{{wisdom.subcategory}}
 	<div class="titlearea">
 		<div class="thumbnail">
 			<div class="image" ng-style="{'background': colorGenerater.generateColor(wisdom.title)}">
 				<div class="text">{{wisdom.title | capitalize}}</div>
 			</div>
 		</div>
-		<embed ng-src="{{content}}" style="width:200px;height:200px;"></embed>
+		<!-- <embed ng-src="{{content}}" style="width:200px;height:200px;"></embed> -->
 		<div class="content">
+		  	<div class="category" translate="modifywisdom.category" translate-values="{value1: wisdom.category, value2: wisdom.subcategory}">Wisdom for {{wisdom.category}} > {{wisdom.subcategory}}</div>
 			<span class="name" translate="modifywisdom.title">Title</span>
 			<span class="notice" ng-show="modifywisdom.title.$error.required">*</span>
-			<input type="text" class="form-control" placeholder="Input title" name="title" ng-model="wisdom.title" required ng-maxlength="{{WISDOM_TITLE_COUNT}}">
+			<input type="text" class="textModify" placeholder="Input title" name="title" ng-model="wisdom.title" required ng-maxlength="{{WISDOM_TITLE_COUNT}}">
 			<span class="error" ng-show="modifywisdom.title.$error.maxlength">Required less than {{WISDOM_TITLE_COUNT}} characters</span>
 
 			<span class="name" translate="modifywisdom.tag">Tag</span>
 			<span class="notice" ng-show="modifywisdom.tag.$error.required">*</span>
-			<input type="text" class="form-control" placeholder="Input tag" name="tag" ng-model="wisdom.tag" required ng-minlength="{{WISDOM_TAG_MIN_COUNT}}" ng-maxlength="{{WISDOM_TAG_MAX_COUNT}}">
+			<input type="text" class="textModify" placeholder="Input tag" name="tag" ng-model="wisdom.tag" required ng-minlength="{{WISDOM_TAG_MIN_COUNT}}" ng-maxlength="{{WISDOM_TAG_MAX_COUNT}}">
 			<span class="error" ng-show="modifywisdom.tag.$error.minlength">Required more than {{WISDOM_TAG_MIN_COUNT}} characters</span>
 			<span class="error" ng-show="modifywisdom.tag.$error.maxlength">Required less than {{WISDOM_TAG_MAX_COUNT}} characters</span>
 
 			<span class="name" translate="modifywisdom.description">Description</span>
 			<span class="notice" ng-show="modifywisdom.description.$error.required">*</span>
-			<input type="text" class="form-control" placeholder="Input description" name="description" ng-model="wisdom.description" required ng-maxlength="{{WISDOM_DESCRIPTION_COUNT}}">
+			<textarea type="text"  class="textModify" placeholder="Input description" name="description" ng-model="wisdom.description" required ng-maxlength="{{WISDOM_DESCRIPTION_COUNT}}"></textarea>
 			<span class="error" ng-show="modifywisdom.description.$error.maxlength">Required less than {{WISDOM_DESCRIPTION_COUNT}} characters</span>
 		</div>
 	</div>

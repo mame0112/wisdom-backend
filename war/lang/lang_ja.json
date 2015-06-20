@@ -182,7 +182,8 @@
 		"optional_desc_help":"500文字以内",
 		"add_new_information":"新しい情報を追加",
 		"save":"変更を保存",
-		"save_additional":"追加情報を保存"
+		"save_additional":"追加情報を保存",
+		"category":"「{{value1}}」の「{{value2}}」に関する知恵"
 	},
 	"categories":{
 		"sports":"スポーツ",
