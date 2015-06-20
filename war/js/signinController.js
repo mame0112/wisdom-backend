@@ -14,8 +14,8 @@ wisdomApp.controller('SigninController',
  '$translate',
  '$auth',
  '$facebook',
- // 'facebookSigninAPIService',
- 'facebookSignupService',
+'facebookSignupAPIService',
+ // 'facebookSignupService',
  function(
  	$scope, 
  	log, 
@@ -32,8 +32,7 @@ wisdomApp.controller('SigninController',
 	$translate,
 	$auth,
 	$facebook,
-	// facebookSigninAPIService,
-	facebookSignupService){
+	facebookSignupAPIService){
 
  	log.d("SigninController");
 
@@ -138,19 +137,11 @@ wisdomApp.controller('SigninController',
 
   $scope.isLoggedIn = false;
 
-  $scope.login = function() {
+  $scope.facebookSignin = function() {
+	log.d("facebookSignin");
+	$facebook.login().then( refresh );
     // $facebook.login().then( refresh );
     // var response = facebookSignupService.signUpFacebook();
-    var response = facebookSignupService.signUpFacebook().then(function(response){
-    	log.d("success");
-    	if(response !== null && response !== undefined){
-	    	log.d("success2");
-    	} else {
-	    	log.d("success, but failed");
-    	}
-    }, function(){
-    	log.d("fail");
-    });
     // log.d("response: " + response);
   //   then(function(){
 		// if(response !== null && response !== undefined){
@@ -166,6 +157,75 @@ wisdomApp.controller('SigninController',
 		// }
   //   });
   };
+
+	function refresh() {
+
+		// var facebookId = response.id;
+
+		$facebook.api("/me").then( 
+		function(response) {
+			log.d("refresh response: " + response);
+			log.d("Welcome: " + response.id);
+			log.d("Welcome: " + response.name);
+
+			var pictureUrl = "http://graph.facebook.com/"+ response.id + "/picture?type=large";
+
+			log.d("pictureUrl: " + pictureUrl);
+
+		var servlet_facebook_name;
+		var servlet_thumbnail_url;
+
+		var params = {
+			servlet_facebook_name:response.name,
+			servlet_thumbnail_url:pictureUrl
+		};
+
+		log.d("params.servlet_facebook_name: " + params.servlet_facebook_name);
+		log.d("params.servlet_thumbnail_url: " + params.servlet_thumbnail_url);
+
+		facebookSignupAPIService.facebookSignup({servlet_params : params}, function(response){
+			if(response !== null && response !== undefined){
+				if(response.params !== null && response.params !== undefined){
+					log.d("successfully facebook sign in and store data");
+					toasterService.showSuccessToasterShort("Signup", "Account successfully created!");
+
+					var userData = {
+						"userId":response.params[0].userId,
+						"username":params.servlet_facebook_name,
+						"thumbnailUrl":params.servlet_thumbnail_url
+					};
+
+					//TODO need to support user thumbnail
+					userDataHolder.setUserData(userData);
+
+					$state.go('/');
+				} else {
+					log.d("fail");
+					toasterService.showErrorToasterLong("Signup", "Something went wrong. Please try again later");
+				}
+			} else {
+				log.d("fail");
+				toasterService.showErrorToasterLong("Signup", "Something went wrong. Please try again later");
+			}
+		});
+		// $scope.welcomeMsg = "Welcome " + response.name;
+	},
+	function(err) {
+		log.d("Please log in");
+		// $scope.welcomeMsg = "Please log in";
+		}
+	);  
+
+	$facebook.getLoginStatus().then(
+		function(response){
+			log.d("response: " + response);
+			console.log(response);
+			},
+				function(er){
+			}
+		);
+	}
+
 
   // $scope.login = function() {
   //   $facebook.login().then( refresh );
