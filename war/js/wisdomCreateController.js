@@ -67,7 +67,7 @@ wisdomApp.controller('wisdomCreateController',
 	var result = {
 		"id": -1,
 		"category": category,
-		"subCategory": subCategory,
+		"subcategory": subCategory,
 		"title": title,
 		"tag": tag,
 		"thumbnail": thumbnail,
@@ -170,7 +170,7 @@ wisdomApp.controller('wisdomCreateController',
 	});
 
 	$scope.$watch('subCategory', function(newValue, oldValue) {
-		result.subCategory = newValue;
+		result.subcategory = newValue;
 	});
 
 	$scope.$watch('wisdom.title', function(newValue, oldValue) {
@@ -286,7 +286,7 @@ wisdomApp.controller('wisdomCreateController',
     	}
 
     	//If subCategory is enabled
-    	if(result.subCategory === null || result.subCategory === undefined){
+    	if(result.subcategory === null || result.subcategory === undefined){
     		return true;
     	}
 

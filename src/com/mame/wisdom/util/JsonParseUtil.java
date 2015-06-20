@@ -205,6 +205,10 @@ public class JsonParseUtil {
 				List<WDWisdomItemEntry> messages = createWisdomItemEntryListFromJsonArray(messageArray);
 				String title = rootObject
 						.getString(JsonConstant.PARAM_WISDOM_TITLE);
+				String category = rootObject
+						.getString(JsonConstant.PARAM_WISDOM_CATEGORY);
+				String subCategory = rootObject
+						.getString(JsonConstant.PARAM_WISDOM_SUB_CATEGORY);
 				long updateDate = rootObject
 						.getLong(JsonConstant.PARAM_WISDOM_UPDATED_DATE);
 				int count = rootObject
@@ -216,7 +220,8 @@ public class JsonParseUtil {
 				long createUserId = rootObject
 						.getLong(JsonConstant.PARAM_WISDOM_CREATE_USER_ID);
 				return new WDWisdomData(id, title, description, tag,
-						createUserId, updateDate, null, messages, count);
+						createUserId, updateDate, null, messages, count,
+						category, subCategory);
 			} catch (JSONException e) {
 				DbgUtil.showLog(TAG, "JSONException: " + e.getMessage());
 			}

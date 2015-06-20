@@ -13,6 +13,10 @@ public class WDWisdomData implements Serializable {
 
 	private String mTag = null;
 
+	private String mCategory = null;
+
+	private String mSubCategory = null;
+
 	private String mTitle = null;
 
 	private String mDescription = null;
@@ -31,7 +35,8 @@ public class WDWisdomData implements Serializable {
 
 	public WDWisdomData(long id, String title, String description, String tag,
 			long createdUserId, long lastUpdatedDate, Blob thumbnail,
-			List<WDWisdomItemEntry> items, long viewCount) {
+			List<WDWisdomItemEntry> items, long viewCount, String category,
+			String subCategory) {
 		mWisdomId = id;
 		mTitle = title;
 		mDescription = description;
@@ -41,6 +46,8 @@ public class WDWisdomData implements Serializable {
 		mThumbnail = thumbnail;
 		mItems = items;
 		mViewCount = viewCount;
+		mCategory = category;
+		mSubCategory = mSubCategory;
 	}
 
 	/*
@@ -60,6 +67,8 @@ public class WDWisdomData implements Serializable {
 		mThumbnail = data.getThumbnail();
 		mItems = data.getItems();
 		mViewCount = data.getViewCount();
+		mCategory = data.getCategory();
+		mSubCategory = data.getSubCategory();
 	}
 
 	public long getWisdomId() {
@@ -76,6 +85,22 @@ public class WDWisdomData implements Serializable {
 
 	public void setTitle(String title) {
 		mTitle = title;
+	}
+
+	public void setCategory(String category) {
+		mCategory = category;
+	}
+
+	public String getCategory() {
+		return mCategory;
+	}
+
+	public void setSubCategory(String subCategory) {
+		mSubCategory = subCategory;
+	}
+
+	public String getSubCategory() {
+		return mSubCategory;
 	}
 
 	public String getDescription() {

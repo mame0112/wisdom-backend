@@ -69,6 +69,9 @@ public class WisdomJsonBuilder extends JsonBuilder {
 
 			obj.put(JsonConstant.PARAM_WISDOM_ID, data.getWisdomId());
 			obj.put(JsonConstant.PARAM_WISDOM_TITLE, data.getTitle());
+			obj.put(JsonConstant.PARAM_WISDOM_CATEGORY, data.getCategory());
+			obj.put(JsonConstant.PARAM_WISDOM_SUB_CATEGORY,
+					data.getSubCategory());
 			obj.put(JsonConstant.PARAM_WISDOM_TAG, data.getTag());
 			obj.put(JsonConstant.PARAM_WISDOM_DESCRIPTION,
 					data.getDescription());

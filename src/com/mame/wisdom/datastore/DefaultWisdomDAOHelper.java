@@ -24,6 +24,10 @@ public class DefaultWisdomDAOHelper {
 
 		if (e != null) {
 			long wisdomId = (Long) e.getProperty(DBConstant.ENTITY_WISDOM_ID);
+			String category = (String) e
+					.getProperty(DBConstant.ENTITY_WISDOM_CATEGORY);
+			String subCategory = (String) e
+					.getProperty(DBConstant.ENTITY_WISDOM_SUBCATEGORY);
 			String title = (String) e
 					.getProperty(DBConstant.ENTITY_WISDOM_TITLE);
 			String description = (String) e
@@ -56,6 +60,7 @@ public class DefaultWisdomDAOHelper {
 					.setCreatedUserId(createdUserId)
 					.setLastUpdatedDate(lastUpdatedDate)
 					.setThumbnail(thumbnail).setViewCount(viewCount)
+					.setCategory(category).setSubCategory(subCategory)
 					.setEntires(items).getWisdomData();
 			// WDWisdomData data = new WDWisdomData(wisdomId, title,
 			// description,

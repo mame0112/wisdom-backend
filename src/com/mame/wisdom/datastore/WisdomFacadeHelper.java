@@ -147,7 +147,8 @@ public class WisdomFacadeHelper {
 			DbgUtil.showLog(TAG, "lastUpdatedDate: " + lastUpdatedDate);
 
 			WDWisdomData data = new WDWisdomData(id, title, description, tag,
-					createdUserId, lastUpdatedDate, thumbBlob, items, 0L);
+					createdUserId, lastUpdatedDate, thumbBlob, items, 0L,
+					category, subCategory);
 			WisdomDataStructure structure = new WisdomDataStructure(category,
 					subCategory, data);
 			return structure;

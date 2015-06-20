@@ -22,7 +22,7 @@ public class WDWisdomDataBuilder {
 			data = new WDWisdomData(wisdomData);
 		} else {
 			data = new WDWisdomData(WConstant.NO_WISDOM, null, null, null,
-					WConstant.NO_USER, 0, null, null, 0);
+					WConstant.NO_USER, 0, null, null, 0, null, null);
 		}
 
 		WDWisdomDataBuilder builder = new WDWisdomDataBuilder(data);
@@ -32,6 +32,16 @@ public class WDWisdomDataBuilder {
 
 	public WDWisdomDataBuilder setWisdomId(long wisdomId) {
 		mWisdomData.setWisdomId(wisdomId);
+		return this;
+	}
+
+	public WDWisdomDataBuilder setCategory(String category) {
+		mWisdomData.setCategory(category);
+		return this;
+	}
+
+	public WDWisdomDataBuilder setSubCategory(String subCategory) {
+		mWisdomData.setSubCategory(subCategory);
 		return this;
 	}
 

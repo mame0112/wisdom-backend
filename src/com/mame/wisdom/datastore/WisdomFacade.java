@@ -160,9 +160,7 @@ public class WisdomFacade {
 			try {
 				WisdomDataStructure data = helper
 						.createWisdomDataFromInputString(input);
-				DbgUtil.showLog(TAG, "AAA");
 				data.getWisdomData().setThumbnail(thumbnail);
-				DbgUtil.showLog(TAG, "BBB");
 				return facade.addWisdom(data.getCategory(),
 						data.getSubCategory(),
 						assignIndexAndOrder(data.getWisdomData()));

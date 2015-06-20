@@ -292,7 +292,8 @@ public class DefaultWisdomDAO implements WisdomDAO {
 				// Create or update wisdom entity
 				// TODO We have to consider if we try to input same tag name
 				// with previous time
-				createOrUpdateWisdomEntity(wisdom, wisdomKey, newId);
+				createOrUpdateWisdomEntity(wisdom, wisdomKey, newId, category,
+						subCategory);
 
 				wisdom.setWisdomId(newId);
 
@@ -319,7 +320,8 @@ public class DefaultWisdomDAO implements WisdomDAO {
 				Key wisdomKey = DatastoreKeyGenerator.getWisdomKeyById(newId);
 
 				// Create or update wisdom entity
-				createOrUpdateWisdomEntity(wisdom, wisdomKey, newId);
+				createOrUpdateWisdomEntity(wisdom, wisdomKey, newId, category,
+						subCategory);
 
 				wisdom.setWisdomId(newId);
 
@@ -372,7 +374,7 @@ public class DefaultWisdomDAO implements WisdomDAO {
 	}
 
 	private void createOrUpdateWisdomEntity(WDWisdomData wisdom, Key wisdomKey,
-			long newId) {
+			long newId, String category, String subCategory) {
 		DbgUtil.showLog(TAG, "createOrUpdateWisdomEntity");
 
 		Entity wisdomEntity = getWisdomEntity(wisdomKey);
@@ -399,6 +401,7 @@ public class DefaultWisdomDAO implements WisdomDAO {
 		if (wisdomEntity != null) {
 			DbgUtil.showLog(TAG, "Wisdom already exist");
 			wisdomEntity = helper.parseWisdomDataToEntity(wisdom, wisdomEntity);
+			putCategoryInfoToWisdomEntity(wisdomEntity, category, subCategory);
 			mDS.put(wisdomEntity);
 			// wisdomEntity = updateWisdomEntity(wisdomEntity, newId);
 		} else {
@@ -406,18 +409,19 @@ public class DefaultWisdomDAO implements WisdomDAO {
 			Entity newWisdomEntity = new Entity(wisdomKey);
 			newWisdomEntity = helper.parseWisdomDataToEntity(wisdom,
 					newWisdomEntity);
+			putCategoryInfoToWisdomEntity(newWisdomEntity, category,
+					subCategory);
 			mDS.put(newWisdomEntity);
 		}
 	}
 
-	// private long getTotalWisdomNum(Key ancestrKey) {
-	// DbgUtil.showLog(TAG, "getTotalWisdomNum");
-	// Query query = new Query(DBConstant.KIND_WISDOM, ancestrKey);
-	// long wisdomNum = mDS.prepare(query).countEntities(
-	// FetchOptions.Builder.withDefaults());
-	// DbgUtil.showLog(TAG, "wisdomNum: " + wisdomNum);
-	// return wisdomNum;
-	// }
+	private void putCategoryInfoToWisdomEntity(Entity wisdomEntity,
+			String category, String subCategory) {
+		wisdomEntity.setProperty(DBConstant.ENTITY_WISDOM_CATEGORY, category);
+		wisdomEntity.setProperty(DBConstant.ENTITY_WISDOM_SUBCATEGORY,
+				subCategory);
+
+	}
 
 	private long getTotalWisdomNum() {
 		DbgUtil.showLog(TAG, "getTotalWisdomNum");
