@@ -94,4 +94,39 @@
     font-weight: normal;
     color: #888888;
     margin-bottom: 20px;
+    height: 100px;
+}
+
+.panel-body2{
+    padding-top: 20px;
+    font-weight: normal;
+    color: #888888;
+    margin-bottom: 20px;
+    height: 200px;
+}
+
+.panel-body3{
+    background-color: #ff0000;
+    padding-top: 20px;
+    font-weight: normal;
+    color: #888888;
+    padding-bottom: 100px;
+    height: 150px;
+}
+
+.panel-body4{
+    background-color: #0ff000;
+    padding-top: 20px;
+    font-weight: normal;
+    color: #888888;
+    padding-bottom: 100px;
+    height: 200px;
+}
+
+.panel-body5{
+    padding-top: 20px;
+    font-weight: normal;
+    color: #888888;
+    margin-bottom: 20px;
+    height: 500px;
 }
