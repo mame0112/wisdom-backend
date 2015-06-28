@@ -12,17 +12,20 @@
 			<span class="name" translate="modifywisdom.title">Title</span>
 			<span class="notice" ng-show="modifywisdom.title.$error.required">*</span>
 			<input type="text" class="textModify" placeholder="Input title" name="title" ng-model="wisdom.title" required ng-maxlength="{{WISDOM_TITLE_COUNT}}">
+			<p class="count">{{WISDOM_TITLE_COUNT - wisdom.title.length}} / {{WISDOM_TITLE_COUNT}}</p>
 			<span class="error" ng-show="modifywisdom.title.$error.maxlength">Required less than {{WISDOM_TITLE_COUNT}} characters</span>
 
 			<span class="name" translate="modifywisdom.tag">Tag</span>
 			<span class="notice" ng-show="modifywisdom.tag.$error.required">*</span>
 			<input type="text" class="textModify" placeholder="Input tag" name="tag" ng-model="wisdom.tag" required ng-minlength="{{WISDOM_TAG_MIN_COUNT}}" ng-maxlength="{{WISDOM_TAG_MAX_COUNT}}">
+			<p class="count">{{WISDOM_TAG_MAX_COUNT - wisdom.tag.length}} / {{WISDOM_TAG_MAX_COUNT}}</p>
 			<span class="error" ng-show="modifywisdom.tag.$error.minlength">Required more than {{WISDOM_TAG_MIN_COUNT}} characters</span>
 			<span class="error" ng-show="modifywisdom.tag.$error.maxlength">Required less than {{WISDOM_TAG_MAX_COUNT}} characters</span>
 
 			<span class="name" translate="modifywisdom.description">Description</span>
 			<span class="notice" ng-show="modifywisdom.description.$error.required">*</span>
 			<textarea type="text"  class="textModify" placeholder="Input description" name="description" ng-model="wisdom.description" required ng-maxlength="{{WISDOM_DESCRIPTION_COUNT}}"></textarea>
+			<p class="count">{{WISDOM_DESCRIPTION_COUNT - wisdom.description.length}} / {{WISDOM_DESCRIPTION_COUNT}}</p>
 			<span class="error" ng-show="modifywisdom.description.$error.maxlength">Required less than {{WISDOM_DESCRIPTION_COUNT}} characters</span>
 		</div>
 	</div>
@@ -72,7 +75,7 @@
 
 		<!-- Additional Title input field -->	
 		<div class="form-group" ng-show="isTitleFieldDisplay()">
-			<h4 translate="modifywisdom.optional_title_text">input sub title</h4>
+			<!-- <h4 translate="modifywisdom.optional_title_text">input sub title</h4> -->
 			<input type="text" class="form-control" placeholder="{{'modifywisdom.optional_title_help' | translate}}" ng-model="optionalHeadlineField" name="optionalHeadlineField" ng-maxlength="{{titleMaxLength}}">
 			<p class="count">{{WISDOM_SUB_TITLE_MAX_LENGTH - optionalHeadlineField.length}}/{{WISDOM_SUB_TITLE_MAX_LENGTH}}</p>
 			<span class="error" ng-show="modifyisdom.optionalHeadlineField.$error.maxlength">Title must be less than {{WISDOM_SUB_TITLE_MAX_LENGTH}} characters</span>
@@ -83,8 +86,7 @@
 
 		<!-- Additional Description input field -->	
 		<div class="form-group" ng-show="isDescriptionFieldDisplay()">
-			<h4 translate="modifywisdom.optional_desc_text">input sub description</h4>
-
+			<!-- <h4 translate="modifywisdom.optional_desc_text">input sub description</h4> -->
 			<textarea type="text" class="form-control" placeholder="{{'modifywisdom.optional_desc_help' | translate}}" ng-model="optionalDescField" name="optionalDescField" ng-maxlength="{{descMaxLength}}"></textarea>
 			<p class="count">{{WISDOM_SUB_DESC_MAX_LENGTH - optionalDescField.length}}/{{WISDOM_SUB_DESC_MAX_LENGTH}}</p>
 			<span class="error" ng-show="modifyisdom.optionalDescField.$error.maxlength">Title must be less than {{WISDOM_SUB_DESC_MAX_LENGTH}} characters</span>

@@ -200,6 +200,11 @@
 	clear: both;
 }
 
+.wisdom .count{
+	color: #F4511E;
+	text-align: right;
+}
+
 .wisdom .date{
 	color: #888888;
 }

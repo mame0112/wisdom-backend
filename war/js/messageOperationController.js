@@ -143,54 +143,15 @@ wisdomApp.controller('messageOperationController',
 		$scope.changeStateToStable();
  	};
 
- 	// $scope.getMessageType = function(data){
- 	// 	log.d("getMessageType");
 
- 	// 	if(data !== null){
- 	// 		switch(data.type)
- 	// 		{
- 	// 			case YPE_TITLE:
- 	// 			break;
- 	// 			case TYPE_MESSAGE:
- 	// 			break;
- 	// 			default:
- 	// 			break;
- 	// 		}
- 	// 	}
- 	// 	if(data.type === TYPE_TITLE)
- 	// 	{
-	 // 		log.d("This is title");
- 	// 		return "panel-heading";
- 	// 	} else if (data.type === TYPE_MESSAGE){
-	 // 		log.d("This is description");
- 	// 		return "panel-body";
- 	// 	} else {
- 	// 		log.d("Unknown type.");
- 	// 		return "panel-body";
- 	// 	}
- 	// };
-
- 	// $scope.findCssClassbyType = function(data)
- 	// {
- 	// 	if(data.type == TYPE_TITLE) {
- 	// 		return "panel-heading";
- 	// 	} else if (data.type == TYPE_MESSAGE){
- 	// 		return "panel-body";
- 	// 	} else {
- 	// 		log.d("Unknown type.");
- 	// 		return "panel-body";
- 	// 	}
- 	// };
-
-	  $scope.findCssClassbyType = function(data)
-	  {
-	  	log.d("findCssClassbyType tag: " + data.tag);
-	    if(data.type == TYPE_TITLE) {
-	      return "panel-heading";
-	    } else{
-	      return "panel-body";
-	    }
-	  };
+	$scope.findCssClassbyType = function(data)
+	{
+		if(data.type == TYPE_TITLE) {
+		  return "panel-heading";
+		} else{
+		  return "panel-body";
+		}
+	};
 
  	$scope.onMouseOver = function(index)
  	{
