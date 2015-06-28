@@ -153,7 +153,10 @@ function($scope,
   {
     if(array !== null && array.length !== 0)
     {
-      array.splice(index, 2, array[index+1], array[index]);
+      //If the selected items is most bottom item, we should not move it to more bottom
+      if(index + 1 < array.length){
+        array.splice(index, 2, array[index+1], array[index]);
+      }
     }
 
   };
