@@ -146,7 +146,7 @@
 		"tag_help": "2文字から8文字",
 		"title_help": "35文字以内推奨 (最大50文字)",
 		"description_help": "150文字以内推奨 (最大500文字)",
-		"additional_title":"付加情報",
+		"additional_title":"追加情報",
 		"optional_title":"見出し",
 		"optional_desc":"本文",
 		"optional_title_text":"見出しを入力",
@@ -168,7 +168,8 @@
 		"howto_headline_title":"ヘッドライン(任意項目)",
 		"howto_headline_desc":"任意の項目です。必要したい内容に応じて追加してください。この項目は複数、記入することができます。",
 		"howto_description_title":"サマリーの説明(任意項目)",
-		"howto_description_desc":"任意の項目です。必要したい内容に応じて追加してください。この項目は複数、記入することができます。"
+		"howto_description_desc":"任意の項目です。必要したい内容に応じて追加してください。この項目は複数、記入することができます。",
+		"messages_minimum_note":"見出しか本文を最低1つ以上、追加してください"
 	},
 	"modifywisdom":{
 		"title":"タイトル",

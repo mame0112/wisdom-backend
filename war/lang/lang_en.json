@@ -168,7 +168,8 @@
 		"howto_headline_title":"Headline (Optional)",
 		"howto_headline_desc":"Optional item. Please add depends on contents you are about to create. For this item, you can add more than two.",
 		"howto_description_title":"Detail explanation (Optional)",
-		"howto_description_desc":"Optional item. Please add depends on contents you are about to create. For this item, you can add more than two"
+		"howto_description_desc":"Optional item. Please add depends on contents you are about to create. For this item, you can add more than two",
+		"messages_minimum_note":"Input more than 1 headline or text"
 	},
 	"modifywisdom":{
 		"title":"Title",
