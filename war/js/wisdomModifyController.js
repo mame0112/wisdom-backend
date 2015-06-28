@@ -473,4 +473,28 @@ function($scope,
     }
   };
 
+  $scope.isSaveModifyButtonDisable = function()
+  {
+    //Check title
+    if($scope.wisdom.title === undefined || $scope.wisdom.title.length === 0){
+      return true;
+    }
+
+    //Check tag
+    if($scope.wisdom.tag === undefined || $scope.wisdom.title.tag === 0){
+      return true;
+    }
+
+    //Check description
+    if($scope.wisdom.description === undefined || $scope.wisdom.title.description === 0){
+      return true;
+    }
+
+    if($scope.messages === null || $scope.messages === undefined || $scope.messages.length === 0){
+      return true;
+    }
+
+    return false;
+  };
+
 }]);
