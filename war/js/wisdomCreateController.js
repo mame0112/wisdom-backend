@@ -267,6 +267,20 @@ wisdomApp.controller('wisdomCreateController',
 		$scope.tosStatus = value;
     };
 
+    $scope.shouldShowMessagesNote = function()
+    {
+    	var messages = createWisdomSharedStateService.getSharedMessages();
+
+    	if(messages !== null){
+	    	if(messages === undefined || messages.length === undefined || messages.length === 0)
+	    	{
+	    		return true;
+	    	}
+    	}
+
+    	return false;
+    };
+
     $scope.isCreateButtonDisabled = function()
     {
     	//If TOS checkbox is checked
