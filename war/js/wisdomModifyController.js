@@ -468,23 +468,7 @@ function($scope,
   {
     if(data.tag == TYPE_TITLE) {
       return "panel-heading";
-    } else if (data.tag == TYPE_MESSAGE){
-      if(data.message.length <= 50){
-        return "panel-body";
-      } else if (data.message.length > 51 && data.message.length <= 150){
-        return "panel-body2";
-      } else if (data.message.length > 151 && data.message.length <= 250){
-        return "panel-body3";
-      } else if (data.message.length > 251 && data.message.length <= 350){
-        return "panel-body4";
-      } else if (data.message.length > 351 && data.message.length <= 500){
-        return "panel-body5";
-      }else {
-        return "panel-body";
-      }
-
-    } else {
-      // log.d("Unknown type.");
+    } else{
       return "panel-body";
     }
   };
