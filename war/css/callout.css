@@ -5,6 +5,7 @@
     border-left-width: 5px;
     border-radius: 3px;
 }
+
 .callout h4 {
     margin-top: 0;
     margin-bottom: 5px;
@@ -41,6 +42,14 @@
     border-left-color: #5cb85c;
 }
 
+.callout-success-modify {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-left-color: #5cb85c;
+}
+
 .callout-success .name {
     font-size: 16px;
     color: #000000;
@@ -66,8 +75,9 @@
 }
 
 .messagecontrol_frame {
-    padding-top: 16px;
-    height: 60px;
+    padding: 0px;
+    margin: 0px;
+    height: 30px;
     position: relative;
 }
 
@@ -91,36 +101,28 @@
 }
 
 .panel-body{
-    padding-top: 20px;
+    margin-top: 0px;
+    padding-top: 0px;
     font-weight: normal;
     color: #888888;
-    margin-bottom: 20px;
-    height: 100px;
 }
 
 .panel-body2{
-    padding-top: 20px;
     font-weight: normal;
     color: #888888;
-    margin-bottom: 20px;
 }
 
 .panel-body3{
-    padding-top: 0px;
-    padding-bottom: 0px;
     font-weight: normal;
     color: #888888;
 }
 
 .panel-body4{
-    padding-top: 0px;
     font-weight: normal;
     color: #888888;
 }
 
 .panel-body5{
-    padding-top: 20px;
     font-weight: normal;
     color: #888888;
-    margin-bottom: 20px;
 }
