@@ -29,6 +29,19 @@
 		"tos": "Terms of use",
 		"blog": "Blog"
 	},
+	"overview":{
+		"title1":"chienowa",
+		"description1":"chienowa is a wisdom sharing platform for beginners,<br>which enable beginners to get to know what they should do at first.",
+		"title2":"Beginners don't know neither what he/she should do nor how he/she should do.",
+		"description2":"Please remember when you get start something<br> such as playing music, learning other languages and programming.... <br>In the internet, there are a bunch of information<br> and you might got lost what you should do, right?<br>We've aimed to solve such problem and we launched this service.",
+		"title3":"Your wisdom and knowledge must be able to help someone",
+		"description3":"You are a expert for some area and you can let someone happy they have some trouble.<br> What about share your wisdom and knowledge to help them out?",
+		"title4":"Share one wisdom with everyone",
+		"description4":"To make 'Definitely correct' place, let's modify other people's wisdom if you think it is wrong.<br> Since chienowa is a wisdom co-creation platform for beginners.",
+		"title5":"Let's get started!",
+		"description5":"Of course, chienowa is free!",
+		"start_button":"Join to chienowa"
+	},
 	"ranking":{
 		"title": "{{value}}'s ranking"
 	},
