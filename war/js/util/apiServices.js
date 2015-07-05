@@ -1,6 +1,6 @@
-wisdomApp.factory('apiService', ['$resource', 'log',
- function($resource, log) {
-    return $resource('/controller/infobar',
+wisdomApp.factory('apiService', ['$resource', 'log', 'Constants',
+ function($resource, log, Constants) {
+    return $resource(Constants.API_V1 + '/infobar',
          {servlet_resp_id: 1, twitter_name: 'TwitterName'},
          { 
             popular: {method: 'GET', isArray: false
@@ -9,9 +9,9 @@ wisdomApp.factory('apiService', ['$resource', 'log',
     }
 ])
 
-.factory('userAPIService', ['$resource', 'log',
- function($resource, log) {
-    return $resource('/controller/user',
+.factory('userAPIService', ['$resource', 'log', 'Constants',
+ function($resource, log, Constants) {
+    return $resource(Constants.API_V1 + '/user',
          {},
          { 
             //Sign in
@@ -23,9 +23,9 @@ wisdomApp.factory('apiService', ['$resource', 'log',
     }
 ])
 
-.factory('userInfoAPIService', ['$resource', 'log',
- function($resource, log) {
-    return $resource('/controller/userInfo',
+.factory('userInfoAPIService', ['$resource', 'log', 'Constants',
+ function($resource, log, Constants) {
+    return $resource(Constants.API_V1 + '/userInfo',
          {servlet_resp_id: 1, param: '@servlet_params'},
          { 
             //Get user info
@@ -34,9 +34,10 @@ wisdomApp.factory('apiService', ['$resource', 'log',
     }
 ])
 
-.factory('userRankingAPIService', ['$resource', 'log',
- function($resource, log) {
-    return $resource('/controller/ranking',
+.factory('userRankingAPIService', ['$resource', 'log', 'Constants',
+ function($resource, log, Constants) {
+    // return $resource('/controller/ranking',
+    return $resource(Constants.API_V1 + '/ranking',
          {servlet_resp_id: 1, param: '@servlet_params'},
          { 
             //Get user info
@@ -45,9 +46,9 @@ wisdomApp.factory('apiService', ['$resource', 'log',
     }
 ])
 
-.factory('notificationAPIService', ['$resource', 'log',
- function($resource, log) {
-    return $resource('/controller/notification',
+.factory('notificationAPIService', ['$resource', 'log', 'Constants',
+ function($resource, log, Constants) {
+    return $resource(Constants.API_V1 + '/notification',
          {},
          { 
             //Latest status
@@ -59,9 +60,9 @@ wisdomApp.factory('apiService', ['$resource', 'log',
     }
 ])
 
-.factory('wisdomAPIService', ['$resource', 'log',
- function($resource, log) {
-    return $resource('/controller/wisdom:param',
+.factory('wisdomAPIService', ['$resource', 'log', 'Constants',
+ function($resource, log, Constants) {
+    return $resource(Constants.API_V1 + '/wisdom:param',
          {servlet_resp_id: 1, param: '@servlet_new_wisdom_param'},
          { 
             //Get one wisdom (by key, under certain category/subcategory)
@@ -76,9 +77,9 @@ wisdomApp.factory('apiService', ['$resource', 'log',
     }
 ])
 
-.factory('newWisdomAPIService', ['$resource', 'log',
- function($resource, log) {
-    return $resource('/controller/newwisdom:param',
+.factory('newWisdomAPIService', ['$resource', 'log', 'Constants',
+ function($resource, log, Constants) {
+    return $resource(Constants.API_V1 + '/newwisdom:param',
          {servlet_resp_id: 1, param: '@servlet_new_wisdom_param'},
          { 
             //Create new wisdom
@@ -87,9 +88,9 @@ wisdomApp.factory('apiService', ['$resource', 'log',
     }
 ])
 
-.factory('modifyWisdomAPIService', ['$resource', 'log',
- function($resource, log) {
-    return $resource('/controller/modifywisdom:param',
+.factory('modifyWisdomAPIService', ['$resource', 'log', 'Constants',
+ function($resource, log, Constants) {
+    return $resource(Constants.API_V1 + '/modifywisdom:param',
          {servlet_resp_id: 1, param: '@servlet_params'},
          { 
             //Create new wisdom
@@ -99,9 +100,9 @@ wisdomApp.factory('apiService', ['$resource', 'log',
 ])
 
 
-.factory('categoryAPIService', ['$resource', 'log',
- function($resource, log) {
-    return $resource('/controller/category:param',
+.factory('categoryAPIService', ['$resource', 'log', 'Constants',
+ function($resource, log, Constants) {
+    return $resource(Constants.API_V1 + '/category:param',
          {servlet_resp_id: 1, param: '@servlet_params'},
          { 
             //Get one wisdom (by key, under certain category/subcategory)
@@ -110,9 +111,9 @@ wisdomApp.factory('apiService', ['$resource', 'log',
     }
 ])
 
-.factory('highlightAPIService', ['$resource', 'log',
- function($resource, log) {
-    return $resource('/controller/highlight',
+.factory('highlightAPIService', ['$resource', 'log', 'Constants',
+ function($resource, log, Constants) {
+    return $resource(Constants.API_V1 + '/highlight',
          {servlet_resp_id: 1},
          { 
             //Get today's highlight wisdoms
@@ -121,9 +122,9 @@ wisdomApp.factory('apiService', ['$resource', 'log',
     }
 ])
 
-.factory('latestAPIService', ['$resource', 'log',
- function($resource, log) {
-    return $resource('/controller/latest',
+.factory('latestAPIService', ['$resource', 'log', 'Constants',
+ function($resource, log, Constants) {
+    return $resource(Constants.API_V1 + '/latest',
          {servlet_resp_id: 1},
          { 
             //Get latest wisdoms
@@ -132,9 +133,9 @@ wisdomApp.factory('apiService', ['$resource', 'log',
     }
 ])
 
-.factory('searchAPIService', ['$resource', 'log',
- function($resource, log) {
-    return $resource('/controller/search:key',
+.factory('searchAPIService', ['$resource', 'log', 'Constants',
+ function($resource, log, Constants) {
+    return $resource(Constants.API_V1 + '/search:key',
          {servlet_resp_id: 1, key: '@searchParam'},
          { 
             //Search widoms by given keyword
@@ -143,9 +144,9 @@ wisdomApp.factory('apiService', ['$resource', 'log',
     }
 ])
 
-.factory('twitterAPIService', ['$resource', 'log',
- function($resource, log) {
-    return $resource('/controller/twitter',
+.factory('twitterAPIService', ['$resource', 'log', 'Constants',
+ function($resource, log, Constants) {
+    return $resource(Constants.API_V1 + '/twitter',
          {servlet_resp_id: 1},
          { 
             //Search widoms by given keyword
@@ -154,9 +155,9 @@ wisdomApp.factory('apiService', ['$resource', 'log',
     }
 ])
 
-.factory('userNameAPIService', ['$resource', 'log',
- function($resource, log) {
-    return $resource('/controller/useraccount',
+.factory('userNameAPIService', ['$resource', 'log', 'Constants',
+ function($resource, log, Constants) {
+    return $resource(Constants.API_V1 + '/useraccount',
          {servlet_resp_id: 1},
          { 
             //Search widoms by given keyword
@@ -165,9 +166,9 @@ wisdomApp.factory('apiService', ['$resource', 'log',
     }
 ])
 
-.factory('userLoginAPIService', ['$resource', 'log',
- function($resource, log) {
-    return $resource('/controller/userlogin',
+.factory('userLoginAPIService', ['$resource', 'log', 'Constants',
+ function($resource, log, Constants) {
+    return $resource(Constants.API_V1 + '/userlogin',
          {servlet_resp_id: 1},
          { 
             //Search widoms by given keyword
@@ -176,9 +177,9 @@ wisdomApp.factory('apiService', ['$resource', 'log',
     }
 ])
 
-.factory('contactAPIService', ['$resource', 'log',
- function($resource, log) {
-    return $resource('/controller/contact',
+.factory('contactAPIService', ['$resource', 'log', 'Constants',
+ function($resource, log, Constants) {
+    return $resource(Constants.API_V1 + '/contact',
          {servlet_resp_id: 1},
          { 
             //Search widoms by given keyword
@@ -187,9 +188,9 @@ wisdomApp.factory('apiService', ['$resource', 'log',
     }
 ])
 
-.factory('wisdomMessageLikeAPIService', ['$resource', 'log',
- function($resource, log) {
-    return $resource('/controller/messagelike',
+.factory('wisdomMessageLikeAPIService', ['$resource', 'log', 'Constants',
+ function($resource, log, Constants) {
+    return $resource(Constants.API_V1 + '/messagelike',
          {servlet_resp_id: 1},
          { 
             //Search widoms by given keyword
@@ -198,9 +199,9 @@ wisdomApp.factory('apiService', ['$resource', 'log',
     }
 ])
 
-.factory('facebookSignupAPIService', ['$resource', 'log',
- function($resource, log) {
-    return $resource('/controller/facebookSignup',
+.factory('facebookSignupAPIService', ['$resource', 'log', 'Constants',
+ function($resource, log, Constants) {
+    return $resource(Constants.API_V1 + '/facebookSignup',
          // {servlet_resp_id: 1, param: '@servlet_params'},
          {servlet_resp_id: 1},
          { 
@@ -210,9 +211,9 @@ wisdomApp.factory('apiService', ['$resource', 'log',
     }
 ])
 
-.factory('facebookSigninAPIService', ['$resource', 'log',
- function($resource, log) {
-    return $resource('/controller/facebookSignin',
+.factory('facebookSigninAPIService', ['$resource', 'log', 'Constants',
+ function($resource, log, Constants) {
+    return $resource(Constants.API_V1 + '/facebookSignin',
          {servlet_resp_id: 1, param: '@servlet_params'},
          { 
             //Search widoms by given keyword

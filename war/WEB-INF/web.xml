@@ -36,7 +36,7 @@
 
 	<servlet-mapping>
 		<servlet-name>controllerServlet</servlet-name>
-		<url-pattern>/controller/*</url-pattern>
+		<url-pattern>/api/v1/*</url-pattern>
 	</servlet-mapping>
 
 	<!-- cron job -->

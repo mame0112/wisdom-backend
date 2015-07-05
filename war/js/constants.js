@@ -4,6 +4,8 @@ wisdomApp.constant(
 
 		testMessage: 'test message from Constants',
 
+		API_V1 : '/api/v1',
+
 		Category: [
 			{id: 0, name: "Sports", translate:"category.sports"},
 			{id: 1, name: "Music", translate:"category.music"},
