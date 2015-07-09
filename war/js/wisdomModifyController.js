@@ -290,7 +290,7 @@ function($scope,
     // log.d("saveModification: " + $scope.wisdom.title);
     //Parse Json Object to Json string
     params.wisdom.messages = angular.fromJson($scope.messages);
-    log.d("modified tag: " + params.wisdom.category);
+    log.d("modified description: " + params.wisdom.description);
 
     modifyWisdomAPIService.modifywisdom({servlet_params : params}, function(response){
       log.d("response received");

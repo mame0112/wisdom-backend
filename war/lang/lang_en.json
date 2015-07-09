@@ -188,6 +188,7 @@
 		"title":"Title",
 		"description":"Overview",
 		"tag": "Tag",
+		"thumbnail": "Thumbnail",
 		"optional_title":"Headline",
 		"optional_desc":"Description",
 		"optional_title_text":"Input title",

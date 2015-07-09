@@ -1,11 +1,6 @@
 <div ng-controller="wisdomModifyController" class="wisdom" ng-init="initialize()">
 <form role="form" name="modifywisdom" novalidation>
 	<div class="titlearea">
-		<div class="thumbnail">
-			<div class="image" ng-style="{'background': colorGenerater.generateColor(wisdom.title)}">
-				<div class="text">{{wisdom.title | capitalize}}</div>
-			</div>
-		</div>
 		<!-- <embed ng-src="{{content}}" style="width:200px;height:200px;"></embed> -->
 		<div class="content">
 		  	<div class="category" translate="modifywisdom.category" translate-values="{value1: wisdom.category, value2: wisdom.subcategory}">Wisdom for {{wisdom.category}} > {{wisdom.subcategory}}</div>
@@ -28,6 +23,15 @@
 			<p class="count">{{WISDOM_DESCRIPTION_COUNT - wisdom.description.length}} / {{WISDOM_DESCRIPTION_COUNT}}</p>
 			<span class="error" ng-show="modifywisdom.description.$error.maxlength">Required less than {{WISDOM_DESCRIPTION_COUNT}} characters</span>
 		</div>
+		<!-- <div class="thumbnail"> -->
+			<span class="name" translate="modifywisdom.thumbnail">Thumbnail</span>
+			<div class="form-group">
+				<input type="file" ng-file-select="onFileSelect($files)">
+			</div>
+<!-- 			<div class="image" ng-style="{'background': colorGenerater.generateColor(wisdom.title)}">
+				<div class="text">{{wisdom.title | capitalize}}</div>
+			</div> -->
+		<!-- </div> -->
 	</div>
 
 <!-- <div class="bodyarea">

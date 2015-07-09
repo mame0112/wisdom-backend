@@ -142,7 +142,7 @@ wisdomApp.controller('wisdomCreateController',
 		result.updated_date = timeService.getCurrentTime();
 
 		result.messages = createWisdomSharedStateService.getSharedMessages();
-		log.d("result: " + "category: " + result.category + "subCategory: " + result.subCategory +  " tag: " + result.tag + " thumbnail: " + result.thumbnail + " title: " + result.title + " description: " + result.description + "messages: " + result.messages + " createUserId: " + result.create_user_id + " updated time: " + result.updated_date);
+		log.d("result: " + "category: " + result.category + "subCategory: " + result.subcategory +  " tag: " + result.tag + " thumbnail: " + result.thumbnail + " title: " + result.title + " description: " + result.description + "messages: " + result.messages + " createUserId: " + result.create_user_id + " updated time: " + result.updated_date);
 		log.d("message length: " + result.messages.length);
 
 		$scope.uploadFile();
@@ -227,7 +227,8 @@ wisdomApp.controller('wisdomCreateController',
 
         var file = $scope.selectedFile[0];
         $scope.upload = $upload.upload({
-            url: '/controller/newwisdom',
+            // url: '/controller/newwisdom',
+            url: Constants.API_V1 + '/newwisdom',
             method: 'POST',
             data: {data: result},
             // data: angular.toJson($scope.model.fileDescription),

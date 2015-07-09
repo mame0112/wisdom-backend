@@ -54,7 +54,7 @@ public class CrawlServlet implements Filter {
 			// important! Give the headless browser enough time to execute
 			// JavaScript
 			// The exact time to wait may depend on your application.
-			webClient.waitForBackgroundJavaScript(20000);
+			webClient.waitForBackgroundJavaScript(5000);
 
 			PrintWriter out = new PrintWriter(new OutputStreamWriter(
 					response.getOutputStream(), "UTF-8"));
