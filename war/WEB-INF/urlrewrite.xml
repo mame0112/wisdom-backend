@@ -1,21 +1,38 @@
 <urlrewrite>
+	<!-- <rule> <note> The rule means that requests to /test/status/ will be 
+		redirected to /rewrite-status the url will be rewritten. </note> <from>/detail</from> 
+		<to type="redirect">%{context-path}/wisdom?servlet_resp_id=1&servlet_wisdom_id=2rewrite-status</to> 
+		<to type="redirect">/api/v1/wisdom?servlet_resp_id=1&servlet_wisdom_id=$1</to> 
+		</rule> -->
 	<rule>
 		<note>
 			The rule means that requests to /test/status/ will be redirected
 			to
 			/rewrite-status the url will be rewritten.
 		</note>
-		<from>/detail</from>
-		<!-- <to type="redirect">%{context-path}/wisdom?servlet_resp_id=1&servlet_wisdom_id=2rewrite-status</to> -->
-		<to type="redirect">/api/v1/wisdom?servlet_resp_id=1&servlet_wisdom_id=$1</to>
+		<from>/test/status2/</from>
+		<to type="redirect">%{context-path}/rewrite-status2</to>
 	</rule>
 	<rule>
 		<note>
-			The rule means that requests to /test/status/ will be redirected to
+			The rule means that requests to /test/status/ will be redirected
+			to
 			/rewrite-status the url will be rewritten.
 		</note>
 		<from>/test/status/</from>
 		<to type="redirect">%{context-path}/rewrite-status</to>
+	</rule>
+<!-- 	<rule>
+		<note>
+		</note>
+		<from>/detail/(.*)$</from>
+		<to>/api/v1/wisdom?servlet_wisdom_id=$1</to>
+	</rule> -->
+	<rule>
+		<note>
+		</note>
+		<from>/detail/(.*)$</from>
+		<to>/index.html</to>
 	</rule>
 	<outbound-rule>
 		<note>
