@@ -24,7 +24,9 @@ public class SearchAction implements Action {
 			HttpServletResponse response) throws Exception {
 		DbgUtil.showLog(TAG, "SearchAction execute");
 
-		String responseId = request.getParameter(WConstant.SERVLET_RESP_ID);
+//		String responseId = request.getParameter(WConstant.SERVLET_RESP_ID);
+		//TODO
+		String responseId = "1";
 		String searchParam = request
 				.getParameter(WConstant.SERVLET_WISDOM_SEARCH_PARAM);
 		DbgUtil.showLog(TAG, "searchParam: " + searchParam);
