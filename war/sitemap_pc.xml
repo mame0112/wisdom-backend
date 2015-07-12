@@ -4,80 +4,80 @@
 	xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 	<url>
-		<loc>https://chieno-wa.appspot.com/#!/</loc>
-		<lastmod>2015-06-18</lastmod>
+		<loc>https://chieno-wa.appspot.com/</loc>
+		<lastmod>2015-07-11</lastmod>
 		<priority>1.0</priority>
 		<changefreq>daily</changefreq>
 	</url>
 	<url>
-		<loc>https://chieno-wa.appspot.com/#!/signin</loc>
-		<lastmod>2015-06-18</lastmod>
+		<loc>https://chieno-wa.appspot.com/signin</loc>
+		<lastmod>2015-07-11</lastmod>
 		<priority>0.3</priority>
 		<changefreq>daily</changefreq>
 	</url>
 	<url>
-		<loc>https://chieno-wa.appspot.com/#!/signup</loc>
-		<lastmod>2015-06-18</lastmod>
+		<loc>https://chieno-wa.appspot.com/signup</loc>
+		<lastmod>2015-07-11</lastmod>
 		<priority>0.3</priority>
 		<changefreq>daily</changefreq>
 	</url>
 	<url>
-		<loc>https://chieno-wa.appspot.com/#!/overview</loc>
-		<lastmod>2015-06-18</lastmod>
+		<loc>https://chieno-wa.appspot.com/overview</loc>
+		<lastmod>2015-07-11</lastmod>
 		<priority>0.8</priority>
 		<changefreq>daily</changefreq>
 	</url>
 	<url>
-		<loc>https://chieno-wa.appspot.com/#!/privacypolicy</loc>
-		<lastmod>2015-06-18</lastmod>
+		<loc>https://chieno-wa.appspot.com/privacypolicy</loc>
+		<lastmod>2015-07-11</lastmod>
 		<priority>0.3</priority>
 		<changefreq>daily</changefreq>
 	</url>
 	<url>
-		<loc>https://chieno-wa.appspot.com/#!/tos</loc>
-		<lastmod>2015-06-18</lastmod>
+		<loc>https://chieno-wa.appspot.com/tos</loc>
+		<lastmod>2015-07-11</lastmod>
 		<priority>0.4</priority>
 		<changefreq>daily</changefreq>
 	</url>
 	<url>
-		<loc>https://chieno-wa.appspot.com/#!/contact</loc>
-		<lastmod>2015-06-18</lastmod>
+		<loc>https://chieno-wa.appspot.com/contact</loc>
+		<lastmod>2015-07-11</lastmod>
 		<priority>0.4</priority>
 		<changefreq>daily</changefreq>
 	</url>
 	<url>
-		<loc>https://chieno-wa.appspot.com/#!/view/view</loc>
-		<lastmod>2015-06-18</lastmod>
+		<loc>https://chieno-wa.appspot.com/view/view</loc>
+		<lastmod>2015-07-11</lastmod>
 		<priority>0.9</priority>
 		<changefreq>daily</changefreq>
 	</url>
 	<url>
-		<loc>https://chieno-wa.appspot.com/#!/detail</loc>
-		<lastmod>2015-06-18</lastmod>
+		<loc>https://chieno-wa.appspot.com/detail</loc>
+		<lastmod>2015-07-11</lastmod>
 		<priority>0.9</priority>
 		<changefreq>daily</changefreq>
 	</url>
 	<url>
-		<loc>https://chieno-wa.appspot.com/#!/category</loc>
-		<lastmod>2015-06-18</lastmod>
+		<loc>https://chieno-wa.appspot.com/category</loc>
+		<lastmod>2015-07-11</lastmod>
 		<priority>0.8</priority>
 		<changefreq>daily</changefreq>
 	</url>
 	<url>
-		<loc>https://chieno-wa.appspot.com/#!/wisdom</loc>
-		<lastmod>2015-06-18</lastmod>
+		<loc>https://chieno-wa.appspot.com/wisdom</loc>
+		<lastmod>2015-07-11</lastmod>
 		<priority>0.9</priority>
 		<changefreq>daily</changefreq>
 	</url>
 	<url>
-		<loc>https://chieno-wa.appspot.com/#!/modify</loc>
-		<lastmod>2015-06-18</lastmod>
+		<loc>https://chieno-wa.appspot.com/modify</loc>
+		<lastmod>2015-07-11</lastmod>
 		<priority>0.4</priority>
 		<changefreq>daily</changefreq>
 	</url>
 	<url>
-		<loc>https://chieno-wa.appspot.com/#!/search</loc>
-		<lastmod>2015-06-18</lastmod>
+		<loc>https://chieno-wa.appspot.com/search</loc>
+		<lastmod>2015-07-11</lastmod>
 		<priority>0.4</priority>
 		<changefreq>daily</changefreq>
 	</url>
