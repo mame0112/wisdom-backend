@@ -21,6 +21,7 @@ public class WisdomAction implements Action {
 
 		JsonBuilder builder = new WisdomJsonBuilder();
 
+		// TODO
 		String responseId = "1";
 		// String responseId = request.getParameter(WConstant.SERVLET_RESP_ID);
 		String wisdomId = request.getParameter(WConstant.SERVLET_WISDOM_ID);

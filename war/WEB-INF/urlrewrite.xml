@@ -22,16 +22,18 @@
 		<from>/test/status/</from>
 		<to type="redirect">%{context-path}/rewrite-status</to>
 	</rule>
-<!-- 	<rule>
-		<note>
-		</note>
-		<from>/detail/(.*)$</from>
-		<to>/api/v1/wisdom?servlet_wisdom_id=$1</to>
-	</rule> -->
 	<rule>
 		<note>
+			Wisdom detail view
 		</note>
-		<from>/detail/(.*)$</from>
+		<from>/detail/(.*)</from>
+		<to>/index.html</to>
+	</rule>
+	<rule>
+		<note>
+			Wisdom list view for each category and sub category combination
+		</note>
+		<from>/category/(.*)/(.*)</from>
 		<to>/index.html</to>
 	</rule>
 	<outbound-rule>

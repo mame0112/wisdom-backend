@@ -25,7 +25,9 @@ public class CategoryAction implements Action {
 			HttpServletResponse response) throws Exception {
 		DbgUtil.showLog(TAG, "execute");
 
-		String responseId = request.getParameter(WConstant.SERVLET_RESP_ID);
+		// String responseId = request.getParameter(WConstant.SERVLET_RESP_ID);
+		// TODO
+		String responseId = "1";
 		String params = request.getParameter(WConstant.SERVLET_PARAMS);
 
 		CategoryJsonBuilder builder = new CategoryJsonBuilder();
