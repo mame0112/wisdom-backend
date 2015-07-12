@@ -3,7 +3,7 @@ wisdomApp.controller('searchResultController',
  function($scope, log, $stateParams, searchAPIService, creativeColorGenerateService, ngProgress){
 
 	// var originalParams = JSON.parse($scope.params);
-	$scope.searchWord = $stateParams.result;
+	$scope.searchWord = $stateParams.keyword;
 
 	$scope.wisdoms = null;
 

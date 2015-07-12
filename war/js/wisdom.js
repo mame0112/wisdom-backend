@@ -147,9 +147,9 @@ var wisdomApp = angular.module('WidsomApp',
 			data : { pageTitle: 'Modify wisdom' }
 		}).
 		state('search',{
-			url: '/search:result',
+			url: '/search/:keyword',
 			templateUrl: 'view/search.html',
-			controller: 'searchResultController',
+			// controller: 'searchResultController',
 			data : { pageTitle: 'Search wisdom' }
 		});
 

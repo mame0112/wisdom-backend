@@ -163,7 +163,7 @@ wisdomApp.controller('headerController',
 
  		$scope.searchParam = "";
 
- 		$state.go('search', {result : data});
+ 		$state.go('search', {keyword : data});
 
  		$scope.switchNavivarStatus();
 

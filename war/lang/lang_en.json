@@ -121,7 +121,7 @@
 		"contact_us": "Contact us"
 	},
 	"search":{
-		"title": "Search result for '{{value}}' (Total {{value2}} wisdoms are foujd)",
+		"title": "Search result for '{{value}}' (Total {{value2}} wisdoms are found)",
 		"loading": "Searching...",
 		"not_found": "No wisdom found"
 	},

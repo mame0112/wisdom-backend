@@ -85,8 +85,11 @@
 		<from>/signup</from>
 		<to>/index.html</to>
 	</rule>
-	<!-- <rule> <note> Search page </note> <from>/search(.*)</from> <to>/index.html</to> 
-		</rule> -->
+	<rule>
+		<note> Search page </note>
+		<from>/search/(.*)</from>
+		<to>/index.html</to>
+	</rule>
 	<outbound-rule>
 		<note>
 			The outbound-rule specifies that when response.encodeURL is
