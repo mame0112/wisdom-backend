@@ -2,8 +2,8 @@
 <div ng-if="!!wisdomNum == -1" translate="search.loading">
 	Loading...
 </div>
-<div ng-if="!!wisdomNum == 0" translate="search.not_found">
-	No wisdom found
+<div ng-if="!!wisdomNum == 0" translate="search.not_found" translate-values="{value: searchWord}">
+	For "{{searchWord}}", no wisdom found.
 </div>
 <div ng-if="!!wisdoms >= 1">
 	<div class="maintitle" translate="search.title" translate-values="{value: searchWord, value2: wisdomNum}">"{{searchWord}}" search result (Total {{wisdomNum}} wisdom)</div>

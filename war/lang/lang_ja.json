@@ -123,7 +123,7 @@
 	"search":{
 		"title": "「{{value}}」の検索結果 (合計{{value2}}件見つかりました)",
 		"loading": "読み込み中...",
-		"not_found": "該当するものはありませんでした"
+		"not_found": "「{{value}}」に該当するものはありませんでした"
 	},
 	"categorypage":{
 		"title": "{{value1}}内{{value2}}の知恵一覧 合計{{value5}}件中{{value3}}件目から{{value4}}件目",

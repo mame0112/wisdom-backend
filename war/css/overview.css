@@ -33,27 +33,28 @@
 }
 
 #overview .description1{
-	height: 600px;
-	background-color: #888888;
-	background-image: url(../image/heroshot04.jpg);
+	height: 640px;
+	background-color: #2a5a72;
+	/*background-image: url(../image/overview1.jpg);*/
 }
 
 #overview .description2{
-	height: 600px;
-	background-color: #1E88E5;
+	height: 640px;
+	background-color: #a4b940;
+	/*background-image: url(../image/overview2.jpg);*/
 }
 
 #overview .description3{
-	height: 600px;
+	height: 640px;
 	background-color: #FB8C00;
 }
 
 #overview .description4{
-	height: 600px;
+	height: 640px;
 	background-color: #ffffff;
 }
 
 #overview .description5{
-	height: 600px;
+	height: 640px;
 	background-color: #33691E;
 }
