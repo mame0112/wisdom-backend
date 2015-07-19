@@ -142,7 +142,10 @@
 		"wisdom_update_desc_point":"ポイント",
 		"like_error": "エラー",
 		"like_failed": "エラーが発生しました。時間をおいて後ほどお試しください",
-		"category":"「{{value1}}」の「{{value2}}」に関する知恵"
+		"category":"「{{value1}}」の「{{value2}}」に関する知恵",
+		"wisdom_request_error": "エラー",
+		"illegal_wisdom_id": "不正な値です。時間をおいて再度お試しください",
+		"unknown_error": "予期せぬエラーが発生しました。時間をおいて再度お試しください"
 	},
 	"newwisdom":{
 		"mandatory_text":"は必須です",	

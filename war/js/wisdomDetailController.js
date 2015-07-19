@@ -43,6 +43,9 @@ function($scope,
  	var wisdom_update_desc_no_user;
  	var like_error;
  	var like_failed;
+ 	var illegal_wisdom_id;
+ 	var unknown_error;
+ 	var wisdom_request_error;
 
 
  	// Variable to identify if the user already select "Like"
@@ -65,6 +68,9 @@ function($scope,
 			'wisdom.like_failed',
 			'wisdom.wisdom_update_desc_point',
 			'wisdom.wisdom_update_desc_no_user',
+			'wisdom.illegal_wisdom_id',
+			'wisdom.unknown_error',
+			'wisdom.wisdom_request_error'
 			])
 		.then(function (translations) {
 			wisdom_update_title = translations['wisdom.wisdom_update_title'];
@@ -73,6 +79,9 @@ function($scope,
 			like_error = translations['wisdom.like_error'];
 			like_failed = translations['wisdom.like_failed'];
 			wisdom_update_desc_no_user = translations['wisdom.wisdom_update_desc_no_user'];
+		 	illegal_wisdom_id = translations['wisdom.illegal_wisdom_id'];
+ 			unknown_error = translations['wisdom.unknown_error'];
+ 			wisdom_request_error = translations['wisdom.wisdom_request_error'];
 		});
 
 		//Get target wisdom
@@ -98,12 +107,17 @@ function($scope,
 
 	 			} else {
 					//Error handling 
+					log.d("Something illegal parameter retunred");
+					toasterService.showErrorToasterShort(wisdom_request_error, unknown_error);
+					$state.go('/');
 	 			}
 	 		} else {
 	 			//Error handling
+					log.d("Wisdom for given wisdom Id might not exist");
+					toasterService.showErrorToasterShort(wisdom_request_error, illegal_wisdom_id);
+					$state.go('/');
 	 		}
 
-	 		// log.d("response:" + $scope.wisdom.messages);
 		});
 
  	};

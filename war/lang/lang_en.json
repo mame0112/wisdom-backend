@@ -142,7 +142,10 @@
 		"wisdom_update_desc_point":"point",
 		"like_error": "Error",
 		"like_failed": "Error occured. Please try again later",
-		"category":"Wisdom for '{{value1}}' >'{{value2}}'"
+		"category":"Wisdom for '{{value1}}' >'{{value2}}'",
+		"wisdom_request_error": "Error",
+		"illegal_wisdom_id": "Illegal parameter is given. Please try again later",
+		"unknown_error": "Unknown error occured. Please try again later"
 	},
 	"newwisdom":{
 		"mandatory_text":"is mandatory item",	
