@@ -62,11 +62,6 @@ public class DefaultWisdomDAOHelper {
 					.setThumbnail(thumbnail).setViewCount(viewCount)
 					.setCategory(category).setSubCategory(subCategory)
 					.setEntires(items).getWisdomData();
-			// WDWisdomData data = new WDWisdomData(wisdomId, title,
-			// description,
-			// tag, createdUserId, lastUpdatedDate, thumbnail, items,
-			// viewCount);
-			// return data;
 		}
 
 		return null;

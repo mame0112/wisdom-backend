@@ -33,28 +33,28 @@
 }
 
 #overview .description1{
-	height: 640px;
+	/*height: 640px;*/
 	background-color: #2a5a72;
 	/*background-image: url(../image/overview1.jpg);*/
 }
 
 #overview .description2{
-	height: 640px;
+	/*height: 640px;*/
 	background-color: #a4b940;
 	/*background-image: url(../image/overview2.jpg);*/
 }
 
 #overview .description3{
-	height: 640px;
-	background-color: #FB8C00;
+	/*height: 640px;*/
+	background-color: #79bee9;
 }
 
 #overview .description4{
-	height: 640px;
-	background-color: #ffffff;
+	/*height: 640px;*/
+	background-color: #f7ad1c;
 }
 
 #overview .description5{
-	height: 640px;
+	/*height: 640px;*/
 	background-color: #33691E;
 }
