@@ -665,22 +665,30 @@ public class DefaultWisdomDAO implements WisdomDAO {
 		PreparedQuery pq = mDS.prepare(q);
 		try {
 			Entity entity = pq.asSingleEntity();
-			DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
 
-			WDWisdomData data = helper.parseEntityToWDWisdomData(entity);
+			// If target Entity exist
+			if (entity != null) {
+				DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
 
-			// Increate view count
-			data.increaseViewCount();
+				WDWisdomData data = helper.parseEntityToWDWisdomData(entity);
 
-			// Get new view count and store it onto Datastroe
-			entity.setProperty(DBConstant.ENTITY_WISDOM_VIEWED_COUNT,
-					data.getViewCount());
+				// Increate view count
+				data.increaseViewCount();
 
-			// View count is not so critical information, then we don't update
-			// memcache for this timing.
-			mDS.put(entity);
+				// Get new view count and store it onto Datastroe
+				entity.setProperty(DBConstant.ENTITY_WISDOM_VIEWED_COUNT,
+						data.getViewCount());
 
-			return data;
+				// View count is not so critical information, then we don't
+				// update
+				// memcache for this timing.
+				mDS.put(entity);
+
+				return data;
+			} else {
+				DbgUtil.showLog(TAG, "Target wisdom doesn't exist. widomId: "
+						+ wisdomId);
+			}
 
 		} catch (TooManyResultsException e) {
 			DbgUtil.showLog(TAG, "TooManyResultsException: " + e.getMessage());
