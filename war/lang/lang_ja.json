@@ -230,7 +230,9 @@
 		"no_liked_wisdom":"まだいいねした知恵がありません",
 		"no_created_wisdom":"まだ作った知恵がありません",
 		"created_wisdom": "作成した知恵",
-		"liked_wisdom":"いいねした知恵"
+		"liked_wisdom":"いいねした知恵",
+		"error_title":"エラー",
+		"error_illegal_data_desc":"不正な値です。時間をおいて再度お試しください"
 	},
 	"category":{
 		"sports": "スポーツ",

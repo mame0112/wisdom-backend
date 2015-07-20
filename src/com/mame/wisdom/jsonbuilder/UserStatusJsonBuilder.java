@@ -62,26 +62,37 @@ public class UserStatusJsonBuilder extends JsonBuilder {
 			throw new JSONBuilderException("parameter is null");
 		}
 
+		JSONObject paramObj = new JSONObject();
+
+		// Check userId
 		if (!(param[0] instanceof Long)) {
 			DbgUtil.showLog(TAG, "illegal param type for param[0]");
 			throw new JSONBuilderException("illegal param type for param[0]");
 		}
 
-		long totalPoint = (long) param[0];
-
-		JSONObject paramObj = new JSONObject();
-
 		try {
+			long userId = (long) param[0];
+			paramObj.put(JsonConstant.PARAM_USER_ID, userId);
+
+			// Check total point
+			if (!(param[1] instanceof Long)) {
+				DbgUtil.showLog(TAG, "illegal param type for param[1]");
+				throw new JSONBuilderException(
+						"illegal param type for param[1]");
+			}
+
+			long totalPoint = (long) param[1];
+
 			paramObj.put(JsonConstant.PARAM_USER_POINT, totalPoint);
 
-			if (param[1] != null) {
-				if (!(param[1] instanceof List<?>)) {
-					DbgUtil.showLog(TAG, "illegal param type for param[1]");
+			if (param[2] != null) {
+				if (!(param[2] instanceof List<?>)) {
+					DbgUtil.showLog(TAG, "illegal param type for param[2]");
 					throw new JSONBuilderException(
-							"illegal param type for param[1]");
+							"illegal param type for param[2]");
 				}
 
-				List<WDWisdomData> createdWisdoms = (List<WDWisdomData>) param[1];
+				List<WDWisdomData> createdWisdoms = (List<WDWisdomData>) param[2];
 
 				JSONArray createdArray = JsonParseUtil
 						.parseWisdomListToJsonArray(createdWisdoms);
@@ -90,14 +101,14 @@ public class UserStatusJsonBuilder extends JsonBuilder {
 
 			}
 
-			if (param[2] != null) {
-				if (!(param[2] instanceof List<?>)) {
-					DbgUtil.showLog(TAG, "Illegal param type for param[2]");
+			if (param[3] != null) {
+				if (!(param[3] instanceof List<?>)) {
+					DbgUtil.showLog(TAG, "Illegal param type for param[3]");
 					throw new JSONBuilderException(
-							"Illegal param type for param[2]");
+							"Illegal param type for param[3]");
 				}
 
-				List<WDWisdomData> likedWisdoms = (List<WDWisdomData>) param[2];
+				List<WDWisdomData> likedWisdoms = (List<WDWisdomData>) param[3];
 
 				JSONArray likeedArray = JsonParseUtil
 						.parseWisdomListToJsonArray(likedWisdoms);

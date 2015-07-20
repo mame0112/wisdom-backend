@@ -69,12 +69,13 @@ public class UserStatusAction implements Action {
 								.getLikedWisdomIds());
 					}
 
-					builder.addResponseParam(statusData.getTotalPoint(),
-							createdWisdoms, likedWisdoms);
+					builder.addResponseParam(userId,
+							statusData.getTotalPoint(), createdWisdoms,
+							likedWisdoms);
 
 				} else {
 					// No status data
-					builder.addResponseParam(0, null, null);
+					builder.addResponseParam(WConstant.NO_USER, 0L, null, null);
 				}
 
 				// Get wisdoms created by user.

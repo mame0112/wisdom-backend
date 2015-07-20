@@ -229,7 +229,9 @@
 		"no_liked_wisdom":"No liked wisdom",
 		"no_created_wisdom":"No created wisdom",
 		"created_wisdom": "Created wisdoms",
-		"liked_wisdom":"Liked wisdoms"
+		"liked_wisdom":"Liked wisdoms",
+		"error_title":"Error",
+		"error_illegal_data_desc":"Illegal data is returned"
 	},
 	"category":{
 		"sports": "Sports",

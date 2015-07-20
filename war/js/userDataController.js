@@ -7,7 +7,20 @@ wisdomApp.controller('UserDataController',
  'timeFormatService',
  'creativeColorGenerateService',
  'userDataHolder',
- function($scope, $stateParams, userInfoAPIService, log, Constants, timeFormatService, creativeColorGenerateService, userDataHolder){
+ '$state',
+ '$translate',
+ 'toasterService',
+ function($scope,
+  $stateParams,
+   userInfoAPIService,
+   log,
+   Constants,
+   timeFormatService,
+   creativeColorGenerateService,
+   userDataHolder,
+   $state,
+   $translate,
+   toasterService){
 
  	console.log("UserDataController");
 
@@ -44,10 +57,24 @@ wisdomApp.controller('UserDataController',
  		"limit" : limit
  	};
 
+ 	var error_title;
+ 	var error_illegal_data_desc;
+
 
  	$scope.initialize = function()
  	{
  		log.d("initialize");
+
+ 		//Load translation
+		$translate([
+			'userpage.error_title',
+			'userpage.error_illegal_data_desc'
+			])
+		.then(function (translations) {
+			error_title = translations['userpage.error_title'];
+			error_illegal_data_desc = translations['userpage.error_illegal_data_desc'];
+		});
+
  		$scope.loadUseData($scope.userId);
  		$scope.userColor = creativeColorGenerateService.generateColor($scope.userId);
  	};
@@ -58,19 +85,28 @@ wisdomApp.controller('UserDataController',
  		{
  			userInfoAPIService.status({servlet_params : param}, function(response){
  				log.d("response received");
- 				$scope.point = response.params.point;
- 				$scope.creates = response.params.created;
- 				$scope.likes = response.params.liked;
+ 				if(response.params.userId !== Constants.NO_USER){
+	 				$scope.point = response.params.point;
+	 				$scope.creates = response.params.created;
+	 				$scope.likes = response.params.liked;
 
- 				$scope.createdNum = 0;
-				if($scope.creates !== null && $scope.creates !== undefined){
-	 				$scope.createdNum = $scope.creates.length;
-				}
+	 				$scope.createdNum = 0;
+					if($scope.creates !== null && $scope.creates !== undefined){
+		 				$scope.createdNum = $scope.creates.length;
+					}
 
-				$scope.likedNum = 0;
-				if($scope.likes !== null && $scope.likes !== undefined){
-	 				$scope.likedNum = $scope.likes.length;
-				}
+					$scope.likedNum = 0;
+					if($scope.likes !== null && $scope.likes !== undefined){
+		 				$scope.likedNum = $scope.likes.length;
+					}
+ 				} else {
+ 					//If returned user Id is illegal (NO_USER)
+ 					// This shall happens illegal user id is passed from browser address bar
+ 					log.d("Illegal data is returned");
+ 					toasterService.showErrorToasterShort(error_title, error_illegal_data_desc);
+ 					$state.go('/');
+ 				}
+
 
  			});
  		}
