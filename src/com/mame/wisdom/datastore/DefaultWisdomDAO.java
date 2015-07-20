@@ -658,42 +658,43 @@ public class DefaultWisdomDAO implements WisdomDAO {
 			throws WisdomDatastoreException {
 		DbgUtil.showLog(TAG, "findWisdomById");
 
-		// TODO It seems that we can get wisdom by key (without doing query)
-		Filter searchFilter = new FilterPredicate(DBConstant.ENTITY_WISDOM_ID,
-				FilterOperator.EQUAL, wisdomId);
-		Query q = new Query(DBConstant.KIND_WISDOM).setFilter(searchFilter);
-		PreparedQuery pq = mDS.prepare(q);
 		try {
-			Entity entity = pq.asSingleEntity();
+			if (wisdomId != WConstant.NO_WISDOM) {
+				Key key = DatastoreKeyGenerator.getWisdomKeyById(wisdomId);
+				Entity entity = mDS.get(key);
 
-			// If target Entity exist
-			if (entity != null) {
-				DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
+				// If target Entity exist
+				if (entity != null) {
+					DefaultWisdomDAOHelper helper = new DefaultWisdomDAOHelper();
 
-				WDWisdomData data = helper.parseEntityToWDWisdomData(entity);
+					WDWisdomData data = helper
+							.parseEntityToWDWisdomData(entity);
 
-				// Increate view count
-				data.increaseViewCount();
+					// Increate view count
+					data.increaseViewCount();
 
-				// Get new view count and store it onto Datastroe
-				entity.setProperty(DBConstant.ENTITY_WISDOM_VIEWED_COUNT,
-						data.getViewCount());
+					// Get new view count and store it onto Datastroe
+					entity.setProperty(DBConstant.ENTITY_WISDOM_VIEWED_COUNT,
+							data.getViewCount());
 
-				// View count is not so critical information, then we don't
-				// update
-				// memcache for this timing.
-				mDS.put(entity);
+					// View count is not so critical information, then we don't
+					// update
+					// memcache for this timing.
+					mDS.put(entity);
 
-				return data;
-			} else {
-				DbgUtil.showLog(TAG, "Target wisdom doesn't exist. widomId: "
-						+ wisdomId);
+					return data;
+				} else {
+					DbgUtil.showLog(TAG,
+							"Target wisdom doesn't exist. widomId: " + wisdomId);
+				}
+
 			}
-
 		} catch (TooManyResultsException e) {
 			DbgUtil.showLog(TAG, "TooManyResultsException: " + e.getMessage());
 		} catch (IllegalStateException e) {
 			DbgUtil.showLog(TAG, "IllegalStateException: " + e.getMessage());
+		} catch (EntityNotFoundException e) {
+			DbgUtil.showLog(TAG, "EntityNotFoundException: " + e.getMessage());
 		}
 
 		return null;
