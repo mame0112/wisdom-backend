@@ -116,36 +116,6 @@ public class UserStatusJsonBuilder extends JsonBuilder {
 
 			}
 
-			// paramObj.put(JsonConstant.PARAM_USER_LIKED_WISDOM, totalPoint);
-
-			// // If user has already generated some information
-			// if (param[1] != null) {
-			//
-			// List<WDWisdomData> wisdomData = (List<WDWisdomData>) param[1];
-			// JSONArray messageArray = new JSONArray();
-			//
-			// // TODO Need to consider which item should be returned.
-			// for (WDWisdomData wisdom : wisdomData) {
-			// JSONObject message = new JSONObject();
-			// message.put(JsonConstant.PARAM_WISDOM_TITLE,
-			// wisdom.getTitle());
-			// message.put(JsonConstant.PARAM_WISDOM_THUMBNAIL,
-			// wisdom.getThumbnail());
-			// message.put(JsonConstant.PARAM_WISDOM_TAG, wisdom.getTag());
-			// message.put(JsonConstant.PARAM_WISDOM_DESCRIPTION,
-			// wisdom.getDescription());
-			// // TODO Need to return "Created date" (Not last updated
-			// // date)
-			// message.put(JsonConstant.PARAM_WISDOM_UPDATED_DATE,
-			// wisdom.getLastUpdatedDate());
-			// messageArray.put(message);
-			// }
-			// paramObj.put(JsonConstant.PARAM_WISDOM_MESSAGES, messageArray);
-			//
-			// } else {
-			// DbgUtil.showLog(TAG, "wisdomData is null");
-			// }
-
 			mRootObject.put(JsonConstant.PARAMS, paramObj);
 		} catch (JSONException e) {
 			DbgUtil.showLog(TAG, "JSONException: " + e.getMessage());

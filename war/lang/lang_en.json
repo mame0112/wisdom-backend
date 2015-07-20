@@ -1,7 +1,8 @@
 {
 	"common": {
 		"cancel": "Cancel",
-		"save": "Save"
+		"save": "Save",
+		"illegal_user_id": "Illegal parameter. Please try again later"
 	},
 	"index":{
 		"app_description":"Share your wisdom with beginners.",

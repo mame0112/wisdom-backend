@@ -10,6 +10,7 @@ wisdomApp.controller('UserDataController',
  '$state',
  '$translate',
  'toasterService',
+ 'UserIdValidator',
  function($scope,
   $stateParams,
    userInfoAPIService,
@@ -20,7 +21,8 @@ wisdomApp.controller('UserDataController',
    userDataHolder,
    $state,
    $translate,
-   toasterService){
+   toasterService,
+   UserIdValidator){
 
  	console.log("UserDataController");
 
@@ -59,7 +61,7 @@ wisdomApp.controller('UserDataController',
 
  	var error_title;
  	var error_illegal_data_desc;
-
+ 	var illegal_user_id;
 
  	$scope.initialize = function()
  	{
@@ -68,19 +70,52 @@ wisdomApp.controller('UserDataController',
  		//Load translation
 		$translate([
 			'userpage.error_title',
-			'userpage.error_illegal_data_desc'
+			'userpage.error_illegal_data_desc',
+			'common.illegal_user_id'
 			])
 		.then(function (translations) {
 			error_title = translations['userpage.error_title'];
 			error_illegal_data_desc = translations['userpage.error_illegal_data_desc'];
+			illegal_user_id = translations['common.illegal_user_id'];
+
+	 		$scope.loadUseData($scope.userId);
+	 		$scope.userColor = creativeColorGenerateService.generateColor($scope.userId);
+
 		});
 
- 		$scope.loadUseData($scope.userId);
- 		$scope.userColor = creativeColorGenerateService.generateColor($scope.userId);
  	};
 
  	$scope.loadUseData = function(userId)
  	{
+		var validateResult = UserIdValidator.validateUserId($scope.userId);
+
+		switch (validateResult){
+			case Constants.VALIDATE_RESULT.VALID_ID:
+				log.d("valid id");
+			break;
+			case Constants.VALIDATE_RESULT.UNDEFINED:
+				log.d("user id is null or undefined");
+				toasterService.showErrorToasterShort(error_title, illegal_user_id);
+				$state.go('/');
+			break;
+			case Constants.VALIDATE_RESULT.ILLEGAL_ID:
+				log.d("illegal user id");
+				toasterService.showErrorToasterShort(error_title, illegal_user_id);
+				$state.go('/');
+			break;
+			case Constants.VALIDATE_RESULT.ID_NOT_OWNED_BY_USER:
+				log.d("user id is not owned by user");
+				toasterService.showErrorToasterShort(error_title, illegal_user_id);
+				$state.go('/');
+			break;
+			default:
+				log.d("unknown case");
+				toasterService.showErrorToasterShort(error_title, illegal_user_id);
+				$state.go('/');
+			break;
+		}
+
+
  		if(userId !== null && userId !== Constants.NO_USER)
  		{
  			userInfoAPIService.status({servlet_params : param}, function(response){

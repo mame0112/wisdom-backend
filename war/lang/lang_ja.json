@@ -1,7 +1,8 @@
 {
 	"common": {
 		"cancel": "キャンセル",
-		"save": "保存"
+		"save": "保存",
+		"illegal_user_id": "不正な値です。時間をおいて再度お試しください"
 	},
 	"index":{
 		"app_description":"あなたの知識を、初心者に。",

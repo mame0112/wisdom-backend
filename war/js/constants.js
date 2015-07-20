@@ -49,5 +49,14 @@ wisdomApp.constant(
 
 		WISDOM_DESCRIPTION_COUNT: 500,
 
+		//Constants for UserIdValidator
+ 		VALIDATE_RESULT : {
+ 			"VALID_ID": "valid user id",
+ 			"UNDEFINED": "user id is null or undefined",
+ 			"ILLEGAL_ID": "illegal user id",
+ 			"ID_NOT_OWNED_BY_USER": "id is not owned by user"
+ 		},
+
+
 	}
 );
