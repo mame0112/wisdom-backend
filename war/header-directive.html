@@ -23,9 +23,9 @@
         <button class="btn btn-default" ng-click="searchWisdom(searchParam)" analytics-on="click" analytics-category="Header" analytics-event="Search" translate="header.search_button" ng-disabled="isSearchButtonDisable()">Search</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li ng-click="switchNavivarStatus()"><a ui-sref="newwisdom" ng-click="onCreatePageSelect()" translate="header.create_page">Create page</a></li>
-        <li ng-click="switchNavivarStatus()"><a ui-sref="signin" ng-click="onSigninOptionSelect()" ng-show="isSigninVisible()" translate="header.sign_in">Sign in</a></li>
-        <li ng-click="switchNavivarStatus()"><a ui-sref="signup" ng-click="onSignupOptionSelect()" ng-show="isSignupVisible()" translate="header.sign_up">Sign up</a></li>
+        <li ng-click="switchNavivarStatus()"><a ui-sref="newwisdom" ng-click="onCreatePageSelect()" translate="header.create_page"  analytics-on="click" analytics-category="Header" analytics-event="Create new wisdom">Create page</a></li>
+        <li ng-click="switchNavivarStatus()"><a ui-sref="signin" ng-click="onSigninOptionSelect()" ng-show="isSigninVisible()" translate="header.sign_in" analytics-on="click" analytics-category="Header" analytics-event="Sign in">Sign in</a></li>
+        <li ng-click="switchNavivarStatus()"><a ui-sref="signup" ng-click="onSignupOptionSelect()" ng-show="isSignupVisible()" translate="header.sign_up" analytics-on="click" analytics-category="Header" analytics-event="Sign up">Sign up</a></li>
         <li ng-click="switchNavivarStatus()"><a ui-sref="user.detail({userId: getUserId()})">{{getUserName()}}</a></li>
         <li ng-click="switchNavivarStatus()"><a ui-sref="#/view/{{getUserId(userData)}}" ng-click="onUserInfoSelect()" ng-show="isUserInfoVisible()"><img ng-src="{{getThumbnail(userData)}}"></a>
         </li>
@@ -35,8 +35,8 @@
           </a>
           <ul class="dropdown-menu">
             <li><a ui-sref="/" ng-click="signout()">Sign out</a></li>
-            <li ng-if="isNowJapanese() === true" ng-click="switchNavivarStatus()"><a ui-sref="/" ng-click="changeLanguage('en')">Switch to English</a></li>
-            <li ng-if="isNowEnglish() === true" ng-click="switchNavivarStatus()"><a ui-sref="/" ng-click="changeLanguage('ja')">日本語に切り替え</a></li>
+            <li ng-if="isNowJapanese() === true" ng-click="switchNavivarStatus()"><a ui-sref="/" ng-click="changeLanguage('en')" analytics-on="click" analytics-category="Header" analytics-event="Switch language to English">Switch to English</a></li>
+            <li ng-if="isNowEnglish() === true" ng-click="switchNavivarStatus()"><a ui-sref="/" ng-click="changeLanguage('ja')" analytics-on="click" analytics-category="Header" analytics-event="Switch language to Japanese">日本語に切り替え</a></li>
           </ul>
         </li>
       </ul>

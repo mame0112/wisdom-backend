@@ -101,8 +101,8 @@
 	</div>
 	<div class="accountSelector">
 		<p class="buttons">
-			<button type="submit" class="btn btn-default" name="modify" ng-model="modify" ng-click="cancelModification()" translate="common.cancel">Cancel</button>
-			<button type="submit" class="btn btn-primary" name="modify" ng-model="modify" ng-click="saveModification()" ng-disabled="isSaveModifyButtonDisable()" translate="modifywisdom.save">Save change</button>
+			<button type="submit" class="btn btn-default" name="modify" ng-model="modify" ng-click="cancelModification()" translate="common.cancel" analytics-on="click" analytics-category="Modify wisdom" analytics-event="Cancel change">Cancel</button>
+			<button type="submit" class="btn btn-primary" name="modify" ng-model="modify" ng-click="saveModification()" ng-disabled="isSaveModifyButtonDisable()" translate="modifywisdom.save" analytics-on="click" analytics-category="Modify wisdom" analytics-event="Save change">Save change</button>
 		</p>
 	</div>
 

@@ -47,13 +47,13 @@
 		How about join in 'chienowa' and spread your wisdom to beginners?
 		</p>
 		<div class="buttons">
-			<button type="submit" class="btn btn-primary" name="modify" ng-model="modify" ng-click="modifyWisdom()" ng-show="isSignedIn() == true" translate="wisdom.modify_wisdom">Modify wisdom</button>
+			<button type="submit" class="btn btn-primary" name="modify" ng-model="modify" ng-click="modifyWisdom()" ng-show="isSignedIn() == true" translate="wisdom.modify_wisdom" analytics-on="click" analytics-category="Wisdom detail" analytics-event="Modify wisdom">Modify wisdom</button>
 			<div ng-show="isSignedIn() == false">
-				<button type="submit" class="btn btn-primary" name="modify" ng-model="modify" ng-click="createAccount()" translate="wisdom.create_account">
+				<button type="submit" class="btn btn-primary" name="modify" ng-model="modify" ng-click="createAccount()" translate="wisdom.create_account" analytics-on="click" analytics-category="Wisdom detail" analytics-event="Create account">
 				Create account
 				</button>
 				<p translate="wisdom.or">or</p>
-				 <a ui-sref="signin" translate="wisdom.signin">Sign in</a>
+				 <a ui-sref="signin" translate="wisdom.signin" analytics-on="click" analytics-category="Wisdom detail" analytics-event="Sign in">Sign in</a>
 			</div>
 		</div>
 	</div>
