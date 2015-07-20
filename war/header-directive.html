@@ -20,7 +20,7 @@
       </ul>
       <form class="navbar-form navbar-left" role="search">
           <input type="text" class="searchArea" placeholder="{{'header.search_help' | translate}}" ng-model="searchParam">
-        <button class="btn btn-default" ng-click="searchWisdom(searchParam)" analytics-on="click" analytics-event="Search" translate="header.search_button" ng-disabled="isSearchButtonDisable()">Search</button>
+        <button class="btn btn-default" ng-click="searchWisdom(searchParam)" analytics-on="click" analytics-category="Header" analytics-event="Search" translate="header.search_button" ng-disabled="isSearchButtonDisable()">Search</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
         <li ng-click="switchNavivarStatus()"><a ui-sref="newwisdom" ng-click="onCreatePageSelect()" translate="header.create_page">Create page</a></li>
